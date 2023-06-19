@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Contact = () => {
+const TestApi = () => {
   return (
     <div>
       <h1>Contact component within pages folder</h1>
@@ -8,4 +8,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default TestApi;

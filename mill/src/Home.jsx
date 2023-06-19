@@ -1,7 +1,7 @@
 import React from 'react';
 import Contact from './pages/Contact';
 
-const About = () => {
+const Home = () => {
   return (
     <div>
       <h1>Hello, React!</h1>
@@ -10,4 +10,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Home;
