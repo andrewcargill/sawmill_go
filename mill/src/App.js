@@ -9,7 +9,7 @@ const App = () => {
     <Router basename='/sawmill_go'>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/about" element={<Home />} />
       </Routes>
     </Router>
   );
