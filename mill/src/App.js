@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './Home';
+import Contact from './Contact';
 import About from './About';
 
 
@@ -8,8 +8,8 @@ const App = () => {
   return (
     <Router basename='/sawmill_go'>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<Home />} />
+        <Route path="/" element={<About />} />
+        <Route path="/about" element={<Contact />} />
       </Routes>
     </Router>
   );
