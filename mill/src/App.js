@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import Home from './Home';
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
         </a>
         <div>Hello World</div>
         <div>React Router Dom added</div>
+        <Home />
       </header>
     </div>
   );
