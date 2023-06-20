@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import TreeLogPost from './TreeLogPost';
 
 const TreeLog = () => {
   const [data, setData] = useState([]);
@@ -20,7 +21,7 @@ const TreeLog = () => {
   return (
     <div>
       <div>
-        
+        <TreeLogPost />
       </div>
       {data.map((item) => (
         <div key={item.id}>

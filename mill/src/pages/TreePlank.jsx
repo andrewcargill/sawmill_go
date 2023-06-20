@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import TreePlankPost from './TreePlankPost';
 
 const TreePlank = () => {
   const [data, setData] = useState([]);
@@ -19,13 +20,16 @@ const TreePlank = () => {
 
   return (
     <div>
+      <div>
+        <TreePlankPost />
+      </div>
       {data.map((item) => (
         <div key={item.id}>
           <h3>Plank Ref: {item.id}</h3>
           <p>Log: {item.log}</p>
           <p>Width: {item.width}</p>
           <p>Depth: {item.depth}</p>
-          <p>Grade: {item.grade}</p>
+          <p>Grade: {item.wood_grade}</p>
         </div>
       ))}
     </div>
