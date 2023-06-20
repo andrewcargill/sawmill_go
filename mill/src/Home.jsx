@@ -5,9 +5,7 @@ import Layout from './pages/Layout';
 const Home = () => {
   return (
     <div>
-      <div>
-      <Layout />
-      </div>
+
       <h1>Hello, React!</h1>
       <Contact />
     </div>

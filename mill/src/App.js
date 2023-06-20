@@ -8,6 +8,7 @@ import Layout from './pages/Layout';
 const App = () => {
   return (
     <Router basename={`/${process.env.PUBLIC_URL}`}>
+      <Layout />
       <Routes>
         <Route path="" element={<Home />} />
         <Route path="about" element={<About />} />

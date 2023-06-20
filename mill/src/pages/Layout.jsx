@@ -17,7 +17,9 @@ const Layout = () => {
         </ul>
       </nav>
 
-      <Outlet />
+      <div className="content">
+        <Outlet /> {/* Render the nested components */}
+      </div>
     </>
   )
 };
