@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import TreePost from './TreePost';
 
 const Tree = () => {
   const [data, setData] = useState([]);
@@ -19,6 +20,11 @@ const Tree = () => {
 
   return (
     <div>
+      <h2>Tree Page!</h2>
+      <TreePost />
+
+      <h2>List of Trees</h2>
+
       {data.map((item) => (
         <div key={item.id}>
           <h3>Tree Ref: {item.id}</h3>
