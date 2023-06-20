@@ -20,6 +20,7 @@ const TreePlank = () => {
 
   return (
     <div>
+      <h1>Planks</h1>
       <div>
         <TreePlankPost />
       </div>

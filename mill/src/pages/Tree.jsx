@@ -20,7 +20,7 @@ const Tree = () => {
 
   return (
     <div>
-      <h2>Tree Page!</h2>
+      <h1>Trees</h1>
       <TreePost />
 
       <h2>List of Trees</h2>

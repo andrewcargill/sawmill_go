@@ -9,6 +9,7 @@ import { Login, Logout } from './pages/TestLogIn';
 import Tree from './pages/Tree';
 import TreeLog from './pages/TreeLog';
 import TreePlank from './pages/TreePlank';
+import TreeMoisture from './pages/TreeMoisture';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="tree" element={<Tree />} />
         <Route path="log" element={<TreeLog />} />
         <Route path="plank" element={<TreePlank />} />
+        <Route path="water" element={<TreeMoisture />} />
       </Routes>
     </Router>
 
