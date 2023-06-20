@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Home';
 import About from './About';
 import TestApi from './pages/TestApi';
+import Layout from './pages/Layout';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="test" element={<TestApi />} />
       </Routes>
     </Router>
+
   );
 };
 
