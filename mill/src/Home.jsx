@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div>
 
-      <h1>Hello, React!</h1>
+      <h1>Hello, Welcome to the Sawmill Go Frontend!</h1>
     </div>
   );
 };
