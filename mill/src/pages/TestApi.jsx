@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import TestPostApi from './TestPostApi';
 
 const TestApi = () => {
   const [data, setData] = useState([]);
@@ -19,6 +20,12 @@ const TestApi = () => {
 
   return (
     <div>
+      <h1>Test Database</h1>
+
+      <div>
+        <TestPostApi />
+      </div>
+      <h2>List of test</h2>
       {data.map((item) => (
         <div key={item.id}>
           <h3>Data1: {item.data1}</h3>
