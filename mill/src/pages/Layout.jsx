@@ -28,28 +28,19 @@ const Layout = () => {
               </li>
            
               <li className="nav-item">
-                <Link className="nav-link" to="tree">Tree</Link>
+                <Link className="nav-link" to="tree_crud">Tree</Link>
               </li>
+             
               <li className="nav-item">
-                <Link className="nav-link" to="tree_crud">Tree CRUD</Link>
+                <Link className="nav-link" to="log_crud">Log</Link>
               </li>
+             
               <li className="nav-item">
-                <Link className="nav-link" to="log">Log</Link>
+                <Link className="nav-link" to="plank_crud">Plank</Link>
               </li>
+             
               <li className="nav-item">
-                <Link className="nav-link" to="log_crud">Log CRUD</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="plank">Plank</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="plank_crud">Plank CRUD</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="water">Moisture Check</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="water_crud">Moisture Check CRUD</Link>
+                <Link className="nav-link" to="water_crud">Moisture Check</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="login">Login</Link>
