@@ -31,6 +31,9 @@ const Layout = () => {
                 <Link className="nav-link" to="tree">Tree</Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link" to="tree_crud">Tree CRUD</Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link" to="log">Log</Link>
               </li>
               <li className="nav-item">
