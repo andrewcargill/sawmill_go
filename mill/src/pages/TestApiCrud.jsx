@@ -8,6 +8,7 @@ const TestApi = () => {
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchData();
@@ -15,7 +16,11 @@ const TestApi = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/lumber/');
+      const response = await axios.get('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/lumber/', {
+        params: {
+          search: searchQuery,
+        },
+      });
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -56,12 +61,20 @@ const TestApi = () => {
     setDeleteItemId(null);
   };
 
+  const handleSearch = () => {
+    fetchData();
+  };
+
   return (
     <div>
       <h1>Test Database</h1>
 
       <div>
         <TestPostApi />
+      </div>
+      <div>
+        <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+        <button onClick={handleSearch}>Search</button>
       </div>
       <h2>List of test</h2>
       {data.map((item) => (
@@ -92,7 +105,7 @@ const TestApi = () => {
           )}
         </div>
       ))}
-      Test Component Content
+     
     </div>
   );
 };
