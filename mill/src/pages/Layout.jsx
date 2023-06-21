@@ -25,6 +25,9 @@ const Layout = () => {
               <li className="nav-item">
                 <Link className="nav-link" to="test">API Test</Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="test_crud">API CRUD Test</Link>
+              </li>
            
               <li className="nav-item">
                 <Link className="nav-link" to="tree">Tree</Link>

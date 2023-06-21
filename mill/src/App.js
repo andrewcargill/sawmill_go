@@ -9,6 +9,7 @@ import Tree from './pages/Tree';
 import TreeLog from './pages/TreeLog';
 import TreePlank from './pages/TreePlank';
 import TreeMoisture from './pages/TreeMoisture';
+import TestApiCrud from './pages/TestApiCrud';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="" element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="test" element={<TestApi />} />
+        <Route path="test_crud" element={<TestApiCrud />} />
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<Logout />} />
         <Route path="tree" element={<Tree />} />
