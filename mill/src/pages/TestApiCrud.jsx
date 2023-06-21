@@ -25,7 +25,7 @@ const TestApi = () => {
         params.id = idSearchQuery;
       }
   
-      const response = await axios.get('http://127.0.0.1:8000/api/lumber/', { params });
+      const response = await axios.get('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/lumber/', { params });
       setData(response.data);
       console.log(response.data);
     } catch (error) {
