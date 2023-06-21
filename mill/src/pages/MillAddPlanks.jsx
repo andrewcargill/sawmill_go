@@ -9,11 +9,12 @@ import axios from 'axios';
 
 
 const MillAddPlanks = () => {
-    const [log, setLog] = useState('');
+  const [log, setLog] = useState('');
   const [width, setWidth] = useState('');
   const [depth, setDepth] = useState('');
   const [wood_grade, setWood_grade] = useState('');
-  const [success, setSuccess] = useState(false); // State variable for success message
+  const [success, setSuccess] = useState(false);
+  const [postId, setPostId] = useState(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,6 +34,7 @@ const MillAddPlanks = () => {
       setDepth('');
       setWood_grade('');
 
+      setPostId(response.data.id);
       setSuccess(true); // Set success status to true
     } catch (error) {
       console.error('Error creating data:', error);
@@ -41,6 +43,8 @@ const MillAddPlanks = () => {
   return (
     
     <div className={css.container}>
+
+        
 
         <form onSubmit={handleSubmit}>
         <Row>
@@ -52,27 +56,34 @@ const MillAddPlanks = () => {
             <Col xs={6}>
             <label htmlFor="input1">Log ID:</label>
             <input type="number" className="form-control form-control-lg" placeholder="Enter value for Input 1" 
-            value={log} onChange={(e) => setLog(e.target.value)} required />
+            value={log} onChange={(e) => setLog(e.target.value)} required 
+            inputMode='numeric'
+            />
             </Col>
         </Row>
         <Row>
             <Col xs={6}>
             <label>Width</label>
             <input type="number" className="form-control form-control-lg" placeholder="Enter value for Input 1" 
-            value={width} onChange={(e) => setWidth(e.target.value)} required />
+            value={width} onChange={(e) => setWidth(e.target.value)} required 
+            inputMode='numeric'
+            />
             </Col>
             <Col xs={6}>
 
             <label>Depth</label>
             <input type="number" className="form-control form-control-lg" placeholder="Enter value for Input 1" 
-            value={depth} onChange={(e) => setDepth(e.target.value)} required />
+            value={depth} onChange={(e) => setDepth(e.target.value)} required 
+            inputMode='numeric'
+            />
             </Col>
         </Row>
         <Row>
             <Col xs={6}>
             <label>Grade</label>
             <input type="text" className="form-control form-control-lg" placeholder="Enter value for Input 1" 
-            value={wood_grade} onChange={(e) => setWood_grade(e.target.value)} required/>
+            value={wood_grade} onChange={(e) => setWood_grade(e.target.value)} required
+            inputMode='numeric'/>
             </Col>
             <Col xs={6}>
             <label htmlFor="input1">N/A</label>
@@ -86,6 +97,11 @@ const MillAddPlanks = () => {
             </Col>
            
         </Row>
+        {success && <Alert key="success" variant='success'> 
+        <p>Success! Data Stored.</p> 
+        <div className={css.plankId}>
+        Plank ID: {postId}
+        </div> </Alert>}
         <Row>
             <Col xs={12}>
             <Button id={css.button} variant='dark' type="submit">save</Button>
@@ -94,7 +110,7 @@ const MillAddPlanks = () => {
         </Row>
         </form>
 
-        {success && <Alert key="success" variant='success'>Success! Data Stored.</Alert>} {/* Display success message if success is true */}
+       
      
 
     </div>
