@@ -31,7 +31,7 @@ const LogsByTree = () => {
           <h2>Logs for Tree ID: {treeId}</h2>
           {logs.map((log) => (
             <div key={log.id}>
-              <h3>ID: {log.id}</h3>
+              <h3>LOG ID: {log.id}</h3>
               <p>Date Cut: {log.date}</p>
               <p>Cut Length: {log.length}</p>
               {/* Display other log information */}

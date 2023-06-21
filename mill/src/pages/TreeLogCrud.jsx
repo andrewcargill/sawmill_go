@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import TreeLogEditForm from './TreeLogEditForm';
 import TreeLogPost from './TreeLogPost';
+import PlanksByLog from '../components/PlanksByLog';
 
 const TreeLogCrud = () => {
   const [data, setData] = useState([]);
@@ -85,7 +86,12 @@ const TreeLogCrud = () => {
       <h1>Log Database</h1>
 
       <div>
+        <p>add a log</p>
         <TreeLogPost />
+      </div>
+      <div>
+        <p>search for planks from log</p>
+        <PlanksByLog />
       </div>
       <div>
         <input type="text" placeholder='Search' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
