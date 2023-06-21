@@ -10,6 +10,7 @@ import TreePlank from './pages/TreePlank';
 import TreeMoisture from './pages/TreeMoisture';
 import TestApiCrud from './pages/TestApiCrud';
 import TreeCrud from './pages/TreeCrud';
+import TreeLogCrud from './pages/TreeLogCrud';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="tree" element={<Tree />} />
         <Route path="tree_crud" element={<TreeCrud/>} />
         <Route path="log" element={<TreeLog />} />
+        <Route path="log_crud" element={<TreeLogCrud />} />
         <Route path="plank" element={<TreePlank />} />
         <Route path="water" element={<TreeMoisture />} />
       </Routes>

@@ -37,6 +37,9 @@ const Layout = () => {
                 <Link className="nav-link" to="log">Log</Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link" to="log_crud">Log CRUD</Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link" to="plank">Plank</Link>
               </li>
               <li className="nav-item">
