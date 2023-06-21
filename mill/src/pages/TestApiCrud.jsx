@@ -9,6 +9,7 @@ const TestApi = () => {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [idSearchQuery, setIdSearchQuery] = useState('');
 
   useEffect(() => {
     fetchData();
@@ -16,16 +17,29 @@ const TestApi = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/lumber/', {
+      let query = searchQuery;
+      if (idSearchQuery) {
+        if (searchQuery) {
+          // Modify the query to search only the 'id' field
+          query = `id:${idSearchQuery}`;
+        } else {
+          query = idSearchQuery; // Set ID as the search query
+        }
+      }
+  
+      const response = await axios.get('http://127.0.0.1:8000/api/lumber/', {
         params: {
-          search: searchQuery,
+          search: query,
         },
       });
       setData(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
+  
+  
 
   const handleEdit = (id) => {
     setSelectedItemId(id);
@@ -65,6 +79,12 @@ const TestApi = () => {
     fetchData();
   };
 
+  const handleIdSearch = () => {
+    const id = parseInt(idSearchQuery);
+  setIdSearchQuery(id);
+    fetchData();
+  };
+
   return (
     <div>
       <h1>Test Database</h1>
@@ -73,8 +93,10 @@ const TestApi = () => {
         <TestPostApi />
       </div>
       <div>
-        <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+        <input type="text" placeholder='Search' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
         <button onClick={handleSearch}>Search</button>
+        <input type="number" value={idSearchQuery} onChange={(e) => setIdSearchQuery(e.target.value)} />
+<button onClick={handleIdSearch}>Search by ID</button>
       </div>
       <h2>List of test</h2>
       {data.map((item) => (
@@ -88,6 +110,7 @@ const TestApi = () => {
             />
           ) : (
             <>
+              <h3>ID: {item.id}</h3>
               <h3>Data1: {item.data1}</h3>
               <p>Data2: {item.data2}</p>
               <p>Data3: {item.data3}</p>
