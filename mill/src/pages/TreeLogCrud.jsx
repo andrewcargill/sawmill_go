@@ -33,8 +33,6 @@ const TreeLogCrud = () => {
     }
   };
   
-  
-
   const handleEdit = (id) => {
     setSelectedItemId(id);
   };
@@ -79,6 +77,9 @@ const TreeLogCrud = () => {
     fetchData();
   };
 
+
+  
+
   return (
     <div>
       <h1>Log Database</h1>
@@ -109,6 +110,7 @@ const TreeLogCrud = () => {
               <p>Cut Length: {item.length}</p>
               <p>Parent Tree: {item.tree}</p>
               <button onClick={() => handleEdit(item.id)}>Edit</button>
+
               {confirmDelete && deleteItemId === item.id ? (
                 <>
                   <p>Are you sure you want to delete this item?</p>

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import TreePlankEditForm from './TreePlankEditForm';
-import TreePlankPost from './TreePlankPost';
 import TreeMoisturePost from './TreeMoisturePost';
 import TreeMoistureEditForm from './TreeMoistureEditForm';
 
