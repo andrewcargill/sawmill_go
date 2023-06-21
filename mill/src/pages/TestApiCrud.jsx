@@ -17,21 +17,15 @@ const TestApi = () => {
 
   const fetchData = async () => {
     try {
-      let query = searchQuery;
+      const params = {};
+      if (searchQuery) {
+        params.search = searchQuery;
+      }
       if (idSearchQuery) {
-        if (searchQuery) {
-          // Modify the query to search only the 'id' field
-          query = `id:${idSearchQuery}`;
-        } else {
-          query = idSearchQuery; // Set ID as the search query
-        }
+        params.id = idSearchQuery;
       }
   
-      const response = await axios.get('http://127.0.0.1:8000/api/lumber/', {
-        params: {
-          search: query,
-        },
-      });
+      const response = await axios.get('http://127.0.0.1:8000/api/lumber/', { params });
       setData(response.data);
       console.log(response.data);
     } catch (error) {
