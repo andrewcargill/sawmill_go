@@ -41,7 +41,10 @@ const MillAddPlanks = () => {
     }
   };
   return (
-    
+    <div>
+      <div>
+        <h1>Sawmill Go - Add Plank</h1>
+      </div>
     <div className={css.container}>
 
         
@@ -113,6 +116,7 @@ const MillAddPlanks = () => {
        
      
 
+    </div>
     </div>
   );
 };

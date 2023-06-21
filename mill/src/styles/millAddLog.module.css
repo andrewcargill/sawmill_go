@@ -1,0 +1,23 @@
+.container {
+    font-size: 24px;
+    background-color: lightblue;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#button {
+    height: 50px;
+    margin-top: 20px;
+    margin-bottom: 2%;
+    width: 100%;
+}
+
+.textField {
+    height: 40vh;
+}
+
+.plankId {
+    font-weight: 800;
+    font-size: 35px;
+}
+

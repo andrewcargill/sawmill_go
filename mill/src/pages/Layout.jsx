@@ -73,7 +73,8 @@ const Layout = () => {
                 SAWMILL INPUT SCREENS
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item as={Link} to="mill_add_planks">Add Planks</Dropdown.Item>
+                <Dropdown.Item as={Link} to="mill_add_planks">Add Plank</Dropdown.Item>
+                <Dropdown.Item as={Link} to="mill_add_logs">Add Log</Dropdown.Item>
                
               </Dropdown.Menu>
              </Dropdown>
