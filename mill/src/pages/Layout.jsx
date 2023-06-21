@@ -1,4 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
+import Dropdown from 'react-bootstrap/Dropdown';
 
 const Layout = () => {
   return (
@@ -34,23 +35,49 @@ const Layout = () => {
               <li className="nav-item">
                 <Link className="nav-link" to="log_crud">Log</Link>
               </li>
+              <Dropdown>
+              <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                Planks
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item as={Link} to="plank_crud">All</Dropdown.Item>
+            
+              
+              </Dropdown.Menu>
+             </Dropdown>
+
              
               <li className="nav-item">
                 <Link className="nav-link" to="plank_crud">Plank</Link>
               </li>
+             <Dropdown>
+              <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                Moisture Checks
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item as={Link} to="water_crud">All</Dropdown.Item>
+                <Dropdown.Item as={Link} to="moisture_by_planks">By Plank Id</Dropdown.Item>
+                <Dropdown.Item as={Link} to="water_post">Add New</Dropdown.Item>
+              </Dropdown.Menu>
+             </Dropdown>
+
              
-              <li className="nav-item">
-                <Link className="nav-link" to="water_crud">Moisture Check</Link>
-              </li>
               <li className="nav-item">
                 <Link className="nav-link" to="login">Login</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="logout">Logout</Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="mill_add_planks">Mill Screen</Link>
-              </li>
+              <Dropdown>
+              <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                SAWMILL INPUT SCREENS
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item as={Link} to="mill_add_planks">Add Planks</Dropdown.Item>
+               
+              </Dropdown.Menu>
+             </Dropdown>
+             
             </ul>
           </div>
         </div>

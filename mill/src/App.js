@@ -10,6 +10,9 @@ import TreeLogCrud from './pages/TreeLogCrud';
 import TreePlankCrud from './pages/TreePlankCrud';
 import TreeMoistureCrud from './pages/TreeMoistureCrud';
 import MillAddPlanks from './pages/MillAddPlanks';
+import MoistureByPlank from './components/MoistureByPlank';
+import TreeMoisturePost from './pages/TreeMoisturePost';
+import TreePlankPost from './pages/TreePlankPost';
 
 const App = () => {
   return (
@@ -28,9 +31,15 @@ const App = () => {
         <Route path="log_crud" element={<TreeLogCrud />} />
      
         <Route path="plank_crud" element={<TreePlankCrud />} />
+        <Route path="plank_add" element={<TreePlankPost />} />
       
         <Route path="water_crud" element={<TreeMoistureCrud />} />
+        <Route path="water_post" element={<TreeMoisturePost />} />
+
         <Route path="mill_add_planks" element={<MillAddPlanks />} />
+        <Route path="moisture_by_planks" element={<MoistureByPlank />} />
+
+
 
       </Routes>
     </Router>
