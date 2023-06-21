@@ -9,6 +9,7 @@ import TreeCrud from './pages/TreeCrud';
 import TreeLogCrud from './pages/TreeLogCrud';
 import TreePlankCrud from './pages/TreePlankCrud';
 import TreeMoistureCrud from './pages/TreeMoistureCrud';
+import MillAddPlanks from './pages/MillAddPlanks';
 
 const App = () => {
   return (
@@ -29,6 +30,8 @@ const App = () => {
         <Route path="plank_crud" element={<TreePlankCrud />} />
       
         <Route path="water_crud" element={<TreeMoistureCrud />} />
+        <Route path="mill_add_planks" element={<MillAddPlanks />} />
+
       </Routes>
     </Router>
 
