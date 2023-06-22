@@ -108,6 +108,8 @@ const TestApi = () => {
               <h3>Data1: {item.data1}</h3>
               <p>Data2: {item.data2}</p>
               <p>Data3: {item.data3}</p>
+              <p>Data3: {item.data3}</p>
+              <p>Long: {item.longitude} Lat: {item.latitude}</p>
               <button onClick={() => handleEdit(item.id)}>Edit</button>
               {confirmDelete && deleteItemId === item.id ? (
                 <>

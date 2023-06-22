@@ -39,6 +39,9 @@ const Layout = () => {
                   <Dropdown.Item as={Link} to="test_gps">
                     Create GPS
                   </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="test_gps_two">
+                    Create GPS 2
+                  </Dropdown.Item>
                   <Dropdown.Item as={Link} to="test_gps_map">
                     Display GPS Map
                   </Dropdown.Item>

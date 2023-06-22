@@ -41,7 +41,12 @@ const TestApiGpsMap = () => {
           >
             <Marker lat={parseFloat(latitude)} lng={parseFloat(longitude)} testId={testId} />
           </GoogleMapReact>
+          <div>
+           <p>Latitude: {latitude}</p>
+           <p>Longitude: {longitude}</p>
+          </div>
         </div>
+        
       ) : (
         <p>Enter a Test ID and click "Fetch Location" to display the map.</p>
       )}
