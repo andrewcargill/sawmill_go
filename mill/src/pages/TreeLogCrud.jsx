@@ -82,7 +82,7 @@ const TreeLogCrud = () => {
   
 
   return (
-    <div>
+    <div className='mainContainer'>
       <h1>Log Database</h1>
 
       <div>

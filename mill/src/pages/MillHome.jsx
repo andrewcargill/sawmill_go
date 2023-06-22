@@ -16,7 +16,7 @@ const MillHome = () => {
     };
 
   return (
-    <div>
+    <div className="mainContainer">
       <div>
         <h1>Sawmill Go</h1>
       </div>
@@ -41,7 +41,9 @@ const MillHome = () => {
         <Row>
           <Col xs={6}>
           <div className={css.buttonContainer}>
-              <button className={css.selectButton}>+ Tree</button>
+              <button className={css.selectButton}
+               onClick={() => handleButtonClick('/mill_add_trees')}
+              >+ Tree</button>
             </div>
           </Col>
           <Col xs={6}>

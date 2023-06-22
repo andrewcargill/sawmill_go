@@ -80,7 +80,7 @@ const TreeMoistureCrud = () => {
   };
 
   return (
-    <div>
+    <div className='mainContainer'>
       <h1>Moisture Check Database</h1>
 
       <div>

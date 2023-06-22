@@ -21,7 +21,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className='mainContainer'>
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
@@ -59,7 +59,7 @@ const Logout = () => {
   };
 
   return (
-    <div>
+    <div className='mainContainer'>
       <h2>Logout</h2>
       <button onClick={handleLogout}>Logout</button>
     </div>

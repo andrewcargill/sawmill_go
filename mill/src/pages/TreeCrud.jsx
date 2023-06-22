@@ -81,7 +81,7 @@ const TreeCrud = () => {
   };
 
   return (
-    <div>
+    <div className='mainContainer'>
       <h1>Tree Database</h1>
 
       <div>

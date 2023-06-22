@@ -14,6 +14,7 @@ import MoistureByPlank from './components/MoistureByPlank';
 import TreeMoisturePost from './pages/TreeMoisturePost';
 import MillAddLogs from './pages/MillAddLogs';
 import MillHome from './pages/MillHome';
+import MillAddTrees from './pages/MillAddTrees';
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
 
         <Route path="mill_add_planks" element={<MillAddPlanks />} />
         <Route path="mill_add_logs" element={<MillAddLogs />} />
+        <Route path="mill_add_trees" element={<MillAddTrees />} />
         <Route path="moisture_by_planks" element={<MoistureByPlank />} />
 
 

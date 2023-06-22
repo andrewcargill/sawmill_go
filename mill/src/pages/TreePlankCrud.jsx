@@ -82,7 +82,7 @@ const TreePlankCrud = () => {
   };
 
   return (
-    <div>
+    <div className='mainContainer'>
       <h1>Plank Database</h1>
 
       <div>

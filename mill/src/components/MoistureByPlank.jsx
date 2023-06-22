@@ -50,7 +50,7 @@ const MoistureByPlank = () => {
   };
 
   return (
-    <div>
+    <div className='mainContainer'>
       <h1>Moisture Checks by Plank ID</h1>
       <input type="number" placeholder="Enter Plank ID" value={plankId} onChange={(e) => setPlankId(e.target.value)} />
       <button onClick={handleSearch}>Search</button>

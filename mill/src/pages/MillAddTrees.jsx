@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 
-const MillAddPlanks = () => {
+const MillAddTrees = () => {
   const [log, setLog] = useState('');
   const [date, setDate] = useState('');
   const [width, setWidth] = useState('');
@@ -56,7 +56,8 @@ const MillAddPlanks = () => {
   return (
     <div className={css.page}>
       <div>
-        <h1>Sawmill Go - Add Plank</h1>
+        <h1>Sawmill Go - Add Tree</h1>
+        <h3>(To be coded!)</h3>
       </div>
     <div className={css.container}>
 
@@ -150,4 +151,4 @@ const MillAddPlanks = () => {
   );
 };
 
-export default MillAddPlanks;
+export default MillAddTrees;

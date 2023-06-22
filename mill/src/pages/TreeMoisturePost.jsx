@@ -30,7 +30,7 @@ const TreeMoisturePost = () => {
   };
 
   return (
-    <div>
+    <div className='mainContainer'>
       <h3>Add new check</h3>
       <form onSubmit={handleSubmit}>
         <div>
