@@ -10,6 +10,7 @@ import axios from 'axios';
 
 const MillAddPlanks = () => {
   const [log, setLog] = useState('');
+  const [date, setDate] = useState('');
   const [width, setWidth] = useState('');
   const [depth, setDepth] = useState('');
   const [wood_grade, setWood_grade] = useState('');
@@ -25,6 +26,7 @@ const MillAddPlanks = () => {
         width,
         depth,
         wood_grade,
+        date,
       });
       console.log('Data created:', response.data);
       
@@ -33,6 +35,7 @@ const MillAddPlanks = () => {
       setWidth('');
       setDepth('');
       setWood_grade('');
+      setDate('');
 
       setPostId(response.data.id);
       setSuccess(true); // Set success status to true
@@ -53,8 +56,13 @@ const MillAddPlanks = () => {
         <Row>
         
             <Col xs={6}>
-            <label>N/A:</label>
-            <input type="date" className="form-control form-control-lg" id="input1" />
+            <label>Date:</label>
+            <input 
+            type="date" 
+            className="form-control form-control-lg"
+            value={date} 
+            onChange={(e) => setDate(e.target.value)} required 
+            />
             </Col>
             <Col xs={6}>
             <label htmlFor="input1">Log ID:</label>
