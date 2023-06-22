@@ -39,11 +39,17 @@ const TreePost = () => {
         </div>
         <div>
           <label>Species:</label>
-          <input type="text" value={species} onChange={(e) => setSpecies(e.target.value)} required />
+          <input type="text" 
+          value={species} 
+          onChange={(e) => setSpecies(e.target.value)} required 
+          />
         </div>
         <div>
           <label>Reason for felling:</label>
-          <input type="text" value={reason_for_felling} onChange={(e) => setReason_for_felling(e.target.value)} required />
+          <input type="text" 
+          value={reason_for_felling} 
+          onChange={(e) => setReason_for_felling(e.target.value)} required
+           />
         </div>
         <button type="submit">Submit</button>
       </form>
