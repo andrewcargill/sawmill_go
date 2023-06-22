@@ -13,8 +13,10 @@ const TestApiGps = ({ onSave }) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setLatitude(position.coords.latitude);
-          setLongitude(position.coords.longitude);
+          const limitedLatitude = parseFloat(position.coords.latitude.toFixed(14));
+          const limitedLongitude = parseFloat(position.coords.longitude.toFixed(14));
+          setLatitude(limitedLatitude.toString());
+          setLongitude(limitedLongitude.toString());
         },
         (error) => {
           console.error(error);
@@ -27,6 +29,7 @@ const TestApiGps = ({ onSave }) => {
 
   const handleSaveLocation = async () => {
     try {
+      console.log('long + lad', latitude, longitude)
       const response = await axios.post('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/lumber/', {
         latitude: parseFloat(String(latitude).replace(',', '.')),
         longitude: parseFloat(String(longitude).replace(',', '.')),
