@@ -15,6 +15,8 @@ import TreeMoisturePost from './pages/TreeMoisturePost';
 import MillAddLogs from './pages/MillAddLogs';
 import MillHome from './pages/MillHome';
 import MillAddTrees from './pages/MillAddTrees';
+import TestApiGps from './pages/TestApiGps';
+import TestApiGpsMap from './pages/TestApiGpsMap';
 
 const App = () => {
   return (
@@ -25,6 +27,9 @@ const App = () => {
         <Route path="about" element={<About />} />
       
         <Route path="test_crud" element={<TestApiCrud />} />
+        <Route path="test_gps" element={<TestApiGps />} />
+        <Route path="test_gps_map" element={<TestApiGpsMap />} />
+
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<Logout />} />
       
