@@ -41,7 +41,7 @@ const MillAddPlanks = () => {
     }
   };
   return (
-    <div>
+    <div className={css.page}>
       <div>
         <h1>Sawmill Go - Add Plank</h1>
       </div>
@@ -58,8 +58,12 @@ const MillAddPlanks = () => {
             </Col>
             <Col xs={6}>
             <label htmlFor="input1">Log ID:</label>
-            <input type="number" className="form-control form-control-lg" placeholder="Enter value for Input 1" 
-            value={log} onChange={(e) => setLog(e.target.value)} required 
+            
+            <input type="number" className="form-control form-control-lg" placeholder="Log ID number" 
+            
+            value={log} 
+            
+            onChange={(e) => setLog(e.target.value)} required 
             inputMode='numeric'
             />
             </Col>
@@ -67,7 +71,7 @@ const MillAddPlanks = () => {
         <Row>
             <Col xs={6}>
             <label>Width</label>
-            <input type="number" className="form-control form-control-lg" placeholder="Enter value for Input 1" 
+            <input type="number" className="form-control form-control-lg" placeholder="Width in cm" 
             value={width} onChange={(e) => setWidth(e.target.value)} required 
             inputMode='numeric'
             />
@@ -75,7 +79,7 @@ const MillAddPlanks = () => {
             <Col xs={6}>
 
             <label>Depth</label>
-            <input type="number" className="form-control form-control-lg" placeholder="Enter value for Input 1" 
+            <input type="number" className="form-control form-control-lg" placeholder="Depth in cm" 
             value={depth} onChange={(e) => setDepth(e.target.value)} required 
             inputMode='numeric'
             />
@@ -84,7 +88,7 @@ const MillAddPlanks = () => {
         <Row>
             <Col xs={6}>
             <label>Grade</label>
-            <input type="text" className="form-control form-control-lg" placeholder="Enter value for Input 1" 
+            <input type="text" className="form-control form-control-lg" placeholder="Grade number" 
             value={wood_grade} onChange={(e) => setWood_grade(e.target.value)} required
             inputMode='numeric'/>
             </Col>

@@ -37,11 +37,12 @@ const MillAddLogs = () => {
     }
   };
   return (
-    <div>
-      <div>
+    <div className={css.page}>
+      <div >
         <h1>Sawmill Go - Add Log</h1>
       </div>
-      <div className={css.container}>
+      
+      <div>
         <form onSubmit={handleSubmit}>
           <Row>
             <Col xs={6}>
@@ -59,7 +60,7 @@ const MillAddLogs = () => {
               <input
                 type="number"
                 className="form-control form-control-lg"
-                
+                placeholder="Tree ID number"
                 value={tree} onChange={(e) => setTree(e.target.value)} 
                 required
                 inputMode="numeric"
@@ -73,6 +74,7 @@ const MillAddLogs = () => {
               <input
                 type="number"
                 className="form-control form-control-lg"
+                placeholder="Length in metres"
                 value={length} onChange={(e) => setLength(e.target.value)} required
                 inputMode="numeric"
               />
