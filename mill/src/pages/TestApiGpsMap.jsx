@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import GoogleMapReact from 'google-map-react';
-import css from '../styles/testApiGps.module.css'
+import css from '../styles/testApiGps.module.css';
 
 const TestApiGpsMap = () => {
   const [testId, setTestId] = useState('');
@@ -20,8 +20,21 @@ const TestApiGpsMap = () => {
       setLongitude(locationData.longitude);
     } catch (error) {
       console.error('Error fetching location data:', error);
+      alert(`ID '${testId}' does not exist.`);
     }
   };
+
+  const handleReset = () => {
+    setTestId('');
+    setLatitude(null);
+    setLongitude(null);
+  };
+
+  useEffect(() => {
+    // Reset latitude and longitude when testId changes
+    setLatitude(null);
+    setLongitude(null);
+  }, [testId]);
 
   return (
     <div>
@@ -30,6 +43,7 @@ const TestApiGpsMap = () => {
         <label htmlFor="testId">Test ID:</label>
         <input type="text" id="testId" value={testId} onChange={handleTestIdChange} />
         <button onClick={handleFetchLocation}>Fetch Location</button>
+        <button onClick={handleReset}>Reset</button>
       </div>
       {latitude && longitude ? (
         <div style={{ height: '400px', width: '100%' }}>
@@ -42,11 +56,10 @@ const TestApiGpsMap = () => {
             <Marker lat={parseFloat(latitude)} lng={parseFloat(longitude)} testId={testId} />
           </GoogleMapReact>
           <div>
-           <p>Latitude: {latitude}</p>
-           <p>Longitude: {longitude}</p>
+            <p>Latitude: {latitude}</p>
+            <p>Longitude: {longitude}</p>
           </div>
         </div>
-        
       ) : (
         <p>Enter a Test ID and click "Fetch Location" to display the map.</p>
       )}
