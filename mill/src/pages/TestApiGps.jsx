@@ -7,6 +7,7 @@ const TestApiGps = ({ onSave }) => {
   const [data1, setData1] = useState('');
   const [data2, setData2] = useState('');
   const [data3, setData3] = useState('');
+  const [savedId, setSavedId] = useState(null);
 
   const handleGetLocation = () => {
     if (navigator.geolocation) {
@@ -26,17 +27,15 @@ const TestApiGps = ({ onSave }) => {
 
   const handleSaveLocation = async () => {
     try {
-      console.log('Lat and Long', latitude, longitude)
       const response = await axios.post('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/lumber/', {
         latitude: parseFloat(String(latitude).replace(',', '.')),
-      longitude: parseFloat(String(longitude).replace(',', '.')),
-
+        longitude: parseFloat(String(longitude).replace(',', '.')),
         data1,
         data2,
         data3,
-        
       });
-      
+
+      setSavedId(response.data.id);
       console.log('Location saved:', response.data);
     } catch (error) {
       console.error('Error saving location:', error);
@@ -63,6 +62,7 @@ const TestApiGps = ({ onSave }) => {
         Data3: <input type="text" value={data3} onChange={(e) => setData3(e.target.value)} />
       </div>
       <button onClick={handleSaveLocation}>Save Location</button>
+      {savedId && <p>Location saved with ID: {savedId}</p>}
     </div>
   );
 };
