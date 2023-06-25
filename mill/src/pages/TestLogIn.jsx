@@ -12,8 +12,13 @@ const Login = () => {
         username: username,
         password: password,
       });
-      console.log('Login success:', response.data);
-      // Store the token in local storage or state and handle the authenticated state
+      const token = response.data.token; // Assuming the token is returned in the 'token' field of the response
+  
+      // Store the token in local storage
+      localStorage.setItem('token', token);
+  
+      console.log('Login success:', token);
+      // Handle the authenticated state or redirect to another page
     } catch (error) {
       console.error('Login error:', error);
       // Handle the login error
@@ -49,15 +54,22 @@ const Login = () => {
 const Logout = () => {
   const handleLogout = async () => {
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api-auth/logout/');
+      const token = localStorage.getItem('token');
+      const response = await axios.post('http://127.0.0.1:8000/api-auth/logout/', null, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
       console.log('Logout success:', response.data);
       // Clear the stored token from local storage or state and handle the authenticated state
+  
+      // Optional: Redirect to a specific page after logout
+      // window.location.href = '/login';
     } catch (error) {
       console.error('Logout error:', error);
       // Handle the logout error
     }
   };
-
   return (
     <div className='mainContainer'>
       <h2>Logout</h2>
@@ -65,5 +77,6 @@ const Logout = () => {
     </div>
   );
 };
+
 
 export { Login, Logout };
