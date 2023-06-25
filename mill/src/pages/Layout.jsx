@@ -1,7 +1,18 @@
 import { Outlet, Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
+import React, {useState, useEffect} from 'react';
 
 const Layout = () => {
+
+  const [isAuth, setIsAuth] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('access_token') !== null) {
+       setIsAuth(true); 
+     }
+   }, [isAuth]);
+
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -93,16 +104,7 @@ const Layout = () => {
                 </Dropdown.Menu>
               </Dropdown>
 
-              <li className="nav-item">
-                <Link className="nav-link" to="login">
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="logout">
-                  Logout
-                </Link>
-              </li>
+             
               <Dropdown>
                 <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                   SAWMILL INPUT SCREENS
@@ -119,6 +121,26 @@ const Layout = () => {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
+              <li>
+              {isAuth ? <Link className="nav-link" to="home_secure">Test</Link> : null}
+              </li>
+              <li>
+              {isAuth ? 
+              <Link className="nav-link" to="logout">
+                  Logout
+              </Link> : 
+              <Link className="nav-link" to="login">
+              Login
+              </Link>
+              }
+              </li>
+
+              <li className="nav-item">
+                
+              </li>
+              <li className="nav-item">
+                
+              </li>
             </ul>
           </div>
         </div>
