@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import TestPostApi from './TestPostApi';
 import TestEditForm from './TestEditForm';
+import FileUpload from './TestFileUpload';
 
 const TestApi = () => {
   const [data, setData] = useState([]);
@@ -24,16 +25,21 @@ const TestApi = () => {
       if (idSearchQuery) {
         params.id = idSearchQuery;
       }
-  
-      const response = await axios.get('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/lumber/', { params });
+
+      const response = await axios.get('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/lumber/', {
+        params,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      });
+
       setData(response.data);
       console.log(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
-  
-  
 
   const handleEdit = (id) => {
     setSelectedItemId(id);
@@ -55,7 +61,13 @@ const TestApi = () => {
 
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/lumber/${deleteItemId}/`);
+      await axios.delete(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/lumber/${deleteItemId}/`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      });
+
       setConfirmDelete(false);
       setDeleteItemId(null);
       fetchData();
@@ -75,14 +87,17 @@ const TestApi = () => {
 
   const handleIdSearch = () => {
     const id = parseInt(idSearchQuery);
-  setIdSearchQuery(id);
+    setIdSearchQuery(id);
     fetchData();
   };
-
   return (
     <div>
       <h1>Test Database</h1>
+      <h2>Image to Dropbox</h2>
+      
+      <FileUpload />
 
+      <h2>Post to test</h2>
       <div>
         <TestPostApi />
       </div>

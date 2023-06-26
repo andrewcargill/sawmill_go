@@ -39,25 +39,7 @@ const Layout = () => {
                 </Link>
               </li>
 
-              <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                  Test API
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item as={Link} to="test_crud">
-                    Test CRUD
-                  </Dropdown.Item>
-                  <Dropdown.Item as={Link} to="test_gps">
-                    Create GPS
-                  </Dropdown.Item>
-                  <Dropdown.Item as={Link} to="test_gps_two">
-                    Create GPS 2
-                  </Dropdown.Item>
-                  <Dropdown.Item as={Link} to="test_gps_map">
-                    Display GPS Map
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+             
               
 
               <li className="nav-item">
@@ -122,7 +104,30 @@ const Layout = () => {
                 </Dropdown.Menu>
               </Dropdown>
               <li>
-              {isAuth ? <Link className="nav-link" to="home_secure">Test</Link> : null}
+              {isAuth ? (
+              <>
+              <Link className="nav-link" to="home_secure">Test</Link>
+              <Dropdown>
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                  SECURE
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="test_crud">
+                    Test CRUD
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="test_gps">
+                    Create GPS
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="test_gps_two">
+                    Create GPS 2
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="test_gps_map">
+                    Display GPS Map
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              </>
+              ) : null}
               </li>
               <li>
               {isAuth ? 
