@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import TestPostApi from './TestPostApi';
 import TestEditForm from './TestEditForm';
-import FileUpload from './TestFileUpload';
+import DropboxList from './TestDropboxList';
+import TestDropboxUpload from './TestDropboxUpload';
 
 const TestApi = () => {
   const [data, setData] = useState([]);
@@ -95,7 +96,8 @@ const TestApi = () => {
       <h1>Test Database</h1>
       <h2>Image to Dropbox</h2>
       
-      <FileUpload />
+      <DropboxList />
+      <TestDropboxUpload />
 
       <h2>Post to test</h2>
       <div>
