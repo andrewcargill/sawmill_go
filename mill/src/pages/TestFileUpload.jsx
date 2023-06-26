@@ -1,55 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import Dropzone from 'react-dropzone';
 
 const FileUpload = () => {
-  const [files, setFiles] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [uploadMessage, setUploadMessage] = useState('');
 
-  useEffect(() => {
-    // Fetch existing files after component mounts
-    fetchFiles();
-  }, []);
-
-  const fetchFiles = async () => {
-    try {
-      const response = await axios.get(
-        'https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/dropbox/',
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-          },
-        }
-      );
-      setFiles(response.data);
-    } catch (error) {
-      console.error('Error fetching files:', error);
-    }
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
   };
 
-  const handleDrop = async (acceptedFiles) => {
+  const handleUpload = async () => {
     try {
-      const formData = new FormData();
-      acceptedFiles.forEach((file) => {
-        formData.append('file', file);
-      });
+      if (selectedFile) {
+        const formData = new FormData();
+        formData.append('file', selectedFile);
 
-      await axios.post(
-        'https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/dropbox/',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-          },
-        }
-      );
+        await axios.post(
+          'https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/dropbox/',
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            },
+            data: { file: null },
+          }
+        );
 
-      // Refresh file list after successful upload
-      fetchFiles();
-      setUploadMessage('File uploaded successfully');
+        setUploadMessage('File uploaded successfully');
+      } else {
+        setUploadMessage('Please select a file');
+      }
     } catch (error) {
-      console.error('Error uploading files:', error);
+      console.error('Error uploading file:', error);
       setUploadMessage('Error uploading file');
     }
   };
@@ -57,25 +40,9 @@ const FileUpload = () => {
   return (
     <div>
       <h1>File Upload</h1>
-      <Dropzone onDrop={handleDrop}>
-        {({ getRootProps, getInputProps }) => (
-          <div {...getRootProps()} className="dropzone">
-            <input {...getInputProps()} />
-            <p>Drag and drop files here, or click to select files</p>
-          </div>
-        )}
-      </Dropzone>
+      <input type="file" onChange={handleFileChange} />
+      <button onClick={handleUpload}>Upload</button>
       {uploadMessage && <p>{uploadMessage}</p>}
-      <h2>Uploaded Files:</h2>
-      <ul>
-        {files.map((file) => (
-          <li key={file.id}>
-            <a href={file.url} target="_blank" rel="noopener noreferrer">
-              {file.name}
-            </a>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
