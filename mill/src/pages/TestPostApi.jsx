@@ -11,7 +11,7 @@ const TestPostApi = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/lumber/', {
+      const response = await axios.post('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/lumber/', {
         data1,
         data2,
         data3,

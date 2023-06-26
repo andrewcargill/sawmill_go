@@ -16,7 +16,7 @@ const TestEditForm = ({ id, initialData, onCancel, onSave }) => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://127.0.0.1:8000/api/lumber/${id}/`, data);
+      await axios.put(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/lumber/${id}/`, data);
       onSave(); // Notify parent component that edit is complete
     } catch (error) {
       console.error('Error updating data:', error);
