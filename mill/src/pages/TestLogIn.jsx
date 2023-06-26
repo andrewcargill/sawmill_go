@@ -12,8 +12,7 @@ const Login = () => {
              password: password
             };
        // Create the POST requuest
-       const {data} = await axios.post(
-        'http://127.0.0.1:8000/token/',
+       const {data} = await axios.post('http://127.0.0.1:8000/token/',
         user ,
         {
           headers: {
@@ -22,14 +21,15 @@ const Login = () => {
            withCredentials: true
           }
         );
+        console.log('Data received:', data); // Log the data received from the API
 
       // Initialize the access & refresh token in localstorage.      
       localStorage.clear();
       localStorage.setItem('access_token', data.access);
       localStorage.setItem('refresh_token', data.refresh);
-      axios.defaults.headers.common['Authorization'] = 
-                                      `Bearer ${data['access']}`;
-      window.location.href = 'home_secure'
+      axios.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
+
+      window.location.href = 'home_secure';
  }
  return(
    <div className="Auth-form-container">
