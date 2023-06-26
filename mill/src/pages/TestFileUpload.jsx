@@ -35,7 +35,7 @@ const FileUpload = () => {
       });
 
       await axios.post(
-        'https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/files/',
+        'https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/dropbox/',
         formData,
         {
           headers: {
