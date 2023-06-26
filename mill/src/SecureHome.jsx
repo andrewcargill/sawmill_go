@@ -12,7 +12,7 @@ const SecureHome = () => {
       (async () => {
         try {
           const {data} = await axios.get(   
-                         'http://localhost:8000/home/', {
+                         'https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/home/', {
                           headers: {
                              'Content-Type': 'application/json'
                           }}

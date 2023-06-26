@@ -12,7 +12,7 @@ const Login = () => {
              password: password
             };
        // Create the POST requuest
-       const {data} = await axios.post('http://127.0.0.1:8000/token/',
+       const {data} = await axios.post('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/token/',
         user ,
         {
           headers: {
@@ -70,7 +70,7 @@ const Logout = () => {
     (async () => {
       try {
         const { data } = await axios.post(
-          'http://127.0.0.1:8000/logout/',
+          'https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/logout/',
           {
             refresh_token: localStorage.getItem('refresh_token'),
           },
