@@ -18,6 +18,7 @@ import MillAddTrees from './pages/MillAddTrees';
 import TestApiGps from './pages/TestApiGps';
 import TestApiGpsMap from './pages/TestApiGpsMap';
 import TestApiGpsTwo from './pages/TestApiGpsTwo';
+import SecureHome from './SecureHome';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
       <Routes>
         <Route path="" element={<Home />} />
         <Route path="about" element={<About />} />
+        <Route path="home_secure" element={<SecureHome />} />
       
         <Route path="test_crud" element={<TestApiCrud />} />
         <Route path="test_gps" element={<TestApiGps />} />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Login = () => {
@@ -66,31 +66,34 @@ const Login = () => {
 }
 
 const Logout = () => {
-  const handleLogout = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post('http://127.0.0.1:8000/api-auth/logout/', null, {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      });
-      console.log('Logout success:', response.data);
-      // Clear the stored token from local storage or state and handle the authenticated state
-  
-      // Optional: Redirect to a specific page after logout
-      // window.location.href = '/login';
-    } catch (error) {
-      console.error('Logout error:', error);
-      // Handle the logout error
-    }
-  };
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await axios.post(
+          'http://127.0.0.1:8000/logout/',
+          {
+            refresh_token: localStorage.getItem('refresh_token'),
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+          }
+        );
+        localStorage.clear();
+        axios.defaults.headers.common['Authorization'] = null;
+        window.location.href = 'mill_home';
+      } catch (e) {
+        console.log('logout not working', e);
+      }
+    })();
+  }, []);
+
   return (
-    <div className='mainContainer'>
-      <h2>Logout</h2>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <div></div>
   );
-};
+}
 
 
 export { Login, Logout };
