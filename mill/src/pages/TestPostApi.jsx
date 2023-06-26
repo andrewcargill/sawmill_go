@@ -9,25 +9,30 @@ const TestPostApi = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.post('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/lumber/', {
         data1,
         data2,
         data3,
+      }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
       });
       console.log('Data created:', response.data);
-      
+  
       // Reset form fields after successful submission
       setData1('');
       setData2('');
       setData3('');
-
+  
       setSuccess(true); // Set success status to true
     } catch (error) {
       console.error('Error creating data:', error);
     }
   };
+  
 
   return (
     <div>

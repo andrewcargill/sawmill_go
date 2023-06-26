@@ -7,12 +7,20 @@ const PlanksByLog = () => {
 
   const fetchPlanksByLog = async () => {
     try {
-      const response = await axios.get(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/planks/by_log/?log_id=${logId}`);
+      const response = await axios.get(
+        `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/planks/by_log/?log_id=${logId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        }
+      );
       setPlanks(response.data);
     } catch (error) {
       console.error('Error fetching logs:', error);
     }
   };
+  
 
   const handleSearch = () => {
     if (logId) {

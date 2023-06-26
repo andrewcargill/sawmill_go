@@ -12,11 +12,14 @@ const SecureHome = () => {
       (async () => {
         try {
           const {data} = await axios.get(   
-                         'https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/home/', {
-                          headers: {
-                             'Content-Type': 'application/json'
-                          }}
-                        );
+            'https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/home/',
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+                'Content-Type': 'application/json',
+              },
+            }
+          );
           setMessage(data.message);
        } catch (e) {
          console.log('not auth')

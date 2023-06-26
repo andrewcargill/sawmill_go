@@ -7,7 +7,14 @@ const LogsByTree = () => {
 
   const fetchLogsByTree = async () => {
     try {
-      const response = await axios.get(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/logs/by_tree/?tree_id=${treeId}`);
+      const response = await axios.get(
+        `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/logs/by_tree/?tree_id=${treeId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        }
+      );
       setLogs(response.data);
     } catch (error) {
       console.error('Error fetching logs:', error);

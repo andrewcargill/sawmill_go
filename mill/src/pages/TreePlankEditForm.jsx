@@ -11,12 +11,20 @@ const TreePlankEditForm = ({ id, initialData, onCancel, onSave }) => {
       [name]: value,
     }));
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-      await axios.put(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/${id}/`, data);
+      await axios.put(
+        `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/${id}/`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        }
+      );
       onSave(); // Notify parent component that edit is complete
     } catch (error) {
       console.error('Error updating data:', error);

@@ -58,43 +58,44 @@ const MoistureByPlank = () => {
     }
 };
 
-  return (
-    <div className='mainContainer'>
-      <h1>Moisture Checks by Plank ID</h1>
-      <input type="number" placeholder="Enter Plank ID" value={plankId} onChange={(e) => setPlankId(e.target.value)} />
-      <button onClick={handleSearch}>Search</button>
+return (
+  <div className='mainContainer'>
+    <h1>Moisture Checks by Plank ID</h1>
+    <input type="number" placeholder="Enter Plank ID" value={plankId} onChange={(e) => setPlankId(e.target.value)} />
+    <button onClick={handleSearch}>Search</button>
 
-      {moistureChecks.length > 0 ? (
-        <div>
-          <h2>Moisture Checks for Plank ID: {plankId}</h2>
-          {moistureChecks.map((water) => (
-            <div key={water.id}>
-              {selectedItemId === water.id ? (
-                <TreeMoistureEditForm
-                  id={water.id}
-                  initialData={water}
-                  onCancel={handleCancelEdit}
-                  onSave={handleSaveEdit}
-                />
-              ) : (
-                <>
-                  <h3>Moisture Check ID: {water.id}</h3>
-                  <p>Date: {water.date}</p>
-                  <p>Water %: {water.water_percentage}</p>
-                  
-                  {/* Display other log information */}
-                  <button onClick={() => handleEdit(water.id)}>Edit</button>
-                  <button onClick={() => handleDelete(water.id)}>Delete</button>
-                </>
-              )}
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>No planks found for Plank ID: {plankId}</p>
-      )}
-    </div>
-  );
+    {moistureChecks && moistureChecks.length > 0 ? (
+      <div>
+        <h2>Moisture Checks for Plank ID: {plankId}</h2>
+        {moistureChecks.map((water) => (
+          <div key={water.id}>
+            {selectedItemId === water.id ? (
+            
+              <TreeMoistureEditForm
+                id={water.id}
+                initialData={water}
+                onCancel={handleCancelEdit}
+                onSave={handleSaveEdit}
+              />
+            ) : (
+              <>
+                <h3>Moisture Check ID: {water.id}</h3>
+                <p>Date: {water.date}</p>
+                <p>Water %: {water.water_percentage}</p>
+
+                {/* Display other log information */}
+                <button onClick={() => handleEdit(water.id)}>Edit</button>
+                <button onClick={() => handleDelete(water.id)}>Delete</button>
+              </>
+            )}
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p>No moisture checks found for Plank ID: {plankId}</p>
+    )}
+  </div>
+);
 };
 
 export default MoistureByPlank;

@@ -14,14 +14,23 @@ const TreeLogEditForm = ({ id, initialData, onCancel, onSave }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-      await axios.put(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/log/${id}/`, data);
+      const response = await axios.put(
+        `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/log/${id}/`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        }
+      );
       onSave(); // Notify parent component that edit is complete
     } catch (error) {
       console.error('Error updating data:', error);
     }
   };
+  
 
   return (
     <div>

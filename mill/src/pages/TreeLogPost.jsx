@@ -9,25 +9,34 @@ const TreeLogPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-      const response = await axios.post('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/log/', {
-        date,
-        tree,
-        length,
-      });
+      const response = await axios.post(
+        'https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/log/',
+        {
+          date,
+          tree,
+          length,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        }
+      );
       console.log('Data created:', response.data);
-      
+  
       // Reset form fields after successful submission
       setDate('');
       setTree('');
       setLength('');
-
+  
       setSuccess(true); // Set success status to true
     } catch (error) {
       console.error('Error creating data:', error);
     }
   };
+  
 
   return (
     <div>

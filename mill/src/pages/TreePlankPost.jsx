@@ -10,27 +10,36 @@ const TreePlankPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-      const response = await axios.post('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/', {
-        log,
-        width,
-        depth,
-        wood_grade,
-      });
+      const response = await axios.post(
+        'https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/',
+        {
+          log,
+          width,
+          depth,
+          wood_grade,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        }
+      );
       console.log('Data created:', response.data);
-      
+  
       // Reset form fields after successful submission
       setLog('');
       setWidth('');
       setDepth('');
       setWood_grade('');
-
+  
       setSuccess(true); // Set success status to true
     } catch (error) {
       console.error('Error creating data:', error);
     }
   };
+  
 
   return (
     <div>
