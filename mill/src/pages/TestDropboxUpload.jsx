@@ -16,7 +16,7 @@ const TestDropboxUpload = () => {
   
     try {
       const formData = new FormData();
-      formData.append('file:', selectedImage);
+      formData.append('image', selectedImage);
   
       const response = await axios.post('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/upload-image/', formData, {
         headers: {

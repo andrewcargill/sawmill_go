@@ -41,12 +41,13 @@ const Layout = () => {
 
              
               
-
+              {isAuth ?
               <li className="nav-item">
                 <Link className="nav-link" to="tree_crud">
-                  Tree
+                  Dev Tree
                 </Link>
               </li>
+              : null}
 
               <li className="nav-item">
                 <Link className="nav-link" to="log_crud">
@@ -98,8 +99,12 @@ const Layout = () => {
                   <Dropdown.Item as={Link} to="mill_add_planks">
                     Add Plank
                   </Dropdown.Item>
+                  
                   <Dropdown.Item as={Link} to="mill_add_logs">
                     Add Log
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="mill_add_trees">
+                    Add Tree
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
