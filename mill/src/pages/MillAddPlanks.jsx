@@ -28,7 +28,13 @@ const MillAddPlanks = () => {
         depth,
         wood_grade,
         date,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
       });
+
       console.log('Data created:', response.data);
       
       // Reset form fields after successful submission

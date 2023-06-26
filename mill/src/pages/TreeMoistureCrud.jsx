@@ -25,7 +25,14 @@ const TreeMoistureCrud = () => {
         params.id = idSearchQuery;
       }
   
-      const response = await axios.get('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/water/', { params });
+      const response = await axios.get('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/water/', { 
+        params,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      });
+      
       setData(response.data);
       console.log(response.data);
     } catch (error) {
@@ -55,7 +62,13 @@ const TreeMoistureCrud = () => {
 
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/water/${deleteItemId}/`);
+      await axios.delete(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/water/${deleteItemId}/`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      });
+    
       setConfirmDelete(false);
       setDeleteItemId(null);
       fetchData();

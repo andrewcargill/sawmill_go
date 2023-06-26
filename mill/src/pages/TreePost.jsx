@@ -11,11 +11,21 @@ const TreePost = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/', {
-        date,
-        species,
-        reason_for_felling,
-      });
+      const accessToken = localStorage.getItem("access_token");
+      const response = await axios.post(
+        "https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/",
+        {
+          date,
+          species,
+          reason_for_felling,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
       console.log('Data created:', response.data);
       
       // Reset form fields after successful submission

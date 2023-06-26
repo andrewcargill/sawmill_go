@@ -14,7 +14,12 @@ const MoistureByPlank = () => {
 
   const fetchMoistureChecksByPlank = async () => {
     try {
-      const response = await axios.get(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/water/by_plank/?plank_id=${plankId}`);
+      const response = await axios.get(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/water/by_plank/?plank_id=${plankId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      });
+
       setMoistureChecks(response.data);
     } catch (error) {
       console.error('Error fetching logs:', error);
@@ -42,12 +47,16 @@ const MoistureByPlank = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/water/${id}/`);
+      await axios.delete(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/water/${id}/`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      });
       fetchMoistureChecksByPlank();
     } catch (error) {
       console.error('Error deleting data:', error);
     }
-  };
+};
 
   return (
     <div className='mainContainer'>

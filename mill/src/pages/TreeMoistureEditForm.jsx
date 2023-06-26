@@ -16,12 +16,16 @@ const TreeMoistureEditForm = ({ id, initialData, onCancel, onSave }) => {
     e.preventDefault();
 
     try {
-      await axios.put(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/water/${id}/`, data);
+      await axios.put(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/water/${id}/`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      });
       onSave(); // Notify parent component that edit is complete
     } catch (error) {
       console.error('Error updating data:', error);
     }
-  };
+};
 
   return (
     <div>
