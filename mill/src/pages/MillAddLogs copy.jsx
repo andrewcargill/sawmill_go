@@ -13,7 +13,6 @@ const MillAddLogs = () => {
   const [length, setLength] = useState("");
   const [success, setSuccess] = useState(false);
   const [postId, setPostId] = useState(null);
-  const [treeIdExists, setTreeIdExists] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,12 +24,6 @@ const MillAddLogs = () => {
           date,
           tree,
           length,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
         }
       );
       console.log("Data created:", response.data);
@@ -47,47 +40,8 @@ const MillAddLogs = () => {
     }
   };
 
-  const validateTreeId = async (treeId) => {
-    try {
-      await axios.get(`http://127.0.0.1:8000/api/tree/${treeId}/`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      });
-      return true; // Tree ID exists
-    } catch (error) {
-      console.log("TreeIdExists:", false);
-      return false; // Tree ID does not exist
-    }
-  };
+  /// Navigation to Mill Home
 
-  const handleTreeChange = (e) => {
-    const treeId = e.target.value;
-    setTree(treeId);
-  };
-
-  const handleTreeBlur = async () => {
-    try {
-      const response = await axios.get(
-        `http://127.0.0.1:8000/api/tree/validate/${tree}/`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        }
-      );
-
-      const { exists } = response.data;
-      console.log("TreeIdExists:", exists);
-      setTreeIdExists(exists);
-    } catch (error) {
-      console.error("Error validating tree ID:", error);
-    }
-  };
-
-  // Navigation to Mill Home
   const navigate = useNavigate();
 
   const handleButtonClick = (route) => {
@@ -116,61 +70,59 @@ const MillAddLogs = () => {
             <Col xs={6}>
               <label>Tree:</label>
               <input
-                type="text"
+                type="number"
                 className="form-control form-control-lg"
-                placeholder="Search tree by ID"
+                placeholder="Tree ID number"
                 value={tree}
-                onChange={handleTreeChange}
-                onBlur={handleTreeBlur}
+                onChange={(e) => setTree(e.target.value)}
                 required
                 inputMode="numeric"
               />
-              {treeIdExists !== null && !treeIdExists && (
-                <div className={css.validationMessage}>ID not in system</div>
-              )}
             </Col>
           </Row>
           <Row>
             <Col xs={6}>
-              <label>Length (cm):</label>
+              <label>Length:</label>
               <input
                 type="number"
                 className="form-control form-control-lg"
+                placeholder="Length in metres"
                 value={length}
                 onChange={(e) => setLength(e.target.value)}
                 required
+                inputMode="numeric"
               />
             </Col>
+            <Col xs={6}></Col>
           </Row>
 
+          {success && (
+            <Alert key="success" variant="success">
+              <p>Success! Data Stored.</p>
+              <div className={css.plankId}>Log ID: {postId}</div>{" "}
+            </Alert>
+          )}
           <Row>
             <Col xs={12}>
-              <Button
-                id={css.button}
-                variant="dark"
-                type="submit"
-                disabled={!treeIdExists}
-              >
-                Save
+              <Button id={css.button} variant="dark" type="submit">
+                save
               </Button>
             </Col>
+            
           </Row>
+          <Row>
+              <Col xs={12}>
+                <Button
+                  id={css.button}
+                  variant="primary"
+                  onClick={() => handleButtonClick("/mill_home")}
+                >
+                  Mill Home
+                </Button>
+              </Col>
+            </Row>
         </form>
       </div>
-
-      {success && (
-        <Alert variant="success" className={css.alert}>
-          Log added successfully with ID: {postId}
-        </Alert>
-      )}
-
-      <Button
-        id={css.button}
-        variant="outline-dark"
-        onClick={() => handleButtonClick("/millhome")}
-      >
-        Back to Mill Home
-      </Button>
     </div>
   );
 };
