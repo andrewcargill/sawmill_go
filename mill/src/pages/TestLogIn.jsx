@@ -83,7 +83,7 @@ const Logout = () => {
         );
         localStorage.clear();
         axios.defaults.headers.common['Authorization'] = null;
-        window.location.href = 'mill_home';
+        window.location.href = '/mill_home';
       } catch (e) {
         console.log('logout not working', e);
       }

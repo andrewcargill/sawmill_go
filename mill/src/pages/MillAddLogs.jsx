@@ -167,7 +167,7 @@ const MillAddLogs = () => {
       <Button
         id={css.button}
         variant="outline-dark"
-        onClick={() => handleButtonClick("/millhome")}
+        onClick={() => handleButtonClick("/mill_home")}
       >
         Back to Mill Home
       </Button>
