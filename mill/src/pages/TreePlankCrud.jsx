@@ -123,6 +123,7 @@ const TreePlankCrud = () => {
               <p>Depth: {item.depth}</p>
               <p>Grade: {item.wood_grade}</p>
               <p>Parent Log: {item.log}</p>
+              <p>Live Edge: {item.live_edge ? "True" : "False"}</p>
               <button onClick={() => handleEdit(item.id)}>Edit</button>
               {confirmDelete && deleteItemId === item.id ? (
                 <>

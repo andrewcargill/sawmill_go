@@ -17,19 +17,21 @@ const MillAddPlanks = () => {
   const [success, setSuccess] = useState(false);
   const [postId, setPostId] = useState(null);
   const [logIdExists, setLogIdExists] = useState(null);
+  const [live_edge, setLive_edge] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post(
-        "https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/",
+        " http://127.0.0.1:8000/api/plank/",
         {
           log,
           width,
           depth,
           wood_grade,
           date,
+          live_edge
         },
         {
           headers: {
@@ -47,6 +49,7 @@ const MillAddPlanks = () => {
       setDepth("");
       setWood_grade("");
       setDate("");
+      setLive_edge(false);
 
       setPostId(response.data.id);
       setSuccess(true); // Set success status to true
@@ -78,6 +81,10 @@ const MillAddPlanks = () => {
     } catch (error) {
       console.error("Error validating log ID:", error);
     }
+  };
+
+  const handleLiveEdgeClick = () => {
+    setLive_edge(!live_edge);
   };
 
   /// Navigation to Mill Home
@@ -207,7 +214,11 @@ const MillAddPlanks = () => {
                       </Button>
                     </Col>
                     <Col xs={6}>
-                      <Button id={css.button} variant="light">
+                      <Button
+                        id={css.button}
+                        variant={live_edge ? "warning" : "light"}
+                        onClick={handleLiveEdgeClick}
+                      >
                         Live-Edge
                       </Button>
                     </Col>
