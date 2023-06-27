@@ -47,21 +47,6 @@ const MillAddLogs = () => {
     }
   };
 
-  // const validateTreeId = async (treeId) => {
-  //   try {
-  //     await axios.get(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/${treeId}/`, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-  //       },
-  //     });
-  //     return true; // Tree ID exists
-  //   } catch (error) {
-  //     console.log("TreeIdExists:", false);
-  //     return false; // Tree ID does not exist
-  //   }
-  // };
-
   const handleTreeChange = (e) => {
     const treeId = e.target.value;
     setTree(treeId);
@@ -118,7 +103,7 @@ const MillAddLogs = () => {
               <input
                 type="text"
                 className="form-control form-control-lg"
-                placeholder="Search tree by ID"
+                placeholder="Enter ID"
                 value={tree}
                 onChange={handleTreeChange}
                 onBlur={handleTreeBlur}
