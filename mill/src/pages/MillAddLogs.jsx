@@ -114,7 +114,7 @@ const MillAddLogs = () => {
               />
             </Col>
             <Col xs={6}>
-              <label>Tree:</label>
+              <label>Tree ID:</label>
               <input
                 type="text"
                 className="form-control form-control-lg"

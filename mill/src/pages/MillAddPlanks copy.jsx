@@ -17,7 +17,6 @@ const MillAddPlanks = () => {
   const [wood_grade, setWood_grade] = useState('');
   const [success, setSuccess] = useState(false);
   const [postId, setPostId] = useState(null)
-  const [logIdExists, setLogIdExists] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,32 +51,6 @@ const MillAddPlanks = () => {
     }
   };
 
-  const handleLogChange = (e) => {
-    const logId = e.target.value;
-    setLog(logId);
-  };
-
-  const handleLogBlur = async () => {
-    try {
-      const response = await axios.get(
-        `http://127.0.0.1:8000/api/log/validate/${log}/`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        }
-      );
-
-      const { exists } = response.data;
-      console.log("LogIdExists:", exists);
-      setLogIdExists(exists);
-    } catch (error) {
-      console.error("Error validating log ID:", error);
-    }
-  };
-
-  
   /// Navigation to Mill Home
 
   const navigate = useNavigate();
@@ -108,21 +81,15 @@ const MillAddPlanks = () => {
             />
             </Col>
             <Col xs={6}>
-            <label>Log ID:</label>
-              <input
-                type="text"
-                className="form-control form-control-lg"
-                placeholder="Search tree by ID"
-                value={log}
-                onChange={handleLogChange}
-                onBlur={handleLogBlur}
-                required
-                inputMode="numeric"
-              />
-              {logIdExists !== null && !logIdExists && (
-                <div className={css.validationMessage}>ID not in system</div>
-              )}
-           
+            <label htmlFor="input1">Log ID:</label>
+            
+            <input type="number" className="form-control form-control-lg" placeholder="Log ID number" 
+            
+            value={log} 
+            
+            onChange={(e) => setLog(e.target.value)} required 
+            inputMode='numeric'
+            />
             </Col>
         </Row>
         <Row>
