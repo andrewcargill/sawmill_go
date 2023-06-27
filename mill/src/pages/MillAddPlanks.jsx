@@ -168,7 +168,9 @@ const MillAddPlanks = () => {
         </div> </Alert>}
         <Row>
             <Col xs={12}>
-            <Button id={css.button} variant='dark' type="submit">save</Button>
+            <Button id={css.button} variant='dark' 
+            disabled={!logIdExists}
+            type="submit">save</Button>
             </Col>
            
         </Row>
