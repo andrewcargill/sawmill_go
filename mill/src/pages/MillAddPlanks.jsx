@@ -18,6 +18,10 @@ const MillAddPlanks = () => {
   const [postId, setPostId] = useState(null);
   const [logIdExists, setLogIdExists] = useState(null);
   const [live_edge, setLive_edge] = useState(false);
+  const [furniture, setFurniture] = useState(false);
+  const [structural, setStructural] = useState(false);
+  const [general, setGeneral] = useState(false);
+  const [info, setInfo] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +35,11 @@ const MillAddPlanks = () => {
           depth,
           wood_grade,
           date,
-          live_edge
+          live_edge,
+          furniture,
+          structural,
+          general,
+          info,
         },
         {
           headers: {
@@ -50,6 +58,10 @@ const MillAddPlanks = () => {
       setWood_grade("");
       setDate("");
       setLive_edge(false);
+      setFurniture(false);
+      setStructural(false);
+      setGeneral(false);
+      setInfo("");
 
       setPostId(response.data.id);
       setSuccess(true); // Set success status to true
@@ -85,6 +97,15 @@ const MillAddPlanks = () => {
 
   const handleLiveEdgeClick = () => {
     setLive_edge(!live_edge);
+  };
+  const handleFurnitureClick = () => {
+    setFurniture(!furniture);
+  };
+  const handleStructuralClick = () => {
+    setStructural(!structural);
+  };
+  const handleGeneralClick = () => {
+    setGeneral(!general);
   };
 
   /// Navigation to Mill Home
@@ -181,12 +202,15 @@ const MillAddPlanks = () => {
           </Row>
           <Row>
             <Col xs={12}>
-              <label>N/A</label>
+              <label>Information</label>
               <textarea
                 className="form-control form-control-lg"
                 id="largeTextInput"
                 rows="6"
                 placeholder="Enter additional information"
+                type="text"
+                value={info}
+                onChange={(e) => setInfo(e.target.value)}
               ></textarea>
             </Col>
           </Row>
@@ -197,19 +221,31 @@ const MillAddPlanks = () => {
                   <Card.Title className="text-light">Categories</Card.Title>
                   <Row>
                     <Col xs={6}>
-                      <Button id={css.button} variant="light">
+                    <Button
+                       id={css.button}
+                       variant={general ? "warning" : "light"}
+                       onClick={handleGeneralClick}
+                      >
                         General
                       </Button>
                     </Col>
                     <Col xs={6}>
-                      <Button id={css.button} variant="light">
+                    <Button
+                       id={css.button}
+                       variant={furniture ? "warning" : "light"}
+                       onClick={handleFurnitureClick}
+                      >
                         Furniture
                       </Button>
                     </Col>
                   </Row>
                   <Row>
                     <Col xs={6}>
-                      <Button id={css.button} variant="light">
+                      <Button
+                       id={css.button}
+                       variant={structural ? "warning" : "light"}
+                       onClick={handleStructuralClick}
+                      >
                         Structural
                       </Button>
                     </Col>
