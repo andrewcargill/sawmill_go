@@ -19,6 +19,7 @@ import TestApiGps from './pages/TestApiGps';
 import TestApiGpsMap from './pages/TestApiGpsMap';
 import TestApiGpsTwo from './pages/TestApiGpsTwo';
 import SecureHome from './SecureHome';
+import LoggedOut from './LoggedOut';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="" element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="home_secure" element={<SecureHome />} />
+        <Route path="logout_success" element={<LoggedOut />} />
       
         <Route path="test_crud" element={<TestApiCrud />} />
         <Route path="test_gps" element={<TestApiGps />} />

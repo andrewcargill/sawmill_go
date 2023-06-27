@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   // Create the submit method.
+ 
+
   const submit = async e => {
        e.preventDefault();
        const user = {
@@ -66,6 +70,8 @@ const Login = () => {
 }
 
 const Logout = () => {
+
+
   useEffect(() => {
     (async () => {
       try {
@@ -83,7 +89,7 @@ const Logout = () => {
         );
         localStorage.clear();
         axios.defaults.headers.common['Authorization'] = null;
-        window.location.href = '/mill_home';
+        window.location.href = 'logout_success';
       } catch (e) {
         console.log('logout not working', e);
       }
