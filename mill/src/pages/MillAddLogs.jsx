@@ -47,20 +47,20 @@ const MillAddLogs = () => {
     }
   };
 
-  const validateTreeId = async (treeId) => {
-    try {
-      await axios.get(`http://127.0.0.1:8000/api/tree/${treeId}/`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      });
-      return true; // Tree ID exists
-    } catch (error) {
-      console.log("TreeIdExists:", false);
-      return false; // Tree ID does not exist
-    }
-  };
+  // const validateTreeId = async (treeId) => {
+  //   try {
+  //     await axios.get(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/${treeId}/`, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+  //       },
+  //     });
+  //     return true; // Tree ID exists
+  //   } catch (error) {
+  //     console.log("TreeIdExists:", false);
+  //     return false; // Tree ID does not exist
+  //   }
+  // };
 
   const handleTreeChange = (e) => {
     const treeId = e.target.value;
@@ -70,7 +70,7 @@ const MillAddLogs = () => {
   const handleTreeBlur = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/tree/validate/${tree}/`,
+        `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/validate/${tree}/`,
         {
           headers: {
             "Content-Type": "application/json",
