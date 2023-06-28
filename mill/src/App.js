@@ -20,6 +20,7 @@ import TestApiGpsMap from './pages/TestApiGpsMap';
 import TestApiGpsTwo from './pages/TestApiGpsTwo';
 import SecureHome from './SecureHome';
 import LoggedOut from './LoggedOut';
+import MillAddMoisture from './pages/MillAddMoisture';
 
 const App = () => {
   return (
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="mill_add_planks" element={<MillAddPlanks />} />
         <Route path="mill_add_logs" element={<MillAddLogs />} />
         <Route path="mill_add_trees" element={<MillAddTrees />} />
+        <Route path="mill_add_moisture" element={<MillAddMoisture />} />
         <Route path="moisture_by_planks" element={<MoistureByPlank />} />
 
 

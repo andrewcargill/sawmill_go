@@ -89,6 +89,9 @@ const Layout = () => {
                       <Dropdown.Item as={Link} to="mill_add_trees">
                         Add Tree
                       </Dropdown.Item>
+                      <Dropdown.Item as={Link} to="mill_add_moisture">
+                        Add Moisture Check
+                      </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                   <Dropdown>

@@ -47,8 +47,11 @@ const MillHome = () => {
             </div>
           </Col>
           <Col xs={6}>
+          
           <div className={css.buttonContainer}>
-              <button className={css.selectButton}>+ Moisture Check</button>
+              <button className={css.selectButton}
+               onClick={() => handleButtonClick('/mill_add_moisture')}
+              >+ Moisture Check</button>
             </div>
           </Col>
         </Row>
