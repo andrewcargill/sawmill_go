@@ -200,7 +200,7 @@ const MillAddPlanks = () => {
               />
             </Col>
           </Row>
-          <Row>
+          <Row className="mb-4">
             <Col xs={12}>
               <label>Information</label>
               <textarea
@@ -214,7 +214,7 @@ const MillAddPlanks = () => {
               ></textarea>
             </Col>
           </Row>
-          <Row>
+          <Row className="mb-4">
             <Col>
               <Card className="bg-secondary">
                 <Card.Body>

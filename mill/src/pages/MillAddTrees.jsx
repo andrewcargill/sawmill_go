@@ -4,16 +4,41 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
 import css from "../styles/millAddPlank.module.css";
 import axios from "axios";
 
 const MillAddTrees = () => {
-  
   const [date, setDate] = useState("");
-  const [species, setSpecies] = useState('');
-  const [reason_for_felling, setReason_for_felling] = useState('');
+  const [species, setSpecies] = useState("");
+  const [reason_for_felling, setReason_for_felling] = useState("");
+  const [age, setAge] = useState("");
+  const [lumberjack, setLumberjack] = useState("");
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
   const [success, setSuccess] = useState(false);
   const [postId, setPostId] = useState(null);
+
+
+  const handleGetLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const limitedLatitude = parseFloat(position.coords.latitude.toFixed(14));
+          const limitedLongitude = parseFloat(position.coords.longitude.toFixed(14));
+          setLatitude(limitedLatitude.toString());
+          setLongitude(limitedLongitude.toString());
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+    }
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +51,8 @@ const MillAddTrees = () => {
           date,
           species,
           reason_for_felling,
+          age,
+          lumberjack,
         },
         {
           headers: {
@@ -75,59 +102,102 @@ const MillAddTrees = () => {
               />
             </Col>
             <Col xs={6}>
-              <label htmlFor="input1">Speices:</label>
+            <Form.Group controlId="species">
+                <Form.Label>Species:</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={species}
+                  onChange={(e) => setSpecies(e.target.value)}
+                  className="form-control form-control-lg"
+                  required
+                >
+                  <option value="Pine">Pine</option>
+                  <option value="Spruce">Spruce</option>
+                  <option value="Birch">Birch</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="mb-4">
+            <Col xs={6}>
+              <Form.Group controlId="age">
+                <Form.Label>Age:</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
+                  className="form-control form-control-lg"
+                  required
+                >
+                  <option value="">Select age range</option>
+                  <option value="30-40">30-40 yrs</option>
+                  <option value="40-60">40-60 yrs</option>
+                  <option value="60-80">60-80 yrs</option>
+                  <option value="80-100">80-100 yrs</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+            <Col xs={6}>
+              <Form.Group controlId="lumberjack">
+                <Form.Label>Lumberjack:</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={lumberjack}
+                  onChange={(e) => setLumberjack(e.target.value)}
+                  className="form-control form-control-lg"
+                  required
+                >
 
-              <input
-                type="text"
-                className="form-control form-control-lg"
-                placeholder="e.g 'Pine'"
-                value={species} 
-          onChange={(e) => setSpecies(e.target.value)} required 
-                
-              />
+                  <option value="Andrew Cargill">Andy</option>
+                  <option value="Jen Nyman">Jens</option>
+                  <option value="Elin Cargill">Elin</option>
+                  <option value="Charlie Cargill">Charlie</option>
+                </Form.Control>
+              </Form.Group>
             </Col>
           </Row>
-          <Row>
-            <Col xs={6}>
-              <label>N/A</label>
-              <input
-                type="number"
-                className="form-control form-control-lg"
-                placeholder="Not in use"
-              />
-            </Col>
-            <Col xs={6}>
-              <label>N/A</label>
-              <input
-                type="number"
-                className="form-control form-control-lg"
-                placeholder="Not in use"
-                
-                inputMode="numeric"
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={6}>
-              <label>N/A</label>
-              <input
-                type="text"
-                className="form-control form-control-lg"
-                placeholder="Not in use"
-                
-                inputMode="numeric"
-              />
-            </Col>
-            <Col xs={6}>
-              <label>N/A</label>
-              <input
-                type="text"
-                className="form-control form-control-lg"
-             
-                placeholder="Not in use"
-              />
-            </Col>
-          </Row>
+        
+          <Card className="bg-secondary">
+  <Card.Body>
+    <Card.Title className="text-light">GPS</Card.Title>
+    <Row>
+    <Col xs={6}>
+        <label>Latitude:</label>
+        <input
+          type="text"
+          className="form-control form-control-lg"
+          placeholder="Not in use"
+          value={longitude}
+          onChange={(e) => setLongitude(e.target.value)}
+        />
+      </Col>
+      
+      <Col xs={6}>
+        <label>Longitude:</label>
+        <input
+          type="text"
+          className="form-control form-control-lg"
+          placeholder="Not in use"
+          value={latitude}
+          onChange={(e) => setLatitude(e.target.value)}
+        />
+      </Col>
+    </Row>
+    <Row>
+    <Col xs={12}>
+        <Button
+          id={css.button}
+          type="button"
+          variant="warning"
+          onClick={handleGetLocation}
+          className={css.getLocationButton}
+        >
+          Get Location
+        </Button>
+      </Col>
+    </Row>
+  </Card.Body>
+</Card>
           <Row>
             <Col xs={12}>
               <label>Reason For Felling</label>
@@ -135,9 +205,9 @@ const MillAddTrees = () => {
                 className="form-control form-control-lg"
                 rows="6"
                 placeholder="Enter additional information"
-                value={reason_for_felling} 
-          onChange={(e) => setReason_for_felling(e.target.value)} required
-          
+                value={reason_for_felling}
+                onChange={(e) => setReason_for_felling(e.target.value)}
+                required
               ></textarea>
             </Col>
           </Row>
