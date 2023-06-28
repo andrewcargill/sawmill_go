@@ -121,6 +121,7 @@ const MillAddMoisture = () => {
             <label>Moisture Content %:</label>
           <input
             type="text"
+            className="form-control form-control-lg"
             value={water_percentage}
             onChange={(e) => setWater_percentage(e.target.value)}
             required
