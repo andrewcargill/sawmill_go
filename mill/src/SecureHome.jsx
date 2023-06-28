@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import css from "./styles/millHome.module.css";
 import axios from "axios";
+import UploadComponent from './components/CloudinaryTest';
 
 const SecureHome = () => {
   const [message, setMessage] = useState('');
@@ -52,6 +53,11 @@ const SecureHome = () => {
             >
               ADD ENTRIES
             </Button>
+
+            
+          </Col>
+          <Col xs={12} className="d-flex justify-content-center">
+          <UploadComponent />
           </Col>
        </Row>
      </div>
