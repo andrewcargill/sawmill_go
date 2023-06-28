@@ -11,6 +11,8 @@ const MillAddLogs = () => {
   const [tree, setTree] = useState("");
   const [date, setDate] = useState("");
   const [length, setLength] = useState("");
+  const [diameter, setDiameter] = useState("");
+  const [buck, setBuck] = useState("");
   const [success, setSuccess] = useState(false);
   const [postId, setPostId] = useState(null);
   const [treeIdExists, setTreeIdExists] = useState(null);
@@ -79,6 +81,10 @@ const MillAddLogs = () => {
     navigate(route);
   };
 
+  const handleBuckClick = () => {
+    setBuck(!buck);
+  };
+
   return (
     <div className={css.page}>
       <div>
@@ -88,7 +94,7 @@ const MillAddLogs = () => {
       <div>
         <form onSubmit={handleSubmit}>
           <Row>
-            <Col xs={6}>
+            <Col xs={4}>
               <label>Date:</label>
               <input
                 type="date"
@@ -98,7 +104,7 @@ const MillAddLogs = () => {
                 required
               />
             </Col>
-            <Col xs={6}>
+            <Col xs={4}>
               <label>Tree ID:</label>
               <input
                 type="text"
@@ -114,6 +120,15 @@ const MillAddLogs = () => {
                 <div className={css.validationMessage}>ID not in system</div>
               )}
             </Col>
+            <Col xs={4}>
+                      <Button
+                        id={css.button}
+                        variant={buck ? "success" : "light"}
+                        onClick={handleBuckClick}
+                      >
+                        Buck Log
+                      </Button>
+                    </Col>
           </Row>
           <Row>
             <Col xs={6}>
@@ -123,11 +138,23 @@ const MillAddLogs = () => {
                 className="form-control form-control-lg"
                 value={length}
                 onChange={(e) => setLength(e.target.value)}
+                inputMode="numeric"
+                required
+              />
+            </Col>
+            <Col xs={6}>
+              <label>Diameter (cm):</label>
+              <input
+                type="number"
+                className="form-control form-control-lg"
+                value={diameter}
+                onChange={(e) => setDiameter(e.target.value)}
+                inputMode="numeric"
                 required
               />
             </Col>
           </Row>
-
+         
           <Row>
             <Col xs={12}>
               <Button
