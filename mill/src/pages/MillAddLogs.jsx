@@ -12,7 +12,7 @@ const MillAddLogs = () => {
   const [date, setDate] = useState("");
   const [length, setLength] = useState("");
   const [diameter, setDiameter] = useState("");
-  const [buck, setBuck] = useState("");
+  const [buck, setBuck] = useState(false);
   const [success, setSuccess] = useState(false);
   const [postId, setPostId] = useState(null);
   const [treeIdExists, setTreeIdExists] = useState(null);
@@ -27,6 +27,7 @@ const MillAddLogs = () => {
           date,
           tree,
           length,
+          buck,
         },
         {
           headers: {
@@ -41,6 +42,7 @@ const MillAddLogs = () => {
       setDate("");
       setTree("");
       setLength("");
+      setBuck(false);
 
       setPostId(response.data.id);
       setSuccess(true); // Set success status to true
@@ -121,12 +123,13 @@ const MillAddLogs = () => {
               )}
             </Col>
             <Col xs={4}>
+            
                       <Button
                         id={css.button}
                         variant={buck ? "success" : "light"}
                         onClick={handleBuckClick}
                       >
-                        Buck Log
+                        {buck ? "BUCK LOG" : "BUCK"}
                       </Button>
                     </Col>
           </Row>
