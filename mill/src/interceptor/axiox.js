@@ -9,7 +9,7 @@ axios.interceptors.response.use(
       refresh = true;
       console.log(localStorage.getItem('refresh_token'));
       const response = await axios.post(
-        'http://127.0.0.1:8000/token/refresh/',
+        'https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/token/refresh/',
         {
           refresh: localStorage.getItem('refresh_token'),
         },
@@ -24,6 +24,8 @@ axios.interceptors.response.use(
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data['access']}`;
         localStorage.setItem('access_token', response.data.access);
         localStorage.setItem('refresh_token', response.data.refresh);
+       
+        console.log('Token refresh successful!');
         return axios(error.config);
       }
     }
