@@ -1,5 +1,10 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+import css from "./styles/millHome.module.css";
 import axios from "axios";
 
 const SecureHome = () => {
@@ -26,9 +31,29 @@ const SecureHome = () => {
        }
       })()};
   }, []);
+
+  const navigate = useNavigate();
+  
+  const handleButtonClick = (route) => {
+    navigate(route);
+  };
+
   return (
      <div className="form-signin mt-5 text-center">
-       <h3>Hi {message}</h3>
+      <Row className='mb-4'>
+       <h3>{message}</h3>
+       </Row>
+       <Row>
+       <Col xs={12} className="d-flex justify-content-center">
+            <Button
+            className={css.logoutButton}
+            variant="success"
+             onClick={() => handleButtonClick('/mill_home')}
+            >
+              ADD ENTRIES
+            </Button>
+          </Col>
+       </Row>
      </div>
   );
 }

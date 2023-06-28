@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import css from "../styles/millHome.module.css";
 
@@ -24,40 +23,52 @@ const MillHome = () => {
         <Row>
           <Col xs={6}>
             <div className={css.buttonContainer}>
-              <button className={css.selectButton}
+              <Button className={css.selectButton}
+              variant="success"
               onClick={() => handleButtonClick('/mill_add_planks')}
               >+ Plank
-              </button>
+              </Button>
             </div>
           </Col>
           <Col xs={6}>
           <div className={css.buttonContainer}>
-              <button className={css.selectButton}
+              <Button className={css.selectButton}
+              variant="success"
               onClick={() => handleButtonClick('/mill_add_logs')}
-              >+ Log</button>
+              >+ Log</Button>
             </div>
           </Col>
         </Row>
         <Row>
           <Col xs={6}>
           <div className={css.buttonContainer}>
-              <button className={css.selectButton}
+              <Button className={css.selectButton}
+              variant="success"
                onClick={() => handleButtonClick('/mill_add_trees')}
-              >+ Tree</button>
+              >+ Tree</Button>
             </div>
           </Col>
           <Col xs={6}>
           
           <div className={css.buttonContainer}>
-              <button className={css.selectButton}
+              <Button className={css.selectButton}
+              variant="success"
                onClick={() => handleButtonClick('/mill_add_moisture')}
-              >+ Moisture Check</button>
+              >+ Moisture Check</Button>
             </div>
           </Col>
         </Row>
-        INFO SECTION
+  
         <Row>
-          <Col xs={12}>LOG IN</Col>
+          <Col xs={12} className="d-flex justify-content-center">
+            <Button
+            className={css.logoutButton}
+            variant="dark"
+             onClick={() => handleButtonClick('/logout')}
+            >
+              LOG OUT
+            </Button>
+          </Col>
         </Row>
       </div>
     </div>
