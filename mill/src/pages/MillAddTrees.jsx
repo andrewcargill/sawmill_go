@@ -198,13 +198,12 @@ const MillAddTrees = () => {
     </Row>
   </Card.Body>
 </Card>
-          <Row>
+          <Row className="mb-4">
             <Col xs={12}>
               <label>Reason For Felling</label>
               <textarea
                 className="form-control form-control-lg"
                 rows="6"
-                placeholder="Enter additional information"
                 value={reason_for_felling}
                 onChange={(e) => setReason_for_felling(e.target.value)}
                 required
