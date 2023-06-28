@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
 import css from "../styles/millAddPlank.module.css";
 import axios from "axios";
 
@@ -21,6 +22,7 @@ const MillAddPlanks = () => {
   const [furniture, setFurniture] = useState(false);
   const [structural, setStructural] = useState(false);
   const [general, setGeneral] = useState(false);
+  const [operator, setOperator] = useState(false);
   const [info, setInfo] = useState("");
 
   const handleSubmit = async (e) => {
@@ -40,6 +42,7 @@ const MillAddPlanks = () => {
           structural,
           general,
           info,
+          operator,
         },
         {
           headers: {
@@ -62,6 +65,7 @@ const MillAddPlanks = () => {
       setStructural(false);
       setGeneral(false);
       setInfo("");
+      setOperator("");
 
       setPostId(response.data.id);
       setSuccess(true); // Set success status to true
@@ -191,13 +195,22 @@ const MillAddPlanks = () => {
               />
             </Col>
             <Col xs={6}>
-              <label htmlFor="input1">N/A</label>
-              <input
-                type="text"
-                className="form-control form-control-lg"
-                id="input1"
-                placeholder="Enter value for Input 1"
-              />
+              <Form.Group controlId="lumberjack">
+                <Form.Label>Operator:</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={operator}
+                  onChange={(e) => setOperator(e.target.value)}
+                  className="form-control form-control-lg"
+                  required
+                >
+                  <option value="Andrew Cargill">Andy</option>
+                  <option value="Andrew Cargill & Jens Nyman">Andy & Jens</option>
+                  <option value="Jens Nyman">Jens</option>
+                  <option value="Elin Cargill">Elin</option>
+                  <option value="Charlie Cargill">Charlie</option>
+                </Form.Control>
+              </Form.Group>
             </Col>
           </Row>
           <Row className="mb-4">
@@ -221,19 +234,19 @@ const MillAddPlanks = () => {
                   <Card.Title className="text-light">Categories</Card.Title>
                   <Row>
                     <Col xs={6}>
-                    <Button
-                       id={css.button}
-                       variant={general ? "warning" : "light"}
-                       onClick={handleGeneralClick}
+                      <Button
+                        id={css.button}
+                        variant={general ? "warning" : "light"}
+                        onClick={handleGeneralClick}
                       >
                         General
                       </Button>
                     </Col>
                     <Col xs={6}>
-                    <Button
-                       id={css.button}
-                       variant={furniture ? "warning" : "light"}
-                       onClick={handleFurnitureClick}
+                      <Button
+                        id={css.button}
+                        variant={furniture ? "warning" : "light"}
+                        onClick={handleFurnitureClick}
                       >
                         Furniture
                       </Button>
@@ -242,9 +255,9 @@ const MillAddPlanks = () => {
                   <Row>
                     <Col xs={6}>
                       <Button
-                       id={css.button}
-                       variant={structural ? "warning" : "light"}
-                       onClick={handleStructuralClick}
+                        id={css.button}
+                        variant={structural ? "warning" : "light"}
+                        onClick={handleStructuralClick}
                       >
                         Structural
                       </Button>
