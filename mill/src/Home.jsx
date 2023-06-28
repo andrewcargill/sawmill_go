@@ -5,7 +5,7 @@ const Home = () => {
     <div>
 
       <h1>Hello, Welcome to the Sawmill Go Frontend!</h1>
-      <p>v1.2.2</p>
+      <p>v1.2.3</p>
     </div>
   );
 };
