@@ -15,18 +15,21 @@ const MillAddTrees = () => {
   const [reason_for_felling, setReason_for_felling] = useState("");
   const [age, setAge] = useState("");
   const [lumberjack, setLumberjack] = useState("");
-  const [latitude, setLatitude] = useState('');
-  const [longitude, setLongitude] = useState('');
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
   const [success, setSuccess] = useState(false);
   const [postId, setPostId] = useState(null);
-
 
   const handleGetLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const limitedLatitude = parseFloat(position.coords.latitude.toFixed(14));
-          const limitedLongitude = parseFloat(position.coords.longitude.toFixed(14));
+          const limitedLatitude = parseFloat(
+            position.coords.latitude.toFixed(14)
+          );
+          const limitedLongitude = parseFloat(
+            position.coords.longitude.toFixed(14)
+          );
           setLatitude(limitedLatitude.toString());
           setLongitude(limitedLongitude.toString());
         },
@@ -35,10 +38,9 @@ const MillAddTrees = () => {
         }
       );
     } else {
-      console.error('Geolocation is not supported by this browser.');
+      console.error("Geolocation is not supported by this browser.");
     }
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,6 +55,8 @@ const MillAddTrees = () => {
           reason_for_felling,
           age,
           lumberjack,
+          latitude,
+          longitude,
         },
         {
           headers: {
@@ -92,7 +96,7 @@ const MillAddTrees = () => {
         <form onSubmit={handleSubmit}>
           <Row>
             <Col xs={6}>
-              <label>Date:</label>
+              <label>Date</label>
               <input
                 type="date"
                 className="form-control form-control-lg"
@@ -102,8 +106,8 @@ const MillAddTrees = () => {
               />
             </Col>
             <Col xs={6}>
-            <Form.Group controlId="species">
-                <Form.Label>Species:</Form.Label>
+              <Form.Group controlId="species">
+                <Form.Label>Species</Form.Label>
                 <Form.Control
                   as="select"
                   value={species}
@@ -111,6 +115,7 @@ const MillAddTrees = () => {
                   className="form-control form-control-lg"
                   required
                 >
+                  <option value="">Select species</option>
                   <option value="Pine">Pine</option>
                   <option value="Spruce">Spruce</option>
                   <option value="Birch">Birch</option>
@@ -121,7 +126,7 @@ const MillAddTrees = () => {
           <Row className="mb-4">
             <Col xs={6}>
               <Form.Group controlId="age">
-                <Form.Label>Age:</Form.Label>
+                <Form.Label>Age</Form.Label>
                 <Form.Control
                   as="select"
                   value={age}
@@ -139,7 +144,7 @@ const MillAddTrees = () => {
             </Col>
             <Col xs={6}>
               <Form.Group controlId="lumberjack">
-                <Form.Label>Lumberjack:</Form.Label>
+                <Form.Label>Lumberjack</Form.Label>
                 <Form.Control
                   as="select"
                   value={lumberjack}
@@ -147,7 +152,7 @@ const MillAddTrees = () => {
                   className="form-control form-control-lg"
                   required
                 >
-
+                  <option value="">Select lumberjack</option>
                   <option value="Andrew Cargill">Andy</option>
                   <option value="Jen Nyman">Jens</option>
                   <option value="Elin Cargill">Elin</option>
@@ -156,48 +161,49 @@ const MillAddTrees = () => {
               </Form.Group>
             </Col>
           </Row>
+         
+            <Card className="bg-secondary mb-4">
+              <Card.Body>
+                <Card.Title className="text-light">GPS MODULE</Card.Title>
+                <Row>
+                  <Col xs={6}>
+                    <label>Latitude</label>
+                    <input
+                      type="text"
+                      className="form-control form-control-lg"
+                      placeholder=""
+                      value={longitude}
+                      onChange={(e) => setLongitude(e.target.value)}
+                    />
+                  </Col>
+
+                  <Col xs={6}>
+                    <label>Longitude</label>
+                    <input
+                      type="text"
+                      className="form-control form-control-lg"
+                      placeholder=""
+                      value={latitude}
+                      onChange={(e) => setLatitude(e.target.value)}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={12}>
+                    <Button
+                      id={css.button}
+                      type="button"
+                      variant="warning"
+                      onClick={handleGetLocation}
+                      className={css.getLocationButton}
+                    >
+                      Get Location
+                    </Button>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
         
-          <Card className="bg-secondary">
-  <Card.Body>
-    <Card.Title className="text-light">GPS</Card.Title>
-    <Row>
-    <Col xs={6}>
-        <label>Latitude:</label>
-        <input
-          type="text"
-          className="form-control form-control-lg"
-          placeholder="Not in use"
-          value={longitude}
-          onChange={(e) => setLongitude(e.target.value)}
-        />
-      </Col>
-      
-      <Col xs={6}>
-        <label>Longitude:</label>
-        <input
-          type="text"
-          className="form-control form-control-lg"
-          placeholder="Not in use"
-          value={latitude}
-          onChange={(e) => setLatitude(e.target.value)}
-        />
-      </Col>
-    </Row>
-    <Row>
-    <Col xs={12}>
-        <Button
-          id={css.button}
-          type="button"
-          variant="warning"
-          onClick={handleGetLocation}
-          className={css.getLocationButton}
-        >
-          Get Location
-        </Button>
-      </Col>
-    </Row>
-  </Card.Body>
-</Card>
           <Row className="mb-4">
             <Col xs={12}>
               <label>Reason For Felling</label>
