@@ -103,6 +103,7 @@ const MillAddMoisture = () => {
             <label>Plank ID:</label>
           <input
             type="text"
+            className="form-control form-control-lg"
             placeholder="Enter ID"
             value={plank}
             onChange={handlePlankChange}
