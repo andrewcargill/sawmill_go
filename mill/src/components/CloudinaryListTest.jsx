@@ -13,7 +13,7 @@ const UploadComponentNew = () => {
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/cloud-post/');
+      const response = await axios.get('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/cloud-post/');
       setPosts(response.data);
     } catch (error) {
       console.error(error);
@@ -32,7 +32,7 @@ const UploadComponentNew = () => {
         const formData = new FormData();
         formData.append('image', selectedFile);
   
-        const response = await axios.post('http://127.0.0.1:8000/api/cloud-post/', formData, {
+        const response = await axios.post('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/cloud-post/', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${localStorage.getItem('access_token')}`,

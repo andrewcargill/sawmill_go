@@ -27,7 +27,7 @@ const ImageCameraTest = () => {
         const formData = new FormData();
         formData.append('image', selectedFile);
 
-        const response = await axios.post('http://127.0.0.1:8000/api/posts/', formData, {
+        const response = await axios.post('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/posts/', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${localStorage.getItem('access_token')}`,
