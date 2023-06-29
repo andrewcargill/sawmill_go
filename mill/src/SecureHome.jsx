@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import css from "./styles/millHome.module.css";
 import axios from "axios";
 import UploadComponentNew from './components/CloudinaryListTest';
+import ImageCameraTest from './components/CloudinaryButtonCameraTest';
 
 const SecureHome = () => {
   const [message, setMessage] = useState('');
@@ -58,6 +59,7 @@ const SecureHome = () => {
           </Col>
           <Col xs={12} className="d-flex justify-content-center">
           <UploadComponentNew />
+          <ImageCameraTest />
           </Col>
        </Row>
      </div>

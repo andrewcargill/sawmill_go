@@ -58,15 +58,16 @@ const UploadComponentNew = () => {
       <input type="file" onChange={handleFileChange} />
       <button type="submit">Upload</button>
     </form>
-
+  
     <Row className="d-flex flex-wrap">
       {posts.map((post) => (
-        <Col>
+        <Col key={post.id}>
           <img src={post.image} alt={`Post ${post.id}`} className="img-thumbnail" />
-          </Col>
+        </Col>
       ))}
     </Row>
   </div>
+  
   );
 };
 
