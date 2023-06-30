@@ -15,8 +15,6 @@ const MillAddPlanks = () => {
   const [width, setWidth] = useState("");
   const [depth, setDepth] = useState("");
   const [wood_grade, setWood_grade] = useState("");
-  const [success, setSuccess] = useState(false);
-  const [postId, setPostId] = useState(null);
   const [logIdExists, setLogIdExists] = useState(null);
   const [live_edge, setLive_edge] = useState(false);
   const [furniture, setFurniture] = useState(false);
@@ -24,37 +22,49 @@ const MillAddPlanks = () => {
   const [general, setGeneral] = useState(false);
   const [operator, setOperator] = useState(false);
   const [info, setInfo] = useState("");
+  const [imageOne, setImageOne] = useState("");
+  const [imageTwo, setImageTwo] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [postId, setPostId] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      const accessToken = localStorage.getItem("access_token");
+      const formData = new FormData();
+      formData.append("date", date);
+      formData.append("log", log);
+      formData.append("width", width);
+      formData.append("depth", depth);
+      formData.append("wood_grade", wood_grade);
+      formData.append("live_edge", live_edge);
+      formData.append("furniture", furniture);
+      formData.append("structural", structural);
+      formData.append("general", general);
+      formData.append("operator", operator);
+      formData.append("info", info);
+      
+      if (imageOne !== "") {
+        formData.append("image1", imageOne);
+      }
+
+      if (imageTwo !== "") {
+        formData.append("image2", imageTwo);
+      }
+
       const response = await axios.post(
-        " https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/",
-        {
-          log,
-          width,
-          depth,
-          wood_grade,
-          date,
-          live_edge,
-          furniture,
-          structural,
-          general,
-          info,
-          operator,
-        },
+        "https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/",
+        formData,
         {
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       );
-
       console.log("Data created:", response.data);
 
-      // Reset form fields after successful submission
       setLog("");
       setWidth("");
       setDepth("");
@@ -66,6 +76,8 @@ const MillAddPlanks = () => {
       setGeneral(false);
       setInfo("");
       setOperator("");
+      setImageOne("");
+      setImageTwo("");
 
       setPostId(response.data.id);
       setSuccess(true); // Set success status to true
@@ -73,6 +85,56 @@ const MillAddPlanks = () => {
       console.error("Error creating data:", error);
     }
   };
+
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const response = await axios.post(
+  //       " https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/",
+  //       {
+  //         log,
+  //         width,
+  //         depth,
+  //         wood_grade,
+  //         date,
+  //         live_edge,
+  //         furniture,
+  //         structural,
+  //         general,
+  //         info,
+  //         operator,
+  //       },
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+  //         },
+  //       }
+  //     );
+
+  //     console.log("Data created:", response.data);
+
+  //     // Reset form fields after successful submission
+  //     setLog("");
+  //     setWidth("");
+  //     setDepth("");
+  //     setWood_grade("");
+  //     setDate("");
+  //     setLive_edge(false);
+  //     setFurniture(false);
+  //     setStructural(false);
+  //     setGeneral(false);
+  //     setInfo("");
+  //     setOperator("");
+
+  //     setPostId(response.data.id);
+  //     setSuccess(true); // Set success status to true
+  //   } catch (error) {
+  //     console.error("Error creating data:", error);
+  //   }
+  // };
 
   const handleLogChange = (e) => {
     const logId = e.target.value;
@@ -274,6 +336,26 @@ const MillAddPlanks = () => {
                   </Row>
                 </Card.Body>
               </Card>
+            </Col>
+          </Row>
+          <Row className="mb-4">
+            <Col xs={6}>
+              <label>Image 1</label>
+              <input
+            type="file"
+            accept="image/*"
+            className="form-control form-control-lg"
+            onChange={(e) => setImageOne(e.target.files[0])}
+          />
+            </Col>
+            <Col xs={6}>
+              <label>Image 2</label>
+              <input
+            type="file"
+            accept="image/*"
+            className="form-control form-control-lg"
+            onChange={(e) => setImageTwo(e.target.files[0])}
+          />
             </Col>
           </Row>
           {success && (
