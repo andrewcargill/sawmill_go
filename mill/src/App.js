@@ -22,6 +22,7 @@ import SecureHome from './SecureHome';
 import LoggedOut from './LoggedOut';
 import MillAddMoisture from './pages/MillAddMoisture';
 import TreeList from './pages/MillListTrees';
+import TreeDetail from './pages/MillTreeDetail';
 
 const App = () => {
   return (
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="mill_home" element={<MillHome />} />
 
         <Route path="tree_list" element={<TreeList />} />
+        <Route path="/tree/:id" element={<TreeDetail />} />
 
         <Route path="mill_add_planks" element={<MillAddPlanks />} />
         <Route path="mill_add_logs" element={<MillAddLogs />} />
