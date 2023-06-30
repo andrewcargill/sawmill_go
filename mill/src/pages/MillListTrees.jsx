@@ -6,66 +6,113 @@ import css from "../styles/TreeList.module.css";
 
 const TreeList = () => {
   const [trees, setTrees] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [idSearchQuery, setIdSearchQuery] = useState("");
+
+  const [orderBy, setOrderBy] = useState("id");
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem("access_token");
-  
-        const response = await axios.get(
-          "https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-  
-        setTrees(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-  
     fetchData();
-  }, []);
-  
+  }, [orderBy]);
+
+  const fetchData = async () => {
+    try {
+      const params = {};
+      if (searchQuery) {
+        params.search = searchQuery;
+      }
+      if (idSearchQuery) {
+        params.id = idSearchQuery;
+      }
+      if (orderBy) {
+        params.ordering = orderBy;
+      }
+
+      const response = await axios.get("http://127.0.0.1:8000/api/tree/", {
+        params,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      });
+      setTrees(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const handleSearch = () => {
+    fetchData();
+  };
+
+  const handleIdSearch = () => {
+    const id = parseInt(idSearchQuery);
+    setIdSearchQuery(id);
+    fetchData();
+  };
+
+  const handleSort = (field) => {
+    if (orderBy === field) {
+      // Toggle the sort order if the same field is clicked
+      setOrderBy(`-${field}`);
+    } else {
+      // Set the new sort field and default sort order to ascending
+      setOrderBy(field);
+    }
+  };
 
   return (
-    <div className={css.tableContainer}>
-      <h2>Tree List</h2>
-      {trees && trees.length > 0 ? (
-        <Table striped bordered hover>
-          <thead className={css.tableHeader}>
-            <tr>
-              <th>Date</th>
-              <th>Species</th>
-              <th>Reason for Felling</th>
-              <th>Age</th>
-              <th>Lumberjack</th>
-              <th>Latitude</th>
-              <th>Longitude</th>
-            </tr>
-          </thead>
-          <tbody>
-            {trees.map((tree) => (
-              <tr key={tree.id}>
-                <td>
-                  <Link to={`/tree/${tree.id}`}>{tree.date}</Link>
-                </td>
-                <td>{tree.species}</td>
-                <td>{tree.reason_for_felling}</td>
-                <td>{tree.age}</td>
-                <td>{tree.lumberjack}</td>
-                <td>{tree.latitude}</td>
-                <td>{tree.longitude}</td>
+    <div className="page">
+      <div>
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button onClick={handleSearch}>Search</button>
+        <input
+          type="number"
+          value={idSearchQuery}
+          onChange={(e) => setIdSearchQuery(e.target.value)}
+        />
+        <button onClick={handleIdSearch}>Search by ID</button>
+      </div>
+      <div className={css.tableContainer}>
+        <h2>Tree List</h2>
+        {trees && trees.length > 0 ? (
+          <Table striped bordered hover>
+            <thead className={css.tableHeader}>
+              <tr>
+                <th onClick={() => handleSort("id")}>Ref</th>
+                <th onClick={() => handleSort("date")}>Date</th>
+                <th onClick={() => handleSort("species")}>Species</th>
+
+                <th onClick={() => handleSort("age")}>Age</th>
+                <th onClick={() => handleSort("lumberjack")}>Lumberjack</th>
+                <th>Reason for Felling</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      ) : (
-        <p>No trees found.</p>
-      )}
+            </thead>
+            <tbody>
+              {trees.map((tree) => (
+                <tr key={tree.id}>
+                  <td>
+                    <Link to={`/tree/${tree.id}`}>{tree.id}</Link>
+                  </td>
+                  <td>{tree.date}</td>
+                  <td>{tree.species}</td>
+                  <td>{tree.age}</td>
+                  <td>{tree.lumberjack}</td>
+                  <td>{tree.reason_for_felling}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        ) : (
+          <p>No trees found.</p>
+        )}
+      </div>
     </div>
   );
 };
