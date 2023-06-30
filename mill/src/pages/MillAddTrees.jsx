@@ -17,6 +17,7 @@ const MillAddTrees = () => {
   const [lumberjack, setLumberjack] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
+  const [image, setImage] = useState("");
   const [success, setSuccess] = useState(false);
   const [postId, setPostId] = useState(null);
 
@@ -42,25 +43,34 @@ const MillAddTrees = () => {
     }
   };
 
+  const handleImageUpload = (e) => {
+    setImage(e.target.files[0]);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const accessToken = localStorage.getItem("access_token");
+      const formData = new FormData();
+      formData.append("date", date);
+      formData.append("species", species);
+      formData.append("reason_for_felling", reason_for_felling);
+      formData.append("age", age);
+      formData.append("lumberjack", lumberjack);
+      formData.append("latitude", latitude);
+      formData.append("longitude", longitude);
+     
+      if (image !== "") {
+        formData.append("image", image);
+      }
+
       const response = await axios.post(
         "https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/",
-        {
-          date,
-          species,
-          reason_for_felling,
-          age,
-          lumberjack,
-          latitude,
-          longitude,
-        },
+        formData,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${accessToken}`,
           },
         }
@@ -71,6 +81,7 @@ const MillAddTrees = () => {
       setDate("");
       setSpecies("");
       setReason_for_felling("");
+      setImage("");
 
       setPostId(response.data.id);
       setSuccess(true); // Set success status to true
@@ -214,6 +225,17 @@ const MillAddTrees = () => {
                 onChange={(e) => setReason_for_felling(e.target.value)}
                 required
               ></textarea>
+            </Col>
+          </Row>
+          <Row className="mb-4">
+            <Col xs={12}>
+            <label>Image Upload</label>
+          <input
+            type="file"
+            accept="image/*"
+            className="form-control form-control-lg"
+            onChange={(e) => setImage(e.target.files[0])}
+          />
             </Col>
           </Row>
           {success && (
