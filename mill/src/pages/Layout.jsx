@@ -70,7 +70,11 @@ const Layout = () => {
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-
+                  <li className="nav-item">
+                    <Link className="nav-link" to="tree_list">
+                      Tree Search
+                    </Link>
+                  </li>
                   <Dropdown>
                     <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                       SAWMILL INPUT SCREENS

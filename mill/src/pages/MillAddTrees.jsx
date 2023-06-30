@@ -43,10 +43,6 @@ const MillAddTrees = () => {
     }
   };
 
-  const handleImageUpload = (e) => {
-    setImage(e.target.files[0]);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 

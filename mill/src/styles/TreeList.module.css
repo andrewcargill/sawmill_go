@@ -1,0 +1,15 @@
+.tableContainer {
+    overflow: auto;
+    max-height: 80vh;
+    font-size: 10px;
+    
+  }
+  
+  .tableHeader {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+    border: 2px solid black;
+  }
+  
