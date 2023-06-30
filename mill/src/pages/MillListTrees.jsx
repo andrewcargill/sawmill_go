@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 import css from "../styles/TreeList.module.css";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 
 const TreeList = () => {
   const [trees, setTrees] = useState([]);
@@ -62,25 +64,57 @@ const TreeList = () => {
     }
   };
 
+  const handleReset = () => {
+    setSearchQuery("");
+    setIdSearchQuery("");
+    setOrderBy("id");
+
+    fetchData();
+
+  };
+
+  const handleSearchKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const handleIdSearchKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleIdSearch();
+    }
+  };
+
   return (
     <div className="page">
-      <div>
+      <Row className="pb-4">
+        <Col xs={12}>
+          <div>
         <input
           type="text"
           placeholder="Search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleSearchKeyPress}
         />
-        <button onClick={handleSearch}>Search</button>
+        
+       
         <input
           type="number"
           value={idSearchQuery}
           onChange={(e) => setIdSearchQuery(e.target.value)}
+          onKeyDown={handleSearchKeyPress}
+          placeholder="Search by ID"
         />
-        <button onClick={handleIdSearch}>Search by ID</button>
-      </div>
+  
+       
+        <button onClick={handleReset}>Reset</button>
+        </div>
+        </Col>
+      </Row>
+      <Row>
       <div className={css.tableContainer}>
-        <h2>Tree List</h2>
+        
         {trees && trees.length > 0 ? (
           <Table striped bordered hover>
             <thead className={css.tableHeader}>
@@ -113,6 +147,7 @@ const TreeList = () => {
           <p>No trees found.</p>
         )}
       </div>
+      </Row>
     </div>
   );
 };
