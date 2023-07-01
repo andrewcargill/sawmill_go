@@ -43,15 +43,19 @@ const TreeDetail = () => {
   return (
     <div className="page">
       <Container className="pb-4">
-        <Row>
-          <Col xs={8}>
+        <Row className="pb-4">
+          <Col xs={6}>
             <h2>Tree {id} Info</h2>
           </Col>
-          <Col xs={2}>
-            <Link to={`/tree_list/`}>BACK</Link>
+          <Col xs={3}>
+            <Link to={`/tree_list/`}>
+              <Button>Back</Button>
+            </Link>
           </Col>
-          <Col xs={2}>
-            <Link to={`/tree/${tree.id}/edit`}>EDIT</Link>
+          <Col xs={3}>
+            <Link to={`/tree/${tree.id}/edit`}>
+              <Button>Edit</Button>
+            </Link>
           </Col>
         </Row>
         <Row>

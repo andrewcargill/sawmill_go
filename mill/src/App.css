@@ -42,6 +42,14 @@
   margin: 2%;
 }
 
+.button-link {
+  width: 100%;
+}
+
+#detail-button {
+  width: 100%;
+}
+
 .button-container {
   display: flex;
   flex-wrap: wrap;
@@ -50,9 +58,9 @@
 }
 
 .button-container a Button {
-  margin: 5px;
+  margin: 2px;
   font-size: 12px;
-  width: 42vw;
+  width: 95%;
 
 }
 

@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import GoogleMapReact from "google-map-react";
-import { Container, Row, Col, Table } from "react-bootstrap";
-import LogsByTree from "../components/LogsbyTree";
+import { Container, Row, Col, Table, Button } from "react-bootstrap";
 import css from "../styles/testApiGps.module.css";
+
 
 const LogDetail = () => {
   const { id } = useParams();
   const [log, setLog] = useState(null);
   const [treeSpecies, setTreeSpecies] = useState("");
+  
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLog = async () => {
@@ -48,18 +49,24 @@ const LogDetail = () => {
     return buck ? "Yes" : "No";
   };
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="page">
       <Container className="pb-4">
-        <Row>
-          <Col xs={8}>
+        <Row className="pb-4">
+          <Col xs={6}>
             <h2>Log {id} Info</h2>
           </Col>
-          <Col xs={2}>
-            <Link to={`/log_list/`}>BACK</Link>
+          <Col xs={3}>
+          <Button onClick={handleGoBack}>BACK</Button>
           </Col>
-          <Col xs={2}>
-            <Link to={`/log/${id}/edit`}>EDIT</Link>
+          <Col xs={3}>
+            <Link to={`/log/${id}/edit`}>
+              <Button>EDIT</Button>
+            </Link>
           </Col>
         </Row>
         <Row>

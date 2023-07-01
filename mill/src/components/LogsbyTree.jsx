@@ -43,7 +43,7 @@ const LogsByTree = ({ treeId }) => { // Accept treeId as a prop
       {logs && logs.length > 0 ? (
         <div className='button-container'>
           {logs.map((log) => (
-           <Link key={log.id} to={`/log/${log.id}`}>
+           <Link classname='button-link' key={log.id} to={`/log/${log.id}`}>
             <Button id='detail-button'>
               <h3>LOG ID: {log.id}</h3>
               <p>Date Cut: {log.date}</p>
