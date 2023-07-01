@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import GoogleMapReact from 'google-map-react';
-import css from '../styles/testApiGps.module.css';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import GoogleMapReact from "google-map-react";
+import css from "../styles/testApiGps.module.css";
+import { Container, Row, Col, Table } from "react-bootstrap";
 
 const TreeDetail = () => {
   const { id } = useParams();
@@ -13,17 +14,20 @@ const TreeDetail = () => {
   useEffect(() => {
     const fetchTree = async () => {
       try {
-        const response = await axios.get(`https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/${id}/`, {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-          },
-        });
+        const response = await axios.get(
+          `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/${id}/`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          }
+        );
         setTree(response.data);
         setLatitude(response.data.latitude);
         setLongitude(response.data.longitude);
       } catch (error) {
-        console.error('Error fetching tree:', error);
+        console.error("Error fetching tree:", error);
       }
     };
 
@@ -35,41 +39,84 @@ const TreeDetail = () => {
   }
 
   return (
-    <div>
-      <h2>Tree {id} Details</h2>
-      <p>Date: {tree.date}</p>
-      <p>Species: {tree.species}</p>
-      <p>Reason for Felling: {tree.reason_for_felling}</p>
-      <p>Age: {tree.age}</p>
-      <p>Lumberjack: {tree.lumberjack}</p>
-      <p>Latitude: {latitude}</p>
-      <p>Longitude: {longitude}</p>
-      {tree.image && (
-        <img
-          src={tree.image}
-          alt="Tree Image"
-          style={{ maxWidth: '200px', maxHeight: '200px' }}
-        />
-      )}
-
+    <div className="page">
+      <Container className="pb-4">
+        <h2>Tree {id}</h2>
+        <Row>
+          <Col>
+            <Table bordered>
+              <tbody>
+                <tr>
+                  <th>Date:</th>
+                  <td>{tree.date}</td>
+                </tr>
+                <tr>
+                  <th>Species:</th>
+                  <td>{tree.species}</td>
+                </tr>
+                <tr>
+                  <th>Age:</th>
+                  <td>{tree.age}</td>
+                </tr>
+                <tr>
+                  <th>Lumberjack:</th>
+                  <td>{tree.lumberjack}</td>
+                </tr>
+                <tr>
+                  <th>Latitude:</th>
+                  <td>{tree.latitude}</td>
+                </tr>
+                <tr>
+                  <th>Longitude:</th>
+                  <td>{tree.longitude}</td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <td colSpan={2}>
+                    <strong>Reason For Felling:</strong>
+                    <p>{tree.reason_for_felling}</p>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+          </Col>
+        </Row>
+      </Container>
+      <Row>
+        <Col xs={6}>
       {latitude && longitude ? (
-        <div style={{ height: '400px', width: '100%' }}>
+        <div style={{ height: "400px", width: "100%" }} className="pb-4">
           <GoogleMapReact
-            bootstrapURLKeys={{ key: 'AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U' }}
-            defaultCenter={{ lat: parseFloat(latitude), lng: parseFloat(longitude) }}
+            bootstrapURLKeys={{
+              key: "AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U",
+            }}
+            defaultCenter={{
+              lat: parseFloat(latitude),
+              lng: parseFloat(longitude),
+            }}
             defaultZoom={18}
-            options={{ mapTypeId: 'satellite' }}
+            options={{ mapTypeId: "satellite" }}
           >
             <Marker lat={parseFloat(latitude)} lng={parseFloat(longitude)} />
           </GoogleMapReact>
-          <div>
-            <p>Latitude: {latitude}</p>
-            <p>Longitude: {longitude}</p>
-          </div>
         </div>
       ) : (
-        <p>No location data available.</p>
+        <p>NO GPS DATA.</p>
       )}
+      </Col>
+      <Col xs={6}>
+      <div className="pb-4">
+        {tree.image && (
+          <img
+            src={tree.image}
+            alt="Tree Image"
+            style={{ maxWidth: "100%", height: "auto" }}
+          />
+        )}
+      </div>
+      </Col>
+      </Row>
     </div>
   );
 };
