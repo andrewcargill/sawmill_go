@@ -41,3 +41,16 @@
 .page {
   margin: 2%;
 }
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button-container Button {
+  margin: 2px;
+  font-size: 12px;
+  width: 48%;
+}

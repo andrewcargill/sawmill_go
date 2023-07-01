@@ -5,6 +5,8 @@ import GoogleMapReact from "google-map-react";
 import css from "../styles/testApiGps.module.css";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
 import style from "../styles/TreeDetail.module.css"
+import { Link } from "react-router-dom";
+import LogsByTree from "../components/LogsbyTree";
 
 
 const TreeDetail = () => {
@@ -43,7 +45,14 @@ const TreeDetail = () => {
   return (
     <div className="page">
       <Container className="pb-4">
+        <Row>
+          <Col xs={6}>
         <h2>Tree {id}</h2>
+        </Col>
+          <Col xs={6}>
+          <Link to={`/tree/${tree.id}/edit`}>EDIT</Link>
+        </Col>
+        </Row>
         <Row>
           <Col>
             <Table bordered>
@@ -83,12 +92,9 @@ const TreeDetail = () => {
                 <tr>
                   <td colSpan={2}>
                     <strong>Logs:</strong>
-                    <div className={style.logButton}>
-                      <Button >LOG 1</Button> 
-                      <Button>LOG 2</Button> 
-                      <Button>LOG 3</Button> 
-                      <Button>LOG 4</Button>
-      
+                    
+                    <div>
+                    <LogsByTree treeId={id} />
                     </div>
                   </td>
                 </tr>

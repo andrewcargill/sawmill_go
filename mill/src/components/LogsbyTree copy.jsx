@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, Col } from 'react-bootstrap';
 
-const LogsByTree = ({ treeId }) => { // Accept treeId as a prop
-
-  // Remove the useState for treeId and its corresponding onChange handler
-
+const LogsByTree = () => {
   const [logs, setLogs] = useState([]);
+  const [treeId, setTreeId] = useState('');
 
   const fetchLogsByTree = async () => {
     try {
@@ -24,29 +21,28 @@ const LogsByTree = ({ treeId }) => { // Accept treeId as a prop
     }
   };
 
-  useEffect(() => {
+  const handleSearch = () => {
     if (treeId) {
       fetchLogsByTree();
     }
-  }, [treeId]); // Fetch logs when the treeId prop changes
+  };
 
   return (
     <div>
+      <h1>Logs by Tree</h1>
+      <input type="number" placeholder="Enter Tree ID" value={treeId} onChange={(e) => setTreeId(e.target.value)} />
+      <button onClick={handleSearch}>Search</button>
 
-
-      {/* Remove the input field and button for searching */}
-
-      {logs && logs.length > 0 ? (
-        <div className='button-container'>
+      {logs.length > 0 ? (
+        <div>
+          <h2>Logs for Tree ID: {treeId}</h2>
           {logs.map((log) => (
-           
-            <Button key={log.id}>
+            <div key={log.id}>
               <h3>LOG ID: {log.id}</h3>
               <p>Date Cut: {log.date}</p>
               <p>Cut Length: {log.length}</p>
               {/* Display other log information */}
-            </Button>
-        
+            </div>
           ))}
         </div>
       ) : (

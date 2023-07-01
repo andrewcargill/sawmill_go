@@ -24,6 +24,7 @@ import LoggedOut from './LoggedOut';
 import MillAddMoisture from './pages/MillAddMoisture';
 import TreeList from './pages/MillListTrees';
 import TreeDetail from './pages/MillTreeDetail';
+import TreeEdit from './pages/MillTreeEdit';
 
 
 const App = () => {
@@ -56,6 +57,7 @@ const App = () => {
 
         <Route path="tree_list" element={<TreeList />} />
         <Route path="/tree/:id" element={<TreeDetail />} />
+        <Route path="/tree/:id/edit" element={<TreeEdit />} />
 
         <Route path="mill_add_planks" element={<MillAddPlanks />} />
         <Route path="mill_add_logs" element={<MillAddLogs />} />

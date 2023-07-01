@@ -161,7 +161,7 @@ const MillAddTrees = () => {
                 >
                   <option value="">Select lumberjack</option>
                   <option value="Andrew Cargill">Andy</option>
-                  <option value="Jen Nyman">Jens</option>
+                  <option value="Jens Nyman">Jens</option>
                   <option value="Elin Cargill">Elin</option>
                   <option value="Charlie Cargill">Charlie</option>
                 </Form.Control>
