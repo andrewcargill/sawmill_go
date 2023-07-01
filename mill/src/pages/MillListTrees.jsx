@@ -35,7 +35,7 @@ const TreeList = () => {
         params.ordering = orderBy;
       }
 
-      const response = await axios.get("http://127.0.0.1:8000/api/tree/", {
+      const response = await axios.get("https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/", {
         params,
         headers: {
           "Content-Type": "application/json",

@@ -4,7 +4,6 @@ import axios from "axios";
 import GoogleMapReact from "google-map-react";
 import css from "../styles/testApiGps.module.css";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
-import style from "../styles/TreeDetail.module.css";
 import { Link } from "react-router-dom";
 import LogsByTree from "../components/LogsbyTree";
 

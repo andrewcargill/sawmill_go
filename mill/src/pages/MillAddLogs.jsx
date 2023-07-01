@@ -28,6 +28,7 @@ const MillAddLogs = () => {
           tree,
           length,
           buck,
+          diameter,
         },
         {
           headers: {
