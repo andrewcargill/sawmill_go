@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import GoogleMapReact from "google-map-react";
 import css from "../styles/testApiGps.module.css";
-import { Container, Row, Col, Table } from "react-bootstrap";
+import { Container, Row, Col, Table, Button } from "react-bootstrap";
+import style from "../styles/TreeDetail.module.css"
+
 
 const TreeDetail = () => {
   const { id } = useParams();
@@ -76,6 +78,18 @@ const TreeDetail = () => {
                   <td colSpan={2}>
                     <strong>Reason For Felling:</strong>
                     <p>{tree.reason_for_felling}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan={2}>
+                    <strong>Logs:</strong>
+                    <div className={style.logButton}>
+                      <Button >LOG 1</Button> 
+                      <Button>LOG 2</Button> 
+                      <Button>LOG 3</Button> 
+                      <Button>LOG 4</Button>
+      
+                    </div>
                   </td>
                 </tr>
               </tbody>

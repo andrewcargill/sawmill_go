@@ -1,0 +1,6 @@
+.logButton {
+  margin: 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
