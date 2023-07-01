@@ -3,6 +3,7 @@ import axios from "axios";
 import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { Link } from "react-router-dom";
 
 const LogList = () => {
   const [logs, setLogs] = useState([]);
@@ -135,8 +136,8 @@ const LogList = () => {
                 {logs.map((log) => (
                   <tr key={log.id}>
                     <td>
-                      {log.id}
-                    {/* <Link to={`/log/${log.id}`}>{log.id}</Link> */}
+                     
+                    <Link to={`/log/${log.id}`}>{log.id}</Link>
                     </td>
                     <td>{log.date}</td>
                     <td>{log.length}</td>

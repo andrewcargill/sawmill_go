@@ -16,7 +16,7 @@ const Home = () => {
 
     <Accordion defaultActiveKey="0" className='pb-4'>
       <Accordion.Item eventKey="0">
-        <Accordion.Header>What is Sawmill GO?</Accordion.Header>
+        <Accordion.Header>Sawmill GO</Accordion.Header>
         <Accordion.Body>
           <p>An online management tool for small sawmill owners. Our system enables you
           to manage your stock from tree to log; from log to blank and includes moisture checks
@@ -30,7 +30,7 @@ const Home = () => {
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="1">
-        <Accordion.Header>Selective Cut forestry?</Accordion.Header>
+        <Accordion.Header>Selective Cut forestry</Accordion.Header>
         
         <Accordion.Body>
         <p>If you do then then you can make use of the powerful additonal features in the system
@@ -72,24 +72,27 @@ const Home = () => {
 
       </Col>
       <Col>
-      <h2>Who am I?</h2>
+      <h2>Transparent Forestry</h2>
       <h5>I am a computer programmer and forest owner in
         North of Sweden.</h5>
       <p>
         I own a small forest of around 30 hectares with various sections
-        and ages of forests. I came into this totally new five years ago when 
-        I moved to a small village outside of Umeå, after living in Stockholm for 10 years.  
+        and ages of forests. 
       </p>
       <p>
-        I own a bandsaw mill and mill for my own projects. From learning about
+        I own a bandsaw mill and currently mill for my own projects. From learning about
         the forest industry and the price of wood and industry methods I really wanted to do 
-        something to share the extra work, time and love that goes into selective forestry
-        and the milling on wood on a small scale. 
+        something to share the extra work, time and love that goes into selective forestry. 
       </p>
       <p>
-        Selective cut forestry is the way most forest owners would want to management
+        I am sure that Selective cut forestry is the way most forest owners would want to management
         their forests, but it just isn't cost effect. So I wanted to find a way to 
         make a preimum product. 
+      </p>
+      <p>
+        It's like with food. You can get a cheap egg from the local store or you can get a 
+        freerange egg, where you know the animal is treated well... and the customer is prepared 
+        to pay more for that preimum product. 
       </p>
       </Col>
       </Row>

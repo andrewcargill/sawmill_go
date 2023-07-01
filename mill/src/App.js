@@ -26,6 +26,7 @@ import TreeList from './pages/MillListTrees';
 import TreeDetail from './pages/MillTreeDetail';
 import TreeEdit from './pages/MillTreeEdit';
 import LogList from './pages/MillListLogs';
+import LogDetail from './pages/MillLogDetail';
 
 
 const App = () => {
@@ -61,7 +62,7 @@ const App = () => {
         <Route path="/tree/:id/edit" element={<TreeEdit />} />
 
         <Route path="log_list" element={<LogList />} />
-        {/* <Route path="/log/:id" element={<Dabve />} /> */}
+        <Route path="/log/:id" element={<LogDetail />} />
 
         <Route path="mill_add_planks" element={<MillAddPlanks />} />
         <Route path="mill_add_logs" element={<MillAddLogs />} />
