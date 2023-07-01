@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const LogsByTree = ({ treeId }) => { // Accept treeId as a prop
 
@@ -30,6 +31,9 @@ const LogsByTree = ({ treeId }) => { // Accept treeId as a prop
     }
   }, [treeId]); // Fetch logs when the treeId prop changes
 
+
+
+
   return (
     <div>
 
@@ -39,13 +43,14 @@ const LogsByTree = ({ treeId }) => { // Accept treeId as a prop
       {logs && logs.length > 0 ? (
         <div className='button-container'>
           {logs.map((log) => (
-           
-            <Button key={log.id}>
+           <Link key={log.id} to={`/log/${log.id}`}>
+            <Button id='detail-button'>
               <h3>LOG ID: {log.id}</h3>
               <p>Date Cut: {log.date}</p>
               <p>Cut Length: {log.length}</p>
-              {/* Display other log information */}
+       
             </Button>
+            </Link>
         
           ))}
         </div>
