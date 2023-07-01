@@ -86,56 +86,6 @@ const MillAddPlanks = () => {
     }
   };
 
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await axios.post(
-  //       " https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/",
-  //       {
-  //         log,
-  //         width,
-  //         depth,
-  //         wood_grade,
-  //         date,
-  //         live_edge,
-  //         furniture,
-  //         structural,
-  //         general,
-  //         info,
-  //         operator,
-  //       },
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-  //         },
-  //       }
-  //     );
-
-  //     console.log("Data created:", response.data);
-
-  //     // Reset form fields after successful submission
-  //     setLog("");
-  //     setWidth("");
-  //     setDepth("");
-  //     setWood_grade("");
-  //     setDate("");
-  //     setLive_edge(false);
-  //     setFurniture(false);
-  //     setStructural(false);
-  //     setGeneral(false);
-  //     setInfo("");
-  //     setOperator("");
-
-  //     setPostId(response.data.id);
-  //     setSuccess(true); // Set success status to true
-  //   } catch (error) {
-  //     console.error("Error creating data:", error);
-  //   }
-  // };
-
   const handleLogChange = (e) => {
     const logId = e.target.value;
     setLog(logId);

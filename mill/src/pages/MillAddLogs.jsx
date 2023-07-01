@@ -124,15 +124,14 @@ const MillAddLogs = () => {
               )}
             </Col>
             <Col xs={4}>
-            
-                      <Button
-                        id={css.button}
-                        variant={buck ? "success" : "light"}
-                        onClick={handleBuckClick}
-                      >
-                        {buck ? "BUCK LOG" : "BUCK"}
-                      </Button>
-                    </Col>
+              <Button
+                id={css.button}
+                variant={buck ? "success" : "light"}
+                onClick={handleBuckClick}
+              >
+                {buck ? "BUCK LOG" : "BUCK"}
+              </Button>
+            </Col>
           </Row>
           <Row>
             <Col xs={6}>
@@ -158,7 +157,7 @@ const MillAddLogs = () => {
               />
             </Col>
           </Row>
-         
+
           <Row>
             <Col xs={12}>
               <Button

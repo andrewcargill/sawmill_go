@@ -6,13 +6,11 @@ import Button from "react-bootstrap/Button";
 import css from "../styles/millHome.module.css";
 
 const MillHome = () => {
+  const navigate = useNavigate();
 
-  
-    const navigate = useNavigate();
-  
-    const handleButtonClick = (route) => {
-      navigate(route);
-    };
+  const handleButtonClick = (route) => {
+    navigate(route);
+  };
 
   return (
     <div className="mainContainer">
@@ -23,48 +21,58 @@ const MillHome = () => {
         <Row>
           <Col xs={6}>
             <div className={css.buttonContainer}>
-              <Button className={css.selectButton}
-              variant="success"
-              onClick={() => handleButtonClick('/mill_add_planks')}
-              >+ Plank
+              <Button
+                className={css.selectButton}
+                variant="success"
+                onClick={() => handleButtonClick("/mill_add_planks")}
+              >
+                + Plank
               </Button>
             </div>
           </Col>
           <Col xs={6}>
-          <div className={css.buttonContainer}>
-              <Button className={css.selectButton}
-              variant="success"
-              onClick={() => handleButtonClick('/mill_add_logs')}
-              >+ Log</Button>
+            <div className={css.buttonContainer}>
+              <Button
+                className={css.selectButton}
+                variant="success"
+                onClick={() => handleButtonClick("/mill_add_logs")}
+              >
+                + Log
+              </Button>
             </div>
           </Col>
         </Row>
         <Row>
           <Col xs={6}>
-          <div className={css.buttonContainer}>
-              <Button className={css.selectButton}
-              variant="success"
-               onClick={() => handleButtonClick('/mill_add_trees')}
-              >+ Tree</Button>
+            <div className={css.buttonContainer}>
+              <Button
+                className={css.selectButton}
+                variant="success"
+                onClick={() => handleButtonClick("/mill_add_trees")}
+              >
+                + Tree
+              </Button>
             </div>
           </Col>
           <Col xs={6}>
-          
-          <div className={css.buttonContainer}>
-              <Button className={css.selectButton}
-              variant="success"
-               onClick={() => handleButtonClick('/mill_add_moisture')}
-              >+ Moisture Check</Button>
+            <div className={css.buttonContainer}>
+              <Button
+                className={css.selectButton}
+                variant="success"
+                onClick={() => handleButtonClick("/mill_add_moisture")}
+              >
+                + Moisture Check
+              </Button>
             </div>
           </Col>
         </Row>
-  
+
         <Row>
           <Col xs={12} className="d-flex justify-content-center">
             <Button
-            className={css.logoutButton}
-            variant="dark"
-             onClick={() => handleButtonClick('/logout')}
+              className={css.logoutButton}
+              variant="dark"
+              onClick={() => handleButtonClick("/logout")}
             >
               LOG OUT
             </Button>

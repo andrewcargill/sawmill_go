@@ -104,18 +104,19 @@ const MillEditLog = () => {
   };
 
   const handleGoBack = () => {
-    navigate(-1); 
+    navigate(-1);
   };
 
   return (
     <div className={css.page}>
       <Row>
-        <Col xs={8}><h1>Edit Log {id}</h1></Col>
-        <Col xs={4}><Button onClick={handleGoBack}>Cancel</Button></Col>
-
+        <Col xs={8}>
+          <h1>Edit Log {id}</h1>
+        </Col>
+        <Col xs={4}>
+          <Button onClick={handleGoBack}>Cancel</Button>
+        </Col>
       </Row>
-        
-      
 
       <div>
         <form onSubmit={handleSubmit}>
@@ -202,11 +203,7 @@ const MillEditLog = () => {
         </Alert>
       )}
 
-      <Button
-        id={css.button}
-        variant="outline-dark"
-        onClick={handleGoBack}
-      >
+      <Button id={css.button} variant="outline-dark" onClick={handleGoBack}>
         Back
       </Button>
     </div>

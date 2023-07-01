@@ -56,7 +56,7 @@ const MillAddTrees = () => {
       formData.append("lumberjack", lumberjack);
       formData.append("latitude", latitude);
       formData.append("longitude", longitude);
-     
+
       if (image !== "") {
         formData.append("image", image);
       }
@@ -168,49 +168,49 @@ const MillAddTrees = () => {
               </Form.Group>
             </Col>
           </Row>
-         
-            <Card className="bg-secondary mb-4">
-              <Card.Body>
-                <Card.Title className="text-light">GPS MODULE</Card.Title>
-                <Row>
-                  <Col xs={6}>
-                    <label>Latitude</label>
-                    <input
-                      type="text"
-                      className="form-control form-control-lg"
-                      placeholder=""
-                      value={longitude}
-                      onChange={(e) => setLongitude(e.target.value)}
-                    />
-                  </Col>
 
-                  <Col xs={6}>
-                    <label>Longitude</label>
-                    <input
-                      type="text"
-                      className="form-control form-control-lg"
-                      placeholder=""
-                      value={latitude}
-                      onChange={(e) => setLatitude(e.target.value)}
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={12}>
-                    <Button
-                      id={css.button}
-                      type="button"
-                      variant="warning"
-                      onClick={handleGetLocation}
-                      className={css.getLocationButton}
-                    >
-                      Get Location
-                    </Button>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
-        
+          <Card className="bg-secondary mb-4">
+            <Card.Body>
+              <Card.Title className="text-light">GPS MODULE</Card.Title>
+              <Row>
+                <Col xs={6}>
+                  <label>Latitude</label>
+                  <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    placeholder=""
+                    value={longitude}
+                    onChange={(e) => setLongitude(e.target.value)}
+                  />
+                </Col>
+
+                <Col xs={6}>
+                  <label>Longitude</label>
+                  <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    placeholder=""
+                    value={latitude}
+                    onChange={(e) => setLatitude(e.target.value)}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12}>
+                  <Button
+                    id={css.button}
+                    type="button"
+                    variant="warning"
+                    onClick={handleGetLocation}
+                    className={css.getLocationButton}
+                  >
+                    Get Location
+                  </Button>
+                </Col>
+              </Row>
+            </Card.Body>
+          </Card>
+
           <Row className="mb-4">
             <Col xs={12}>
               <label>Reason For Felling</label>
@@ -225,13 +225,13 @@ const MillAddTrees = () => {
           </Row>
           <Row className="mb-4">
             <Col xs={12}>
-            <label>Image Upload</label>
-          <input
-            type="file"
-            accept="image/*"
-            className="form-control form-control-lg"
-            onChange={(e) => setImage(e.target.files[0])}
-          />
+              <label>Image Upload</label>
+              <input
+                type="file"
+                accept="image/*"
+                className="form-control form-control-lg"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
             </Col>
           </Row>
           {success && (

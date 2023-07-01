@@ -74,8 +74,6 @@ const TreeEdit = () => {
       formData.append("latitude", latitude);
       formData.append("longitude", longitude);
 
-      
-
       if (image !== "") {
         formData.append("image", image);
       }
@@ -127,7 +125,7 @@ const TreeEdit = () => {
   };
 
   const handleGoBack = () => {
-    navigate(-1); 
+    navigate(-1);
   };
 
   return (
@@ -137,7 +135,7 @@ const TreeEdit = () => {
           <h1>Tree {id} Edit</h1>
         </Col>
         <Col xs={4}>
-        <Button onClick={handleGoBack}>Cancel</Button>
+          <Button onClick={handleGoBack}>Cancel</Button>
         </Col>
       </Row>
       <div className={css.container}>

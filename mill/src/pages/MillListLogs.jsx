@@ -33,13 +33,16 @@ const LogList = () => {
         params.ordering = orderBy;
       }
 
-      const response = await axios.get("https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/log/", {
-        params,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      });
+      const response = await axios.get(
+        "https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/log/",
+        {
+          params,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        }
+      );
       setLogs(response.data.results);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -73,16 +76,13 @@ const LogList = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
-
   const handleSort = (field) => {
     if (orderBy === field) {
-      // Toggle the sort order if the same field is clicked
       setOrderBy(`-${field}`);
     } else {
-      // Set the new sort field and default sort order to ascending
       setOrderBy(field);
     }
-    setCurrentPage(1); // Reset to first page when changing the sort field
+    setCurrentPage(1);
   };
 
   useEffect(() => {
@@ -119,25 +119,20 @@ const LogList = () => {
             <Table striped bordered hover>
               <thead className="tableHeader">
                 <tr>
-                <th onClick={() => handleSort("id")}>
-                <td>
-                      Ref
-                    </td>
-                </th>
-                <th onClick={() => handleSort("date")}>Date</th>
-                <th onClick={() => handleSort("length")}>Length</th>
-                <th onClick={() => handleSort("width")}>Width</th>
-                <th onClick={() => handleSort("buck")}>Buck</th>
-                
-          
+                  <th onClick={() => handleSort("id")}>
+                    <td>Ref</td>
+                  </th>
+                  <th onClick={() => handleSort("date")}>Date</th>
+                  <th onClick={() => handleSort("length")}>Length</th>
+                  <th onClick={() => handleSort("width")}>Width</th>
+                  <th onClick={() => handleSort("buck")}>Buck</th>
                 </tr>
               </thead>
               <tbody>
                 {logs.map((log) => (
                   <tr key={log.id}>
                     <td>
-                     
-                    <Link to={`/log/${log.id}`}>{log.id}</Link>
+                      <Link to={`/log/${log.id}`}>{log.id}</Link>
                     </td>
                     <td>{log.date}</td>
                     <td>{log.length}</td>

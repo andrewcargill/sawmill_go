@@ -131,9 +131,7 @@ const MillAddMoisture = () => {
              
             </Col>
           </Row>
-         
-        
-          
+
           {success && (
             <Alert key="success" variant="success">
               <p>Success! Moisture Reading Stored For Plank ID: {plankId}</p>{" "}

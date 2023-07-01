@@ -35,13 +35,16 @@ const TreeList = () => {
         params.ordering = orderBy;
       }
 
-      const response = await axios.get("https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/", {
-        params,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      });
+      const response = await axios.get(
+        "https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/",
+        {
+          params,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        }
+      );
       setTrees(response.data.results);
       console.log(trees);
     } catch (error) {
@@ -50,12 +53,12 @@ const TreeList = () => {
   };
 
   const handleSearch = () => {
-    setCurrentPage(1); // Reset to first page when performing a search
+    setCurrentPage(1);
     fetchData();
   };
 
   const handleIdSearch = () => {
-    setCurrentPage(1); // Reset to first page when performing a search
+    setCurrentPage(1);
     const id = parseInt(idSearchQuery);
     setIdSearchQuery(id);
     fetchData();
@@ -63,20 +66,18 @@ const TreeList = () => {
 
   const handleSort = (field) => {
     if (orderBy === field) {
-      // Toggle the sort order if the same field is clicked
       setOrderBy(`-${field}`);
     } else {
-      // Set the new sort field and default sort order to ascending
       setOrderBy(field);
     }
-    setCurrentPage(1); // Reset to first page when changing the sort field
+    setCurrentPage(1);
   };
 
   const handleReset = () => {
     setSearchQuery("");
     setIdSearchQuery("");
     setOrderBy("id");
-    setCurrentPage(1); // Reset to first page when resetting the search
+    setCurrentPage(1);
 
     fetchData();
   };
@@ -96,7 +97,7 @@ const TreeList = () => {
   const handlePageSizeChange = (e) => {
     const size = parseInt(e.target.value);
     setPageSize(size);
-    setCurrentPage(1); // Reset to first page when changing page size
+    setCurrentPage(1);
   };
 
   return (
@@ -119,7 +120,7 @@ const TreeList = () => {
               onKeyDown={handleIdSearchKeyPress}
               placeholder="Search by ID"
             />
-                <input
+            <input
               type="number"
               value={pageSize}
               onChange={handlePageSizeChange}
