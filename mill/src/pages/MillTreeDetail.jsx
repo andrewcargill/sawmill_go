@@ -4,10 +4,9 @@ import axios from "axios";
 import GoogleMapReact from "google-map-react";
 import css from "../styles/testApiGps.module.css";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
-import style from "../styles/TreeDetail.module.css"
+import style from "../styles/TreeDetail.module.css";
 import { Link } from "react-router-dom";
 import LogsByTree from "../components/LogsbyTree";
-
 
 const TreeDetail = () => {
   const { id } = useParams();
@@ -46,12 +45,15 @@ const TreeDetail = () => {
     <div className="page">
       <Container className="pb-4">
         <Row>
-          <Col xs={6}>
-        <h2>Tree {id}</h2>
-        </Col>
-          <Col xs={6}>
-          <Link to={`/tree/${tree.id}/edit`}>EDIT</Link>
-        </Col>
+          <Col xs={8}>
+            <h2>Tree {id} Info</h2>
+          </Col>
+          <Col xs={2}>
+            <Link to={`/tree_list/`}>BACK</Link>
+          </Col>
+          <Col xs={2}>
+            <Link to={`/tree/${tree.id}/edit`}>EDIT</Link>
+          </Col>
         </Row>
         <Row>
           <Col>
@@ -92,9 +94,9 @@ const TreeDetail = () => {
                 <tr>
                   <td colSpan={2}>
                     <strong>Logs:</strong>
-                    
+
                     <div>
-                    <LogsByTree treeId={id} />
+                      <LogsByTree treeId={id} />
                     </div>
                   </td>
                 </tr>
@@ -105,37 +107,40 @@ const TreeDetail = () => {
       </Container>
       <Row>
         <Col xs={6}>
-      {latitude && longitude ? (
-        <div style={{ height: "400px", width: "100%" }} className="pb-4">
-          <GoogleMapReact
-            bootstrapURLKeys={{
-              key: "AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U",
-            }}
-            defaultCenter={{
-              lat: parseFloat(latitude),
-              lng: parseFloat(longitude),
-            }}
-            defaultZoom={18}
-            options={{ mapTypeId: "satellite" }}
-          >
-            <Marker lat={parseFloat(latitude)} lng={parseFloat(longitude)} />
-          </GoogleMapReact>
-        </div>
-      ) : (
-        <p>NO GPS DATA.</p>
-      )}
-      </Col>
-      <Col xs={6}>
-      <div className="pb-4">
-        {tree.image && (
-          <img
-            src={tree.image}
-            alt="Tree Image"
-            style={{ maxWidth: "100%", height: "auto" }}
-          />
-        )}
-      </div>
-      </Col>
+          {latitude && longitude ? (
+            <div style={{ height: "400px", width: "100%" }} className="pb-4">
+              <GoogleMapReact
+                bootstrapURLKeys={{
+                  key: "AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U",
+                }}
+                defaultCenter={{
+                  lat: parseFloat(latitude),
+                  lng: parseFloat(longitude),
+                }}
+                defaultZoom={18}
+                options={{ mapTypeId: "satellite" }}
+              >
+                <Marker
+                  lat={parseFloat(latitude)}
+                  lng={parseFloat(longitude)}
+                />
+              </GoogleMapReact>
+            </div>
+          ) : (
+            <p>NO GPS DATA.</p>
+          )}
+        </Col>
+        <Col xs={6}>
+          <div className="pb-4">
+            {tree.image && (
+              <img
+                src={tree.image}
+                alt="Tree Image"
+                style={{ maxWidth: "100%", height: "auto" }}
+              />
+            )}
+          </div>
+        </Col>
       </Row>
     </div>
   );

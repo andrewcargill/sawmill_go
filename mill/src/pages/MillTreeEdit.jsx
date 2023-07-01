@@ -8,6 +8,7 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import css from "../styles/millAddPlank.module.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const TreeEdit = () => {
   const { id } = useParams();
@@ -23,7 +24,6 @@ const TreeEdit = () => {
   const [success, setSuccess] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
 
-
   const fetchTreeData = async () => {
     try {
       const accessToken = localStorage.getItem("access_token");
@@ -34,7 +34,7 @@ const TreeEdit = () => {
             Authorization: `Bearer ${accessToken}`,
           },
         }
-        );
+      );
       const treeData = response.data;
 
       setDate(treeData.date);
@@ -126,79 +126,85 @@ const TreeEdit = () => {
 
   return (
     <div className={css.page}>
-    <div>
-      <h1>Sawmill Go - Edit Tree {id}</h1>
-    </div>
-    <div className={css.container}>
-      <form onSubmit={handleUpdate}>
-        <Row>
-          <Col xs={6}>
-            <label>Date</label>
-            <input
-              type="date"
-              className="form-control form-control-lg"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              required
-            />
-          </Col>
-          <Col xs={6}>
-            <Form.Group controlId="species">
-              <Form.Label>Species</Form.Label>
-              <Form.Control
-                as="select"
-                value={species}
-                onChange={(e) => setSpecies(e.target.value)}
+      <Row>
+        <Col xs={8}>
+          <h1>Tree {id} Edit</h1>
+        </Col>
+        <Col xs={4}>
+          <Link to={`/tree/${id}`}>BACK</Link>
+        </Col>
+      </Row>
+      <div className={css.container}>
+        <form onSubmit={handleUpdate}>
+          <Row>
+            <Col xs={6}>
+              <label>Date</label>
+              <input
+                type="date"
                 className="form-control form-control-lg"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
                 required
-              >
-                <option value="">Select species</option>
-                <option value="Pine">Pine</option>
-                <option value="Spruce">Spruce</option>
-                <option value="Birch">Birch</option>
-              </Form.Control>
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row className="mb-4">
-          <Col xs={6}>
-            <Form.Group controlId="age">
-              <Form.Label>Age</Form.Label>
-              <Form.Control
-                as="select"
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
-                className="form-control form-control-lg"
-                required
-              >
-                <option value="">Select age range</option>
-                <option value="30-40">30-40 yrs</option>
-                <option value="40-60">40-60 yrs</option>
-                <option value="60-80">60-80 yrs</option>
-                <option value="80-100">80-100 yrs</option>
-              </Form.Control>
-            </Form.Group>
-          </Col>
-          <Col xs={6}>
-            <Form.Group controlId="lumberjack">
-              <Form.Label>Lumberjack</Form.Label>
-              <Form.Control
-                as="select"
-                value={lumberjack}
-                onChange={(e) => setLumberjack(e.target.value)}
-                className="form-control form-control-lg"
-                required
-              >
-                <option value="">Select lumberjack</option>
-                <option value="Andrew Cargill">Andy</option>
-                <option value="Jens Nyman">Jens</option>
-                <option value="Elin Cargill">Elin</option>
-                <option value="Charlie Cargill">Charlie</option>
-              </Form.Control>
-            </Form.Group>
-          </Col>
-        </Row>
-       
+              />
+            </Col>
+
+            <Col xs={6}>
+              <Form.Group controlId="species">
+                <Form.Label>Species</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={species}
+                  onChange={(e) => setSpecies(e.target.value)}
+                  className="form-control form-control-lg"
+                  required
+                >
+                  <option value="">Select species</option>
+                  <option value="Pine">Pine</option>
+                  <option value="Spruce">Spruce</option>
+                  <option value="Birch">Birch</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="mb-4">
+            <Col xs={6}>
+              <Form.Group controlId="age">
+                <Form.Label>Age</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
+                  className="form-control form-control-lg"
+                  required
+                >
+                  <option value="">Select age range</option>
+                  <option value="30-40">30-40 yrs</option>
+                  <option value="40-60">40-60 yrs</option>
+                  <option value="60-80">60-80 yrs</option>
+                  <option value="80-100">80-100 yrs</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+            <Col xs={6}>
+              <Form.Group controlId="lumberjack">
+                <Form.Label>Lumberjack</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={lumberjack}
+                  onChange={(e) => setLumberjack(e.target.value)}
+                  className="form-control form-control-lg"
+                  required
+                >
+                  <option value="">Select lumberjack</option>
+                  <option value="Andrew Cargill">Andy</option>
+                  <option value="Jens Nyman">Jens</option>
+                  <option value="Elin Cargill">Elin</option>
+                  <option value="Charlie Cargill">Charlie</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+          </Row>
+
           <Card className="bg-secondary mb-4">
             <Card.Body>
               <Card.Title className="text-light">GPS MODULE</Card.Title>
@@ -240,68 +246,68 @@ const TreeEdit = () => {
               </Row>
             </Card.Body>
           </Card>
-      
-        <Row className="mb-4">
-          <Col xs={12}>
-            <label>Reason For Felling</label>
-            <textarea
-              className="form-control form-control-lg"
-              rows="6"
-              value={reason_for_felling}
-              onChange={(e) => setReason_for_felling(e.target.value)}
-              required
-            ></textarea>
-          </Col>
-        </Row>
-        <Row className="mb-4">
-          <Col xs={12} className="pb-4">
-          <label>Update Image</label>
-        <input
-          type="file"
-          accept="image/*"
-          className="form-control form-control-lg"
-          onChange={(e) => setImage(e.target.files[0])}
-        />
-        </Col>
-        <Col xs={12} >
 
-{imageUrl && (
-  <div className={css.imagePreview}>
-    <img src={imageUrl} alt="Current Tree" className={css.previewImage} />
-  </div>
-)}      
-        </Col>
-          
-        </Row>
-        {success && (
-          <Alert key="success" variant="success">
-            <p>Success! Data Updated.</p>
-           
-          </Alert>
-        )}
-        <Row>
-          <Col xs={12}>
-            <Button id={css.button} variant="dark" type="submit"
-            >
-              Save 
-            </Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <Button
-              id={css.button}
-              variant="primary"
-              onClick={() => handleButtonClick("/tree_list")}
-            >
-              Tree List
-            </Button>
-          </Col>
-        </Row>
-      </form>
+          <Row className="mb-4">
+            <Col xs={12}>
+              <label>Reason For Felling</label>
+              <textarea
+                className="form-control form-control-lg"
+                rows="6"
+                value={reason_for_felling}
+                onChange={(e) => setReason_for_felling(e.target.value)}
+                required
+              ></textarea>
+            </Col>
+          </Row>
+          <Row className="mb-4">
+            <Col xs={12} className="pb-4">
+              <label>Update Image</label>
+              <input
+                type="file"
+                accept="image/*"
+                className="form-control form-control-lg"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </Col>
+            <Col xs={12}>
+              {imageUrl && (
+                <div className={css.imagePreview}>
+                  <img
+                    src={imageUrl}
+                    alt="Current Tree"
+                    className={css.previewImage}
+                  />
+                </div>
+              )}
+            </Col>
+          </Row>
+          {success && (
+            <Alert key="success" variant="success">
+              <p>Success! Data Updated.</p>
+            </Alert>
+          )}
+          <Row>
+            <Col xs={12}>
+              <Button id={css.button} variant="dark" type="submit">
+                Save
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <Button
+                id={css.button}
+                variant="primary"
+                onClick={() => handleButtonClick("/tree_list")}
+              >
+                Tree List
+              </Button>
+            </Col>
+          </Row>
+        </form>
+      </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default TreeEdit;
