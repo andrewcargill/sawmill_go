@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/sawmill_go/static/css/main.68df97fd.css",
-    "main.js": "/sawmill_go/static/js/main.dcb4df00.js",
+    "main.js": "/sawmill_go/static/js/main.d19cd68d.js",
     "static/js/787.90f69282.chunk.js": "/sawmill_go/static/js/787.90f69282.chunk.js",
     "index.html": "/sawmill_go/index.html",
     "main.68df97fd.css.map": "/sawmill_go/static/css/main.68df97fd.css.map",
-    "main.dcb4df00.js.map": "/sawmill_go/static/js/main.dcb4df00.js.map",
+    "main.d19cd68d.js.map": "/sawmill_go/static/js/main.d19cd68d.js.map",
     "787.90f69282.chunk.js.map": "/sawmill_go/static/js/787.90f69282.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.68df97fd.css",
-    "static/js/main.dcb4df00.js"
+    "static/js/main.d19cd68d.js"
   ]
 }
