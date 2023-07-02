@@ -28,6 +28,9 @@ import TreeEdit from "./pages/MillTreeEdit";
 import LogList from "./pages/MillListLogs";
 import LogDetail from "./pages/MillLogDetail";
 import MillEditLog from "./pages/MillEditLog";
+import MillEditPlank from "./pages/MillEditPlank";
+import PlankDetail from "./pages/MillPlankDetail";
+import PlankList from "./pages/MillListPlanks";
 
 const App = () => {
   return (
@@ -64,6 +67,11 @@ const App = () => {
         <Route path="log_list" element={<LogList />} />
         <Route path="/log/:id" element={<LogDetail />} />
         <Route path="/log/:id/edit" element={<MillEditLog />} />
+
+        <Route path="plank_list" element={<PlankList />} />
+        <Route path="/plank/:id" element={<PlankDetail />} />
+        <Route path="/plank/:id/edit" element={<MillEditPlank />} />
+
 
         <Route path="mill_add_planks" element={<MillAddPlanks />} />
         <Route path="mill_add_logs" element={<MillAddLogs />} />

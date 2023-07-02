@@ -80,6 +80,11 @@ const Layout = () => {
                       Log Search
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="plank_list">
+                      Plank Search
+                    </Link>
+                  </li>
                   <Dropdown>
                     <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                       SAWMILL INPUT SCREENS
