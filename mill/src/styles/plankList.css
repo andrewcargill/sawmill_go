@@ -1,0 +1,62 @@
+/* accordion.css */
+
+/* Customize the accordion wrapper */
+.accordion {
+    /* background-color: lightgray;
+    border: solid 2px black;
+    border-radius: 10px;
+    padding: 2px;
+    font-size: 10px; */
+
+  }
+  
+  /* Customize the accordion item */
+  .accordion__item {
+    /* Custom styles for accordion item */
+    /* margin: 5px;
+    border: 1px solid black;
+    background-color: white;
+    color: white;
+    border-radius: 5px;
+    padding: 5px; */
+  }
+  
+  /* Customize the accordion item heading */
+  .itemHeading {
+    /* Custom styles for accordion item heading */
+    background-color: grey;
+  }
+  
+  /* Customize the accordion item button */
+  .itemButton {
+    /* Custom styles for accordion item button */
+    background-color: lightgray;
+  }
+  
+  /* Customize the accordion item panel */
+  .itemPanel {
+    /* Custom styles for accordion item panel */
+    background-color: white;
+    color: black
+  }
+
+  #pages {
+    background-color: #f8d0e6;
+    position: fixed;
+  }
+
+  .sticky-top {
+    
+    position: fixed;
+    background-color: blue;
+    top: 0;
+    z-index: 1000;
+    background-color: #fff;
+  }
+  
+  #scrollable {
+    overflow-y: scroll;
+  height: 70vh;
+  background: #f8d0e6;
+  padding: 40px;
+  }

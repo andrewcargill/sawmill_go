@@ -13,7 +13,7 @@ const Layout = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{ position: "sticky", top: 0, zIndex: 100 }}>
         <div className="container">
           <Link className="navbar-brand" to="/">
             Home

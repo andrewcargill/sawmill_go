@@ -5,9 +5,19 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
-import { Accordion, AccordionItem, AccordionItemHeading, AccordionItemButton, AccordionItemPanel } from "react-accessible-accordion";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from "react-accessible-accordion";
+
 
 import "react-accessible-accordion/dist/fancy-example.css";
+import "../styles/plankList.css";
+
+
 
 const PlankList = () => {
   const [planks, setPlanks] = useState([]);
@@ -38,16 +48,13 @@ const PlankList = () => {
         params.ordering = orderBy;
       }
 
-      const response = await axios.get(
-        "http://127.0.0.1:8000/api/plank/",
-        {
-          params,
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        }
-      );
+      const response = await axios.get("http://127.0.0.1:8000/api/plank/", {
+        params,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      });
       setPlanks(response.data.results);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -76,6 +83,7 @@ const PlankList = () => {
     observer.observe(document.getElementById("scrollObserver"));
   };
 
+
   const loadMoreData = () => {
     setIsFetching(true);
     setCurrentPage((prevPage) => prevPage + 1);
@@ -98,23 +106,11 @@ const PlankList = () => {
     });
   }, [isFetching]);
 
-  const toggleAccordion = (index) => {
-    const expandedIndex = expandedItems.indexOf(index);
-    let newExpandedItems = [];
-
-    if (expandedIndex === -1) {
-      // Expand the accordion item
-      newExpandedItems = [...expandedItems, index];
-    } else {
-      // Collapse the accordion item
-      newExpandedItems = expandedItems.filter((item) => item !== index);
-    }
-
-    setExpandedItems(newExpandedItems);
-  };
 
   return (
-    <div className="page">
+    <div id="pagePage" className="page">
+      <div className="sticky-top">
+      <h2>Planks List</h2>
       <Row className="pb-4">
         <Col xs={12}>
           <Form>
@@ -131,46 +127,98 @@ const PlankList = () => {
               placeholder="Page Size"
             />
           </Form>
-          <h2>Planks List</h2>
+         
         </Col>
       </Row>
-      <Row>
+      </div>
+
+      <Row id="scrollable">
         <div className="cardContainer">
           {planks && planks.length > 0 ? (
             planks.map((plank, index) => (
               <Card key={plank.id} className="mb-3">
                 <Card.Body>
                   <Card.Title>
-                    <Link to={`/plank/${plank.id}`}>{plank.id}</Link>
+                    <Row>
+                      <Col xs={8}><Link to={`/plank/${plank.id}`}>ID: {plank.id}</Link></Col>
+                      <Col xs={4}>G{plank.wood_grade}</Col>
+                    </Row>
+                 
+                 
                   </Card.Title>
-                  <Card.Text>Date: {plank.date}</Card.Text>
-                  <Card.Text>Width: {plank.width}</Card.Text>
-                  <Card.Text>Depth: {plank.depth}</Card.Text>
-                  <Card.Text>Grade: {plank.wood_grade}</Card.Text>
-                  <Card.Text>Info: {plank.info}</Card.Text>
+                  <Row className="pb-1">
+                            <Col sx={4}>W: {plank.width}</Col>
+                            <Col sx={4}>D: {plank.depth}</Col>
+                            <Col sx={4}>L: {plank.depth}</Col>
+                            
+                            </Row>
+                       
+                          
+
                   <Accordion>
                     <AccordionItem>
-                      <AccordionItemHeading>
-                        <AccordionItemButton onClick={() => toggleAccordion(index)}>
-                          Extra Details
-                        </AccordionItemButton>
+                      <AccordionItemHeading className="itemHeading">
+                        <AccordionItemButton className="itemButton">
+                          Info</AccordionItemButton>
                       </AccordionItemHeading>
-                      <AccordionItemPanel expanded={expandedItems.includes(index)}>
-                        <Card.Text>Operator: {plank.operator}</Card.Text>
-                        <Card.Text>
-                          Live Edge: {plank.live_edge ? "Yes" : "No"}
-                        </Card.Text>
-                        <Card.Text>
-                          Furniture: {plank.Furniture ? "Yes" : "No"}
-                        </Card.Text>
-                        <Card.Text>
-                          Structural: {plank.Structual ? "Yes" : "No"}
-                        </Card.Text>
-                        <Card.Text>
-                          General: {plank.General ? "Yes" : "No"}
-                        </Card.Text>
+                      <AccordionItemPanel className="itemPanel">
+                <Row>
+                  <Col xs={6}> Date:</Col>
+                  <Col xs={6}> {plank.date}</Col>
+                </Row>
+                <Row>
+                  <Col xs={6}> Operator:</Col>
+                  <Col xs={6}>     {plank.operator}</Col>
+                </Row>
+                <Row>
+                  <Col xs={6}> Images:</Col>
+                  <Col xs={6}>    Yes</Col>
+                </Row>
+                <Row>
+                  <Col xs={6}>Milling Notes:</Col>
+                 
+                </Row>
+                <Row>
+
+                  <Col xs={2}></Col>
+                  <Col xs={10}> {plank.info}</Col>
+                 
+                </Row>
+
+                    
+                       
+                  
+                      
+      
+                   
                       </AccordionItemPanel>
                     </AccordionItem>
+                    <AccordionItem>
+                    <AccordionItemHeading className="itemHeading">
+                        <AccordionItemButton className="itemButton">
+                          Categories
+                          </AccordionItemButton>
+                      </AccordionItemHeading>
+                      <AccordionItemPanel className="itemPanel">
+                     <Row>
+                         <Col xs={6}>Live Edge: {plank.live_edge ? "Yes" : "No"}</Col>
+                         <Col xs={6}>Furniture: {plank.Furniture ? "Yes" : "No"}</Col>
+                         </Row>
+                     <Row>
+                         <Col xs={6}>Structural: {plank.Structual ? "Yes" : "No"}</Col>
+                         <Col xs={6}>General: {plank.General ? "Yes" : "No"}</Col>
+                         </Row>
+                          
+                      
+                          
+                     
+                          
+                    
+                          
+                   
+                      </AccordionItemPanel>
+                    </AccordionItem>
+                    
                   </Accordion>
                 </Card.Body>
               </Card>
