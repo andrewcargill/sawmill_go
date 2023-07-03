@@ -58,5 +58,9 @@
     overflow-y: scroll;
   height: 70vh;
   background: #f8d0e6;
-  padding: 40px;
+  padding: 10px;
+  }
+
+  .card {
+    width: 100%;
   }
