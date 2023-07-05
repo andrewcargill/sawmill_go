@@ -32,7 +32,7 @@ const TreeDetail = () => {
         console.error("Error fetching tree:", error);
       }
     };
-
+    
     fetchTree();
   }, [id]);
 

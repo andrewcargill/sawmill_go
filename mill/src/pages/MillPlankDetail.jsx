@@ -6,6 +6,7 @@ import css from "../styles/testApiGps.module.css";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import LogsByTree from "../components/LogsbyTree";
+import WaterByPlank from "../components/WaterByPlank";
 
 const PlankDetail = () => {
   const { id } = useParams();
@@ -17,7 +18,7 @@ const PlankDetail = () => {
     const fetchTree = async () => {
       try {
         const response = await axios.get(
-          `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/${id}/`,
+          `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/${id}/`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -45,7 +46,7 @@ const PlankDetail = () => {
       <Container className="pb-4">
         <Row className="pb-4">
           <Col xs={6}>
-            <h2>Tree {id} Info</h2>
+            <h2>Plank {id} Info</h2>
           </Col>
           <Col xs={3}>
             <Link to={`/tree_list/`}>
@@ -67,20 +68,20 @@ const PlankDetail = () => {
                   <td>{tree.date}</td>
                 </tr>
                 <tr>
-                  <th>Species:</th>
-                  <td>{tree.species}</td>
+                  <th>Width:</th>
+                  <td>{tree.width}</td>
                 </tr>
                 <tr>
-                  <th>Age:</th>
-                  <td>{tree.age}</td>
+                  <th>Depth:</th>
+                  <td>{tree.depth}</td>
                 </tr>
                 <tr>
-                  <th>Lumberjack:</th>
-                  <td>{tree.lumberjack}</td>
+                  <th>info:</th>
+                  <td>{tree.info}</td>
                 </tr>
                 <tr>
-                  <th>Latitude:</th>
-                  <td>{tree.latitude}</td>
+                  <th>Operator:</th>
+                  <td>{tree.operator}</td>
                 </tr>
                 <tr>
                   <th>Longitude:</th>
@@ -99,7 +100,7 @@ const PlankDetail = () => {
                     <strong>Logs:</strong>
 
                     <div>
-                      <LogsByTree treeId={id} />
+                      <WaterByPlank plankId={id} />
                     </div>
                   </td>
                 </tr>
@@ -108,43 +109,7 @@ const PlankDetail = () => {
           </Col>
         </Row>
       </Container>
-      <Row>
-        <Col xs={6}>
-          {latitude && longitude ? (
-            <div style={{ height: "400px", width: "100%" }} className="pb-4">
-              <GoogleMapReact
-                bootstrapURLKeys={{
-                  key: "AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U",
-                }}
-                defaultCenter={{
-                  lat: parseFloat(latitude),
-                  lng: parseFloat(longitude),
-                }}
-                defaultZoom={18}
-                options={{ mapTypeId: "satellite" }}
-              >
-                <Marker
-                  lat={parseFloat(latitude)}
-                  lng={parseFloat(longitude)}
-                />
-              </GoogleMapReact>
-            </div>
-          ) : (
-            <p>NO GPS DATA.</p>
-          )}
-        </Col>
-        <Col xs={6}>
-          <div className="pb-4">
-            {tree.image && (
-              <img
-                src={tree.image}
-                alt="Tree Image"
-                style={{ maxWidth: "100%", height: "auto" }}
-              />
-            )}
-          </div>
-        </Col>
-      </Row>
+
     </div>
   );
 };
