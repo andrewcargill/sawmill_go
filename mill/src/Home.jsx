@@ -8,7 +8,7 @@ const Home = () => {
       <Row>
         <Col xs={12}>
       <h1>Hello, Welcome to the Sawmill Go Frontend!</h1>
-      <p>v1.3.3</p>
+      <p>v1.3.4</p>
       </Col>
       <Col xs={12}>
    
