@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import Card from "react-bootstrap/Card";
-// import Form from "react-bootstrap/Form";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
-import { Card, Form, Row, Col } from "react-bootstrap"
+import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import {
   Accordion,
@@ -17,25 +16,41 @@ import {
 import "react-accessible-accordion/dist/fancy-example.css";
 import "../styles/plankList.css";
 
-import { fetchMoreData } from "../paginationUtils";
-
-
 const PlankList = () => {
-  const [plankData, setPlankData] = useState({ results: [], count: 0, next: null });
+  const [plankData, setPlankData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [orderBy, setOrderBy] = useState("id");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState();
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     fetchData();
-  }, [searchQuery, orderBy]);
+  }, [currentPage, pageSize, orderBy]);
+  useEffect(() => {
+    // Add scroll event listener
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      // Remove scroll event listener on component unmount
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const fetchData = async () => {
     try {
       const params = {
-        search: searchQuery,
-        ordering: orderBy,
+        page: currentPage,
+        page_size: pageSize, // Include the page_size parameter
       };
-
+  
+      if (searchQuery) {
+        params.search = searchQuery;
+      }
+  
+      if (orderBy) {
+        params.ordering = orderBy;
+      }
+  
       const response = await axios.get("http://127.0.0.1:8000/api/plank/", {
         params,
         headers: {
@@ -43,41 +58,37 @@ const PlankList = () => {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
       });
-
-      setPlankData({
-        results: response.data.results,
+  
+      setPlankData((prevData) => ({
+        results: [...(prevData.results || []), ...response.data.results],
         count: response.data.count,
-        next: response.data.next,
-      });
-      console.log("UseEffect_pageload", response.data);
+      }));
+      
+  
+      // Calculate the total number of pages
+      const totalPages = Math.ceil(response.data.count / pageSize);
+      setTotalPages(totalPages);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-
+  
 
   const handleScroll = () => {
-    const scrollableElement = document.getElementById("scrollable");
-    const { scrollTop, clientHeight, scrollHeight } = scrollableElement;
-    console.log("handleScroll triggered!");
-    if (scrollTop + clientHeight >= scrollHeight) {
-      if (plankData.next) {
-        fetchMoreData(plankData.next, setPlankData);
+    const { scrollTop, clientHeight, offsetHeight } = document.documentElement;
+    if (scrollTop + clientHeight >= offsetHeight) {
+      // User has reached the bottom of the page
+      if (currentPage < totalPages) {
+        // Increment current page and fetch the next page of planks
+        setCurrentPage((prevPage) => prevPage + 1);
       }
     }
   };
 
-  useEffect(() => {
-    const scrollableElement = document.getElementById("scrollable");
-    scrollableElement.addEventListener("scroll", handleScroll);
-    return () => {
-      scrollableElement.removeEventListener("scroll", handleScroll);
-    };
-  }, [plankData.next]);
 
   return (
     <div id="pagePage" className="page">
-    <div className="sticky-top">
+      <div className="sticky-top">
         <h2>Planks List</h2>
         <Row className="pb-4">
           <Col xs={12}>

@@ -1,170 +1,212 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Table from "react-bootstrap/Table";
+import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from "react-accessible-accordion";
+
+import "react-accessible-accordion/dist/fancy-example.css";
+import "../styles/plankList.css";
+
+
+// Utility function to fetch more data
+const fetchMoreData = async (nextUrl, setPlankData) => {
+  console.log("Hitting fetchMoreData:");
+  try {
+    const { data } = await axios.get(nextUrl, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    });
+
+    console.log("API Response:", data);
+
+    setPlankData((prevData) => ({
+      results: [...prevData.results, ...data.results],
+      count: data.count,
+      next: data.next,
+    }));
+  } catch (error) {
+    console.error("Error fetching more data:", error);
+  }
+};
+
+
+
 
 const PlankList = () => {
-  const [planks, setPlanks] = useState([]);
+  const [plankData, setPlankData] = useState({ results: [], count: 0, next: null });
   const [searchQuery, setSearchQuery] = useState("");
   const [orderBy, setOrderBy] = useState("id");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-  const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
     fetchData();
-    observeScroll();
-  }, [currentPage, pageSize, orderBy]);
+  }, [searchQuery, orderBy]);
 
   const fetchData = async () => {
     try {
       const params = {
-        page: currentPage,
-        page_size: pageSize,
+        search: searchQuery,
+        ordering: orderBy,
       };
 
-      if (searchQuery) {
-        params.search = searchQuery;
-      }
+      const response = await axios.get("http://127.0.0.1:8000/api/plank/", {
+        params,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      });
 
-      if (orderBy) {
-        params.ordering = orderBy;
-      }
-
-      const response = await axios.get(
-        "http://127.0.0.1:8000/api/plank/",
-        {
-          params,
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        }
-      );
-      setPlanks(response.data.results);
+      setPlankData({
+        results: response.data.results,
+        count: response.data.count,
+        next: response.data.next,
+      });
+      console.log("UseEffect_pageload", response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  const handlePageSizeChange = (e) => {
-    const size = parseInt(e.target.value);
-    setPageSize(size);
-    setCurrentPage(1);
-  };
 
-  const observeScroll = () => {
-    const options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 1.0,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !isFetching) {
-        loadMoreData();
+  const handleScroll = () => {
+    const scrollableElement = document.getElementById("scrollable");
+    const { scrollTop, clientHeight, scrollHeight } = scrollableElement;
+    console.log("handleScroll triggered!");
+    if (scrollTop + clientHeight >= scrollHeight) {
+      if (plankData.next) {
+        fetchMoreData(plankData.next, setPlankData);
       }
-    }, options);
-
-    observer.observe(document.getElementById("scrollObserver"));
-  };
-
-  const loadMoreData = () => {
-    setIsFetching(true);
-    setCurrentPage((prevPage) => prevPage + 1);
-  };
-
-  const handleSort = (field) => {
-    if (orderBy === field) {
-      setOrderBy(`-${field}`);
-    } else {
-      setOrderBy(field);
     }
-    setCurrentPage(1);
   };
 
   useEffect(() => {
-    if (!isFetching) return;
-
-    fetchData().then(() => {
-      setIsFetching(false);
-    });
-  }, [isFetching]);
+    const scrollableElement = document.getElementById("scrollable");
+    scrollableElement.addEventListener("scroll", handleScroll);
+    return () => {
+      scrollableElement.removeEventListener("scroll", handleScroll);
+    };
+  }, [plankData.next]);
 
   return (
-    <div className="page">
-      <Row className="pb-4">
+    <div id="pagePage" className="page">
+    <div className="sticky-top">
+        <h2>Planks List</h2>
+        <Row className="pb-4">
+          <Col xs={12}>
+            <Form>
+              <Form.Control
+                type="text"
+                placeholder="Search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              {/* <Form.Control
+                type="number"
+                value={pageSize}
+                onChange={handlePageSizeChange}
+                placeholder="Page Size"
+              /> */}
+            </Form>
+          </Col>
+        </Row>
+      </div>
+
+      <Row id="scrollable">
         <Col xs={12}>
-          <div>
-            <input
-              type="text"
-              placeholder="Search"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <input
-              type="number"
-              value={pageSize}
-              onChange={handlePageSizeChange}
-              placeholder="Page Size"
-            />
-          </div>
-          <div>
-            <h2>Planks List</h2>
+          <div className="cardContainer">
+          {plankData && plankData.results && plankData.results.length > 0 ? (
+
+              plankData.results.map((plank, index) => (
+                <Card key={plank.id} className="mb-3">
+                  <Card.Body>
+                    <Card.Title>
+                      <Row>
+                        <Col xs={8}>
+                          <Link to={`/plank/${plank.id}`}>ID: {plank.id}</Link>
+                        </Col>
+                        <Col xs={4}>G{plank.wood_grade}</Col>
+                      </Row>
+                    </Card.Title>
+                    <Row className="pb-1">
+                      <Col sx={4}>W: {plank.width}</Col>
+                      <Col sx={4}>D: {plank.depth}</Col>
+                      <Col sx={4}>L: {plank.depth}</Col>
+                    </Row>
+
+                    <Accordion>
+                      <AccordionItem>
+                        <AccordionItemHeading className="itemHeading">
+                          <AccordionItemButton className="itemButton">
+                            Info
+                          </AccordionItemButton>
+                        </AccordionItemHeading>
+                        <AccordionItemPanel className="itemPanel">
+                          <Row>
+                            <Col xs={6}> Date:</Col>
+                            <Col xs={6}> {plank.date}</Col>
+                          </Row>
+                          <Row>
+                            <Col xs={6}> Operator:</Col>
+                            <Col xs={6}> {plank.operator}</Col>
+                          </Row>
+                          <Row>
+                            <Col xs={6}> Images:</Col>
+                            <Col xs={6}> Yes</Col>
+                          </Row>
+                          <Row>
+                            <Col xs={6}>Milling Notes:</Col>
+                          </Row>
+                          <Row>
+                            <Col xs={2}></Col>
+                            <Col xs={10}> {plank.info}</Col>
+                          </Row>
+                        </AccordionItemPanel>
+                      </AccordionItem>
+                      <AccordionItem>
+                        <AccordionItemHeading className="itemHeading">
+                          <AccordionItemButton className="itemButton">
+                            Categories
+                          </AccordionItemButton>
+                        </AccordionItemHeading>
+                        <AccordionItemPanel className="itemPanel">
+                          <Row>
+                            <Col xs={6}>
+                              Live Edge: {plank.live_edge ? "Yes" : "No"}
+                            </Col>
+                            <Col xs={6}>
+                              Furniture: {plank.Furniture ? "Yes" : "No"}
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col xs={6}>
+                              Structural: {plank.Structual ? "Yes" : "No"}
+                            </Col>
+                            <Col xs={6}>
+                              General: {plank.General ? "Yes" : "No"}
+                            </Col>
+                          </Row>
+                        </AccordionItemPanel>
+                      </AccordionItem>
+                    </Accordion>
+                  </Card.Body>
+                </Card>
+              ))
+            ) : (
+              <p>No planks found.</p>
+            )}
           </div>
         </Col>
-      </Row>
-      <Row>
-        <div className="tableContainer">
-          {planks && planks.length > 0 ? (
-            <Table striped bordered hover>
-              <thead className="tableHeader">
-                <tr>
-                  <th onClick={() => handleSort("id")}>
-                    Ref
-                  </th>
-                  <th onClick={() => handleSort("date")}>Date</th>
-                  <th onClick={() => handleSort("width")}>Width</th>
-                  <th onClick={() => handleSort("depth")}>Depth</th>
-
-                  <th onClick={() => handleSort("depth")}>Grade</th>
-                  <th onClick={() => handleSort("depth")}>Info</th>
-                  <th onClick={() => handleSort("depth")}>Operator</th>
-
-                  <th onClick={() => handleSort("live_edge")}>Live Edge</th>
-                  <th onClick={() => handleSort("live_edge")}>Furniture</th>
-                  <th onClick={() => handleSort("live_edge")}>Structural</th>
-                  <th onClick={() => handleSort("live_edge")}>General</th>
-                </tr>
-              </thead>
-              <tbody>
-                {planks.map((plank) => (
-                  <tr key={plank.id}>
-                    <td>
-                      <Link to={`/plank/${plank.id}`}>{plank.id}</Link>
-                    </td>
-                    <td>{plank.date}</td>
-                    <td>{plank.width}</td>
-                    <td>{plank.depth}</td>
-
-                    <td>{plank.wood_grade}</td>
-                    <td>{plank.info}</td>
-                    <td>{plank.operator}</td>
-
-                    <td>{plank.live_edge ? "Yes" : "No"}</td>
-                    <td>{plank.Furniture ? "Yes" : "No"}</td>
-                    <td>{plank.Structual ? "Yes" : "No"}</td>
-                    <td>{plank.General ? "Yes" : "No"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          ) : (
-            <p>No logs found.</p>
-          )}
-        </div>
         <div id="scrollObserver" style={{ height: "10px" }}></div>
       </Row>
     </div>
