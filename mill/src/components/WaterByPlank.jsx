@@ -55,7 +55,7 @@ const WaterByPlank = ({ plankId }) => { // Accept treeId as a prop
           ))}
         </div>
       ) : (
-        <p>No logs found for Tree ID: {plankId}</p>
+        <p>No records found for Plank ID: {plankId}</p>
       )}
     </div>
   );

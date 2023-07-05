@@ -78,6 +78,7 @@ const TreeEdit = () => {
         formData.append("image", image);
       }
 
+      console.log('formData', formData);
       const response = await axios.put(
         `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/${id}/`,
         formData,

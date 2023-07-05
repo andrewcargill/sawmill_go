@@ -15,14 +15,13 @@ const PlankDetail = () => {
   const [treeId, setTreeId] = useState(null);
   const [species, setSpecies] = useState(null);
 
-
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPlank = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/plank/${id}/`,
+          `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/${id}/`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -30,33 +29,16 @@ const PlankDetail = () => {
             },
           }
         );
-        console.log("Response data:", response.data);
         setPlank(response.data);
-        if (response.data.log) {
-          console.log("Log length:", response.data.log.length);
-          console.log("Log tree id:", response.data.log.tree);
-          setLength(response.data.log.length);
-          // setTreeId(response.data.log.tree.id);
-          // setSpecies(response.data.log.tree.species);
-          // console.log("Tree ID:", response.data.log.tree.id);
-          // console.log("Species:", response.data.log.tree.species);
-        }
-        if (response.data.log.tree) {
-          console.log("Tree Object:", response.data.log.tree);
-          setSpecies(response.data.log.tree.species);
-          // setTreeId(response.data.log.tree.id);
-          // setSpecies(response.data.log.tree.species);
-          // console.log("Tree ID:", response.data.log.tree.id);
-          // console.log("Species:", response.data.log.tree.species);
-        }
+        setLength(response.data.log.length);
+        setSpecies(response.data.log.tree.species);
       } catch (error) {
         console.error("Error fetching plank:", error);
       }
     };
-  
+
     fetchPlank();
   }, [id]);
-  
 
   if (!plank) {
     return <p>Loading...</p>;
@@ -90,10 +72,10 @@ const PlankDetail = () => {
             <h2>Plank {id} Info</h2>
           </Col>
           <Col xs={3}>
-          <Button onClick={handleGoBack}>BACK</Button>
+            <Button onClick={handleGoBack}>BACK</Button>
           </Col>
           <Col xs={3}>
-            <Link to={`/tree/${plank.id}/edit`}>
+            <Link to={`/plank/${plank.id}/edit`}>
               <Button>Edit</Button>
             </Link>
           </Col>
@@ -126,15 +108,10 @@ const PlankDetail = () => {
                   <th>Grade:</th>
                   <td>{plank.wood_grade}</td>
                 </tr>
-            
-                
+
                 <tr>
                   <th>Operator:</th>
                   <td>{plank.operator}</td>
-                </tr>
-                <tr>
-                  <th>Longitude:</th>
-                  <td>{plank.longitude}</td>
                 </tr>
               </tbody>
               <tbody>
@@ -149,14 +126,40 @@ const PlankDetail = () => {
                     <strong>Categories:</strong>
                     <Row>
                       <Col>
-                    <p>Live-Edge: {getLiveEdgeStatus(plank?.live_edge)}</p>
-                    <p>Furniture: {getFurnitureStatus(plank?.furniture)}</p>
-                    </Col>
-                    <Col>
-                    <p>Structural: {getStructuralStatus(plank?.structural)}</p>
-                    <p>General: {getGeneralStatus(plank?.general)}</p>
-                    </Col>
+                        <p>Live-Edge: {getLiveEdgeStatus(plank?.live_edge)}</p>
+                        <p>Furniture: {getFurnitureStatus(plank?.furniture)}</p>
+                      </Col>
+                      <Col>
+                        <p>
+                          Structural: {getStructuralStatus(plank?.structural)}
+                        </p>
+                        <p>General: {getGeneralStatus(plank?.general)}</p>
+                      </Col>
                     </Row>
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan={2}>
+                  Image 1
+                  {plank.image1 && (
+                    <img
+                      src={plank.image1}
+                      alt="Tree Image"
+                      style={{ maxWidth: "100%", height: "auto" }}
+                    />
+                  )}
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan={2}>
+                  Image 2
+                  {plank.image2 && (
+                    <img
+                      src={plank.image2}
+                      alt="Tree Image"
+                      style={{ maxWidth: "100%", height: "auto" }}
+                    />
+                  )}
                   </td>
                 </tr>
                 <tr>
@@ -173,7 +176,6 @@ const PlankDetail = () => {
           </Col>
         </Row>
       </Container>
-
     </div>
   );
 };
