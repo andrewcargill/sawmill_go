@@ -30,11 +30,25 @@ const PlankDetail = () => {
             },
           }
         );
+        console.log("Response data:", response.data);
         setPlank(response.data);
-        setLength(response.data.log.length);
-        // setTreeId(response.data.log.tree.id);
-        // setSpecies(response.data.log.tree.species);
-        console.log("request data", treeId, species);
+        if (response.data.log) {
+          console.log("Log length:", response.data.log.length);
+          console.log("Log tree id:", response.data.log.tree);
+          setLength(response.data.log.length);
+          // setTreeId(response.data.log.tree.id);
+          // setSpecies(response.data.log.tree.species);
+          // console.log("Tree ID:", response.data.log.tree.id);
+          // console.log("Species:", response.data.log.tree.species);
+        }
+        if (response.data.log.tree) {
+          console.log("Tree Object:", response.data.log.tree);
+          setSpecies(response.data.log.tree.species);
+          // setTreeId(response.data.log.tree.id);
+          // setSpecies(response.data.log.tree.species);
+          // console.log("Tree ID:", response.data.log.tree.id);
+          // console.log("Species:", response.data.log.tree.species);
+        }
       } catch (error) {
         console.error("Error fetching plank:", error);
       }
@@ -42,6 +56,7 @@ const PlankDetail = () => {
   
     fetchPlank();
   }, [id]);
+  
 
   if (!plank) {
     return <p>Loading...</p>;
