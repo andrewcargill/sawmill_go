@@ -22,7 +22,7 @@ const PlankDetail = () => {
     const fetchPlank = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/plank/${id}/`,
+          `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/${id}/`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -31,15 +31,38 @@ const PlankDetail = () => {
           }
         );
         setPlank(response.data);
-        setLength(response.data.log.length);
-        // setTreeId(response.data.log.tree.id);
-        // setSpecies(response.data.log.tree.species);
-        console.log("request data", treeId, species);
+
+        ///Log Length and Tree ID
+        const logResponse = await axios.get(
+          `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/log/${response.data.log}/`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          }
+        );
+        setLength(logResponse.data.length);
+        setTreeId(logResponse.data.tree);
+
+        ///Tree Species
+        const treeResponse = await axios.get(
+          `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/${treeId}/`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          }
+        );
+        setSpecies(treeResponse.data.species);
+        console.log(treeResponse.data);
+
       } catch (error) {
-        console.error("Error fetching plank:", error);
+        console.error("Error fetching tree:", error);
       }
     };
-  
+
     fetchPlank();
   }, [id]);
 

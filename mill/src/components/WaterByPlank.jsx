@@ -44,8 +44,8 @@ const WaterByPlank = ({ plankId }) => { // Accept treeId as a prop
       {moistureChecks && moistureChecks.length > 0 ? (
         <div className='button-container'>
           {moistureChecks.map((water) => (
-           <div classname='button-link'>
-            <Button id='detail-button'>
+           <div className='water-button-link' key={water.id}>
+            <Button id='water-detail-button'>
               <p>Date: {water.date}</p>
               <p>Moisture: {water.water_percentage}%</p>
        
