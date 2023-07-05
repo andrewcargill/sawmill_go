@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import GoogleMapReact from "google-map-react";
 import css from "../styles/testApiGps.module.css";
@@ -13,6 +13,8 @@ const PlankDetail = () => {
   const [tree, setTree] = useState(null);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTree = async () => {
@@ -41,6 +43,10 @@ const PlankDetail = () => {
     return <p>Loading...</p>;
   }
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="page">
       <Container className="pb-4">
@@ -49,9 +55,7 @@ const PlankDetail = () => {
             <h2>Plank {id} Info</h2>
           </Col>
           <Col xs={3}>
-            <Link to={`/tree_list/`}>
-              <Button>Back</Button>
-            </Link>
+          <Button onClick={handleGoBack}>BACK</Button>
           </Col>
           <Col xs={3}>
             <Link to={`/tree/${tree.id}/edit`}>
