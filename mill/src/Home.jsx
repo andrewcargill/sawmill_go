@@ -1,24 +1,41 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
-import treetops from "/src/media/images/treetops.png";
+import treetops from "./media/images/treetops.png";
+import treeview from "./media/images/forest_mountain.png";
+import css from "./styles/home.module.css";
 
 const Home = () => {
   return (
-    <div className="page">
+    <div className="page-home">
+      <div className={css.Container}>
+        <div className={css.headimage}>
+          <img className={css.images} src={treetops} alt="My Image" />
+        </div>
+        <div className={css.textContainer}>
+          <h1>Hello, Welcome to the Sawmill Go Frontend!</h1>
+          <p>This is the launch of an exciting new product for 
+            forest owners, small sawmills and wood-workers.
+          </p>
+        </div>
+        <div className={css.headimage}>
+          <img className={css.images} src={treeview} alt="My Image" />
+        </div>
+        <div className={css.textContainer}>
+          <h1>Hello, Welcome to the Sawmill Go Frontend!</h1>
+          <p>This is the launch of an exciting new product for 
+            forest owners, small sawmills and wood-workers.
+          </p>
+        </div>
+      </div>
+
+
+
+
       <Row>
-        <Row className="home-header">
-          <Col xs={12}>
-            <h1>Hello, Welcome to the Sawmill Go Frontend!</h1>
-            <p>v1.3.4</p>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            Image
-          </Col>
-        </Row>
-        <Col xs={12}>
+        
+      
+        {/* <Col xs={12}>
           <Accordion defaultActiveKey="0" className="pb-4">
             <Accordion.Item eventKey="0">
               <Accordion.Header>Sawmill GO</Accordion.Header>
@@ -86,8 +103,8 @@ const Home = () => {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-        </Col>
-        <Col>
+        </Col> */}
+        {/* <Col>
           <h2>Transparent Forestry</h2>
           <h5>
             I am a computer programmer and forest owner in North of Sweden.
@@ -113,7 +130,7 @@ const Home = () => {
             well... and the customer is prepared to pay more for that preimum
             product.
           </p>
-        </Col>
+        </Col> */}
       </Row>
     </div>
   );

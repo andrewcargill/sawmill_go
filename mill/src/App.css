@@ -40,12 +40,7 @@
 }
 
 
-.home-header h1 {
-  color: #286140;
-}
-.home-header p {
-  color: #79c001;
-}
+
 
 .home-header .accordion {
   background-color: #ffb500;
@@ -53,7 +48,7 @@
 
 
 .page {
-  margin: 2%;
+  margin: 1%;
 }
 
 .button-link {
