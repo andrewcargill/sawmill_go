@@ -13,19 +13,46 @@ const Home = () => {
           <img className={css.images} src={treetops} alt="My Image" />
         </div>
         <div className={css.textContainer}>
-          <h1>Hello, Welcome to the Sawmill Go Frontend!</h1>
+          <h1>Hello, Welcome to Sawmill Go!</h1>
           <p>This is the launch of an exciting new product for 
             forest owners, small sawmills and wood-workers.
           </p>
+          <p>
+            A custom built cloud database system that will manage everything from the forest
+            to customer orders.
+          </p>
+          <div className={css.buttonContainer}>
+            <button>Find out More</button>
+          </div>
         </div>
         <div className={css.headimage}>
           <img className={css.images} src={treeview} alt="My Image" />
         </div>
-        <div className={css.textContainer}>
-          <h1>Hello, Welcome to the Sawmill Go Frontend!</h1>
-          <p>This is the launch of an exciting new product for 
-            forest owners, small sawmills and wood-workers.
+        <div className={css.textContainerOrange}>
+          <h1>Premium Products with Selective Cut Forestry</h1>
+          <p>Each timber product produced in the sawmill comes with a unique story, that
+            until now, has never been able to be passed onto the customer.
           </p>
+          <p>Sawmill Go creates a detailed report of every product that leaves the mill.
+          </p>
+          <div className={css.buttonContainer}>
+            <button>Find out More</button>
+          </div>
+        </div>
+        <div className={css.headimage}>
+          <img className={css.images} src={treetops} alt="My Image" />
+        </div>
+        <div className={css.textContainerGreen}>
+          <h1>The power of cloud computing</h1>
+          <p>Add the tree, then the length of the logs and the diameter. We can use that diameter
+            measurement to calculate what can be cut from that log!
+          </p>
+          <p>Our system can add GPS locations, images of the tree and planks... notes from the 
+            sawmill operator and moisture checks. All from your mobile phone or desktop computer.
+          </p>
+          <div className={css.buttonContainer}>
+            <button>Find out More</button>
+          </div>
         </div>
       </div>
 
