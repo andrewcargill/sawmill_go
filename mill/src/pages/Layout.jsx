@@ -1,6 +1,9 @@
 import { Outlet, Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import React, { useState, useEffect } from "react";
+import css from "../styles/Layout.module.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 const Layout = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -13,13 +16,17 @@ const Layout = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{ position: "sticky", top: 0, zIndex: 100 }}>
+      <nav
+        id={css.nav}
+        className="navbar navbar-expand-lg"
+        style={{ position: "sticky", top: 0, zIndex: 100 }}
+      >
         <div className="container">
-          <Link className="navbar-brand" to="/">
-            Home
+          <Link id={css.home} className="navbar-brand" to="/">
+            SAWMILL <span>GO!</span>
           </Link>
           <button
-            className="navbar-toggler"
+            className={css.button}
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -27,17 +34,18 @@ const Layout = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon"></span>
+            <span className={css.toggle}><FontAwesomeIcon icon={faBars} />
+</span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
+          <div className={`collapse navbar-collapse ${css.navExpand}`} id="navbarNav">
+            <ul id={css.menuItems} className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link" to="about">
+                <Link className={css.navLink} to="about">
                   About
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="report/:id">
+                <Link className={css.navLink} to="report/:id">
                   Report
                 </Link>
               </li>
@@ -142,7 +150,7 @@ const Layout = () => {
                     Logout
                   </Link>
                 ) : (
-                  <Link className="nav-link" to="login">
+                  <Link className={css.navLink} to="login">
                     Login
                   </Link>
                 )}
