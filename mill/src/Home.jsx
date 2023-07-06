@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
+import treetops from "/src/media/images/treetops.png";
 
 const Home = () => {
   return (
@@ -10,6 +11,11 @@ const Home = () => {
           <Col xs={12}>
             <h1>Hello, Welcome to the Sawmill Go Frontend!</h1>
             <p>v1.3.4</p>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            Image
           </Col>
         </Row>
         <Col xs={12}>
