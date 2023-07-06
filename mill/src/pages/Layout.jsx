@@ -36,6 +36,11 @@ const Layout = () => {
                   About
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="report/:id">
+                  Report
+                </Link>
+              </li>
 
               {isAuth ? (
                 <>

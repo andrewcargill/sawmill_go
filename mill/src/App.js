@@ -31,6 +31,7 @@ import MillEditLog from "./pages/MillEditLog";
 import MillEditPlank from "./pages/MillEditPlank";
 import PlankDetail from "./pages/MillPlankDetail";
 import PlankList from "./pages/MillListPlanks";
+import PlankReport from "./pages/PlankReport/PlankReport";
 
 const App = () => {
   return (
@@ -72,6 +73,7 @@ const App = () => {
         <Route path="/plank/:id" element={<PlankDetail />} />
         <Route path="/plank/:id/edit" element={<MillEditPlank />} />
 
+        <Route path="/report/:id" element={<PlankReport />} />
 
         <Route path="mill_add_planks" element={<MillAddPlanks />} />
         <Route path="mill_add_logs" element={<MillAddLogs />} />
