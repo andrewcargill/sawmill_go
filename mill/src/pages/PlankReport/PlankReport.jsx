@@ -29,7 +29,7 @@ const PlankReport = () => {
     const fetchPlank = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/plank/report/${id}/`,
+          `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/report/${id}/`,
           {
             headers: {
               "Content-Type": "application/json",
