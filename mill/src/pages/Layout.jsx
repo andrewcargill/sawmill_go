@@ -2,11 +2,21 @@ import { Outlet, Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import React, { useState, useEffect } from "react";
 import css from "../styles/Layout.module.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { Collapse } from "react-bootstrap";
 
 const Layout = () => {
   const [isAuth, setIsAuth] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const handleToggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+
+  const handleMenuClose = () => {
+    setMenuOpen(false);
+  };
 
   useEffect(() => {
     if (localStorage.getItem("access_token") !== null) {
@@ -22,7 +32,12 @@ const Layout = () => {
         style={{ position: "sticky", top: 0, zIndex: 100 }}
       >
         <div className="container">
-          <Link id={css.home} className="navbar-brand" to="/">
+          <Link
+            id={css.home}
+            className="navbar-brand"
+            to="/"
+            onClick={handleMenuClose}
+          >
             SAWMILL <span>GO!</span>
           </Link>
           <button
@@ -33,11 +48,16 @@ const Layout = () => {
             aria-controls="navbarNav"
             aria-expanded="false"
             aria-label="Toggle navigation"
+            onClick={handleToggleMenu}
           >
-            <span className={css.toggle}><FontAwesomeIcon icon={faBars} />
-</span>
+            <span className={css.toggle}>
+              <FontAwesomeIcon icon={faBars} />
+            </span>
           </button>
-          <div className={`collapse navbar-collapse ${css.navExpand}`} id="navbarNav">
+          <div
+            className={`navbar-collapse collapse ${css.navExpand}`}
+            id="navbarNav"
+          >
             <ul id={css.menuItems} className="navbar-nav">
               <li className="nav-item">
                 <Link className={css.navLink} to="about">
