@@ -5,7 +5,7 @@ import Accordion from 'react-bootstrap/Accordion';
 const Home = () => {
   return (
     <div className='page'>
-      <Row>
+      <Row className='home-header'>
         <Col xs={12}>
       <h1>Hello, Welcome to the Sawmill Go Frontend!</h1>
       <p>v1.3.4</p>
