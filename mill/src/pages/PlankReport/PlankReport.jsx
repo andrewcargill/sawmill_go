@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import LogsByTree from "../../components/LogsbyTree";
 import WaterByPlank from "../../components/WaterByPlank";
 import AboutReport from "./About";
+import TreeReport from "./TreeReport";
 
 const PlankReport = () => {
   const { id } = useParams();
@@ -130,8 +131,7 @@ const PlankReport = () => {
           <Image src={treeImage} rounded />
         </div>
         <div>
-          This is an actual picture of {species}_{id} before it was removed from
-          the forest.
+          (This is an actual picture of {species}_{id}!)
         </div>
       </div>
 
@@ -175,7 +175,7 @@ const PlankReport = () => {
           id="tree"
           style={{ display: activeTab === "tree" ? "block" : "none" }}
         >
-          Content for tree
+          <TreeReport plank={plank} />
         </div>
         <div
           id="logging"
@@ -211,77 +211,7 @@ const PlankReport = () => {
           </Col>
         </Row> */}
         {/*Report Tree */}
-        {/* <Row className="border border-3">
-          <Col xs={12}>
-            <h4>The Tree</h4>
-          </Col>
-          <Col xs={6} className="border">
-            Date: {treeDate}
-          </Col>
-          <Col xs={6} className="border">
-            LumberJack: {lumberjack}
-          </Col>
-          <Col xs={12}>
-            <p>
-              This {species} was estimated to be {age} years old when it was
-              removed by {lumberjack} on {treeDate}. The unqiue reference for
-              this tree was {species}_{treeId}.
-            </p>
-
-            <p>
-              Below you will see more detailed information about the tree and
-              why it was removed from the forest.
-            </p>
-          </Col>
-
-          <Col xs={12} className="border">
-            <h5>Lumberjack {lumberjack}'s notes:</h5>
-            <p>{reason_for_felling}</p>
-          </Col>
-
-          <Col xs={12} className="border">
-            <p>
-              Image of {species}_{treeId}
-            </p>
-            <div>
-              {treeImage && (
-                <img
-                  src={treeImage}
-                  alt="Tree Image"
-                  style={{ maxWidth: "300px", height: "auto" }}
-                />
-              )}
-            </div>
-          </Col>
-          <Col xs={12} className="border">
-            <div>
-              GPS location of {species}_{treeId}.
-            </div>
-
-            {latitude && longitude ? (
-              <div style={{ height: "400px", width: "100%" }} className="pb-4">
-                <GoogleMapReact
-                  bootstrapURLKeys={{
-                    key: "AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U",
-                  }}
-                  defaultCenter={{
-                    lat: parseFloat(latitude),
-                    lng: parseFloat(longitude),
-                  }}
-                  defaultZoom={18}
-                  options={{ mapTypeId: "satellite" }}
-                >
-                  <Marker
-                    lat={parseFloat(latitude)}
-                    lng={parseFloat(longitude)}
-                  />
-                </GoogleMapReact>
-              </div>
-            ) : (
-              <p>NO GPS DATA.</p>
-            )}
-          </Col>
-        </Row> */}
+       
         {/*Report Milling */}
         {/* <Row className="border border-3">
           <Col xs={12} className="border">
