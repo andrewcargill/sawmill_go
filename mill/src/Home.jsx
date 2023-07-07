@@ -8,7 +8,7 @@ import css from "./styles/home.module.css";
 const Home = () => {
   return (
     <div className="page-home">
-      <div className={css.Container}>
+     <div className={css.Container}>
         <div className={css.headimage}>
           <img className={css.images} src={treetops} alt="My Image" />
         </div>

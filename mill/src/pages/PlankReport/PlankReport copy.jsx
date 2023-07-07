@@ -22,6 +22,7 @@ const PlankReport = () => {
   const [treeImage, setTreeImage] = useState(null);
   const [species, setSpecies] = useState(null);
   const [log, setLog] = useState([]);
+  const [treeData, setTreeData] = useState([]);
 
   const navigate = useNavigate();
 
@@ -50,6 +51,8 @@ const PlankReport = () => {
         setLumberjack(response.data.log.tree.lumberjack);
         setTreeImage(response.data.log.tree.image);
         setTreeId(response.data.log.tree.id);
+        setTreeData(response.data.log.tree);
+
       } catch (error) {
         console.error("Error fetching plank:", error);
       }

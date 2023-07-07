@@ -17,6 +17,7 @@ import {
 import { Link } from "react-router-dom";
 import LogsByTree from "../../components/LogsbyTree";
 import WaterByPlank from "../../components/WaterByPlank";
+import AboutReport from "./About";
 
 const PlankReport = () => {
   const { id } = useParams();
@@ -32,6 +33,7 @@ const PlankReport = () => {
   const [treeImage, setTreeImage] = useState(null);
   const [species, setSpecies] = useState(null);
   const [log, setLog] = useState([]);
+  const [treeData, setTreeData] = useState([]);
 
   const [activeTab, setActiveTab] = useState("about");
 
@@ -62,6 +64,13 @@ const PlankReport = () => {
         setLumberjack(response.data.log.tree.lumberjack);
         setTreeImage(response.data.log.tree.image);
         setTreeId(response.data.log.tree.id);
+        setTreeData(response.data.log.tree);
+
+        console.log("treeData", treeData);
+        console.log("logData", log);
+        console.log("response.data", response.data);
+        
+        
       } catch (error) {
         console.error("Error fetching plank:", error);
       }
@@ -160,7 +169,7 @@ const PlankReport = () => {
           id="tree"
           style={{ display: activeTab === "about" ? "block" : "none" }}
         >
-          Content for about
+          <AboutReport plank={plank} />
         </div>
         <div
           id="tree"
