@@ -18,6 +18,7 @@ import LogsByTree from "../../components/LogsbyTree";
 import WaterByPlank from "../../components/WaterByPlank";
 import AboutReport from "./About";
 import TreeReport from "./TreeReport";
+import MyMapComponent from "./MapReport";
 
 const PlankReport = () => {
   const { id } = useParams();
@@ -120,6 +121,7 @@ const PlankReport = () => {
             {species}_{id}
           </span>
         </h1>
+       
         {/* <p>
               In this report you will learn about the unique story behind the
               wood that your have purchased.
@@ -278,6 +280,6 @@ const PlankReport = () => {
   );
 };
 
-const Marker = () => <div className={css.marker}></div>;
+
 
 export default PlankReport;

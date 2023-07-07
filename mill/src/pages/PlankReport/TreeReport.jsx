@@ -27,11 +27,20 @@ const TreeReport = ({ plank }) => {
 
   return (
     <div className="report-section-container">
-      <h2>This tree was {tree.age} years old.</h2>
+      <h2>{tree.species}_{plank.id} was {tree.age} years old.</h2>
       <p className="sub-header">
-        Below you can see a map of where the tree stood.
+        The GPS location of the tree was recorded before felling.
       </p>
-      <MyMapComponent tree={tree}/>
+
+
+      <div className="report-section-container-dark">
+      <h2>Reason for Felling</h2>
+      <p>{tree.reason_for_felling}</p>
+      </div>
+      <MyMapComponent tree={tree} />
+   
+
+
       <div>
         <div>
           <p>
@@ -44,25 +53,25 @@ const TreeReport = ({ plank }) => {
             <div className="stage-icon">
               <FontAwesomeIcon icon={faTree} />
             </div>
-            <div className="stage-label">tree</div>
+            <div className="stage-label">{tree.date}</div>
           </div>
           <div>
             <div className="stage-icon">
               <FontAwesomeIcon icon={faLinesLeaning} />
             </div>
-            <div className="stage-label">Logs</div>
+            <div className="stage-label">{tree.lumberjack}</div>
           </div>
           <div>
             <div className="stage-icon">
               <FontAwesomeIcon icon={faIndustry} />
             </div>
-            <div className="stage-label">Mill</div>
+            <div className="stage-label">{tree.age}YRS</div>
           </div>
           <div>
             <div className="stage-icon">
               <FontAwesomeIcon icon={faSun} />
             </div>
-            <div className="stage-label">Dry</div>
+            <div className="stage-label">{tree.species}</div>
           </div>
         </div>
       </div>
