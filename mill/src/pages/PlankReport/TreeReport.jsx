@@ -38,7 +38,6 @@ const TreeReport = ({ plank }) => {
       <p>{tree.reason_for_felling}</p>
       </div>
       <MyMapComponent tree={tree} />
-   
 
 
       <div>
