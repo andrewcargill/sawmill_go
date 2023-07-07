@@ -85,4 +85,57 @@
   width: 95%;
 }
 
+/* Styling for text */
+
+.textContainer {
+  height: auto;
+  background-color: white;
+  color: #79c001;
+  padding-bottom: 10px;
+
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 20px;
+}
+
+
+
+body h1 {
+    padding-top: 20px;
+    font-size: 40px;
+    text-transform: uppercase;
+    font-weight: 800;
+    line-height: 1;
+    padding-bottom: 10px;
+  }
+
+.textHighlight {
+    color: #ffb500;
+  }
+  
+
+
+
+.textContainer p {
+    font-size: 20px;
+    padding-right: 15px;
+    line-height: 1.6;
+    color: black;
+  }
+
+#tree-image {
+  width: 100%;
+  height: auto;
+  padding: 20px;
+}
+
+#tree-image > div:first-child img {
+  width: 100%;
+  object-fit: contain;
+}
+
+#tree-image > div:nth-child(2) {
+  color: gray;
+}
+
 

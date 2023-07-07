@@ -3,17 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import GoogleMapReact from "google-map-react";
 import css from "../../styles/testApiGps.module.css";
-import styles from "../../styles/PlankReport.module.css";
-import {
-  Container,
-  Row,
-  Col,
-  Table,
-  Button,
-  Nav,
-  Image,
-  Tab,
-} from "react-bootstrap";
+import { Container, Row, Col, Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import LogsByTree from "../../components/LogsbyTree";
 import WaterByPlank from "../../components/WaterByPlank";
@@ -32,8 +22,6 @@ const PlankReport = () => {
   const [treeImage, setTreeImage] = useState(null);
   const [species, setSpecies] = useState(null);
   const [log, setLog] = useState([]);
-
-  const [activeTab, setActiveTab] = useState("tree");
 
   const navigate = useNavigate();
 
@@ -94,103 +82,13 @@ const PlankReport = () => {
     navigate(-1);
   };
 
-  const handleTabSelect = (tab) => {
-    console.log(activeTab);
-    setActiveTab(tab);
-  };
-
   return (
-    <div className="">
+    <div className="page">
       {/*Report Start */}
-
-      <div className="textContainer">
-        <h1>
-          Life cycle of wood product:{" "}
-          <span className="textHighlight">
-            {" "}
-            {species}_{id}
-          </span>
-        </h1>
-        {/* <p>
-              In this report you will learn about the unique story behind the
-              wood that your have purchased.
-            </p> */}
-      </div>
-      <div id="tree-image">
-        <div>
-          <Image src={treeImage} rounded />
-        </div>
-        <div>
-          This is an actual picture of {species}_{id} before it was removed from
-          the forest.
-        </div>
-      </div>
-
-      <div id={styles.reportContainer}>
-        <Nav variant="tabs" activeKey={activeTab} onSelect={handleTabSelect}>
-          <Nav.Item>
-            <Nav.Link eventKey="about"
-            className={activeTab === "about" ? "active" : ""}
-            >About
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="tree"
-            className={activeTab === styles.tree ? "active" : ""}
-            >Tree</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="logging"
-            className={activeTab === "logging" ? "active" : ""}
-            >Logging</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="milling"
-            className={activeTab === "milling" ? "active" : ""}
-            >Milling</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="drying"
-            className={activeTab === "drying" ? "active" : ""}
-            >Drying</Nav.Link>
-          </Nav.Item>
-        </Nav>
-
-        <div
-          id="tree"
-          style={{ display: activeTab === "about" ? "block" : "none" }}
-        >
-          Content for about
-        </div>
-        <div
-          id="tree"
-          style={{ display: activeTab === "tree" ? "block" : "none" }}
-        >
-          Content for tree
-        </div>
-        <div
-          id="logging"
-          style={{ display: activeTab === "logging" ? "block" : "none" }}
-        >
-          Content for logging
-        </div>
-        <div
-          id="milling"
-          style={{ display: activeTab === "milling" ? "block" : "none" }}
-        >
-          Content for milling
-        </div>
-        <div
-          id="drying"
-          style={{ display: activeTab === "drying" ? "block" : "none" }}
-        >
-          Content for drying
-        </div>
-      </div>
 
       <Container className="pb-4 border border-5">
         {/*Report Title */}
-        {/* <Row className="border border-3">
+        <Row className="border border-3">
           <Col>
             <h3>
               Welcome to the report on the wood product {species}_{id}
@@ -200,9 +98,9 @@ const PlankReport = () => {
               wood that your have purchased.
             </p>
           </Col>
-        </Row> */}
+        </Row>
         {/*Report Tree */}
-        {/* <Row className="border border-3">
+        <Row className="border border-3">
           <Col xs={12}>
             <h4>The Tree</h4>
           </Col>
@@ -272,9 +170,9 @@ const PlankReport = () => {
               <p>NO GPS DATA.</p>
             )}
           </Col>
-        </Row> */}
+        </Row>
         {/*Report Milling */}
-        {/* <Row className="border border-3">
+        <Row className="border border-3">
           <Col xs={12} className="border">
             <h4>Logging, Milling and Drying</h4>
             <p>
@@ -334,7 +232,8 @@ const PlankReport = () => {
               />
             )}
           </Col>
-        </Row> */}
+        </Row>
+
       </Container>
     </div>
   );

@@ -74,6 +74,7 @@ p {
 button {
     padding: 8px 12px 8px 12px;
     border: 0;
+    color: black;
     font-size: 12px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     transition: box-shadow 0.9s, font-weight 0.8s;
