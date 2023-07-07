@@ -31,7 +31,7 @@ const TreeReport = ({ plank }) => {
       <p className="sub-header">
         Below you can see a map of where the tree stood.
       </p>
-      <MyMapComponent />
+      <MyMapComponent tree={tree}/>
       <div>
         <div>
           <p>
