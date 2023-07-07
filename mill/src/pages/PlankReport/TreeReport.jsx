@@ -6,8 +6,7 @@ import {
   faLinesLeaning,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import GoogleMapReact from "google-map-react";
-import Marker from "google-map-react";
+import MyMapComponent from "./MapReport";
 
 const TreeReport = ({ plank }) => {
   const [log, setLog] = useState([]);
@@ -20,7 +19,6 @@ const TreeReport = ({ plank }) => {
     setTree(plank.log.tree);
     setLatitude(plank.log.tree.latitude);
     setLongitude(plank.log.tree.longitude);
-
   }, [plank]);
 
   console.log("about plank", plank);
@@ -33,35 +31,7 @@ const TreeReport = ({ plank }) => {
       <p className="sub-header">
         Below you can see a map of where the tree stood.
       </p>
-
-    
-      {latitude && longitude ? (
-              <div style={{ height: "400px", width: "100%" }}>
-                <GoogleMapReact
-                  bootstrapURLKeys={{
-                    key: "AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U",
-                  }}
-                  defaultCenter={{
-                    lat: parseFloat(latitude),
-                    lng: parseFloat(longitude),
-                  }}
-                  defaultZoom={18}
-                  options={{ mapTypeId: "satellite" }}
-                >
-                  <Marker
-                    lat={parseFloat(latitude)}
-                    lng={parseFloat(longitude)}
-                  />
-                </GoogleMapReact>
-              </div>
-            ) : (
-              <p>NO GPS DATA.</p>
-            )}
-     
-
-
-    
-
+      <MyMapComponent />
       <div>
         <div>
           <p>
@@ -96,7 +66,7 @@ const TreeReport = ({ plank }) => {
           </div>
         </div>
       </div>
-       {/* <Row className="border border-3">
+      {/* <Row className="border border-3">
           <Col xs={12}>
             <h4>The Tree</h4>
           </Col>
@@ -168,7 +138,6 @@ const TreeReport = ({ plank }) => {
           </Col>
         </Row> */}
     </div>
-
   );
 };
 

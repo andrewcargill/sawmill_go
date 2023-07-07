@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import GoogleMapReact from "google-map-react";
 import css from "../../styles/testApiGps.module.css";
 import styles from "../../styles/PlankReport.module.css";
 import {
