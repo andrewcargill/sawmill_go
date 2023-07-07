@@ -33,7 +33,7 @@ const PlankReport = () => {
   const [species, setSpecies] = useState(null);
   const [log, setLog] = useState([]);
 
-  const [activeTab, setActiveTab] = useState("tree");
+  const [activeTab, setActiveTab] = useState("about");
 
   const navigate = useNavigate();
 
