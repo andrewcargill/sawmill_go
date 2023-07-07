@@ -126,7 +126,7 @@ body h1 {
 #tree-image {
   width: 100%;
   height: auto;
-  padding: 20px;
+  padding: 40px;
 }
 
 #tree-image > div:first-child img {
@@ -136,6 +136,48 @@ body h1 {
 
 #tree-image > div:nth-child(2) {
   color: gray;
+}
+
+/* Report */
+
+body .nav-tabs .nav-link {
+  width: 20vw;
+  background-color: #79c001;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border: white 1px solid;
+  border-color: white;
+
+  margin-bottom: 0;
+  font-size: 15px;
+  font-weight: 800;
+  color:white;
+  text-transform: uppercase;
+  transition: background-color 0.9s, color 0.8s;
+}
+
+
+
+
+body .nav-tabs .nav-link.active {
+  background-color: white;
+  color:#79c001;
+}
+
+
+
+#reportContainer {
+  background-color: white;
+  color:black;
+}
+
+#tree {
+  color: #286140;
+  font-size: 40px;
+}
+
+#reportContainer Nav {
+  font-size: 50px;
 }
 
 
