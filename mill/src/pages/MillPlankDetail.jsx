@@ -8,6 +8,14 @@ import { Link } from "react-router-dom";
 import LogsByTree from "../components/LogsbyTree";
 import WaterByPlank from "../components/WaterByPlank";
 
+import {
+  faLeftLong,
+  faPenToSquare,
+  faFile
+
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const PlankDetail = () => {
   const { id } = useParams();
   const [plank, setPlank] = useState(null);
@@ -66,17 +74,28 @@ const PlankDetail = () => {
 
   return (
     <div className="page">
-      <Container className="pb-4">
-        <Row className="pb-4">
+      <Container className="pb-4 small">
+        <Row className="pb-4 mill-buttons">
           <Col xs={6}>
             <h2>Plank {id} Info</h2>
           </Col>
-          <Col xs={3}>
-            <Button onClick={handleGoBack}>BACK</Button>
+          <Col xs={2}>
+            <Button small onClick={handleGoBack}>
+              <FontAwesomeIcon icon={faLeftLong} />
+            </Button>
           </Col>
-          <Col xs={3}>
+          <Col xs={2}>
             <Link to={`/plank/${plank.id}/edit`}>
-              <Button>Edit</Button>
+              <Button small >
+                <FontAwesomeIcon icon={faPenToSquare} />
+              </Button>
+            </Link>
+          </Col>
+          <Col xs={2}>
+            <Link to={`/report/${plank.id}/`}>
+              <Button small >
+                <FontAwesomeIcon icon={faFile} />
+              </Button>
             </Link>
           </Col>
         </Row>

@@ -69,9 +69,41 @@
   margin-bottom: 5px;
 }
 
+/* Admin screens */
+
+.mill-buttons h2 {
+  text-transform: uppercase;
+  font-size: 23px;
+  font-weight: 800;
+  color: black;
+}
+
+.mill-buttons button {
+  background-color: #e35205;
+  width: 50px;
+  font-size: 15px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  align-content: center;
+  height: 30px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.body table button {
+  background-color: #e35205;
+  width: 50px;
+  font-size: 10px;
+  align-content: center;
+  height: 20px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
 
 
 
+/* Note sure - could be home page*/
 .button-container {
   display: flex;
   flex-wrap: wrap;
