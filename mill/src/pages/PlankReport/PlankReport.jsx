@@ -136,6 +136,10 @@ const PlankReport = () => {
 
   const treeName = `${species}_${id}`
 
+  const formattedDepth = Number(plank.depth).toString();
+  const formattedWidth = Number(plank.width).toString();
+  const formattedLength = Number(log.length).toString();
+
 
 
   return (
@@ -165,8 +169,8 @@ const PlankReport = () => {
       <div className="report-section-container">
         <h2>this is a picture of your tree in the forest.</h2>
         <p className="sub-header">
-          Transparent forestry starts with you knowing where your wood came from
-          and the reason why it was removed from the forest.
+        Transparent forestry involves understanding the origin of your 
+        wood and the circumstances surrounding its extraction from the forest
         </p>
         <p>
           You own{" "}
@@ -174,19 +178,19 @@ const PlankReport = () => {
             {species}_{id}
           </span>
           . It is unque. In this document we will share what we know. The tree
-          stood in the forest in Selet, Vännäs, Umeå for{" "}
+          stood in a selective-cut forest in Selet, Vännäs, Umeå for{" "}
           <span className="highlight-one"> {treeData.age} years.</span>
         </p>
         <p>
-          The tree was removed on <span className="highlight-one"> {formatDate(treeData.date)}</span> by local lumberjack{" "}
+          The tree was removed on <span className="highlight-one"> {formatDate(treeData.date)}</span> by lumberjack{" "}
           {treeData.lumberjack}.
         </p>
       </div>
       <div className="report-section-container-dark">
-        <h3>reason for felling <span> {species}_{id}</span></h3>
+        <h3>the reason for felling <span> {species}_{id}</span></h3>
         <div id="quote">
           <FontAwesomeIcon icon={faQuoteLeft} />
-          {treeData.reason_for_felling}
+           <p>{treeData.reason_for_felling}</p>
           <FontAwesomeIcon icon={faQuoteRight} />
           
         </div>
@@ -196,8 +200,45 @@ const PlankReport = () => {
       <div className="report-section-container">
         <h2>Milling</h2>
         <p>{treeName} was milled on {formatDate(plank.date)} by {plank.operator} at Selet15 sawmills.</p>
-        <p>The dimensions were: {plank.depth} x {plank.width} x {log.length}</p>
+        <p>The cut dimensions were: {formattedDepth} x {formattedWidth} x {formattedLength}cm</p>
+        <p>Wood is graded, with 1 being the highest standard. {treeName} was graded: {plank.wood_grade}</p>
+        <p>The following notes were added on milling: </p>
+        <p>{plank.info}</p>
       </div>
+      <div className="report-section-container-dark">
+        <h3>Picture's from the sawmill of {treeName}</h3>
+        <div className="sawmill-images">
+          <div>
+          {plank.image1 && (
+              <img
+                src={plank.image1}
+                alt="Tree Image"
+                style={{ maxWidth: "150px", height: "auto" }}
+              />
+            )}
+          </div>
+          <div>
+          {plank.image2 && (
+              <img
+                src={plank.image2}
+                alt="Tree Image"
+                style={{ maxWidth: "150px", height: "auto" }}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="report-section-container">
+        <h2>Finally...thank you for caring!</h2>
+        <p className="sub-header"> 
+        It is essential that new wood products that come from an 
+        honest and sustainable source. Without honesty and transparency we cannot stop the world's climate problems. 
+        </p>
+        <p>Below you can read more about our project. Please continue to support the sawmill and forest
+          owners that are actively striving to create a positive impact. 
+        </p>
+        </div>
+      
 
 {/* 
       <div id={styles.reportContainer}>

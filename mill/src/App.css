@@ -233,6 +233,10 @@ body .nav-tabs .nav-link.active {
   line-height: 1.4;
 }
 
+#quote p {
+  font-size: 20px;
+}
+
 #quote-signed {
   color: white;
   margin-left: 40px;
@@ -254,7 +258,18 @@ body p {
   line-height: 1.3;
 }
 
+/* sawmill images */
+.sawmill-images {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content:space-around;
+
+}
+
 /* Report: About page*/
+
+
 
 
 
