@@ -7,7 +7,10 @@ import css from "../styles/testApiGps.module.css";
 const LogDetail = () => {
   const { id } = useParams();
   const [log, setLog] = useState(null);
-  const [treeSpecies, setTreeSpecies] = useState("");
+  const [tree, setTree] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  
+
 
   const navigate = useNavigate();
 
@@ -24,24 +27,27 @@ const LogDetail = () => {
           }
         );
         setLog(response.data);
-
-        const treeResponse = await axios.get(
-          `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/${response.data.tree}/`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-            },
-          }
-        );
-        setTreeSpecies(treeResponse.data.species);
+        setTree(response.data.tree)
+        setIsLoading(false);
+        console.log("rd", response.data)
+       
+    
       } catch (error) {
         console.error("Error fetching log:", error);
+        setIsLoading(false);
       }
     };
 
+
+
     fetchLog();
   }, [id]);
+
+
+  useEffect(() => {
+    console.log('log', log);
+  }, [log]);
+
 
   const getBuckStatus = (buck) => {
     return buck ? "Yes" : "No";
@@ -50,6 +56,10 @@ const LogDetail = () => {
   const handleGoBack = () => {
     navigate(-1);
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="page">
@@ -69,33 +79,36 @@ const LogDetail = () => {
         </Row>
         <Row>
           <Col>
+          {log && <p>{log.date}</p>}
+
             <Table bordered>
               <tbody>
+
                 <tr>
                   <th>Date:</th>
-                  <td>{log?.date}</td>
+                  <td>{log.date}</td>
                 </tr>
                 <tr>
                   <th>Buck:</th>
-                  <td>{getBuckStatus(log?.buck)}</td>
+                  <td>{getBuckStatus(log.buck)}</td>
                 </tr>
                 <tr>
                   <th>Length:</th>
-                  <td>{log?.length}</td>
+                  <td>{log.length}</td>
                 </tr>
                 <tr>
                   <th>Diameter:</th>
-                  <td>{log?.diameter}</td>
+                  <td>{log.diameter}</td>
                 </tr>
                 <tr>
                   <th>Tree:</th>
                   <td>
-                    <Link to={`/tree/${log?.tree}/`}>{log?.tree}</Link>
+                    <Link to={`/tree/${log.tree.id}/`}>{log.tree.id}</Link>
                   </td>
                 </tr>
                 <tr>
                   <th>Species:</th>
-                  <td>{treeSpecies}</td>
+                  <td>{log.tree.species}</td>
                 </tr>
               </tbody>
             </Table>

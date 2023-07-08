@@ -108,6 +108,26 @@ const PlankDetail = () => {
                   <th>Grade:</th>
                   <td>{plank.wood_grade}</td>
                 </tr>
+                <tr>
+                  <th>Log ID:</th>
+
+                  <td>
+                  <Link to={`/log/${plank.log.id}`}>
+              <Button>{plank.log.id}</Button>
+                  </Link>
+                    
+                    </td>
+                </tr>
+                <tr>
+                  <th>Tree ID:</th>
+  
+                  <td>
+                  <Link to={`/tree/${plank.log.tree.id}`}>
+              <Button>{plank.log.tree.id}</Button>
+                  </Link>
+                    
+                    </td>
+                </tr>
 
                 <tr>
                   <th>Operator:</th>

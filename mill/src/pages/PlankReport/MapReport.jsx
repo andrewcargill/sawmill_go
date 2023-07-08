@@ -1,43 +1,41 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
-import {
-  faTree,
-  faIndustry,
-  faSun,
-  faLinesLeaning,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTree } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import css from "../../styles/mapReport.module.css";
 
-
 const MyMapComponent = ({ tree }) => {
   const marker = {
-    lat: 64.0531796,
-    lng: 19.9174683,
+    lat: parseFloat(tree.latitude),
+    lng: parseFloat(tree.longitude),
   };
 
-  console.log(tree);
-  console.log(tree.latitude)
-  const Marker = (props) => (
+  const Marker = () => (
     <div className={css.pin}>
-      <FontAwesomeIcon icon={faTree}  />
+      <div id={css.iconContainer}>
+        <FontAwesomeIcon icon={faTree} />
+      </div>
+      <div>{marker.lat}</div>
+      <div>{marker.lng}</div>
     </div>
   );
 
   return (
-    <div>
-      <div style={{ height: "400px", width: "100%" }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U" }} // Replace with your Google Maps API key
-          defaultCenter={marker}
-          defaultZoom={17}
-        >
-          <Marker lat={marker.lat} lng={marker.lng} text="My Marker" />
-        </GoogleMapReact>
-      </div>
+    <div style={{ height: "400px", width: "100%" }}>
+      <GoogleMapReact
+        bootstrapURLKeys={{
+          key: "AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U",
+        }}
+        center={marker}
+        defaultZoom={17}
+        options={{
+          gestureHandling: "greedy",
+        }}
+      >
+        <Marker />
+      </GoogleMapReact>
     </div>
   );
 };
-
 
 export default MyMapComponent;

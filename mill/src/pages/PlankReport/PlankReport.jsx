@@ -19,6 +19,11 @@ import WaterByPlank from "../../components/WaterByPlank";
 import AboutReport from "./About";
 import TreeReport from "./TreeReport";
 import MyMapComponent from "./MapReport";
+import {
+  faQuoteLeft,
+  faQuoteRight
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const PlankReport = () => {
   const { id } = useParams();
@@ -70,8 +75,6 @@ const PlankReport = () => {
         console.log("treeData", treeData);
         console.log("logData", log);
         console.log("response.data", response.data);
-        
-        
       } catch (error) {
         console.error("Error fetching plank:", error);
       }
@@ -109,6 +112,32 @@ const PlankReport = () => {
     setActiveTab(tab);
   };
 
+  const formatDate = (date) => {
+    const options = { day: "numeric", month: "long", year: "numeric" };
+    const formattedDate = new Date(date).toLocaleDateString(undefined, options);
+    return formattedDate.replace(/\b(\d{1,2})\b/g, (match, day) =>
+      day + getDayOrdinalSuffix(day)
+    );
+  };
+
+  const getDayOrdinalSuffix = (day) => {
+    if (day > 3 && day < 21) return "th";
+    switch (day % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  };
+
+  const treeName = `${species}_${id}`
+
+
+
   return (
     <div className="">
       {/*Report Start */}
@@ -121,7 +150,7 @@ const PlankReport = () => {
             {species}_{id}
           </span>
         </h1>
-       
+
         {/* <p>
               In this report you will learn about the unique story behind the
               wood that your have purchased.
@@ -129,40 +158,89 @@ const PlankReport = () => {
       </div>
       <div id="tree-image">
         <div>
-          <Image src={treeImage} rounded />
-        </div>
-        <div>
-          (This is an actual picture of {species}_{id}!)
+          <Image src={treeImage} />
         </div>
       </div>
 
+      <div className="report-section-container">
+        <h2>this is a picture of your tree in the forest.</h2>
+        <p className="sub-header">
+          Transparent forestry starts with you knowing where your wood came from
+          and the reason why it was removed from the forest.
+        </p>
+        <p>
+          You own{" "}
+          <span>
+            {species}_{id}
+          </span>
+          . It is unque. In this document we will share what we know. The tree
+          stood in the forest in Selet, Vännäs, Umeå for{" "}
+          <span className="highlight-one"> {treeData.age} years.</span>
+        </p>
+        <p>
+          The tree was removed on <span className="highlight-one"> {formatDate(treeData.date)}</span> by local lumberjack{" "}
+          {treeData.lumberjack}.
+        </p>
+      </div>
+      <div className="report-section-container-dark">
+        <h3>reason for felling <span> {species}_{id}</span></h3>
+        <div id="quote">
+          <FontAwesomeIcon icon={faQuoteLeft} />
+          {treeData.reason_for_felling}
+          <FontAwesomeIcon icon={faQuoteRight} />
+          
+        </div>
+        <div id="quote-signed"> - {treeData.lumberjack} (Lumberjack)</div>
+      </div>
+      <MyMapComponent tree={treeData}/>
+      <div className="report-section-container">
+        <h2>Milling</h2>
+        <p>{treeName} was milled on {formatDate(plank.date)} by {plank.operator} at Selet15 sawmills.</p>
+        <p>The dimensions were: {plank.depth} x {plank.width} x {log.length}</p>
+      </div>
+
+{/* 
       <div id={styles.reportContainer}>
         <Nav variant="tabs" activeKey={activeTab} onSelect={handleTabSelect}>
           <Nav.Item>
-            <Nav.Link eventKey="about"
-            className={activeTab === "about" ? "active" : ""}
-            >About
+            <Nav.Link
+              eventKey="about"
+              className={activeTab === "about" ? "active" : ""}
+            >
+              About
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="tree"
-            className={activeTab === styles.tree ? "active" : ""}
-            >Tree</Nav.Link>
+            <Nav.Link
+              eventKey="tree"
+              className={activeTab === styles.tree ? "active" : ""}
+            >
+              Tree
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="logging"
-            className={activeTab === "logging" ? "active" : ""}
-            >Logging</Nav.Link>
+            <Nav.Link
+              eventKey="logging"
+              className={activeTab === "logging" ? "active" : ""}
+            >
+              Logging
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="milling"
-            className={activeTab === "milling" ? "active" : ""}
-            >Milling</Nav.Link>
+            <Nav.Link
+              eventKey="milling"
+              className={activeTab === "milling" ? "active" : ""}
+            >
+              Milling
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="drying"
-            className={activeTab === "drying" ? "active" : ""}
-            >Drying</Nav.Link>
+            <Nav.Link
+              eventKey="drying"
+              className={activeTab === "drying" ? "active" : ""}
+            >
+              Drying
+            </Nav.Link>
           </Nav.Item>
         </Nav>
 
@@ -196,7 +274,7 @@ const PlankReport = () => {
         >
           Content for drying
         </div>
-      </div>
+      </div> */}
 
       <Container className="pb-4 border border-5">
         {/*Report Title */}
@@ -212,7 +290,7 @@ const PlankReport = () => {
           </Col>
         </Row> */}
         {/*Report Tree */}
-       
+
         {/*Report Milling */}
         {/* <Row className="border border-3">
           <Col xs={12} className="border">
@@ -279,7 +357,5 @@ const PlankReport = () => {
     </div>
   );
 };
-
-
 
 export default PlankReport;
