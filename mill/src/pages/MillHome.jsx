@@ -14,16 +14,14 @@ const MillHome = () => {
 
   return (
     <div className="mainContainer">
-      <div>
-        <h1>Sawmill Go</h1>
-      </div>
+      
       <div className={css.container}>
         <Row>
           <Col xs={6}>
             <div className={css.buttonContainer}>
               <Button
                 className={css.selectButton}
-                variant="success"
+              
                 onClick={() => handleButtonClick("/mill_add_planks")}
               >
                 + Plank

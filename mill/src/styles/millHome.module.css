@@ -15,6 +15,13 @@
 
 }
 
+.buttonContainer button {
+    background-color:#79c001;
+    font-weight: 800;
+    font-size: larger;
+    border: 0;
+}
+
 .selectButton {
 
     height: 40vw;
@@ -29,7 +36,8 @@
 }
 
 .logoutButton {
-    width: 98%;
+    font-weight: 500;
+    width: 97%;
     height: 20vw;
     max-height: 150px;
 
