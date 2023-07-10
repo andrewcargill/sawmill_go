@@ -53,7 +53,7 @@ const MillEditPlank = () => {
         setDate(response.data.date);
         setDepth(response.data.depth);
         setWidth(response.data.width);
-        setLog(response.data.log);
+        setLog(response.data.log.id);
         setWood_grade(response.data.wood_grade);
         setLive_edge(response.data.live_edge);
         setFurniture(response.data.furniture);
@@ -68,7 +68,7 @@ const MillEditPlank = () => {
         // Handle error if needed
       }
     };
-
+    
     fetchPlankData();
   }, [id]);
 
@@ -336,7 +336,7 @@ const MillEditPlank = () => {
           {success && (
             <Alert key="success" variant="success">
               <p>Success! Data Updated.</p>
-              <div className={css.plankId}>Plank ID: {postId}</div>{" "}
+              <div className={css.plankId}>Plank ID: {id}</div>{" "}
             </Alert>
           )}
           <Row>
