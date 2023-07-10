@@ -33,7 +33,7 @@ const MillEditLog = () => {
         );
 
         const logData = response.data;
-        setTree(logData.tree);
+        setTree(logData.tree.id);
         setDate(logData.date);
         setLength(logData.length);
         setDiameter(logData.diameter);

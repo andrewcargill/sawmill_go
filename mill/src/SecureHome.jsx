@@ -57,13 +57,7 @@ const SecureHome = () => {
 
             
           </Col>
-          <Col xs={12} className="d-flex justify-content-center">
-          <UploadComponentNew />
-          
-          </Col>
-          <Col xs={12} className="d-flex justify-content-center">
-          <ImageCameraTest />
-          </Col>
+         
        </Row>
      </div>
   );
