@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Card, Form, Row, Col } from "react-bootstrap";
+import { Card, Form, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { Offcanvas } from "react-bootstrap";
 import {
   Accordion,
   AccordionItem,
@@ -14,12 +15,21 @@ import {
 import "react-accessible-accordion/dist/fancy-example.css";
 import "../styles/plankList.css";
 
+import {
+  faFilter
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { fetchMoreData } from "../paginationUtils";
 
 const PlankList = () => {
   const [plankData, setPlankData] = useState({ results: [], count: 0, next: null });
   const [searchQuery, setSearchQuery] = useState("");
   const [orderBy, setOrderBy] = useState("id");
+  const [showFilters, setShowFilters] = useState(false);
+  const [gradeFilter, setGradeFilter] = useState("");
+  const [minWidthFilter, setMinWidthFilter] = useState("");
+  const [maxWidthFilter, setMaxWidthFilter] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -57,12 +67,44 @@ const PlankList = () => {
     }
   };
 
+  const handleFilterClick = () => {
+    setShowFilters(!showFilters);
+  };
+
+  const handleClearFilters = () => {
+    setSearchQuery("");
+    setOrderBy("id");
+    setGradeFilter("");
+    setMinWidthFilter("");
+    setMaxWidthFilter("");
+  };
+
+  const handleSearchQueryChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleOrderByChange = (e) => {
+    setOrderBy(e.target.value);
+  };
+
+  const handleGradeFilterChange = (e) => {
+    setGradeFilter(e.target.value);
+  };
+
+  const handleMinWidthFilterChange = (e) => {
+    setMinWidthFilter(e.target.value);
+  };
+
+  const handleMaxWidthFilterChange = (e) => {
+    setMaxWidthFilter(e.target.value);
+  };
+
   return (
     <div id="pagePage" className="page">
       <div className="sticky-top">
         <h2>Planks List</h2>
         <Row className="pb-4">
-          <Col xs={12}>
+          <Col xs={8}>
             <Form>
               <Form.Control
                 type="text"
@@ -70,15 +112,85 @@ const PlankList = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              {/* <Form.Control
-                type="number"
-                value={pageSize}
-                onChange={handlePageSizeChange}
-                placeholder="Page Size"
-              /> */}
             </Form>
           </Col>
+          <Col>
+          <Button variant="link" onClick={handleFilterClick}>
+              <FontAwesomeIcon icon={faFilter} regular />
+            </Button>
+          </Col>
         </Row>
+        {showFilters && (
+        
+        
+          <Row>
+            <Col>
+            <div className="filtersContainer">
+          <h4>Filters</h4>
+          <Form.Group as={Row}>
+            <Form.Label column sm={3}>
+              Order By
+            </Form.Label>
+            <Col sm={9}>
+              <Form.Control
+                as="select"
+                value={orderBy}
+                onChange={handleOrderByChange}
+              >
+                <option value="id">ID (Highest)</option>
+                <option value="-id">ID (Lowest)</option>
+                <option value="date">Date (Oldest)</option>
+                <option value="-date">Date (Newest)</option>
+              </Form.Control>
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row}>
+            <Form.Label column sm={3}>
+              Grade
+            </Form.Label>
+            <Col sm={9}>
+              <Form.Control
+                type="text"
+                placeholder="Enter Grade"
+                value={gradeFilter}
+                onChange={handleGradeFilterChange}
+              />
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row}>
+            <Form.Label column sm={3}>
+              Min Width
+            </Form.Label>
+            <Col sm={9}>
+              <Form.Control
+                type="number"
+                placeholder="Enter Min Width"
+                value={minWidthFilter}
+                onChange={handleMinWidthFilterChange}
+              />
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row}>
+            <Form.Label column sm={3}>
+              Max Width
+            </Form.Label>
+            <Col sm={9}>
+              <Form.Control
+                type="number"
+                placeholder="Enter Max Width"
+                value={maxWidthFilter}
+                onChange={handleMaxWidthFilterChange}
+              />
+            </Col>
+          </Form.Group>
+          <Button variant="secondary" onClick={handleClearFilters}>
+            Clear Filters
+          </Button>
+        </div>
+          </Col>
+          </Row>
+       
+      )}
       </div>
 
       <InfiniteScroll
@@ -176,6 +288,9 @@ const PlankList = () => {
         </Row>
       </InfiniteScroll>
     </div>
+
+    
+
   );
 };
 

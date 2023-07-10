@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import Card from "react-bootstrap/Card";
-// import Form from "react-bootstrap/Form";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
-import { Card, Form, Row, Col } from "react-bootstrap"
+import { Card, Form, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import InfiniteScroll from 'react-infinite-scroll-component';
 import {
   Accordion,
   AccordionItem,
@@ -17,8 +14,12 @@ import {
 import "react-accessible-accordion/dist/fancy-example.css";
 import "../styles/plankList.css";
 
-import { fetchMoreData } from "../paginationUtils";
+import {
+  faFilter
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { fetchMoreData } from "../paginationUtils";
 
 const PlankList = () => {
   const [plankData, setPlankData] = useState({ results: [], count: 0, next: null });
@@ -55,32 +56,18 @@ const PlankList = () => {
     }
   };
 
-
-  const handleScroll = () => {
-    const scrollableElement = document.getElementById("scrollable");
-    const { scrollTop, clientHeight, scrollHeight } = scrollableElement;
-    console.log("handleScroll triggered!");
-    if (scrollTop + clientHeight >= scrollHeight) {
-      if (plankData.next) {
-        fetchMoreData(plankData.next, setPlankData);
-      }
+  const fetchMorePlanks = () => {
+    if (plankData.next) {
+      fetchMoreData(plankData.next, setPlankData);
     }
   };
 
-  useEffect(() => {
-    const scrollableElement = document.getElementById("scrollable");
-    scrollableElement.addEventListener("scroll", handleScroll);
-    return () => {
-      scrollableElement.removeEventListener("scroll", handleScroll);
-    };
-  }, [plankData.next]);
-
   return (
     <div id="pagePage" className="page">
-    <div className="sticky-top">
+      <div className="sticky-top">
         <h2>Planks List</h2>
         <Row className="pb-4">
-          <Col xs={12}>
+          <Col xs={8}>
             <Form>
               <Form.Control
                 type="text"
@@ -88,25 +75,29 @@ const PlankList = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              {/* <Form.Control
-                type="number"
-                value={pageSize}
-                onChange={handlePageSizeChange}
-                placeholder="Page Size"
-              /> */}
             </Form>
+          </Col>
+          <Col>
+          <FontAwesomeIcon icon={faFilter} regular />FILTER
           </Col>
         </Row>
       </div>
 
-      <Row id="scrollable">
-        <Col xs={12}>
-          <div className="cardContainer">
-          {plankData && plankData.results && plankData.results.length > 0 ? (
-
-              plankData.results.map((plank, index) => (
-                <Card key={plank.id} className="mb-3">
-                  <Card.Body>
+      <InfiniteScroll
+        dataLength={plankData.results.length}
+        next={fetchMorePlanks}
+        hasMore={!!plankData.next}
+        loader={<h4>Loading...</h4>}
+        endMessage={<p>No more planks to load.</p>}
+        className="scrollable"
+      >
+        <Row>
+          <Col xs={12}>
+            <div className="cardContainer">
+              {plankData && plankData.results && plankData.results.length > 0 ? (
+                plankData.results.map((plank, index) => (
+                  <Card key={plank.id} className="mb-3">
+                     <Card.Body>
                     <Card.Title>
                       <Row>
                         <Col xs={8}>
@@ -177,15 +168,15 @@ const PlankList = () => {
                       </AccordionItem>
                     </Accordion>
                   </Card.Body>
-                </Card>
-              ))
-            ) : (
-              <p>No planks found.</p>
-            )}
-          </div>
-        </Col>
-        <div id="scrollObserver" style={{ height: "10px" }}></div>
-      </Row>
+                  </Card>
+                ))
+              ) : (
+                <p>No planks found.</p>
+              )}
+            </div>
+          </Col>
+        </Row>
+      </InfiniteScroll>
     </div>
   );
 };
