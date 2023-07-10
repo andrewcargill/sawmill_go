@@ -4,24 +4,25 @@ import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
-import InfiniteScroll from 'react-infinite-scroll-component';
 
 const LogList = () => {
   const [logs, setLogs] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [orderBy, setOrderBy] = useState("id");
   const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
     fetchData();
     observeScroll();
-  }, [currentPage, orderBy]);
+  }, [currentPage, pageSize, orderBy]);
 
   const fetchData = async () => {
     try {
       const params = {
         page: currentPage,
+        page_size: pageSize,
       };
 
       if (searchQuery) {
@@ -46,6 +47,12 @@ const LogList = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+  };
+
+  const handlePageSizeChange = (e) => {
+    const size = parseInt(e.target.value);
+    setPageSize(size);
+    setCurrentPage(1);
   };
 
   const observeScroll = () => {
@@ -87,8 +94,7 @@ const LogList = () => {
   }, [isFetching]);
 
   return (
-    <div id="pagePage" className="page">
-      <div className="sticky-top">
+    <div className="page">
       <Row className="pb-4">
         <Col xs={12}>
           <div>
@@ -98,51 +104,47 @@ const LogList = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
+            <input
+              type="number"
+              value={pageSize}
+              onChange={handlePageSizeChange}
+              placeholder="Page Size"
+            />
           </div>
         </Col>
       </Row>
-   </div>
       <Row>
         <div className="tableContainer">
-          <InfiniteScroll
-            dataLength={logs.length}
-            next={loadMoreData}
-            hasMore={!!currentPage}
-            loader={<h4>Loading...</h4>}
-            endMessage={<p>No more logs to load.</p>}
-            className="scrollable"
-          >
-            {logs && logs.length > 0 ? (
-              <Table striped bordered hover>
-                <thead className="tableHeader">
-                  <tr>
-                    <th onClick={() => handleSort("id")}>
-                      Ref
-                    </th>
-                    <th onClick={() => handleSort("date")}>Date</th>
-                    <th onClick={() => handleSort("length")}>Length</th>
-                    <th onClick={() => handleSort("width")}>Width</th>
-                    <th onClick={() => handleSort("buck")}>Buck</th>
+          {logs && logs.length > 0 ? (
+            <Table striped bordered hover>
+              <thead className="tableHeader">
+                <tr>
+                  <th onClick={() => handleSort("id")}>
+                    <td>Ref</td>
+                  </th>
+                  <th onClick={() => handleSort("date")}>Date</th>
+                  <th onClick={() => handleSort("length")}>Length</th>
+                  <th onClick={() => handleSort("width")}>Width</th>
+                  <th onClick={() => handleSort("buck")}>Buck</th>
+                </tr>
+              </thead>
+              <tbody>
+                {logs.map((log) => (
+                  <tr key={log.id}>
+                    <td>
+                      <Link to={`/log/${log.id}`}>{log.id}</Link>
+                    </td>
+                    <td>{log.date}</td>
+                    <td>{log.length}</td>
+                    <td>{log.diameter}</td>
+                    <td>{log.buck ? "Yes" : "No"}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {logs.map((log) => (
-                    <tr key={log.id}>
-                      <td>
-                        <Link to={`/log/${log.id}`}>{log.id}</Link>
-                      </td>
-                      <td>{log.date}</td>
-                      <td>{log.length}</td>
-                      <td>{log.diameter}</td>
-                      <td>{log.buck ? "Yes" : "No"}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            ) : (
-              <p>No logs found.</p>
-            )}
-          </InfiniteScroll>
+                ))}
+              </tbody>
+            </Table>
+          ) : (
+            <p>No logs found.</p>
+          )}
         </div>
         <div id="scrollObserver" style={{ height: "10px" }}></div>
       </Row>
