@@ -14,6 +14,10 @@ const FilterSection = ({
   handleMaxDepthFilterChange,
   handleClearFilters,
   handleSearchSubmit,
+  handleGeneralFilterChange,
+  generalFilter,
+    setGeneralFilter,
+
 }) => {
   return (
     <div className="filtersContainer">
@@ -81,6 +85,14 @@ const FilterSection = ({
             value={maxDepthFilter}
             onChange={handleMaxDepthFilterChange}
           />
+        </Col>
+        <Col xs={6}>
+        <Button
+        variant={generalFilter ? 'primary' : 'secondary'}
+        onClick={handleGeneralFilterChange}
+      >
+        {generalFilter ? 'General' : 'General'}
+      </Button>
         </Col>
       </Form.Group>
 

@@ -35,6 +35,7 @@ const PlankList = () => {
   const [maxWidthFilter, setMaxWidthFilter] = useState("");
   const [maxDepthFilter, setMaxDepthFilter] = useState("");
   const [minDepthFilter, setMinDepthFilter] = useState("");
+  const [generalFilter, setGeneralFilter] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -51,6 +52,10 @@ const PlankList = () => {
         depth_min: minDepthFilter,
         depth_max: maxDepthFilter,
       };
+
+      if (generalFilter) {
+        params.general = true;
+      }
 
       const response = await axios.get("https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/", {
         params,
@@ -89,6 +94,7 @@ const PlankList = () => {
     setMaxWidthFilter("");
     setMinDepthFilter("");
     setMaxDepthFilter("");
+    setGeneralFilter("");
   };
 
   const handleSearchQueryChange = (e) => {
@@ -117,6 +123,17 @@ const PlankList = () => {
 
   const handleMaxDepthFilterChange = (e) => {
     setMaxDepthFilter(e.target.value);
+  };
+
+  // const handleGeneralFilterChange = (e) => {
+  //   const value = e.target.value === 'true' ? 'True' : 'False'; // Convert string value to Python boolean
+  //   setGeneralFilter(value);
+  //   console.log('GeneralFilter', generalFilter);
+  //   console.log('value', value);
+  // };
+
+  const handleGeneralFilterChange = () => {
+    setGeneralFilter(!generalFilter);
   };
 
   const handleSearchSubmit = () => {
@@ -172,6 +189,8 @@ const PlankList = () => {
                 handleMaxDepthFilterChange={handleMaxDepthFilterChange}
                 handleClearFilters={handleClearFilters}
                 handleSearchSubmit={handleSearchSubmit}
+                handleGeneralFilterChange={handleGeneralFilterChange}
+                generalFilter={generalFilter}
               />
             </Col>
           </Row>
@@ -252,15 +271,15 @@ const PlankList = () => {
                                 Live Edge: {plank.live_edge ? "Yes" : "No"}
                               </Col>
                               <Col xs={6}>
-                                Furniture: {plank.Furniture ? "Yes" : "No"}
+                                Furniture: {plank.furniture ? "Yes" : "No"}
                               </Col>
                             </Row>
                             <Row>
                               <Col xs={6}>
-                                Structural: {plank.Structual ? "Yes" : "No"}
+                                Structural: {plank.structual ? "Yes" : "No"}
                               </Col>
                               <Col xs={6}>
-                                General: {plank.General ? "Yes" : "No"}
+                                General: {plank.general ? "Yes" : "No"}
                               </Col>
                             </Row>
                           </AccordionItemPanel>
