@@ -41,6 +41,7 @@ const FilterSection = ({
             placeholder="Enter Grade"
             value={gradeFilter}
             onChange={handleGradeFilterChange}
+            inputMode="numeric"
           />
         </Col>
 
@@ -55,6 +56,7 @@ const FilterSection = ({
             placeholder="Enter Min Width"
             value={minWidthFilter}
             onChange={handleMinWidthFilterChange}
+            inputMode="numeric"
           />
         </Col>
 
@@ -67,6 +69,7 @@ const FilterSection = ({
             placeholder="Enter Max Width"
             value={maxWidthFilter}
             onChange={handleMaxWidthFilterChange}
+            inputMode="numeric"
           />
         </Col>
 
@@ -80,6 +83,7 @@ const FilterSection = ({
             placeholder="Enter Min Depth"
             value={minDepthFilter}
             onChange={handleMinDepthFilterChange}
+            inputMode="numeric"
           />
         </Col>
 
@@ -92,6 +96,7 @@ const FilterSection = ({
             placeholder="Enter Max Depth"
             value={maxDepthFilter}
             onChange={handleMaxDepthFilterChange}
+            inputMode="numeric"
           />
         </Col>
         <Form.Label column xs={6}>
@@ -103,6 +108,7 @@ const FilterSection = ({
             placeholder="Enter Log ID"
             value={logIdFilter}
             onChange={handleLogIdFilterChange}
+            inputMode="numeric"
           />
         </Col>
         {/* <Form.Label column xs={6}>

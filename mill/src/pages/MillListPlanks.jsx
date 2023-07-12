@@ -186,6 +186,7 @@ const PlankList = () => {
 
   const handleSearchSubmit = () => {
     fetchData();
+    setShowFilters(!showFilters);
   };
 
   return (
