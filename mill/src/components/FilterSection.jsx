@@ -7,17 +7,25 @@ const FilterSection = ({
   maxWidthFilter,
   minDepthFilter,
   maxDepthFilter,
+  logIdFilter,
+  speciesFilter,
   handleGradeFilterChange,
   handleMinWidthFilterChange,
   handleMaxWidthFilterChange,
   handleMinDepthFilterChange,
   handleMaxDepthFilterChange,
+  handleLogIdFilterChange,
+  handleSpeciesFilterChange,
   handleClearFilters,
   handleSearchSubmit,
   handleGeneralFilterChange,
   generalFilter,
   handleLiveEdgeFilterChange,
   live_edgeFilter,
+  handleSturcturalFilterChange,
+  structuralFilter,
+  handleFurnitureFilterChange,
+  furnitureFilter,
 }) => {
   return (
     <div className="filtersContainer">
@@ -86,6 +94,45 @@ const FilterSection = ({
             onChange={handleMaxDepthFilterChange}
           />
         </Col>
+        <Form.Label column xs={6}>
+          Log ID
+        </Form.Label>
+        <Col xs={6}>
+          <Form.Control
+            type="number"
+            placeholder="Enter Log ID"
+            value={logIdFilter}
+            onChange={handleLogIdFilterChange}
+          />
+        </Col>
+        {/* <Form.Label column xs={6}>
+          Species
+        </Form.Label>
+        <Col xs={6}>
+          <Form.Control
+            type="text"
+            placeholder="Select Species"
+            value={speciesFilter}
+            onChange={handleSpeciesFilterChange}
+          />
+        </Col> */}
+        <Col xs={12}>
+              <Form.Group controlId="species">
+                <Form.Label>Species</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={speciesFilter}
+                  onChange={handleSpeciesFilterChange}
+                  className="form-control form-control-lg"
+                  required
+                >
+                  <option value="">Select species</option>
+                  <option value="Pine">Pine</option>
+                  <option value="Spruce">Spruce</option>
+                  <option value="Birch">Birch</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
         <Col xs={6}>
           <Button
             variant={generalFilter ? "primary" : "secondary"}
@@ -100,6 +147,22 @@ const FilterSection = ({
             onClick={handleLiveEdgeFilterChange}
           >
             Live Edge
+          </Button>
+        </Col>
+        <Col xs={6}>
+          <Button
+            variant={furnitureFilter ? "primary" : "secondary"}
+            onClick={handleFurnitureFilterChange}
+          >
+            Furniture
+          </Button>
+        </Col>
+        <Col xs={6}>
+          <Button
+            variant={structuralFilter ? "primary" : "secondary"}
+            onClick={handleSturcturalFilterChange}
+          >
+            Structural
           </Button>
         </Col>
       </Form.Group>

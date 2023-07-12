@@ -28,7 +28,8 @@ const PlankList = () => {
     next: null,
   });
   const [searchQuery, setSearchQuery] = useState("");
-  const [orderBy, setOrderBy] = useState("id");
+  const [orderBy, setOrderBy] = useState(0);
+  const [resultCount, setResultCount] = useState("id");
   const [showFilters, setShowFilters] = useState(false);
   const [gradeFilter, setGradeFilter] = useState("");
   const [minWidthFilter, setMinWidthFilter] = useState("");
@@ -36,9 +37,12 @@ const PlankList = () => {
   const [maxDepthFilter, setMaxDepthFilter] = useState("");
   const [minDepthFilter, setMinDepthFilter] = useState("");
   const [generalFilter, setGeneralFilter] = useState("");
-  const [structuralFilter, setStucturalFilter] = useState("");
+  const [speciesFilter, setSpeciesFilter] = useState("");
+  const [structuralFilter, setStructuralFilter] = useState("");
   const [live_edgeFilter, setLive_edgeFilter] = useState("");
   const [furnitureFilter, setFurnitureFilter] = useState("");
+  const [logIdFilter, setLogIdFilter] = useState("");
+ 
 
   useEffect(() => {
     fetchData();
@@ -54,6 +58,8 @@ const PlankList = () => {
         width_max: maxWidthFilter,
         depth_min: minDepthFilter,
         depth_max: maxDepthFilter,
+        log_id: logIdFilter,
+        species: speciesFilter,
       };
 
       if (generalFilter) {
@@ -61,7 +67,7 @@ const PlankList = () => {
       }
 
       if (structuralFilter) {
-        params.structual = true;
+        params.structural = true;
       }
 
       if (live_edgeFilter) {
@@ -85,6 +91,8 @@ const PlankList = () => {
         count: response.data.count,
         next: response.data.next,
       });
+
+      setResultCount(response.data.count);
       console.log("UseEffect_pageload", response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -112,7 +120,9 @@ const PlankList = () => {
     setGeneralFilter("");
     setLive_edgeFilter("");
     setFurnitureFilter("");
-    setStucturalFilter("");
+    setStructuralFilter("");
+    setLogIdFilter("");
+    setSpeciesFilter("");
   };
 
   const handleSearchQueryChange = (e) => {
@@ -143,6 +153,14 @@ const PlankList = () => {
     setMaxDepthFilter(e.target.value);
   };
 
+  const handleLogIdFilterChange = (e) => {
+    setLogIdFilter(e.target.value);
+  };
+
+  const handleSpeciesFilterChange = (e) => {
+    setSpeciesFilter(e.target.value);
+  };
+
   // const handleGeneralFilterChange = (e) => {
   //   const value = e.target.value === 'true' ? 'True' : 'False'; // Convert string value to Python boolean
   //   setGeneralFilter(value);
@@ -159,7 +177,7 @@ const PlankList = () => {
   };
 
   const handleSturcturalFilterChange = () => {
-    setStucturalFilter(!structuralFilter);
+    setStructuralFilter(!structuralFilter);
   };
 
   const handleFurnitureFilterChange = () => {
@@ -203,6 +221,7 @@ const PlankList = () => {
             </Button>
           </Col>
         </Row>
+       
         {showFilters && (
           <Row>
             <Col>
@@ -212,11 +231,15 @@ const PlankList = () => {
                 maxWidthFilter={maxWidthFilter}
                 minDepthFilter={minDepthFilter}
                 maxDepthFilter={maxDepthFilter}
+                logIdFilter={logIdFilter}
+                speciesFilter={speciesFilter}
                 handleGradeFilterChange={handleGradeFilterChange}
                 handleMinWidthFilterChange={handleMinWidthFilterChange}
                 handleMaxWidthFilterChange={handleMaxWidthFilterChange}
                 handleMinDepthFilterChange={handleMinDepthFilterChange}
                 handleMaxDepthFilterChange={handleMaxDepthFilterChange}
+                handleLogIdFilterChange={handleLogIdFilterChange}
+                handleSpeciesFilterChange={handleSpeciesFilterChange}
                 handleClearFilters={handleClearFilters}
                 handleSearchSubmit={handleSearchSubmit}
                 handleGeneralFilterChange={handleGeneralFilterChange}
@@ -231,6 +254,9 @@ const PlankList = () => {
             </Col>
           </Row>
         )}
+         <Row>
+        <p>Result Count: {resultCount}</p>
+        </Row>
       </div>
 
       <InfiniteScroll
@@ -252,10 +278,15 @@ const PlankList = () => {
                     <Card.Body>
                       <Card.Title>
                         <Row>
-                          <Col xs={8}>
+                          <Col xs={4}>
                             <Link to={`/plank/${plank.id}`}>
                               ID: {plank.id}
                             </Link>
+                          </Col>
+                          <Col xs={4}>
+                            
+                              {plank.log.tree.species}
+                           
                           </Col>
                           <Col xs={4}>G{plank.wood_grade}</Col>
                         </Row>
@@ -263,7 +294,7 @@ const PlankList = () => {
                       <Row className="pb-1">
                         <Col sx={4}>W: {plank.width}</Col>
                         <Col sx={4}>D: {plank.depth}</Col>
-                        <Col sx={4}>L: {plank.depth}</Col>
+                        <Col sx={4}>L: {plank.log.length}</Col>
                       </Row>
 
                       <Accordion>
@@ -277,6 +308,10 @@ const PlankList = () => {
                             <Row>
                               <Col xs={6}> Date:</Col>
                               <Col xs={6}> {plank.date}</Col>
+                            </Row>
+                            <Row>
+                              <Col xs={6}> Parent Log ID:</Col>
+                              <Col xs={6}> {plank.log.id}</Col>
                             </Row>
                             <Row>
                               <Col xs={6}> Operator:</Col>
@@ -312,7 +347,7 @@ const PlankList = () => {
                             </Row>
                             <Row>
                               <Col xs={6}>
-                                Structural: {plank.structual ? "Yes" : "No"}
+                                Structural: {plank.structural ? "Yes" : "No"}
                               </Col>
                               <Col xs={6}>
                                 General: {plank.general ? "Yes" : "No"}
