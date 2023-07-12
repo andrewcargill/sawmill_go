@@ -16,8 +16,8 @@ const FilterSection = ({
   handleSearchSubmit,
   handleGeneralFilterChange,
   generalFilter,
-    setGeneralFilter,
-
+  handleLiveEdgeFilterChange,
+  live_edgeFilter,
 }) => {
   return (
     <div className="filtersContainer">
@@ -87,12 +87,20 @@ const FilterSection = ({
           />
         </Col>
         <Col xs={6}>
-        <Button
-        variant={generalFilter ? 'primary' : 'secondary'}
-        onClick={handleGeneralFilterChange}
-      >
-        {generalFilter ? 'General' : 'General'}
-      </Button>
+          <Button
+            variant={generalFilter ? "primary" : "secondary"}
+            onClick={handleGeneralFilterChange}
+          >
+            {generalFilter ? "General" : "General"}
+          </Button>
+        </Col>
+        <Col xs={6}>
+          <Button
+            variant={live_edgeFilter ? "primary" : "secondary"}
+            onClick={handleLiveEdgeFilterChange}
+          >
+            Live Edge
+          </Button>
         </Col>
       </Form.Group>
 

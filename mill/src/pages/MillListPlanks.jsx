@@ -36,6 +36,9 @@ const PlankList = () => {
   const [maxDepthFilter, setMaxDepthFilter] = useState("");
   const [minDepthFilter, setMinDepthFilter] = useState("");
   const [generalFilter, setGeneralFilter] = useState("");
+  const [structuralFilter, setStucturalFilter] = useState("");
+  const [live_edgeFilter, setLive_edgeFilter] = useState("");
+  const [furnitureFilter, setFurnitureFilter] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -55,6 +58,18 @@ const PlankList = () => {
 
       if (generalFilter) {
         params.general = true;
+      }
+
+      if (structuralFilter) {
+        params.structual = true;
+      }
+
+      if (live_edgeFilter) {
+        params.live_edge = true;
+      }
+
+      if (furnitureFilter) {
+        params.furniture = true;
       }
 
       const response = await axios.get("https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/", {
@@ -95,6 +110,9 @@ const PlankList = () => {
     setMinDepthFilter("");
     setMaxDepthFilter("");
     setGeneralFilter("");
+    setLive_edgeFilter("");
+    setFurnitureFilter("");
+    setStucturalFilter("");
   };
 
   const handleSearchQueryChange = (e) => {
@@ -134,6 +152,18 @@ const PlankList = () => {
 
   const handleGeneralFilterChange = () => {
     setGeneralFilter(!generalFilter);
+  };
+
+  const handleLiveEdgeFilterChange = () => {
+    setLive_edgeFilter(!live_edgeFilter);
+  };
+
+  const handleSturcturalFilterChange = () => {
+    setStucturalFilter(!structuralFilter);
+  };
+
+  const handleFurnitureFilterChange = () => {
+    setFurnitureFilter(!furnitureFilter);
   };
 
   const handleSearchSubmit = () => {
@@ -191,6 +221,12 @@ const PlankList = () => {
                 handleSearchSubmit={handleSearchSubmit}
                 handleGeneralFilterChange={handleGeneralFilterChange}
                 generalFilter={generalFilter}
+                handleLiveEdgeFilterChange={handleLiveEdgeFilterChange}
+                live_edgeFilter={live_edgeFilter}
+                handleFurnitureFilterChange={handleFurnitureFilterChange}
+                furnitureFilter={furnitureFilter}
+                handleSturcturalFilterChange={handleSturcturalFilterChange}
+                structuralFilter={structuralFilter}
               />
             </Col>
           </Row>
