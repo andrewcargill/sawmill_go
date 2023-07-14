@@ -32,6 +32,8 @@ import MillEditPlank from "./pages/MillEditPlank";
 import PlankDetail from "./pages/MillPlankDetail";
 import PlankList from "./pages/MillListPlanks";
 import PlankReport from "./pages/PlankReport/PlankReport";
+import PerfectSolution from "./PerfectSolution";
+import Transparent from "./TransparentForestry";
 
 const App = () => {
   return (
@@ -40,6 +42,9 @@ const App = () => {
       <Routes>
         <Route path="" element={<Home />} />
         <Route path="about" element={<About />} />
+        <Route path="product" element={<PerfectSolution />} />
+        <Route path="transparent" element={<Transparent />} />
+
         <Route path="home_secure" element={<SecureHome />} />
         <Route path="logout_success" element={<LoggedOut />} />
 

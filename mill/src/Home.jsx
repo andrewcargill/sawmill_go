@@ -8,20 +8,20 @@ import css from "./styles/home.module.css";
 const Home = () => {
   return (
     <div className="page-home">
-     <div className={css.Container}>
+      <div className={css.Container}>
         <div className={css.headimage}>
           <img className={css.images} src={treetops} alt="My Image" />
         </div>
         <div className={css.textContainer}>
-          <h1>Hello, Welcome to Sawmill Go!</h1>
-          <p><strong>Sawmill Go is a comprehensive database system specifically built for artisanal sawmills, ensuring 
-            seamless and hassle-free management of all inventory operations.
-          </strong></p>
-          <p>
-          Artisans can 
-        effortlessly oversee their operations, 
-      ensuring smooth and seamless management from start to finish.
-          </p>
+        <h1>Welcome to Sawmill Go!</h1>
+<p>
+  <strong>
+    Empower Your Artisanal Sawmill with Sawmill Go - The Ultimate Database Solution!
+  </strong>
+</p>
+<p>
+  Seamlessly manage your inventory operations with ease. From start to finish, experience smooth and hassle-free management, allowing artisans to effortlessly oversee their operations.
+</p>
           <div className={css.buttonContainer}>
             <button>Find out More</button>
           </div>
@@ -30,11 +30,14 @@ const Home = () => {
           <img className={css.images} src={treeview} alt="My Image" />
         </div>
         <div className={css.textContainerOrange}>
-          <h1>100% transpartent forestry</h1>
-          <p>Each timber product produced in the sawmill comes with a unique story, that
-            until now, has never been able to be passed onto the customer.
+          <h1>100% transparent forestry</h1>
+          <p>
+            <strong>
+              Introducing "Transparent Forestry" - Revolutionizing the Industry!
+            </strong>
           </p>
-          <p>Sawmill Go creates a detailed report of every product that leaves the mill.
+          <p>
+            Discover complete information about sourced trees, from felling date to responsible individuals and precise locations. Experience unparalleled transparency and traceability for a truly distinctive offering.
           </p>
           <div className={css.buttonContainer}>
             <button>Find out More</button>
@@ -44,12 +47,16 @@ const Home = () => {
           <img className={css.images} src={treetops} alt="My Image" />
         </div>
         <div className={css.textContainerGreen}>
-          <h1>The power of cloud computing</h1>
-          <p>Add the tree, then the length of the logs and the diameter. We can use that diameter
-            measurement to calculate what can be cut from that log!
+          <h1>Unleashing Cloud Computing's Power</h1>
+          <p>
+            <strong>
+              Effortlessly search your inventory with custom-built filters for
+              seamless organization.
+            </strong>
           </p>
-          <p>Our system can add GPS locations, images of the tree and planks... notes from the 
-            sawmill operator and moisture checks. All from your mobile phone or desktop computer.
+          <p>
+            Input tree details for precise calculations. Add GPS locations,
+            images, notes, moisture checks, from any device.
           </p>
           <div className={css.buttonContainer}>
             <button>Find out More</button>
@@ -57,12 +64,7 @@ const Home = () => {
         </div>
       </div>
 
-
-
-
       <Row>
-        
-      
         {/* <Col xs={12}>
           <Accordion defaultActiveKey="0" className="pb-4">
             <Accordion.Item eventKey="0">

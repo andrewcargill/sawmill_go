@@ -64,9 +64,10 @@ const Layout = () => {
                   About
                 </Link>
               </li>
+              
               <li className="nav-item">
-                <Link className={css.navLink} to="report/:id">
-                  Report
+                <Link className={css.navLink} to="transparent">
+                  Transparent Forestry
                 </Link>
               </li>
 
