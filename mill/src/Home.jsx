@@ -14,12 +14,13 @@ const Home = () => {
         </div>
         <div className={css.textContainer}>
           <h1>Hello, Welcome to Sawmill Go!</h1>
-          <p>This is the launch of an exciting new product for 
-            forest owners, small sawmills and wood-workers.
-          </p>
+          <p><strong>Sawmill Go is a comprehensive database system specifically built for artisanal sawmills, ensuring 
+            seamless and hassle-free management of all inventory operations.
+          </strong></p>
           <p>
-            A custom built cloud database system that will manage everything from the forest
-            to customer orders.
+          Artisans can 
+        effortlessly oversee their operations, 
+      ensuring smooth and seamless management from start to finish.
           </p>
           <div className={css.buttonContainer}>
             <button>Find out More</button>
@@ -29,7 +30,7 @@ const Home = () => {
           <img className={css.images} src={treeview} alt="My Image" />
         </div>
         <div className={css.textContainerOrange}>
-          <h1>Premium Products with Selective Cut Forestry</h1>
+          <h1>100% transpartent forestry</h1>
           <p>Each timber product produced in the sawmill comes with a unique story, that
             until now, has never been able to be passed onto the customer.
           </p>
