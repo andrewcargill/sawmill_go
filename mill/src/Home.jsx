@@ -4,8 +4,17 @@ import Accordion from "react-bootstrap/Accordion";
 import treetops from "./media/images/treetops.png";
 import treeview from "./media/images/forest_mountain.png";
 import css from "./styles/home.module.css";
+import { useParams, Link, useNavigate } from "react-router-dom";
+
 
 const Home = () => {
+
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/about');
+  };
+
   return (
     <div className="page-home">
       <div className={css.Container}>
@@ -13,17 +22,20 @@ const Home = () => {
           <img className={css.images} src={treetops} alt="My Image" />
         </div>
         <div className={css.textContainer}>
-        <h1>Welcome to Sawmill Go!</h1>
-<p>
-  <strong>
-    Empower Your Artisanal Sawmill with Sawmill Go - The Ultimate Database Solution!
-  </strong>
-</p>
-<p>
-  Seamlessly manage your inventory operations with ease. From start to finish, experience smooth and hassle-free management, allowing artisans to effortlessly oversee their operations.
-</p>
+          <h1>Welcome to Sawmill Go!</h1>
+          <p>
+            <strong>
+              Empower Your Artisanal Sawmill with Sawmill Go - The Ultimate
+              Database Solution!
+            </strong>
+          </p>
+          <p>
+            Seamlessly manage your inventory operations with ease. From start to
+            finish, experience smooth and hassle-free management, allowing
+            artisans to effortlessly oversee their operations.
+          </p>
           <div className={css.buttonContainer}>
-            <button>Find out More</button>
+            <button onClick={handleButtonClick}>Find out More</button>
           </div>
         </div>
         <div className={css.headimage}>
@@ -37,10 +49,13 @@ const Home = () => {
             </strong>
           </p>
           <p>
-            Discover complete information about sourced trees, from felling date to responsible individuals and precise locations. Experience unparalleled transparency and traceability for a truly distinctive offering.
+            Discover complete information about sourced trees, from felling date
+            to responsible individuals and precise locations. Experience
+            unparalleled transparency and traceability for a truly distinctive
+            offering.
           </p>
           <div className={css.buttonContainer}>
-            <button>Find out More</button>
+            <button onClick={handleButtonClick}>Find Out More</button>
           </div>
         </div>
         <div className={css.headimage}>

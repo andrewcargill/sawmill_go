@@ -39,6 +39,22 @@
   } 
 }
 
+/* Navigation */
+.dropdown-item {
+  background-color: red;
+}
+
+#dropdown-basic {
+  background-color: white;
+  border: 0;
+  color: #286140;
+  box-shadow: none;
+  padding-left: 0;
+  font-size: 20px;
+  font-weight: 800;
+
+}
+
 
 
 

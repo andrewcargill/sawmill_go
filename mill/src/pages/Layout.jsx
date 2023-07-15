@@ -64,20 +64,31 @@ const Layout = () => {
                   About
                 </Link>
               </li>
-              
-              <li className="nav-item">
-                <Link className={css.navLink} to="transparent">
-                  Transparent Forestry
-                </Link>
-              </li>
 
               {isAuth ? (
                 <>
-                 
-                 
-
-
-                  <li className="nav-item">
+                  <Dropdown>
+                    <Dropdown.Toggle variant="secondary" 
+                    id="dropdown-basic"
+                    className="dropdown-toggle"
+                    >
+                      ADMIN
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu
+                    className="dropdown-menu"
+                    >
+                      <Dropdown.Item as={Link} to="tree_list">
+                        Tree
+                      </Dropdown.Item>
+                      <Dropdown.Item as={Link} to="log_list">
+                        Log
+                      </Dropdown.Item>
+                      <Dropdown.Item as={Link} to="plank_list">
+                        Plank
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                  {/* <li className="nav-item">
                     <Link className="nav-link" to="tree_list">
                       Tree Search
                     </Link>
@@ -91,13 +102,21 @@ const Layout = () => {
                     <Link className="nav-link" to="plank_list">
                       Plank Search
                     </Link>
-                  </li>
+                  </li> */}
                   <Dropdown>
-                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                      SAWMILL INPUT SCREENS
+                    <Dropdown.Toggle variant="secondary" 
+                    id="dropdown-basic"
+                    className="dropdown-toggle"
+                    >
+                      ADD DATA
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item as={Link} to="mill_home">
+                    <Dropdown.Menu
+                    id="dropdown-menu"
+                    >
+                      <Dropdown.Item as={Link} 
+                      to="mill_home"
+                      className="dropbox-item"
+                      >
                         Mill Home
                       </Dropdown.Item>
                       <Dropdown.Item as={Link} to="mill_add_planks">
@@ -115,7 +134,7 @@ const Layout = () => {
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-                  <Dropdown>
+                  {/* <Dropdown>
                     <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                       Test
                     </Dropdown.Toggle>
@@ -133,23 +152,26 @@ const Layout = () => {
                         Display GPS Map
                       </Dropdown.Item>
                       <Dropdown>
-                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                      Moisture Checks
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item as={Link} to="water_crud">
-                        All
-                      </Dropdown.Item>
-                      <Dropdown.Item as={Link} to="moisture_by_planks">
-                        By Plank Id
-                      </Dropdown.Item>
-                      <Dropdown.Item as={Link} to="water_post">
-                        Add New
-                      </Dropdown.Item>
+                        <Dropdown.Toggle
+                          variant="secondary"
+                          id="dropdown-basic"
+                        >
+                          Moisture Checks
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                          <Dropdown.Item as={Link} to="water_crud">
+                            All
+                          </Dropdown.Item>
+                          <Dropdown.Item as={Link} to="moisture_by_planks">
+                            By Plank Id
+                          </Dropdown.Item>
+                          <Dropdown.Item as={Link} to="water_post">
+                            Add New
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
                     </Dropdown.Menu>
-                  </Dropdown>
-                    </Dropdown.Menu>
-                  </Dropdown>
+                  </Dropdown> */}
                 </>
               ) : null}
 

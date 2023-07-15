@@ -1,74 +1,69 @@
-import React from 'react';
-
+import React from "react";
+import css from "./styles/home.module.css";
+import treetops from "./media/images/treetops.png";
+import treeview from "./media/images/forest_mountain.png";
 
 const About = () => {
   return (
-    <div>
-      <h2>Our Systems</h2>
-<h3>Sawmill Go</h3>
-<p>
-  Sawmill Go is our comprehensive database system designed specifically for sawmills. It offers efficient management of logs and processed planks, streamlining inventory control and optimizing operations. With its user-friendly interface and essential features, Sawmill Go provides a reliable solution for your sawmill's everyday needs.
-</p>
-<h3>Tree-to-Plank Pro</h3>
-<p>
-  Tree-to-Plank Pro is our advanced system that encompasses the entire process, from tree to planks. It goes beyond the functionality of Sawmill Go, capturing and organizing data at every stage. This holistic solution allows you to trace the journey of each material, empowering you to provide customers with a complete picture of the sourcing, processing, and origins of their products. Experience unrivaled transparency and customer engagement with Tree-to-Plank Pro.
-</p>
-{/* 
-      <h1>About!</h1>
-      <h2>The two s</h2>
-
-
-      <h2>The perfect solution</h2>
-      Sawmill Go is a custom-built cloud database system that streamlines 
-      the entire workflow of artisanal sawmills, offering access from anywhere at any time. 
-      From managing the sourcing of timber from the forest to efficiently 
-      handling customer orders, this robust solution encompasses a wide 
-      array of features. It facilitates quick and accurate stock search, 
-      enabling users to easily locate and retrieve specific materials based
-       on various parameters such as dimensions, species, or moisture content.
-        Additionally, Sawmill Go provides comprehensive categorization 
-        capabilities, allowing for efficient organization and classification 
-        of inventory items. With this all-inclusive system, artisans can 
-        effortlessly oversee their operations, 
-      ensuring smooth and seamless management from start to finish.
-      <h2>Transparent Forestry</h2>
-    <p>
-    Our full version of the product introduces a revolutionary concept 
-    in the field of forestry known as "Transparent Forestry." This 
-    innovative solution offers a unique and unparalleled experience by 
-    providing customers with comprehensive information about the sourced 
-    trees. From the exact date of felling to the responsible individual, 
-    along with the precise location where the tree stood, our system ensures 
-    complete transparency. By empowering customers with this level of 
-    detailed knowledge, they can enjoy a truly distinctive product that 
-    embodies transparency and traceability throughout the entire process.</p>
-  
-    <p>
+    <div className="page-home">
+      <div className={css.Container}>
+        <div className={css.textContainer}>
+          <h1>Our systems</h1>
+        </div>
+        <div className={css.textContainerWhite}>
+          <h1>Sawmill Go</h1>
+        </div>
+        <div className={css.textContainerWhite}>
+          <p>
             <strong>
-              Introducing "Transparent Forestry," our innovative solution
-              revolutionizes the industry by providing customers with complete
-              information about sourced trees. 
+              Sawmill Go is our comprehensive database system designed
+              specifically for sawmills.
             </strong>
           </p>
           <p>
-            From felling date to responsible individuals and precise locations,
-            this unique product ensures full transparency, delivering an
-            unparalleled experience. Embrace transparency and traceability for a
-            truly distinctive offering.
+            It offers efficient management of logs and processed planks,
+            streamlining inventory control and optimizing operations. With its
+            user-friendly interface and essential features, Sawmill Go provides
+            a reliable solution for your sawmill's everyday needs.
           </p>
 
-          <h1>100% transparent forestry</h1>
+          <div className={css.buttonContainer}>
+            <button>Find out More</button>
+          </div>
+        </div>
+        <div className={css.headimage}>
+          <img className={css.images} src={treeview} alt="My Image" />
+        </div>
+
+        <div className={css.textContainerWhite}>
+          <h1>Eco pro</h1>
+        </div>
+          <div className={css.textContainerWhite}>
           <p>
             <strong>
-              Introducing "Transparent Forestry" - Revolutionizing the Industry!
+              Eco Pro is our advanced system that encompasses the
+              entire process, from tree to planks. It goes beyond the
+              functionality of Sawmill Go, capturing and organizing data at
+              every stage.
             </strong>
           </p>
           <p>
-            Discover complete information about sourced trees, from felling date to responsible individuals and precise locations. Experience unparalleled transparency and traceability for a truly distinctive offering.
-          </p> */}
-    </div>
+            This holistic solution allows you to trace the journey of each
+            material, empowering you to provide customers with a complete
+            picture of the sourcing, processing, and origins of their products.
+            Experience unrivaled transparency and customer engagement with
+            Eco Pro.
+          </p>
+          <div className={css.buttonContainer}>
+            <button>Find out More</button>
+          </div>
+          </div>
+          
+        </div>
 
-
+       
+      </div>
+   
   );
 };
 

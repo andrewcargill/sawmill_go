@@ -18,6 +18,15 @@
     color: #79c001;
 }
 
+/* White */
+.textContainerWhite {
+    height: auto;
+    background-color: white;
+    color: #286140;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
 /* Orange*/
 .textContainerOrange {
     height: auto;
