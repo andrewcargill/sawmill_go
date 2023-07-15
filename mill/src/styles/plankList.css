@@ -1,24 +1,23 @@
-/* accordion.css */
 
 /* Customize the accordion wrapper */
 .accordion {
-    /* background-color: lightgray;
+    background-color: lightgray;
     border: solid 2px black;
     border-radius: 10px;
     padding: 2px;
-    font-size: 10px; */
+    font-size: 10px;
 
   }
   
   /* Customize the accordion item */
   .accordion__item {
     /* Custom styles for accordion item */
-    /* margin: 5px;
+    margin: 5px;
     border: 1px solid black;
     background-color: white;
     color: white;
     border-radius: 5px;
-    padding: 5px; */
+    padding: 5px;
   }
   
   /* Customize the accordion item heading */
@@ -61,6 +60,57 @@
   padding: 10px;
   }
 
-  .card {
-    width: 100%;
+  .custom-card {
+    background-color: blue;
   }
+
+  .vertical-align-center {
+    /* Flexbox properties to vertically align items */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+
+  /* card background / container */
+  .custom-card-body {
+    border: 2px solid #286140;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+  }
+
+  /* header and dimensions */
+  .custom-card-body .row {
+    color: #286140;
+  }
+
+  /* title background */
+  .custom-card-title {
+    text-transform: uppercase;
+    color: #286140;
+  }
+
+  /* title section text */
+  .custom-card-title .row {
+    color: #286140;
+    font-weight: 800;
+    font-size: 20px;
+  }
+
+  #detail-button {
+    background-color: white;
+    color: #e35205;
+    border: 0;
+    font-weight: 800;
+    font-size: 20px;
+    border-radius: 5px;
+
+  }
+
+
+
+
+
+

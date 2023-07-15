@@ -189,6 +189,8 @@ const PlankList = () => {
     setShowFilters(!showFilters);
   };
 
+  
+
   return (
     <div id="pagePage" className="page">
       <div className="sticky-top">
@@ -275,27 +277,29 @@ const PlankList = () => {
               plankData.results &&
               plankData.results.length > 0 ? (
                 plankData.results.map((plank, index) => (
-                  <Card key={plank.id} className="mb-3">
-                    <Card.Body>
-                      <Card.Title>
-                        <Row>
-                          <Col xs={4}>
+                  <Card key={plank.id} className="mb-3 custom-card">
+                    <Card.Body className="custom-card-body">
+                      <Card.Title className="custom-card-title">
+                        <Row className="vertical-align-center">
+                          <Col >
                             <Link to={`/plank/${plank.id}`}>
-                              ID: {plank.id}
+                              <Button id="detail-button"> ID: {plank.id} </Button>
                             </Link>
                           </Col>
-                          <Col xs={4}>
+                          <Col>
                             
                               {plank.log.tree.species}
                            
                           </Col>
-                          <Col xs={4}>G{plank.wood_grade}</Col>
+                          <Col>Grade: {plank.wood_grade}</Col>
                         </Row>
                       </Card.Title>
-                      <Row className="pb-1">
-                        <Col sx={4}>W: {plank.width}</Col>
-                        <Col sx={4}>D: {plank.depth}</Col>
-                        <Col sx={4}>L: {plank.log.length}</Col>
+                      <Row className="pb-1 ">
+                        <Col sx={3}></Col>
+                        <Col sx={3}>W: {plank.width}cm</Col>
+
+                        <Col sx={3}>D: {plank.depth}cm</Col>
+                        <Col sx={3}>L: {plank.log.length}cm</Col>
                       </Row>
 
                       <Accordion>

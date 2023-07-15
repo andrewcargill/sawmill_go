@@ -36,7 +36,7 @@ const Login = () => {
       window.location.href = 'home_secure';
  }
  return(
-   <div className="Auth-form-container">
+   <div className="page">
      <form className="Auth-form" onSubmit={submit}>
        <div className="Auth-form-content">
          <h3 className="Auth-form-title">Sign In</h3>

@@ -316,11 +316,6 @@ body p {
 }
 
 /* Report: About page*/
-
-
-
-
-
 .cycle-container {
   padding: 10px;
   margin-left: 15px;
@@ -331,11 +326,9 @@ body p {
   justify-content: space-around;
   border: #79c001 solid 2px;
   height: auto;
-
 }
 
 .cycle-container div {
-  
   width: 80px;
   height: 80px;
   background-color: black;
@@ -346,7 +339,6 @@ body p {
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
-
 }
 
 .cycle-container div div {
