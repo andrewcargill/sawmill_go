@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# SAWMILL GO! 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
 
-## Available Scripts
+| Section | Description |
+| ------- | ----------- |
+| Project Introduction | Briefly introduces the project and its goals. |
+| Site Architecture | Lists the technology stack used in the project. |
+| Database Structure | Lists the technology stack used in the project. |
+| Current Status | Provides an overview of the project's current status. |
+| Future Development | Outlines the planned future development of the project. |
 
-In the project directory, you can run:
+## Project Introduction
 
-### `npm start`
+I am the owner of a sawmill and forest in the North of Sweden. After studying programming in 2022, I embarked on creating this project during the summer of 2023.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Project Goals:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Develop an easy-to-use management system for processed timber (planks/lumber).
+- Promote sustainable forest management, emphasizing selective cut forestry over clear-cut forestry.
+- Establish a transparent process that fosters an emotional connection between the end buyer/user and the timber. This transparency is achieved through sharing information about the people involved in the process, GPS data on tree locations, images, and comments on why and when the tree was removed and where it was processed.
 
-### `npm test`
+### Distinctive Products:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Sawmill Stock Management System**: A comprehensive database system tailored specifically for artisanal sawmills, ensuring seamless and hassle-free management of all inventory operations.
 
-### `npm run build`
+2. **Transparent Forestry System with Certification/Customer Report**: This advanced system creates a transparent and traceable process that allows end buyers and customers to gain complete information about the sourced trees. From the date of felling to responsible individuals, precise locations, and more, this unique product provides a distinctive offering, fostering a strong emotional connection to the timber.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Site Architecture
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The Sawmill Go application follows a modern and scalable architecture to ensure efficient and maintainable development. The project's architecture can be summarized as follows:
 
-### `npm run eject`
+- **Frontend**: The frontend of the application is built using JSReact, a popular JavaScript library for creating user interfaces. It is deployed using GitHub Pages, providing easy access to users.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Backend**: The backend is powered by Django Python, a powerful web framework that enables smooth back-end development. The backend APIs are deployed on Heroku, ensuring robust performance and scalability.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Media Storage**: Images and videos are seamlessly uploaded, optimized, and delivered to users through Cloudinary, a cloud-based media storage solution.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Database Storage**: The application's data is hosted and managed on Heroku's scalable and user-friendly cloud platform.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **External APIs**: JavaScript MAPS API is integrated into the frontend, allowing interactive maps and geolocation functionality for enhanced user experience.
 
-## Learn More
+The project's architecture prioritizes performance, security, and user experience, enabling smooth management of processed timber data and promoting transparent forestry practices.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Database Structure
+### Current Models
+![Database Structure](../mill/src/media/images/database_structure.png)
+### Reasoning
+The database structure consists of several main tables that form the foundation of the application's data management. Key tables include:
 
-### Code Splitting
+- **Tree**: Stores information about individual trees, such as date of felling, species, and location.
+- **Log**: Relates each tree to its corresponding log, including log length, diameter, and buck status.
+- **Plank**: Represents processed timber planks, containing details like width, depth, wood grade, and usage type.
+- **MoistureCheck**: Tracks moisture content checks for each plank to ensure quality control.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Current Status
+I am working on getting a basic verison of the software ready for testing / sharing with the community. Currently the databases are in place and talking to the frontend. Image storage, GPS location storage and CRUD functionality are working on all databases.
 
-### Making a Progressive Web App
+### The good  
+- Basic Site arcitecture is complete  
+- Backend API is up and running with key databases created and working well
+- API is secured with login tokens and refresh tokens functioning
+- Frontend is linked to the API for POST, PUT and GET functions 
+- Frontend POST and PUT form views created
+- Detailed GET filtering created for 'Plank' database
+- Image POST, PUT and GET working from frontend to Cloudinary
+- GPS location stored via mobile phone GPS functionality
+- Javascript MAPS API intergrated and showing current / stored locations
+- Basic frontend site navigation in place
+- UX Design has been started - A color palett and styling decided
+- How process is working. The frontend can produce a 'report' of the complete process. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### The Bad
+- Site styling on home page but currently no styling on rest of site.
+- Pagination bugs on somse frontened list views
+- Auto logout and refresh not functioning
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+### The Ugly
+- Structure and file management of the Django backend could be improved by seperating the models into seperate apps
+- Removal off all test Models, Views, URLS on backend
+- No 404 view in place
+- No user feedback on input / edit forms
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+## Future Development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Minimum Viable Product (MVP) & Testing
+
+To prepare the software for sharing and testing, the following key milestones will be achieved:
+
+- **Frontend Styling**: Enhance the frontend's visual appeal and user experience, making it more engaging and user-friendly.
+- **Clear About Page**: Create an informative about page with visuals that effectively explain the functionality of both systems.
+- **Database Demo**: Develop a demo version of the database, allowing visitors to explore and search parts of the system without requiring login credentials.
+- **Certification/Transparent Forestry View**: Design a dedicated view that showcases the transparency and certification aspect, demonstrating what end users will experience when scanning a product's QR code.
+
+### Feedback and Community Engagement
+
+In the near future, focus will be on frontend development, enabling the project's initial sharing and testing phase from July to October 2023. The feedback collected during this period will be instrumental in refining and enhancing the project.
+
+The engagement with various stakeholders will be as follows:
+
+1. **The Community**: Once the frontend is in place, featuring a demo searchable database and screenshots of different input views, it will be shared with the sawmill online community to gather feedback and initial impressions.
+
+2. **Woodworkers and Creators**: With a clear demonstration of the transparent forestry process and a frontend display of the end user's perspective through the product's QR code, the project will be shared with woodworkers and creators, seeking their valuable feedback.
+
+3. **Re-sellers & Shops**: The frontend view, portraying what customers will experience through the product's QR code, will be presented to high-end shops to gauge their interest and gather insights into the market potential.
+
+4. **Conservation and Environmental Grants and Bodies**: Once the frontend effectively conveys the system's essence, the project will be shared with conservation and environmental groups to receive feedback on how it aligns with their interests in protecting forests and supporting rural farmers, foresters, and landowners.
+
+This feedback-driven approach will guide the project's future development, ensuring it meets the needs of various stakeholders and fulfills its goals of promoting sustainable forest management and transparent forestry practices.
+
+
+
+
