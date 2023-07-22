@@ -198,8 +198,8 @@ const PlankList = () => {
       <div className="sticky-top">
         <h2>Planks List</h2>
         <div className="bottomComponentContainer">
-          <Row>
-          <Col xs={4}>
+          <div className="search-container">
+          <div>
             <Form>
               <Form.Control
                 type="text"
@@ -208,8 +208,8 @@ const PlankList = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </Form>
-          </Col>
-          <Col xs={4}>
+          </div>
+          <div>
             <Form.Control
               as="select"
               value={orderBy}
@@ -220,13 +220,13 @@ const PlankList = () => {
               <option value="date">Date (Oldest)</option>
               <option value="-date">Date (Newest)</option>
             </Form.Control>
-          </Col>
-          <Col xs={4}>
+          </div>
+          <div>
             <Button variant="link" onClick={handleFilterClick}>
               <FontAwesomeIcon icon={faFilter} regular />
             </Button>
-          </Col>
-          </Row>
+          </div>
+          </div>
         </div>
 
         {showFilters && (

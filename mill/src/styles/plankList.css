@@ -21,16 +21,26 @@
 /* Styling for the bottomComponentContainer */
 .bottomComponentContainer {
   position: fixed;
-  bottom: 0;
+  bottom: 40px;
   left: 0;
   width: 100%;
-  height: 80px; /* Set the desired height for your component */
+  height: auto; /* Set the desired height for your component */
   background-color: #f0f0f0; /* Add any background color you want */
-  opacity: 0.8;
-  transition: opacity 0.3s;
+  
 }
 
-.bottomComponentContainer:hover {
+.search-container {
+  display: flex;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  height: 60px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: center;
+}
+
+.search-container:hover {
   opacity: 1;
 }
 
