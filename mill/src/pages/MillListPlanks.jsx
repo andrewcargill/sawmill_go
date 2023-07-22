@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, Form, Row, Col, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Offcanvas } from "react-bootstrap";
 import {
@@ -42,7 +42,6 @@ const PlankList = () => {
   const [live_edgeFilter, setLive_edgeFilter] = useState("");
   const [furnitureFilter, setFurnitureFilter] = useState("");
   const [logIdFilter, setLogIdFilter] = useState("");
- 
 
   useEffect(() => {
     fetchData();
@@ -78,13 +77,16 @@ const PlankList = () => {
         params.furniture = true;
       }
 
-      const response = await axios.get("https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/", {
-        params,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      });
+      const response = await axios.get(
+        "https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/",
+        {
+          params,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        }
+      );
 
       setPlankData({
         results: response.data.results,
@@ -189,7 +191,7 @@ const PlankList = () => {
     setShowFilters(!showFilters);
   };
 
-  
+  const navigate = useNavigate();
 
   return (
     <div id="pagePage" className="page">
@@ -212,8 +214,8 @@ const PlankList = () => {
               value={orderBy}
               onChange={handleOrderByChange}
             >
-              <option value="id">ID (Highest)</option>
-              <option value="-id">ID (Lowest)</option>
+              <option value="id">ID (Lowest)</option>
+              <option value="-id">ID (Highest)</option>
               <option value="date">Date (Oldest)</option>
               <option value="-date">Date (Newest)</option>
             </Form.Control>
@@ -224,11 +226,11 @@ const PlankList = () => {
             </Button>
           </Col>
         </Row>
-       
+
         {showFilters && (
           <Row>
             <Col>
-              <FilterSection 
+              <FilterSection
                 gradeFilter={gradeFilter}
                 minWidthFilter={minWidthFilter}
                 maxWidthFilter={maxWidthFilter}
@@ -257,8 +259,8 @@ const PlankList = () => {
             </Col>
           </Row>
         )}
-         <Row>
-        <p>Result Count: {resultCount}</p>
+        <Row>
+          <p>Result Count: {resultCount}</p>
         </Row>
       </div>
 
@@ -276,94 +278,58 @@ const PlankList = () => {
               {plankData &&
               plankData.results &&
               plankData.results.length > 0 ? (
-                plankData.results.map((plank, index) => (
-                  <Card key={plank.id} className="mb-3 custom-card">
-                    <Card.Body className="custom-card-body">
-                      <Card.Title className="custom-card-title">
-                        <Row className="vertical-align-center">
-                          <Col >
-                            <Link to={`/plank/${plank.id}`}>
-                              <Button id="detail-button"> ID: {plank.id} </Button>
-                            </Link>
+                plankData.results.map((plank, index) => {
+                  // Calculate the whole length using Math.floor() or Math.round() as needed
+                  const wholeLength = Math.floor(plank.log.length); // or use Math.round() if you want rounding
+                  const wholeDepth = Math.floor(plank.depth); // or use Math.round() if you want rounding
+                  const wholeWidth = Math.floor(plank.width); // or use Math.round() if you want rounding
+                  const handleCardClick = () => {
+                    navigate(`/plank/${plank.id}`);
+                  };
+                  return (
+                    <Card
+                      key={plank.id}
+                      className="mb-3 custom-card"
+                      onClick={handleCardClick}
+                    >
+                      <Card.Body className="custom-card-body">
+                        <Card.Title className="custom-card-title">
+                          <Row className="vertical-align-center">
+                            <Col sx={4}>ID: {plank.id}</Col>
+                            <Col sx={4}>{plank.log.tree.species}</Col>
+                            <Col sx={4}>Grade: {plank.wood_grade}</Col>
+                          </Row>
+                        </Card.Title>
+                        <Row className="pb-1 ">
+                        <Col sx={4}>
+                        
+                        </Col>
+                          <Col sx={4} className="dimensions-container">
+                            {wholeWidth} x {wholeDepth} x {wholeLength}
                           </Col>
-                          <Col>
-                            
-                              {plank.log.tree.species}
-                           
+                          <Col sx={4} className="category-container">
+                            {plank.live_edge ? (
+                              <span className="category-tab">LE</span>
+                            ) : null}
+
+                            {plank.furniture ? (
+                              <span className="category-tab">F</span>
+                            ) : null}
+
+                            {plank.structural ? (
+                              <span className="category-tab">S</span>
+                            ) : null}
+
+                            {plank.general ? (
+                              <span className="category-tab">G</span>
+                            ) : null}
                           </Col>
-                          <Col>Grade: {plank.wood_grade}</Col>
+                        
                         </Row>
-                      </Card.Title>
-                      <Row className="pb-1 ">
-                        <Col sx={3}></Col>
-                        <Col sx={3}>W: {plank.width}cm</Col>
-
-                        <Col sx={3}>D: {plank.depth}cm</Col>
-                        <Col sx={3}>L: {plank.log.length}cm</Col>
-                      </Row>
-
-                      <Accordion>
-                        <AccordionItem>
-                          <AccordionItemHeading className="itemHeading">
-                            <AccordionItemButton className="itemButton">
-                              Info
-                            </AccordionItemButton>
-                          </AccordionItemHeading>
-                          <AccordionItemPanel className="itemPanel">
-                            <Row>
-                              <Col xs={6}> Date:</Col>
-                              <Col xs={6}> {plank.date}</Col>
-                            </Row>
-                            <Row>
-                              <Col xs={6}> Parent Log ID:</Col>
-                              <Col xs={6}> {plank.log.id}</Col>
-                            </Row>
-                            <Row>
-                              <Col xs={6}> Operator:</Col>
-                              <Col xs={6}> {plank.operator}</Col>
-                            </Row>
-                            <Row>
-                              <Col xs={6}> Images:</Col>
-                              <Col xs={6}> Yes</Col>
-                            </Row>
-                            <Row>
-                              <Col xs={6}>Milling Notes:</Col>
-                            </Row>
-                            <Row>
-                              <Col xs={2}></Col>
-                              <Col xs={10}> {plank.info}</Col>
-                            </Row>
-                          </AccordionItemPanel>
-                        </AccordionItem>
-                        <AccordionItem>
-                          <AccordionItemHeading className="itemHeading">
-                            <AccordionItemButton className="itemButton">
-                              Categories
-                            </AccordionItemButton>
-                          </AccordionItemHeading>
-                          <AccordionItemPanel className="itemPanel">
-                            <Row>
-                              <Col xs={6}>
-                                Live Edge: {plank.live_edge ? "Yes" : "No"}
-                              </Col>
-                              <Col xs={6}>
-                                Furniture: {plank.furniture ? "Yes" : "No"}
-                              </Col>
-                            </Row>
-                            <Row>
-                              <Col xs={6}>
-                                Structural: {plank.structural ? "Yes" : "No"}
-                              </Col>
-                              <Col xs={6}>
-                                General: {plank.general ? "Yes" : "No"}
-                              </Col>
-                            </Row>
-                          </AccordionItemPanel>
-                        </AccordionItem>
-                      </Accordion>
-                    </Card.Body>
-                  </Card>
-                ))
+                      </Card.Body>
+                    </Card>
+                  );
+                })
               ) : (
                 <p>No planks found.</p>
               )}

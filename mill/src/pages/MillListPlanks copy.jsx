@@ -19,6 +19,7 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { fetchMoreData } from "../paginationUtils";
+import FilterSection from "../components/FilterSection";
 
 const PlankList = () => {
   const [plankData, setPlankData] = useState({
@@ -27,13 +28,21 @@ const PlankList = () => {
     next: null,
   });
   const [searchQuery, setSearchQuery] = useState("");
-  const [orderBy, setOrderBy] = useState("id");
+  const [orderBy, setOrderBy] = useState(0);
+  const [resultCount, setResultCount] = useState("id");
   const [showFilters, setShowFilters] = useState(false);
   const [gradeFilter, setGradeFilter] = useState("");
   const [minWidthFilter, setMinWidthFilter] = useState("");
   const [maxWidthFilter, setMaxWidthFilter] = useState("");
   const [maxDepthFilter, setMaxDepthFilter] = useState("");
   const [minDepthFilter, setMinDepthFilter] = useState("");
+  const [generalFilter, setGeneralFilter] = useState("");
+  const [speciesFilter, setSpeciesFilter] = useState("");
+  const [structuralFilter, setStructuralFilter] = useState("");
+  const [live_edgeFilter, setLive_edgeFilter] = useState("");
+  const [furnitureFilter, setFurnitureFilter] = useState("");
+  const [logIdFilter, setLogIdFilter] = useState("");
+ 
 
   useEffect(() => {
     fetchData();
@@ -49,7 +58,25 @@ const PlankList = () => {
         width_max: maxWidthFilter,
         depth_min: minDepthFilter,
         depth_max: maxDepthFilter,
+        log_id: logIdFilter,
+        species: speciesFilter,
       };
+
+      if (generalFilter) {
+        params.general = true;
+      }
+
+      if (structuralFilter) {
+        params.structural = true;
+      }
+
+      if (live_edgeFilter) {
+        params.live_edge = true;
+      }
+
+      if (furnitureFilter) {
+        params.furniture = true;
+      }
 
       const response = await axios.get("https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/", {
         params,
@@ -64,6 +91,8 @@ const PlankList = () => {
         count: response.data.count,
         next: response.data.next,
       });
+
+      setResultCount(response.data.count);
       console.log("UseEffect_pageload", response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -88,6 +117,12 @@ const PlankList = () => {
     setMaxWidthFilter("");
     setMinDepthFilter("");
     setMaxDepthFilter("");
+    setGeneralFilter("");
+    setLive_edgeFilter("");
+    setFurnitureFilter("");
+    setStructuralFilter("");
+    setLogIdFilter("");
+    setSpeciesFilter("");
   };
 
   const handleSearchQueryChange = (e) => {
@@ -118,9 +153,43 @@ const PlankList = () => {
     setMaxDepthFilter(e.target.value);
   };
 
+  const handleLogIdFilterChange = (e) => {
+    setLogIdFilter(e.target.value);
+  };
+
+  const handleSpeciesFilterChange = (e) => {
+    setSpeciesFilter(e.target.value);
+  };
+
+  // const handleGeneralFilterChange = (e) => {
+  //   const value = e.target.value === 'true' ? 'True' : 'False'; // Convert string value to Python boolean
+  //   setGeneralFilter(value);
+  //   console.log('GeneralFilter', generalFilter);
+  //   console.log('value', value);
+  // };
+
+  const handleGeneralFilterChange = () => {
+    setGeneralFilter(!generalFilter);
+  };
+
+  const handleLiveEdgeFilterChange = () => {
+    setLive_edgeFilter(!live_edgeFilter);
+  };
+
+  const handleSturcturalFilterChange = () => {
+    setStructuralFilter(!structuralFilter);
+  };
+
+  const handleFurnitureFilterChange = () => {
+    setFurnitureFilter(!furnitureFilter);
+  };
+
   const handleSearchSubmit = () => {
     fetchData();
+    setShowFilters(!showFilters);
   };
+
+  
 
   return (
     <div id="pagePage" className="page">
@@ -155,93 +224,42 @@ const PlankList = () => {
             </Button>
           </Col>
         </Row>
+       
         {showFilters && (
           <Row>
             <Col>
-              <div className="filtersContainer">
-                <h4>Filters</h4>
-
-                {/* Search grade */}
-
-                <Form.Group as={Row} className="pb-4">
-                  <Form.Label column xs={6}>
-                    Grade
-                  </Form.Label>
-                  <Col xs={6}>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter Grade"
-                      value={gradeFilter}
-                      onChange={handleGradeFilterChange}
-                    />
-                  </Col>
-
-                  {/* Search width */}
-
-                  <Form.Label column xs={6}>
-                    Min Width
-                  </Form.Label>
-                  <Col xs={6}>
-                    <Form.Control
-                      type="number"
-                      placeholder="Enter Min Width"
-                      value={minWidthFilter}
-                      onChange={handleMinWidthFilterChange}
-                    />
-                  </Col>
-
-                  <Form.Label column xs={6}>
-                    Max Width
-                  </Form.Label>
-                  <Col xs={6}>
-                    <Form.Control
-                      type="number"
-                      placeholder="Enter Max Width"
-                      value={maxWidthFilter}
-                      onChange={handleMaxWidthFilterChange}
-                    />
-                  </Col>
-
-                  {/* Search depth */}
-                  <Form.Label column xs={6}>
-                    Min Depth
-                  </Form.Label>
-                  <Col xs={6}>
-                    <Form.Control
-                      type="number"
-                      placeholder="Enter Min Depth"
-                      value={minDepthFilter}
-                      onChange={handleMinDepthFilterChange}
-                    />
-                  </Col>
-
-                  <Form.Label column xs={6}>
-                    Max Depth
-                  </Form.Label>
-                  <Col xs={6}>
-                    <Form.Control
-                      type="number"
-                      placeholder="Enter Max Depth"
-                      value={maxDepthFilter}
-                      onChange={handleMaxDepthFilterChange}
-                    />
-                  </Col>
-                </Form.Group>
-
-                <Form.Group as={Row} className="pb-4">
-                  <Col xs={6}>
-                    <Button variant="secondary" onClick={handleClearFilters}>
-                      Clear Filters
-                    </Button>
-                  </Col>
-                  <Col xs={6}>
-                    <Button onClick={handleSearchSubmit}>Search</Button>
-                  </Col>
-                </Form.Group>
-              </div>
+              <FilterSection 
+                gradeFilter={gradeFilter}
+                minWidthFilter={minWidthFilter}
+                maxWidthFilter={maxWidthFilter}
+                minDepthFilter={minDepthFilter}
+                maxDepthFilter={maxDepthFilter}
+                logIdFilter={logIdFilter}
+                speciesFilter={speciesFilter}
+                handleGradeFilterChange={handleGradeFilterChange}
+                handleMinWidthFilterChange={handleMinWidthFilterChange}
+                handleMaxWidthFilterChange={handleMaxWidthFilterChange}
+                handleMinDepthFilterChange={handleMinDepthFilterChange}
+                handleMaxDepthFilterChange={handleMaxDepthFilterChange}
+                handleLogIdFilterChange={handleLogIdFilterChange}
+                handleSpeciesFilterChange={handleSpeciesFilterChange}
+                handleClearFilters={handleClearFilters}
+                handleSearchSubmit={handleSearchSubmit}
+                handleGeneralFilterChange={handleGeneralFilterChange}
+                generalFilter={generalFilter}
+                handleLiveEdgeFilterChange={handleLiveEdgeFilterChange}
+                live_edgeFilter={live_edgeFilter}
+                handleFurnitureFilterChange={handleFurnitureFilterChange}
+                furnitureFilter={furnitureFilter}
+                handleSturcturalFilterChange={handleSturcturalFilterChange}
+                structuralFilter={structuralFilter}
+              />
             </Col>
           </Row>
         )}
+         <Row>
+        <p>Result Count: {resultCount}</p>
+        </Row>
       </div>
 
       <InfiniteScroll
@@ -259,22 +277,29 @@ const PlankList = () => {
               plankData.results &&
               plankData.results.length > 0 ? (
                 plankData.results.map((plank, index) => (
-                  <Card key={plank.id} className="mb-3">
-                    <Card.Body>
-                      <Card.Title>
-                        <Row>
-                          <Col xs={8}>
+                  <Card key={plank.id} className="mb-3 custom-card">
+                    <Card.Body className="custom-card-body">
+                      <Card.Title className="custom-card-title">
+                        <Row className="vertical-align-center">
+                          <Col >
                             <Link to={`/plank/${plank.id}`}>
-                              ID: {plank.id}
+                              <Button id="detail-button"> ID: {plank.id} </Button>
                             </Link>
                           </Col>
-                          <Col xs={4}>G{plank.wood_grade}</Col>
+                          <Col>
+                            
+                              {plank.log.tree.species}
+                           
+                          </Col>
+                          <Col>Grade: {plank.wood_grade}</Col>
                         </Row>
                       </Card.Title>
-                      <Row className="pb-1">
-                        <Col sx={4}>W: {plank.width}</Col>
-                        <Col sx={4}>D: {plank.depth}</Col>
-                        <Col sx={4}>L: {plank.depth}</Col>
+                      <Row className="pb-1 ">
+                        <Col sx={3}></Col>
+                        <Col sx={3}>W: {plank.width}cm</Col>
+
+                        <Col sx={3}>D: {plank.depth}cm</Col>
+                        <Col sx={3}>L: {plank.log.length}cm</Col>
                       </Row>
 
                       <Accordion>
@@ -288,6 +313,10 @@ const PlankList = () => {
                             <Row>
                               <Col xs={6}> Date:</Col>
                               <Col xs={6}> {plank.date}</Col>
+                            </Row>
+                            <Row>
+                              <Col xs={6}> Parent Log ID:</Col>
+                              <Col xs={6}> {plank.log.id}</Col>
                             </Row>
                             <Row>
                               <Col xs={6}> Operator:</Col>
@@ -318,15 +347,15 @@ const PlankList = () => {
                                 Live Edge: {plank.live_edge ? "Yes" : "No"}
                               </Col>
                               <Col xs={6}>
-                                Furniture: {plank.Furniture ? "Yes" : "No"}
+                                Furniture: {plank.furniture ? "Yes" : "No"}
                               </Col>
                             </Row>
                             <Row>
                               <Col xs={6}>
-                                Structural: {plank.Structual ? "Yes" : "No"}
+                                Structural: {plank.structural ? "Yes" : "No"}
                               </Col>
                               <Col xs={6}>
-                                General: {plank.General ? "Yes" : "No"}
+                                General: {plank.general ? "Yes" : "No"}
                               </Col>
                             </Row>
                           </AccordionItemPanel>
