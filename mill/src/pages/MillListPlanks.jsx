@@ -197,7 +197,8 @@ const PlankList = () => {
     <div id="pagePage" className="page">
       <div className="sticky-top">
         <h2>Planks List</h2>
-        <Row className="pb-4">
+        <div className="bottomComponentContainer">
+          <Row>
           <Col xs={4}>
             <Form>
               <Form.Control
@@ -225,7 +226,8 @@ const PlankList = () => {
               <FontAwesomeIcon icon={faFilter} regular />
             </Button>
           </Col>
-        </Row>
+          </Row>
+        </div>
 
         {showFilters && (
           <Row>

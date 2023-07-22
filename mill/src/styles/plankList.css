@@ -1,5 +1,3 @@
-
-
 /* .accordion {
     background-color: lightgray;
     border: solid 2px black;
@@ -8,9 +6,9 @@
     font-size: 10px;
 
   } */
-  
-  /* Customize the accordion item */
-  /* .accordion__item {
+
+/* Customize the accordion item */
+/* .accordion__item {
  
     margin: 5px;
     border: 1px solid black;
@@ -20,122 +18,128 @@
     padding: 5px;
   } */
 
-  .dimensions-container {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    font-size: 12px;
-    font-weight: 500;
-  }
+/* Styling for the bottomComponentContainer */
+.bottomComponentContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px; /* Set the desired height for your component */
+  background-color: #f0f0f0; /* Add any background color you want */
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
 
-  .category-container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
+.bottomComponentContainer:hover {
+  opacity: 1;
+}
 
-  }
+.dimensions-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  font-size: 12px;
+  font-weight: 500;
+}
 
-  .category-tab {
-    background-color: #79c001;
-    padding: 4px;
-    color: white;
-    font-size: 12px;
-    font-weight: 500;
-    border-radius: 5px;
-  }
-  
-  /* Customize the accordion item heading */
-  .itemHeading {
-    /* Custom styles for accordion item heading */
-    background-color: grey;
-  }
-  
-  /* Customize the accordion item button */
-  .itemButton {
-    /* Custom styles for accordion item button */
-    background-color: lightgray;
-  }
-  
-  /* Customize the accordion item panel */
-  .itemPanel {
-    /* Custom styles for accordion item panel */
-    background-color: white;
-    color: black
-  }
+.category-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
-  #pages {
-    background-color: #f8d0e6;
-    position: fixed;
-  }
+.category-tab {
+  background-color: #79c001;
+  padding: 4px;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 5px;
+}
 
-  .sticky-top {
-    
-    position: fixed;
-    background-color: blue;
-    top: 0;
-    z-index: 1000;
-    background-color: #fff;
-  }
-  
-  #scrollable {
-    overflow-y: scroll;
+/* Customize the accordion item heading */
+.itemHeading {
+  /* Custom styles for accordion item heading */
+  background-color: grey;
+}
+
+/* Customize the accordion item button */
+.itemButton {
+  /* Custom styles for accordion item button */
+  background-color: lightgray;
+}
+
+/* Customize the accordion item panel */
+.itemPanel {
+  /* Custom styles for accordion item panel */
+  background-color: white;
+  color: black;
+}
+
+#pages {
+  background-color: #f8d0e6;
+  position: fixed;
+}
+
+.sticky-top {
+  position: fixed;
+  background-color: blue;
+  top: 0;
+  z-index: 1000;
+  background-color: #fff;
+}
+
+#scrollable {
+  overflow-y: scroll;
   height: 70vh;
   background: #f8d0e6;
   padding: 10px;
-  }
+}
 
-  .custom-card {
-    background-color: blue;
-  }
+.custom-card {
+  background-color: blue;
+}
 
-  .vertical-align-center {
-    /* Flexbox properties to vertically align items */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
+.vertical-align-center {
+  /* Flexbox properties to vertically align items */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 
+/* card background / container */
+.custom-card-body {
+  border: 2px solid #286140;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+}
 
-  /* card background / container */
-  .custom-card-body {
-    border: 2px solid #286140;
-    border-radius: 10px;
-    background-color: white;
-    color: black;
-  }
+/* header and dimensions */
+.custom-card-body .row {
+  color: #286140;
+}
 
-  /* header and dimensions */
-  .custom-card-body .row {
-    color: #286140;
-  }
+/* title background */
+.custom-card-title {
+  text-transform: uppercase;
+  color: #286140;
+}
 
-  /* title background */
-  .custom-card-title {
-    text-transform: uppercase;
-    color: #286140;
-  }
+/* title section text */
+.custom-card-title .row {
+  color: #286140;
+  font-weight: 800;
+  font-size: 20px;
+}
 
-  /* title section text */
-  .custom-card-title .row {
-    color: #286140;
-    font-weight: 800;
-    font-size: 20px;
-  }
-
-  #detail-button {
-    background-color: white;
-    color: #e35205;
-    border: 0;
-    font-weight: 800;
-    font-size: 20px;
-    border-radius: 5px;
-
-  }
-
-
-
-
-
-
+#detail-button {
+  background-color: white;
+  color: #e35205;
+  border: 0;
+  font-weight: 800;
+  font-size: 20px;
+  border-radius: 5px;
+}
