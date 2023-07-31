@@ -34,13 +34,16 @@ import PlankList from "./pages/MillListPlanks";
 import PlankReport from "./pages/PlankReport/PlankReport";
 import PerfectSolution from "./PerfectSolution";
 import Transparent from "./TransparentForestry";
+import Navigation from "./Navigation";
 
 const App = () => {
   return (
     <Router basename={`/${process.env.PUBLIC_URL}`}>
-      <Layout />
+      {/* <Layout /> */}
+      <Navigation />
       <Routes>
         <Route path="" element={<Home />} />
+        <Route path="nav" element={<Navigation />} />
         <Route path="about" element={<About />} />
         <Route path="product" element={<PerfectSolution />} />
         <Route path="transparent" element={<Transparent />} />

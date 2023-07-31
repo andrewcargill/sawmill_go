@@ -6,14 +6,18 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import './interceptor/axiox.js';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import customTheme from './customTheme';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-
+       <ThemeProvider theme={customTheme}>
+      <CssBaseline />
     <App />
-  
+    </ThemeProvider>
   </React.StrictMode>
 );
 
