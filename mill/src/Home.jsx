@@ -22,7 +22,7 @@ const Home = () => {
           <img className={css.images} src={treetops} alt="My Image" />
         </div>
         <div className={css.textContainer}>
-          <h1>Welcome to Sawmill Go!</h1>
+          <h1>MUI Styling to Sawmill Go!</h1>
           <p>
             <strong>
               Empower Your Artisanal Sawmill with Sawmill Go - The Ultimate
