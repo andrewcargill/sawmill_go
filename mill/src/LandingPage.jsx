@@ -8,9 +8,17 @@ import forestTwo from './media/images/forest_mountain.png';
 import cloud from './media/images/database_structure.png';
 import FullWidthImageContainer from './components/CustomBoxes/FullWidthImageContainer';
 import CustomButton from './components/Buttons/CustomButtons';
+import { useNavigate } from "react-router-dom";
 
 
 const LandingPage = () => {
+
+    const navigate = useNavigate();
+
+    const handleButtonClick = () => {
+      navigate('/about');
+    };
+
   return (
     <Container maxWidth="xl" disableGutters={true}>
       <FullWidthImageContainer imageUrl={forest} />
@@ -33,7 +41,7 @@ const LandingPage = () => {
             </CustomTypography.paragraph>
           </Grid>
           <Grid item xs={12}>
-            <CustomButton variant="contained">
+            <CustomButton onClick={handleButtonClick} variant="contained">
               Read More
             </CustomButton>
           </Grid>
@@ -59,7 +67,7 @@ const LandingPage = () => {
             </CustomTypography.paragraph>
           </Grid>
           <Grid item xs={12}>
-            <CustomButton variant="contained">
+          <CustomButton onClick={handleButtonClick} variant="contained">
               Read More
             </CustomButton>
           </Grid>
@@ -84,9 +92,9 @@ const LandingPage = () => {
             </CustomTypography.paragraph>
           </Grid>
           <Grid item xs={12}>
-            <Button variant="contained">
+          <CustomButton onClick={handleButtonClick} variant="contained">
               Read More
-            </Button>
+            </CustomButton>
           </Grid>
         </Grid>
       </CustomBox>

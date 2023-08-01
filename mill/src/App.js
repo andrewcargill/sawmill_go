@@ -37,6 +37,7 @@ import PerfectSolution from "./PerfectSolution";
 import Transparent from "./TransparentForestry";
 import Navigation from "./Navigation";
 import LandingPage from "./LandingPage";
+import PlankListView from "./pages/ListViews/PlankListView";
 
 const App = () => {
   return (
@@ -80,6 +81,7 @@ const App = () => {
         <Route path="/tree/:id/edit" element={<TreeEdit />} />
 
         <Route path="log_list" element={<LogList />} />
+        <Route path="newplank" element={<PlankListView />} />
         <Route path="/log/:id" element={<LogDetail />} />
         <Route path="/log/:id/edit" element={<MillEditLog />} />
 
