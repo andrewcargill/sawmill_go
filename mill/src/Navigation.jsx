@@ -35,7 +35,7 @@ const Navigation = () => {
   }, [isAuth]);
 
   const pages = ['About', 'Products', 'Demo', 'Blog'];
-  const settings = ['Mill_Home', 'Tree_List', 'Log_list', 'Plank_List', 'NewPlank', 'Logout', ];
+  const settings = ['Mill_Home', 'Tree_List', 'Log_list', 'Plank_List', 'NewPlank', , 'add_plank', 'Logout' ];
 
   return (
     <AppBar position="fixed" sx={{ backgroundColor: theme => theme.palette.white.main, boxShadow: 'none' }}>

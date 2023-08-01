@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
 import CustomBox from '../CustomBoxes/CustomBoxes';
-import CustomTypography from '../CustomTypography';
+import CustomTypography from '../Typography/CustomTypography';
 
 const CustomFormHeading = ({ title }) => {
   return (

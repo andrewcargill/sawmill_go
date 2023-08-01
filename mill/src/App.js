@@ -38,6 +38,7 @@ import Transparent from "./TransparentForestry";
 import Navigation from "./Navigation";
 import LandingPage from "./LandingPage";
 import PlankListView from "./pages/ListViews/Plank/PlankListView";
+import AddPlank from "./pages/AddData/Plank/AddPlank";
 
 const App = () => {
   return (
@@ -81,17 +82,19 @@ const App = () => {
         <Route path="/tree/:id/edit" element={<TreeEdit />} />
 
         <Route path="log_list" element={<LogList />} />
-        <Route path="newplank" element={<PlankListView />} />
+    
         <Route path="/log/:id" element={<LogDetail />} />
         <Route path="/log/:id/edit" element={<MillEditLog />} />
 
         <Route path="plank_list" element={<PlankList />} />
+        <Route path="newplank" element={<PlankListView />} />
         <Route path="/plank/:id" element={<PlankDetail />} />
         <Route path="/plank/:id/edit" element={<MillEditPlank />} />
 
         <Route path="/report/:id" element={<PlankReport />} />
 
         <Route path="mill_add_planks" element={<MillAddPlanks />} />
+        <Route path="add_plank" element={<AddPlank/>} />
         <Route path="mill_add_logs" element={<MillAddLogs />} />
         <Route path="mill_add_trees" element={<MillAddTrees />} />
         <Route path="mill_add_moisture" element={<MillAddMoisture />} />
