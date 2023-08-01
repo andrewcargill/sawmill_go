@@ -177,6 +177,23 @@ const PlankListView = () => {
         setDrawerOpen(false);
     };
 
+    /* Reset all filters */
+    const handleResetFilters = () => {
+        setOrderBy(0);
+        setGradeFilter("");
+        setLogIdFilter("");
+        setSpeciesFilter("");
+        setMinWidthFilter("");
+        setMaxWidthFilter("");
+        setMinDepthFilter("");
+        setMaxDepthFilter("");
+        setGeneralFilter("");
+        setLive_edgeFilter("");
+        setFurnitureFilter("");
+        setStructuralFilter("");
+        fetchData();
+      };
+
     return (
         <Container maxWidth="xl">
             <div style={{ position: 'sticky', top: 0, zIndex: 1 }}>
@@ -194,6 +211,7 @@ const PlankListView = () => {
                                 label="Search"
                                 type="search"
                                 variant="outlined"
+                                onChange={(e) => setSearchQuery(e.target.value)}
                                 size="small"
                                 InputProps={{
                                     endAdornment: (
@@ -209,7 +227,7 @@ const PlankListView = () => {
                             <Button size="md" variant="contained" color="primary" onClick={handleDrawerOpen}>
                                 filter <FilterAltIcon />
                             </Button>
-                            <TemporaryDrawer open={drawerOpen} onClose={handleDrawerClose} onSubmit={handleFilterSubmit} />
+                            <TemporaryDrawer open={drawerOpen} onClose={handleDrawerClose} onSubmit={handleFilterSubmit} onResetFilters={handleResetFilters} />
                         </Grid>
                     </Grid>
                     <p>Result Count: {resultCount}</p>

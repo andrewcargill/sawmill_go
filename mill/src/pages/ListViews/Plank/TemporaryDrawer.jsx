@@ -5,7 +5,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 
 
 
-const TemporaryDrawer = ({ open, onClose, onSubmit }) => {
+const TemporaryDrawer = ({ open, onClose, onSubmit, onResetFilters }) => {
   const [selectedSortValue, setSelectedSortValue] = useState(0);
   const [gradeValue, setGradeValue] = useState("");
   const [logIdValue, setLogIdValue] = useState("");
@@ -115,6 +115,9 @@ const TemporaryDrawer = ({ open, onClose, onSubmit }) => {
     setLiveEdgeValue(false);
     setStructuralValue(false);
     formRef.current.reset();
+
+    //Reset filters on main component
+    onResetFilters();
   };
 
   const handleSubmit = (event) => {
@@ -166,10 +169,10 @@ const TemporaryDrawer = ({ open, onClose, onSubmit }) => {
               value={gradeValue}
               size="small"
               options={[
-                { label: '1', value: 1 },
-                { label: '2', value: 2 },
-                { label: '3', value: 3 },
-                { label: '4', value: 4 },
+                { label: '1', value: '1' },
+                { label: '2', value: '2' },
+                { label: '3', value: '3' },
+                { label: '4', value: '4' },
               ]}
             />
 
