@@ -34,8 +34,15 @@ const AddPlank = () => {
     const [success, setSuccess] = useState(false);
     const [postId, setPostId] = useState(null);
 
+    useEffect(() => {
+        console.log('imageOne:', imageOne);
+        console.log('imageTwo:', imageTwo);
+      }, [imageOne, imageTwo]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        
 
         try {
             const accessToken = localStorage.getItem("access_token");

@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Paper, Typography, Grid } from '@mui/material';
 import CustomImageUploadButton from './CustomImageUploadButton';
 
 const CustomImageUploadContainer = ({ title, imageLabels, imageUrls, setImageUrls }) => {
+  console.log('setimageUrl:', setImageUrls);
+  console.log('imageUrl:', imageUrls);
   const handleImageUpload = (imageUrl, index) => {
+    console.log(`Image URL: ${imageUrl}, Index: ${index}`);
+   
+  console.log('title:', title);
+  console.log('current imageUrls:', imageUrls);
     const updatedUrls = [...imageUrls];
     updatedUrls[index] = imageUrl;
+    console.log(`Updated URLs: ${updatedUrls}`);
     setImageUrls(updatedUrls);
   };
 
