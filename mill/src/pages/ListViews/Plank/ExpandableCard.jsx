@@ -6,6 +6,8 @@ import image2 from '../../../media/images/forest.jpeg';
 import ArticleIcon from '@mui/icons-material/Article';
 import EditIcon from '@mui/icons-material/Edit';
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useNavigate } from "react-router";
+
 
 const ExpandableCardContainer = styled(Card)(({ theme }) => ({
     marginBottom: theme.spacing(2),
@@ -56,6 +58,16 @@ const ExpandableCard = ({ data }) => {
     const wholeDepth = Math.floor(data.depth); // or use Math.round() if you want rounding
     const wholeWidth = Math.floor(data.width);
 
+    /* Card Click */
+    const navigate = useNavigate();
+
+    const handleEditClick = () => {
+        navigate(`/plank/${data.id}/edit`);
+      };
+
+    const handleReportClick = () => {
+        navigate(`/report/${data.id}`);
+      };
 
     return (
         <ExpandableCardContainer onClick={handleCardClick}>
@@ -68,8 +80,8 @@ const ExpandableCard = ({ data }) => {
                 }
                 action={
                     <div sx={{ display: 'flex', height: '50px', alignItems: 'center', bgcolor: 'black', padding: '5px' }}>
-                        <ArticleIcon fontSize="small" sx={{ marginRight: 1 }} />
-                        <EditIcon fontSize="small" />
+                        <ArticleIcon fontSize="small" sx={{ marginRight: 1 }} onClick={handleReportClick}/>
+                        <EditIcon fontSize="small" onClick={handleEditClick} />
                     </div>
                 }
                 sx={{

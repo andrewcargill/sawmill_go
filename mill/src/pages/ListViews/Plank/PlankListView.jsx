@@ -9,6 +9,7 @@ import CustomBox from '../../../components/CustomBoxes/CustomBoxes';
 import ExpandableCard from './ExpandableCard';
 import { fetchMoreData } from "../../../paginationUtils";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useNavigate } from "react-router";
 import "../../../styles/plankList.css";
 
 const testData = [
@@ -162,6 +163,7 @@ const PlankListView = () => {
         setStructuralFilter("");
         fetchData();
     };
+
 
     return (
         <Container maxWidth="xl">
