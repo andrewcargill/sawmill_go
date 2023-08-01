@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import About from "./About";
+import { Box } from '@mui/material';
 import Layout from "./pages/Layout";
 import { Login, Logout } from "./pages/TestLogIn";
 import TestApiCrud from "./pages/TestApiCrud";
@@ -39,8 +40,11 @@ import Navigation from "./Navigation";
 const App = () => {
   return (
     <Router basename={`/${process.env.PUBLIC_URL}`}>
+      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '55px', background: '#f0f0f0' }}>
       {/* <Layout /> */}
       <Navigation />
+      </div>
+      <div style={{ paddingTop: '55px' }}>
       <Routes>
         <Route path="" element={<Home />} />
         <Route path="nav" element={<Navigation />} />
@@ -89,6 +93,7 @@ const App = () => {
         <Route path="mill_add_moisture" element={<MillAddMoisture />} />
         <Route path="moisture_by_planks" element={<MoistureByPlank />} />
       </Routes>
+      </div>
     </Router>
   );
 };

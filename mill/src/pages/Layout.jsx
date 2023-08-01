@@ -50,6 +50,7 @@ const Layout = () => {
             aria-label="Toggle navigation"
             onClick={handleToggleMenu}
           >
+          
             <span className={css.toggle}>
               <FontAwesomeIcon icon={faBars} />
             </span>
@@ -88,21 +89,6 @@ const Layout = () => {
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-                  {/* <li className="nav-item">
-                    <Link className="nav-link" to="tree_list">
-                      Tree Search
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="log_list">
-                      Log Search
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="plank_list">
-                      Plank Search
-                    </Link>
-                  </li> */}
                   <Dropdown>
                     <Dropdown.Toggle variant="secondary" 
                     id="dropdown-basic"
@@ -134,44 +120,6 @@ const Layout = () => {
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-                  {/* <Dropdown>
-                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                      Test
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item as={Link} to="test_crud">
-                        Test CRUD
-                      </Dropdown.Item>
-                      <Dropdown.Item as={Link} to="test_gps">
-                        Create GPS
-                      </Dropdown.Item>
-                      <Dropdown.Item as={Link} to="test_gps_two">
-                        Create GPS 2
-                      </Dropdown.Item>
-                      <Dropdown.Item as={Link} to="test_gps_map">
-                        Display GPS Map
-                      </Dropdown.Item>
-                      <Dropdown>
-                        <Dropdown.Toggle
-                          variant="secondary"
-                          id="dropdown-basic"
-                        >
-                          Moisture Checks
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                          <Dropdown.Item as={Link} to="water_crud">
-                            All
-                          </Dropdown.Item>
-                          <Dropdown.Item as={Link} to="moisture_by_planks">
-                            By Plank Id
-                          </Dropdown.Item>
-                          <Dropdown.Item as={Link} to="water_post">
-                            Add New
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </Dropdown.Menu>
-                  </Dropdown> */}
                 </>
               ) : null}
 
