@@ -42,11 +42,11 @@ import PlankListView from "./pages/ListViews/Plank/PlankListView";
 const App = () => {
   return (
     <Router basename={`/${process.env.PUBLIC_URL}`}>
-      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '55px', background: '#f0f0f0' }}>
+      <div style={{position: 'fixed', top: 0, left: 0, right: 0, height: '55px', background: '#f0f0f0' }}>
       {/* <Layout /> */}
       <Navigation />
       </div>
-      <div style={{ paddingTop: '55px' }}>
+      <div style={{paddingTop: '55px' }}>
       <Routes>
         {/* <Route path="" element={<Home />} /> */}
         <Route path="" element={<LandingPage />} />
