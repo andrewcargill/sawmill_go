@@ -8,6 +8,7 @@ import TemporaryDrawer from './TemporaryDrawer';
 import CustomBox from '../../../components/CustomBoxes/CustomBoxes';
 import ExpandableCard from './ExpandableCard';
 import { fetchMoreData } from "../../../paginationUtils";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const testData = [
     { id: 2, species: 'pine', grade: 2, dimensions: '30 x 2 x 400', date: '2023-06-22', logid: 2, treeid: 3, operator: 'andy cargill', info: 'perfect plank for making a table', live_edge: false, structural: true, furniture: false, general: true, image1: 'dave.jpg', image2: 'frank.jpg', water: 10 },
@@ -235,6 +236,15 @@ const PlankListView = () => {
 
             </div>
             <div style={{ overflowY: 'auto', maxHeight: 'calc(88vh - 100px)' }}>
+            <InfiniteScroll
+        dataLength={plankData.results.length}
+        next={fetchMorePlanks}
+        hasMore={!!plankData.next}
+        loader={<h4>Loading...</h4>}
+        endMessage={<p>No more planks to load.</p>}
+        className="scrollable"
+      >
+            
            
                 <Grid container spacing={2}>
                     {plankData.results.map((data) => (
@@ -243,6 +253,8 @@ const PlankListView = () => {
                         </Grid>
                     ))}
                 </Grid>
+       
+            </InfiniteScroll>
             </div>
         </Container>
     );

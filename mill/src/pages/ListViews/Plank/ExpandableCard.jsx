@@ -5,6 +5,7 @@ import image1 from '../../../media/images/cloud.jpeg';
 import image2 from '../../../media/images/forest.jpeg';
 import ArticleIcon from '@mui/icons-material/Article';
 import EditIcon from '@mui/icons-material/Edit';
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const ExpandableCardContainer = styled(Card)(({ theme }) => ({
     marginBottom: theme.spacing(2),
