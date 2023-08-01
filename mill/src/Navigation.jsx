@@ -85,7 +85,9 @@ const Navigation = () => {
   getContentAnchorEl={null}
   sx={{
     display: { xs: 'block', md: 'none' },
+    boxShadow: 'none',
   }}
+ 
 >
   {pages.map((page) => (
     <MenuItem key={page} onClick={handleMenuClose}>
