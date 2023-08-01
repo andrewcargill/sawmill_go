@@ -8,16 +8,20 @@ import 'bootstrap/dist/js/bootstrap.js';
 import './interceptor/axiox.js';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import customTheme from './customTheme';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
        <ThemeProvider theme={customTheme}>
       <CssBaseline />
     <App />
     </ThemeProvider>
+    </LocalizationProvider>
   </React.StrictMode>
 );
 
