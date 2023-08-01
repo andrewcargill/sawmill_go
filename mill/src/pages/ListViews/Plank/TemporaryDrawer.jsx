@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { SwipeableDrawer, List, ListItem, ListItemText, Grid, Button, TextField, Typography, IconButton, Paper, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
-import CustomDropdown from '../../components/CustomForm/CustomDropDown';
+import CustomDropdown from '../../../components/CustomForm/CustomDropDown';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
 
 
 const TemporaryDrawer = ({ open, onClose, onSubmit }) => {
-  const [selectedSortValue, setSelectedSortValue] = useState("");
-  const [gradeValue, setGradeValue] = useState(null);
-  const [logIdValue, setLogIdValue] = useState(null);
-  const [speciesValue, setSpeciesValue] = useState('');
-  const [minWidth, setMinWidth] = useState('');
-  const [maxWidth, setMaxWidth] = useState('');
-  const [minDepth, setMinDepth] = useState('');
-  const [maxDepth, setMaxDepth] = useState('');
-  const [generalValue, setGeneralValue] = useState(false);
-  const [FurnitureValue, setFurnitureValue] = useState(false);
-  const [liveEdgeValue, setLiveEdgeValue] = useState(false);
-  const [StructuralValue, setStructuralValue] = useState(false);
+  const [selectedSortValue, setSelectedSortValue] = useState(0);
+  const [gradeValue, setGradeValue] = useState("");
+  const [logIdValue, setLogIdValue] = useState("");
+  const [speciesValue, setSpeciesValue] = useState("");
+  const [minWidth, setMinWidth] = useState("");
+  const [maxWidth, setMaxWidth] = useState("");
+  const [minDepth, setMinDepth] = useState("");
+  const [maxDepth, setMaxDepth] = useState("");
+  const [generalValue, setGeneralValue] = useState("");
+  const [FurnitureValue, setFurnitureValue] = useState("");
+  const [liveEdgeValue, setLiveEdgeValue] = useState("");
+  const [StructuralValue, setStructuralValue] = useState("");
 
 
   /* Resets Form when requested */
@@ -153,10 +153,10 @@ const TemporaryDrawer = ({ open, onClose, onSubmit }) => {
               onChange={handleSortChange}
               size="small"
               options={[
-                { label: 'ID (Lowest)', value: 'id low' },
-                { label: 'ID (Highest)', value: 'id high' },
-                { label: 'Date (Newest)', value: 'date new' },
-                { label: 'Date (Oldest)', value: 'date old' },
+                { label: 'ID (Lowest)', value: "id" },
+                { label: 'ID (Highest)', value: "-id" },
+                { label: 'Date (Newest)', value: "-date" },
+                { label: 'Date (Oldest)', value: "date" },
               ]}
             />
             {/* Grade */}

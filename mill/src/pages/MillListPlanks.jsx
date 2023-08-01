@@ -107,10 +107,13 @@ const PlankList = () => {
     }
   };
 
+
+  /* NOT NEEDED IN NEW CODE */
   const handleFilterClick = () => {
     setShowFilters(!showFilters);
   };
 
+  /* NOT NEEDED IN NEW CODE */
   const handleClearFilters = () => {
     setSearchQuery("");
     setOrderBy("id");

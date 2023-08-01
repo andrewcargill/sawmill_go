@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, Typography, styled, Rating, Grid, Dialog, DialogContent, DialogTitle, Box, Paper, Avatar } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
-import image1 from '../../media/images/cloud.jpeg';
-import image2 from '../../media/images/forest.jpeg';
+import image1 from '../../../media/images/cloud.jpeg';
+import image2 from '../../../media/images/forest.jpeg';
 import ArticleIcon from '@mui/icons-material/Article';
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -51,7 +51,9 @@ const ExpandableCard = ({ data }) => {
         setOpenImageDialog(false);
     };
 
-  
+    const wholeLength = Math.floor(data.log.length); // or use Math.round() if you want rounding
+    const wholeDepth = Math.floor(data.depth); // or use Math.round() if you want rounding
+    const wholeWidth = Math.floor(data.width);
 
 
     return (
@@ -60,7 +62,7 @@ const ExpandableCard = ({ data }) => {
 
                 title={
                     <Typography variant="body1" sx={{ marginRight: 1 }}>
-                        ID: {data.id} | {data.species.toUpperCase()} | {data.dimensions}
+                        ID: {data.id} | {data.log.tree.species.toUpperCase()} | {wholeLength} x {wholeDepth} x {wholeWidth}
                     </Typography>
                 }
                 action={
@@ -101,7 +103,7 @@ const ExpandableCard = ({ data }) => {
                     <Grid item xs={4}>
                         <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center' }}>
 
-                            Grade: {data.grade}
+                            Grade: {data.wood_grade}
                         </Typography>
                         {/* 
                         <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center', textTransform: 'capitalize' }}>
@@ -137,10 +139,10 @@ const ExpandableCard = ({ data }) => {
                             <Grid item xs={6}>
 
                                 <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center', textTransform: 'capitalize' }}>
-                                    Tree ID: {data.treeid}
+                                    Tree ID: {data.log.tree.id}
                                 </Typography>
                                 <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center' }}>
-                                    Log ID:  {data.logid}
+                                    Log ID:  {data.log.id}
                                 </Typography>
 
                             </Grid>
@@ -175,11 +177,11 @@ const ExpandableCard = ({ data }) => {
                             <Grid item xs={6}>
                                 {/* Thumbnail of Image1 */}
                                 <img
-                                    src={image1}
+                                    src={data.image1}
                                     alt="Image 1"
                                     width="100%"
                                     style={{ cursor: 'pointer' }}
-                                    onClick={() => handleImageClick(image1)}
+                                    onClick={() => handleImageClick(data.image1)}
                                 />
                             </Grid>
 
@@ -187,11 +189,11 @@ const ExpandableCard = ({ data }) => {
                             <Grid item xs={6} >
                                 {/* Thumbnail of Image2 */}
                                 <img
-                                    src={image2}
+                                    src={data.image2}
                                     alt="Image 2"
                                     width="100%"
                                     style={{ cursor: 'pointer' }}
-                                    onClick={() => handleImageClick(image2)}
+                                    onClick={() => handleImageClick(data.image2)}
                                 />
                             </Grid>
                         </Grid>

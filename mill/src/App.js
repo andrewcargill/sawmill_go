@@ -37,7 +37,7 @@ import PerfectSolution from "./PerfectSolution";
 import Transparent from "./TransparentForestry";
 import Navigation from "./Navigation";
 import LandingPage from "./LandingPage";
-import PlankListView from "./pages/ListViews/PlankListView";
+import PlankListView from "./pages/ListViews/Plank/PlankListView";
 
 const App = () => {
   return (
