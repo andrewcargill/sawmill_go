@@ -36,6 +36,7 @@ import PlankReport from "./pages/PlankReport/PlankReport";
 import PerfectSolution from "./PerfectSolution";
 import Transparent from "./TransparentForestry";
 import Navigation from "./Navigation";
+import LandingPage from "./LandingPage";
 
 const App = () => {
   return (
@@ -46,7 +47,8 @@ const App = () => {
       </div>
       <div style={{ paddingTop: '55px' }}>
       <Routes>
-        <Route path="" element={<Home />} />
+        {/* <Route path="" element={<Home />} /> */}
+        <Route path="" element={<LandingPage />} />
         <Route path="nav" element={<Navigation />} />
         <Route path="about" element={<About />} />
         <Route path="product" element={<PerfectSolution />} />
