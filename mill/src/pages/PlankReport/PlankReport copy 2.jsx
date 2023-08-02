@@ -74,6 +74,7 @@ const PlankReport = () => {
         setTreeData(response.data.log.tree);
 
         console.log("treeData", treeData);
+        console.log("treeImage", treeImage);
         console.log("logData", log);
         console.log("response.data", response.data);
       } catch (error) {

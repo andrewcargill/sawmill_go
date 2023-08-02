@@ -25,6 +25,7 @@ import CustomBox from "../../components/CustomBoxes/CustomBoxes";
 import { Grid } from "@mui/material";
 import CustomTypography from "../../components/Typography/CustomTypography";
 import CustomButton from "../../components/Buttons/CustomButtons";
+import FullWidthImageContainer from '../../components/CustomBoxes/FullWidthImageContainer';
 
 const PlankReport = () => {
   const { id } = useParams();
@@ -160,27 +161,15 @@ const PlankReport = () => {
         <Grid item xs={12}>
           <CustomTypography.subheading>
             {/* Empower Your Artisanal Sawmill with Sawmill Go - The Ultimate Database Solution! */}
-            My ongoing personal API and Frontend project for Artisan Sawmill Owners!
+            Let's begin the journey.... Below is an image, taken on the day of felling, of the actual tree from which your product was produced.
           </CustomTypography.subheading>
         </Grid>
-        <Grid item xs={12}>
-          <CustomTypography.paragraph>
-            {/* Seamlessly manage your inventory operations with ease. From start to finish, experience smooth and hassle-free management, allowing artisans to effortlessly oversee their operations. */}
-            I own a sawmill and forests in the North of Sweden and had the need for an inventory management system.
-          </CustomTypography.paragraph>
-        </Grid>
-        <Grid item xs={12}>
-          <CustomTypography.paragraph>
-            {/* Seamlessly manage your inventory operations with ease. From start to finish, experience smooth and hassle-free management, allowing artisans to effortlessly oversee their operations. */}
-            Forestry done well is great for the enviroment. For the last few years I have wanted to create a system that delivers a transparent process, from the tree in the forest, to
-            the customer. This is what is at the heart of Sawmill Go.
-          </CustomTypography.paragraph>
-        </Grid>
+        
 
       </Grid>
     </CustomBox>
     {/* IMAGE */}
-
+    <FullWidthImageContainer imageUrl={treeImage} />
     {/* Transparent Forestry */}
     <CustomBox variant="secondary">
       <Grid container spacing={1}>
@@ -188,7 +177,7 @@ const PlankReport = () => {
         <Grid item xs={12}>
           <CustomTypography.subheading>
             Transparent forestry involves understanding the origin of your 
-        wood and the circumstances surrounding its extraction from the forest
+        wood and the circumstances surrounding its extraction from the forest.
           </CustomTypography.subheading>
         </Grid>
         <Grid item xs={12}>
@@ -220,6 +209,12 @@ const PlankReport = () => {
            <p>{treeData.reason_for_felling}</p>
           <FontAwesomeIcon icon={faQuoteRight} />
           </CustomTypography.subheading>
+        </Grid>
+        <Grid item xs={12}>
+          <CustomTypography.paragraph>
+          We record the GPS location of the tree as further transparency. 
+        
+          </CustomTypography.paragraph>
         </Grid>
         </Grid>
     </CustomBox>
@@ -259,6 +254,30 @@ const PlankReport = () => {
            <p>{plank.info}</p>
           <FontAwesomeIcon icon={faQuoteRight} />
           </CustomTypography.subheading>
+        </Grid>
+        </Grid>
+    </CustomBox>
+    {/* Thank You */}
+    <CustomBox variant="dark">
+      <Grid container spacing={1}>
+      <Grid item xs={12}>
+          <CustomTypography.heading>
+          Finally...thank you for caring!
+          </CustomTypography.heading>
+        </Grid>
+        <Grid item xs={12}>
+          <CustomTypography.subheading>
+          It is essential that new wood products that come from an 
+        honest and sustainable source. Without honesty and transparency we cannot stop the world's climate problems. 
+       
+          </CustomTypography.subheading>
+        </Grid>
+        <Grid item xs={12}>
+          <CustomTypography.paragraph>
+          Below you can read more about our project. Please continue to support the sawmill and forest
+          owners that are actively striving to create a positive impact. 
+        
+          </CustomTypography.paragraph>
         </Grid>
         </Grid>
     </CustomBox>
