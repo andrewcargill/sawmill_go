@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 
 
 const PageContentContainer = styled(Container)({
-    maxWidth: 'xl',
+    maxWidth: 'md',
     padding: 0, // To disable the default gutters
   });
   
