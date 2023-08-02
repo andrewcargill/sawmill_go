@@ -16,14 +16,18 @@ const LandingPage = () => {
 
     const navigate = useNavigate();
 
-    const handleButtonClick = () => {
-        navigate('/about');
-    };
+    const handleButtonClick = (route) => {
+        // Check if the route starts with "http://" or "https://" to determine if it's an external link
+        if (route.startsWith('http://') || route.startsWith('https://')) {
+          window.open(route, '_blank'); // Open the external link in a new tab
+        } else {
+          navigate(route); // Navigate within your application using the useNavigate hook
+        }
+      };
 
     return (
         <PageContentContainer>
             <FullWidthImageContainer imageUrl={forest} />
-
             <CustomBox variant="primary">
                 <Grid container spacing={1}>
                     <Grid item xs={12}>
@@ -34,24 +38,37 @@ const LandingPage = () => {
                     <Grid item xs={12}>
                         <CustomTypography.subheading>
                             {/* Empower Your Artisanal Sawmill with Sawmill Go - The Ultimate Database Solution! */}
-                            My personal API and Frontend project for Artisan Sawmill Owners!
+                            My ongoing personal API and Frontend project for Artisan Sawmill Owners!
                         </CustomTypography.subheading>
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.paragraph>
                             {/* Seamlessly manage your inventory operations with ease. From start to finish, experience smooth and hassle-free management, allowing artisans to effortlessly oversee their operations. */}
-                            I own a sawmill and forests in the North of Sweden and wanted to create a inventory management system.
+                            I own a sawmill and forests in the North of Sweden and had the need for an inventory management system.
                         </CustomTypography.paragraph>
                     </Grid>
                     <Grid item xs={12}>
-                        <CustomButton onClick={handleButtonClick} variant="contained">
-                            GitHub ReadMe
-                        </CustomButton>
+                        <CustomTypography.paragraph>
+                            {/* Seamlessly manage your inventory operations with ease. From start to finish, experience smooth and hassle-free management, allowing artisans to effortlessly oversee their operations. */}
+                            Forestry done well is great for the enviroment. For the last few years I have wanted to create a system that delivers a transparent process, from the tree in the forest, to 
+                            the customer. This is what is at the heart of Sawmill Go.
+                        </CustomTypography.paragraph>
+                    </Grid>
+                    <Grid container xs={12} pt={2} spacing={1}>
+                       
+                        <Grid item xs={6}>
+                            <CustomButton 
+                            onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_go/tree/main/mill")} 
+                            variant="contained" fullWidth>
+                            ReadMe.MD
+                            </CustomButton>
+                        </Grid>
+
                     </Grid>
                 </Grid>
             </CustomBox>
 
-            <FullWidthImageContainer imageUrl={cloud} />
+            <FullWidthImageContainer imageUrl={forestTwo} />
             <CustomBox variant="secondary">
                 <Grid container spacing={1}>
                     <Grid item xs={12}>
@@ -69,15 +86,15 @@ const LandingPage = () => {
                             The backend is built with MySQL Database with a Django (Python) API, hosted with Heroku. The Frontend is ReactJS using Matrial UI for styling, currently deployed via Github Pages.
                         </CustomTypography.paragraph>
                     </Grid>
-                    <Grid container xs={12}>
+                    <Grid container xs={12} pt={2} spacing={1}>
                         <Grid item xs={6}>
-                            <CustomButton onClick={handleButtonClick} variant="contained">
-                                FrontEnd ReadMe
+                            <CustomButton onClick={handleButtonClick} variant="contained" fullWidth>
+                                FrontEnd
                             </CustomButton>
                         </Grid>
                         <Grid item xs={6}>
-                            <CustomButton onClick={handleButtonClick} variant="contained">
-                                Backend Repository
+                            <CustomButton onClick={handleButtonClick} variant="contained" fullWidth>
+                                Backend
                             </CustomButton>
                         </Grid>
 
@@ -85,7 +102,7 @@ const LandingPage = () => {
 
                 </Grid>
             </CustomBox>
-            <FullWidthImageContainer imageUrl={forestTwo} />
+            <FullWidthImageContainer imageUrl={cloud} />
             <CustomBox variant="dark">
                 <Grid container spacing={1}>
                     <Grid item xs={12}>
@@ -104,11 +121,15 @@ const LandingPage = () => {
                             Discover complete information about sourced trees, from felling date to responsible individuals and precise locations. Experience unparalleled transparency and traceability for a truly distinctive offering.
                         </CustomTypography.paragraph>
                     </Grid>
-                    <Grid item xs={12}>
-                        <CustomButton onClick={handleButtonClick} variant="contained">
-                            Read More
-                        </CustomButton>
-                    </Grid>
+                    <Grid item xs={6}>
+                            <CustomButton 
+                            onClick={() => handleButtonClick("/newplank")} 
+                            variant="contained" 
+                            fullWidth
+                            >
+                                Demo
+                            </CustomButton>
+                        </Grid>
                 </Grid>
             </CustomBox>
         </PageContentContainer>
