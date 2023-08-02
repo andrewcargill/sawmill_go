@@ -172,7 +172,7 @@ const PlankListView = () => {
                     <Grid container spacing={1}>
                         <Grid item xs={12}>
                             <CustomTypography.heading>
-                                Lumber
+                                Lumber Yard
                             </CustomTypography.heading>
                         </Grid>
                         <Grid container xs={12} spacing={1} alignItems="center" justifyContent="center" ml="0px">

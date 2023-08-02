@@ -43,11 +43,10 @@ import AddPlank from "./pages/AddData/Plank/AddPlank";
 const App = () => {
   return (
     <Router basename={`/${process.env.PUBLIC_URL}`}>
-      <div style={{position: 'fixed', top: 0, left: 0, right: 0, height: '55px', background: '#f0f0f0' }}>
       {/* <Layout /> */}
       <Navigation />
-      </div>
-      <div style={{paddingTop: '55px' }}>
+    
+      <Box sx={{ padding: '55px 0 0' }}>
       <Routes>
         {/* <Route path="" element={<Home />} /> */}
         <Route path="" element={<LandingPage />} />
@@ -100,7 +99,7 @@ const App = () => {
         <Route path="mill_add_moisture" element={<MillAddMoisture />} />
         <Route path="moisture_by_planks" element={<MoistureByPlank />} />
       </Routes>
-      </div>
+      </Box>
     </Router>
   );
 };

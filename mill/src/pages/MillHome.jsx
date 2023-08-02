@@ -22,7 +22,7 @@ const MillHome = () => {
               <Button
                 className={css.selectButton}
               
-                onClick={() => handleButtonClick("/mill_add_planks")}
+                onClick={() => handleButtonClick("/add_plank")}
               >
                 + Plank
               </Button>
