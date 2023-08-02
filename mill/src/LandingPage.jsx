@@ -9,6 +9,7 @@ import cloud from './media/images/database_structure.png';
 import FullWidthImageContainer from './components/CustomBoxes/FullWidthImageContainer';
 import CustomButton from './components/Buttons/CustomButtons';
 import { useNavigate } from "react-router-dom";
+import PageContentContainer from './components/CustomBoxes/PageContentContainer';
 
 
 const LandingPage = () => {
@@ -20,7 +21,7 @@ const LandingPage = () => {
     };
 
   return (
-    <Container maxWidth="xl" disableGutters={true}>
+    <PageContentContainer>
       <FullWidthImageContainer imageUrl={forest} />
 
       <CustomBox variant="primary">
@@ -98,7 +99,7 @@ const LandingPage = () => {
           </Grid>
         </Grid>
       </CustomBox>
-    </Container>
+    </PageContentContainer>
 
   );
 };

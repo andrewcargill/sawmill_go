@@ -40,7 +40,7 @@ const Navigation = () => {
   return (
     
       <AppBar position="fixed" sx={{ backgroundColor: theme => theme.palette.white.main, boxShadow: 'none' }}>
-        <Container maxWidth="md">
+        <Container maxWidth="lg">
         <Toolbar disableGutters>
 
           <FingerprintIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: 'secondary.main' }} />
