@@ -11,6 +11,7 @@ import { fetchMoreData } from "../../../paginationUtils";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useNavigate } from "react-router";
 import "../../../styles/plankList.css";
+import PageContentContainer from '../../../components/CustomBoxes/PageContentContainer';
 
 const testData = [
     { id: 2, species: 'pine', grade: 2, dimensions: '30 x 2 x 400', date: '2023-06-22', logid: 2, treeid: 3, operator: 'andy cargill', info: 'perfect plank for making a table', live_edge: false, structural: true, furniture: false, general: true, image1: 'dave.jpg', image2: 'frank.jpg', water: 10 },
@@ -163,16 +164,16 @@ const PlankListView = () => {
         setStructuralFilter("");
         fetchData();
     };
-
-
     return (
-        <Container maxWidth="xl">
+        
+        <PageContentContainer>
+            
             <div classname="stuck" style={{position: 'sticky', top: '55px', left: 0, right: 0, bottom: 0, zIndex: 1 }}>
                 <CustomBox variant="primary" sx={{ marginBottom: '32px' }}>
                     <Grid container spacing={1}>
                         <Grid item xs={12}>
                             <CustomTypography.heading>
-                                Lumber Yard
+                                Lumber Stock
                             </CustomTypography.heading>
                         </Grid>
                         <Grid container xs={12} spacing={1} alignItems="center" justifyContent="center" ml="0px">
@@ -208,7 +209,7 @@ const PlankListView = () => {
                    
                 </CustomBox>
             </div>
-            <Box> {/* Add padding to create space */}
+            <Container> {/* Add padding to create space */}
                 <InfiniteScroll
                     dataLength={plankData.results.length}
                     next={fetchMorePlanks}
@@ -227,9 +228,9 @@ const PlankListView = () => {
                     </Grid>
 
                 </InfiniteScroll>
-            </Box>
+            </Container>
 
-        </Container>
+        </PageContentContainer>
     );
 };
 
