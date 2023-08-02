@@ -3,7 +3,7 @@ import { Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const PageContentContainer = styled(Container)(({ theme }) => ({
-  maxWidth: 'lg',
+  
   padding: 0,
   [theme.breakpoints.up('sm')]: {
     paddingLeft: theme.spacing(0),

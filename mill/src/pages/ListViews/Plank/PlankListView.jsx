@@ -166,7 +166,7 @@ const PlankListView = () => {
     };
     return (
         
-        <PageContentContainer>
+        <PageContentContainer id="page_container">
             
             <div classname="stuck" style={{position: 'sticky', top: '55px', left: 0, right: 0, bottom: 0, zIndex: 1 }}>
                 <CustomBox variant="primary" sx={{ marginBottom: '32px' }}>

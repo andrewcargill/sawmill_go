@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import About from "./About";
-import { Box } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import Layout from "./pages/Layout";
 import { Login, Logout } from "./pages/TestLogIn";
 import TestApiCrud from "./pages/TestApiCrud";
@@ -39,14 +39,19 @@ import Navigation from "./Navigation";
 import LandingPage from "./LandingPage";
 import PlankListView from "./pages/ListViews/Plank/PlankListView";
 import AddPlank from "./pages/AddData/Plank/AddPlank";
+import PageContentContainer from "./components/CustomBoxes/PageContentContainer";
+
 
 const App = () => {
   return (
     <Router basename={`/${process.env.PUBLIC_URL}`}>
       {/* <Layout /> */}
-      <Navigation />
     
-      <Box sx={{ padding: '55px 0 0' }}>
+      <Navigation />
+   
+
+      <PageContentContainer>
+      <Box id='rootbox' sx={{ padding: '55px 0 0', margin: '0' }}>
       <Routes>
         {/* <Route path="" element={<Home />} /> */}
         <Route path="" element={<LandingPage />} />
@@ -100,6 +105,7 @@ const App = () => {
         <Route path="moisture_by_planks" element={<MoistureByPlank />} />
       </Routes>
       </Box>
+      </PageContentContainer>
     </Router>
   );
 };

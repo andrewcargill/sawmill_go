@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { AppBar, Box, Toolbar, Typography, Button, IconButton, Avatar, Tooltip, Menu, MenuItem } from '@mui/material';
+import { AppBar, Box, Toolbar, Typography, Button, IconButton, Avatar, Tooltip, Menu, MenuItem, Container } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import FingerprintIcon from '@mui/icons-material/Fingerprint';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { Container } from 'react-bootstrap';
+
 
 const Navigation = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -40,7 +40,7 @@ const Navigation = () => {
   return (
     
       <AppBar position="fixed" sx={{ backgroundColor: theme => theme.palette.white.main, boxShadow: 'none' }}>
-        <Container maxWidth="lg">
+       <Container maxWidth='lg'>
         <Toolbar disableGutters>
 
           <FingerprintIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: 'secondary.main' }} />
