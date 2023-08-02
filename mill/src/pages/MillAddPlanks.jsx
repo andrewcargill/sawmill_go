@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -26,6 +26,11 @@ const MillAddPlanks = () => {
   const [imageTwo, setImageTwo] = useState("");
   const [success, setSuccess] = useState(false);
   const [postId, setPostId] = useState(null);
+
+  useEffect(() => {
+    console.log('imageOne:', imageOne);
+    console.log('imageTwo:', imageTwo);
+  }, [imageOne, imageTwo]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

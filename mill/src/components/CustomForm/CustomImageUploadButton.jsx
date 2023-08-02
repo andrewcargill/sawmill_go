@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
 
-const CustomImageUploadButton = ({ label }) => {
-  const [imageUrl, setImageUrl] = useState(null);
+const CustomImageUploadButton = ({ label, imageUrl, setImageUrl }) => {
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      setImageUrl(reader.result);
+      const imageDataUrl = file;
+      setImageUrl(imageDataUrl); // Update the imageUrl state in CustomImageUploadContainer
     };
 
     reader.readAsDataURL(file);

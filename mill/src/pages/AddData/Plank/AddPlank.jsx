@@ -30,7 +30,9 @@ const AddPlank = () => {
     const [operator, setOperator] = useState("");
     const [info, setInfo] = useState("");
     const [imageOne, setImageOne] = useState("");
+    const [imageOneReader, setImageOneReader] = useState("");
     const [imageTwo, setImageTwo] = useState("");
+    const [imageTwoReader, setImageTwoReader] = useState("");
     const [success, setSuccess] = useState(false);
     const [postId, setPostId] = useState(null);
 
@@ -93,6 +95,8 @@ const AddPlank = () => {
             setOperator("");
             setImageOne("");
             setImageTwo("");
+            setImageOneReader("");
+            setImageTwoReader("");
 
             setPostId(response.data.id);
             setSuccess(true); // Set success status to true
@@ -160,19 +164,43 @@ const AddPlank = () => {
     //     console.log('Image 2 URL:', image2Url);
     //   }, [image2Url]);
 
-    const handleFileUpload = (event, setImageUrl) => {
+    // const handleFileUpload = (event, setImageUrl) => {
+    //     const file = event.target.files[0];
+    //     const reader = new FileReader();
+    //     console.log('yes');
+
+    //     reader.onloadend = () => {
+    //         console.log('Image data URL:', reader.result);
+    //         setImageUrl(reader.result);
+    //         console.log('Image URL set:', reader.result);
+    //     };
+
+    //     reader.readAsDataURL(file);
+    // };
+
+    const handleImageOneUpload = (event) => {
         const file = event.target.files[0];
         const reader = new FileReader();
-        console.log('yes');
+        setImageOne(file);
 
         reader.onloadend = () => {
-            console.log('Image data URL:', reader.result);
-            setImageUrl(reader.result);
-            console.log('Image URL set:', reader.result);
+            setImageOneReader(reader.result);
         };
 
         reader.readAsDataURL(file);
-    };
+    }
+
+    const handleImageTwoUpload = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        setImageTwo(file);
+
+        reader.onloadend = () => {
+            setImageTwoReader(reader.result);
+        };
+
+        reader.readAsDataURL(file);
+    }
 
     /* Update date state */
     const handleDateChange = (formattedDate) => {
@@ -327,14 +355,49 @@ const AddPlank = () => {
 
 
 
-                        {/*Custom Submit Button*/}
-                        <CustomImageUploadContainer
-                            title="Image Upload"
-                            imageLabels={['Image 1', 'Image 2']}
-                            imageUrls={[imageOne, imageTwo]}
-                            setImageUrls={[setImageOne, setImageTwo]}
-                        />
+                        <Box p={2} sx={{ width: '100%' }}>
+                            <Paper elevation={3} sx={{ p: 2, mb: 4 }}>
+                                {/*Select*/}
+                                <Typography variant="h6" gutterBottom>
+                                    Image Upload
+                                </Typography>
+                                {/*Image 1 Upload*/}
+                                <Grid container spacing={2} xs={12}>
+                                    <Grid item xs={6}>
+                                        <label htmlFor="upload-image-1">
+                                            <Button variant="contained" color="secondary" component="span" fullWidth>
+                                                Image 1
+                                            </Button>
+                                            <input
+                                                id="upload-image-1"
+                                                hidden
+                                                accept="image/*"
+                                                type="file"
+                                                onChange={handleImageOneUpload}
+                                            />
+                                        </label>
+                                        {imageOneReader && <img src={imageOneReader} alt="Uploaded Image" width="100%" />}
+                                    </Grid>
 
+                                    {/*Image 2 Upload*/}
+                                    <Grid item xs={6}>
+                                        <label htmlFor="upload-image-2">
+                                            <Button variant="contained" color="secondary" component="span" fullWidth>
+                                                Image 2
+                                            </Button>
+                                            <input
+                                                id="upload-image-2"
+                                                hidden
+                                                accept="image/*"
+                                                type="file"
+                                                onChange={handleImageTwoUpload}
+                                            />
+                                        </label>
+                                        {imageTwoReader && <img src={imageTwoReader} alt="Uploaded Image" width="100%" />}
+                                    </Grid>
+                                </Grid>
+                            </Paper>
+                        </Box>
                         {success && (
                             <Grid item xs={12}>
                                 <Alert severity="success">

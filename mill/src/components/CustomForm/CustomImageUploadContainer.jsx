@@ -5,15 +5,14 @@ import CustomImageUploadButton from './CustomImageUploadButton';
 const CustomImageUploadContainer = ({ title, imageLabels, imageUrls, setImageUrls }) => {
   console.log('setimageUrl:', setImageUrls);
   console.log('imageUrl:', imageUrls);
+
   const handleImageUpload = (imageUrl, index) => {
     console.log(`Image URL: ${imageUrl}, Index: ${index}`);
-   
-  console.log('title:', title);
-  console.log('current imageUrls:', imageUrls);
     const updatedUrls = [...imageUrls];
     updatedUrls[index] = imageUrl;
     console.log(`Updated URLs: ${updatedUrls}`);
-    setImageUrls(updatedUrls);
+    
+    // setImageUrls(updatedUrls);
   };
 
   return (
@@ -25,7 +24,13 @@ const CustomImageUploadContainer = ({ title, imageLabels, imageUrls, setImageUrl
         <Grid container spacing={2}>
           {imageLabels.map((label, index) => (
             <Grid item xs={6} key={index}>
-              <CustomImageUploadButton label={label} onChange={(imageUrl) => handleImageUpload(imageUrl, index)} />
+              {/* <CustomImageUploadButton label={label} onChange={(imageUrl) => handleImageUpload(imageUrl, index)} /> */}
+              <CustomImageUploadButton
+        label={label}
+        imageUrl={imageUrls[index]} // Use the correct imageUrl for each image
+        setImageUrl={(imageUrl) => handleImageUpload(imageUrl, index)} // Pass the individual setImageUrl function for each image
+      />
+              
               {imageUrls[index] && <img src={imageUrls[index]} alt={`Uploaded ${label}`} width="100%" />}
             </Grid>
           ))}
