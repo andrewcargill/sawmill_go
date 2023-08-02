@@ -13,17 +13,18 @@ import {
   Image,
   Tab,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import LogsByTree from "../../components/LogsbyTree";
-import WaterByPlank from "../../components/WaterByPlank";
-import AboutReport from "./About";
-import TreeReport from "./TreeReport";
+
 import MyMapComponent from "./MapReport";
 import {
   faQuoteLeft,
   faQuoteRight
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PageContentContainer from "../../components/CustomBoxes/PageContentContainer";
+import CustomBox from "../../components/CustomBoxes/CustomBoxes";
+import { Grid } from "@mui/material";
+import CustomTypography from "../../components/Typography/CustomTypography";
+import CustomButton from "../../components/Buttons/CustomButtons";
 
 const PlankReport = () => {
   const { id } = useParams();
@@ -143,259 +144,126 @@ const PlankReport = () => {
 
 
   return (
-    <div className="">
-      {/*Report Start */}
 
-      <div className="textContainer">
-        <h1>
-          Life cycle of wood product:{" "}
-          <span className="textHighlight">
-            {" "}
-            {species}_{id}
-          </span>
-        </h1>
 
-        {/* <p>
-              In this report you will learn about the unique story behind the
-              wood that your have purchased.
-            </p> */}
-      </div>
-      <div id="tree-image">
-        <div>
-          <Image src={treeImage} />
-        </div>
-      </div>
 
-      <div className="report-section-container">
-        <h2>this is a picture of your tree in the forest.</h2>
-        <p className="sub-header">
-        Transparent forestry involves understanding the origin of your 
+  
+    < PageContentContainer >
+    {/* Header */}
+    <CustomBox variant="primary">
+      <Grid container spacing={1}>
+        <Grid item xs={12}>
+          <CustomTypography.heading>
+            Life Cycle of Wood Product {species}_{id}
+          </CustomTypography.heading>
+        </Grid>
+        <Grid item xs={12}>
+          <CustomTypography.subheading>
+            {/* Empower Your Artisanal Sawmill with Sawmill Go - The Ultimate Database Solution! */}
+            My ongoing personal API and Frontend project for Artisan Sawmill Owners!
+          </CustomTypography.subheading>
+        </Grid>
+        <Grid item xs={12}>
+          <CustomTypography.paragraph>
+            {/* Seamlessly manage your inventory operations with ease. From start to finish, experience smooth and hassle-free management, allowing artisans to effortlessly oversee their operations. */}
+            I own a sawmill and forests in the North of Sweden and had the need for an inventory management system.
+          </CustomTypography.paragraph>
+        </Grid>
+        <Grid item xs={12}>
+          <CustomTypography.paragraph>
+            {/* Seamlessly manage your inventory operations with ease. From start to finish, experience smooth and hassle-free management, allowing artisans to effortlessly oversee their operations. */}
+            Forestry done well is great for the enviroment. For the last few years I have wanted to create a system that delivers a transparent process, from the tree in the forest, to
+            the customer. This is what is at the heart of Sawmill Go.
+          </CustomTypography.paragraph>
+        </Grid>
+
+      </Grid>
+    </CustomBox>
+    {/* IMAGE */}
+
+    {/* Transparent Forestry */}
+    <CustomBox variant="secondary">
+      <Grid container spacing={1}>
+        
+        <Grid item xs={12}>
+          <CustomTypography.subheading>
+            Transparent forestry involves understanding the origin of your 
         wood and the circumstances surrounding its extraction from the forest
-        </p>
-        <p>
-          You own{" "}
-          <span>
-            {species}_{id}
-          </span>
-          . It is unque. In this document we will share what we know. The tree
-          stood in a selective-cut forest in Selet, Vännäs, Umeå for{" "}
-          <span className="highlight-one"> {treeData.age} years.</span>
-        </p>
-        <p>
+          </CustomTypography.subheading>
+        </Grid>
+        <Grid item xs={12}>
+          <CustomTypography.paragraph>
+           You own {species}_{id}. It is unque. In this document we will share what we know. The tree
+          stood in a selective-cut forest in Selet, Vännäs, Umeå for {treeData.age}.
+          </CustomTypography.paragraph>
+        </Grid>
+        <Grid item xs={12}>
+          <CustomTypography.paragraph>
           The tree was removed on <span className="highlight-one"> {formatDate(treeData.date)}</span> by lumberjack{" "}
           {treeData.lumberjack}.
-        </p>
-      </div>
-      <div className="report-section-container-dark">
-        <h3>the reason for felling <span> {species}_{id}</span></h3>
-        <div id="quote">
+          </CustomTypography.paragraph>
+        </Grid>
+      </Grid>
+    </CustomBox>
+
+    {/* Reason for felling */}
+    <CustomBox variant="white">
+      <Grid container spacing={1}>
+      <Grid item xs={12}>
+          <CustomTypography.heading>
+          the reason for felling <span> {species}_{id}</span>
+          </CustomTypography.heading>
+        </Grid>
+        <Grid item xs={12}>
+          <CustomTypography.subheading>
           <FontAwesomeIcon icon={faQuoteLeft} />
            <p>{treeData.reason_for_felling}</p>
           <FontAwesomeIcon icon={faQuoteRight} />
-          
-        </div>
-        <div id="quote-signed"> - {treeData.lumberjack} (Lumberjack)</div>
-      </div>
-      <MyMapComponent tree={treeData}/>
-      <div className="report-section-container">
-        <h2>Milling</h2>
-        <p>{treeName} was milled on {formatDate(plank.date)} by {plank.operator} at Selet15 sawmills.</p>
-        <p>The cut dimensions were: {formattedDepth} x {formattedWidth} x {formattedLength}cm</p>
-        <p>Wood is graded, with 1 being the highest standard. {treeName} was graded: {plank.wood_grade}</p>
-        <p>The following notes were added on milling: </p>
-        <p>{plank.info}</p>
-      </div>
-      <div className="report-section-container-dark">
-        <h3>Picture's from the sawmill of {treeName}</h3>
-        <div className="sawmill-images">
-          <div>
-          {plank.image1 && (
-              <img
-                src={plank.image1}
-                alt="Tree Image"
-                style={{ maxWidth: "150px", height: "auto" }}
-              />
-            )}
-          </div>
-          <div>
-          {plank.image2 && (
-              <img
-                src={plank.image2}
-                alt="Tree Image"
-                style={{ maxWidth: "150px", height: "auto" }}
-              />
-            )}
-          </div>
-        </div>
-      </div>
-      <div className="report-section-container">
-        <h2>Finally...thank you for caring!</h2>
-        <p className="sub-header"> 
-        It is essential that new wood products that come from an 
-        honest and sustainable source. Without honesty and transparency we cannot stop the world's climate problems. 
-        </p>
-        <p>Below you can read more about our project. Please continue to support the sawmill and forest
-          owners that are actively striving to create a positive impact. 
-        </p>
-        </div>
-      
+          </CustomTypography.subheading>
+        </Grid>
+        </Grid>
+    </CustomBox>
+    <MyMapComponent tree={treeData}/>
+    {/* Milling */}
+    <CustomBox variant="primary">
+      <Grid container spacing={1}>
+      <Grid item xs={12}>
+          <CustomTypography.heading>
+          Milling of <span> {species}_{id}</span>
+          </CustomTypography.heading>
+        </Grid>
+        <Grid item xs={12}>
+          <CustomTypography.subheading>
+          {treeName} was milled from a log (REF:{plank.log.tree.id}_{plank.log.id}) on {formatDate(plank.date)} by {plank.operator} at Selet15 sawmills.
+          </CustomTypography.subheading>
+        </Grid>
+        </Grid>
+    </CustomBox>
+    {/* Milling Notes - ADD PAPER CONTAINER */}
+    <CustomBox variant="white">
+      <Grid container spacing={1}>
+      <Grid item xs={12}>
+          <CustomTypography.heading>
+          Notes from the sawmill
+          </CustomTypography.heading>
+        </Grid>
+        <Grid item xs={12}>
+          <CustomTypography.subheading>
+          The cut dimensions were: {formattedDepth} x {formattedWidth} x {formattedLength}cm. 
+          Wood is graded, with 1 being the highest standard. {treeName} was graded: {plank.wood_grade}. The following notes were added on milling: 
+          </CustomTypography.subheading>
+        </Grid>
+        <Grid item xs={12}>
+          <CustomTypography.subheading>
+          <FontAwesomeIcon icon={faQuoteLeft} />
+           <p>{plank.info}</p>
+          <FontAwesomeIcon icon={faQuoteRight} />
+          </CustomTypography.subheading>
+        </Grid>
+        </Grid>
+    </CustomBox>
+      </PageContentContainer >
 
-{/* 
-      <div id={styles.reportContainer}>
-        <Nav variant="tabs" activeKey={activeTab} onSelect={handleTabSelect}>
-          <Nav.Item>
-            <Nav.Link
-              eventKey="about"
-              className={activeTab === "about" ? "active" : ""}
-            >
-              About
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link
-              eventKey="tree"
-              className={activeTab === styles.tree ? "active" : ""}
-            >
-              Tree
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link
-              eventKey="logging"
-              className={activeTab === "logging" ? "active" : ""}
-            >
-              Logging
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link
-              eventKey="milling"
-              className={activeTab === "milling" ? "active" : ""}
-            >
-              Milling
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link
-              eventKey="drying"
-              className={activeTab === "drying" ? "active" : ""}
-            >
-              Drying
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
-
-        <div
-          id="tree"
-          style={{ display: activeTab === "about" ? "block" : "none" }}
-        >
-          <AboutReport plank={plank} />
-        </div>
-        <div
-          id="tree"
-          style={{ display: activeTab === "tree" ? "block" : "none" }}
-        >
-          <TreeReport plank={plank} />
-        </div>
-        <div
-          id="logging"
-          style={{ display: activeTab === "logging" ? "block" : "none" }}
-        >
-          Content for logging
-        </div>
-        <div
-          id="milling"
-          style={{ display: activeTab === "milling" ? "block" : "none" }}
-        >
-          Content for milling
-        </div>
-        <div
-          id="drying"
-          style={{ display: activeTab === "drying" ? "block" : "none" }}
-        >
-          Content for drying
-        </div>
-      </div> */}
-
-      <Container className="pb-4 border border-5">
-        {/*Report Title */}
-        {/* <Row className="border border-3">
-          <Col>
-            <h3>
-              Welcome to the report on the wood product {species}_{id}
-            </h3>
-            <p>
-              In this report you will learn about the unique story behind the
-              wood that your have purchased.
-            </p>
-          </Col>
-        </Row> */}
-        {/*Report Tree */}
-
-        {/*Report Milling */}
-        {/* <Row className="border border-3">
-          <Col xs={12} className="border">
-            <h4>Logging, Milling and Drying</h4>
-            <p>
-              In this section we share the the next step in the journey. The
-              Tree is logged, then taken to the sawmill where it is milled and
-              dried.{" "}
-            </p>
-          </Col>
-          <Col xs={12} className="border">
-            <h5>Logging of the Tree</h5>
-            <p>
-              The tree was logged on {log.date} to a length of {log.length}cm
-              and given the id of {species}_{log.id}.
-            </p>
-            <p>(The tree was divided up into a totle of /number of logs/!)</p>
-          </Col>
-
-          <Col xs={12} className="border">
-            <h5>Milling and Drying</h5>
-            <p>
-              The log was milled on {plank.date} by {plank.operator} at Selet15
-              Sawmill.
-            </p>
-            <p>Below is the data we have from that day.</p>
-          </Col>
-          <Col xs={6} className="border">
-            Milled dimensions: (width){plank.width}cm x (depth){plank.depth}cm x
-            (length){log.length}cm
-          </Col>
-          <Col xs={6} className="border">
-            Operator: {plank.operator}
-          </Col>
-          <Col xs={6} className="border">
-            Wood Grade: {plank.wood_grade}
-          </Col>
-          <Col xs={12} className="border">
-            Operator ({plank.operator}) Notes:
-            <p>{plank.info}</p>
-          </Col>
-          <Col xs={6} className="border">
-            Image 1
-            {plank.image1 && (
-              <img
-                src={plank.image1}
-                alt="Tree Image"
-                style={{ maxWidth: "150px", height: "auto" }}
-              />
-            )}
-          </Col>
-          <Col xs={6} className="border">
-            Image 2
-            {plank.image2 && (
-              <img
-                src={plank.image2}
-                alt="Tree Image"
-                style={{ maxWidth: "150px", height: "auto" }}
-              />
-            )}
-          </Col>
-        </Row> */}
-      </Container>
-    </div>
   );
 };
 
