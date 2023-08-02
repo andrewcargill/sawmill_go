@@ -88,12 +88,19 @@ const LandingPage = () => {
                     </Grid>
                     <Grid container xs={12} pt={2} spacing={1}>
                         <Grid item xs={6}>
-                            <CustomButton onClick={handleButtonClick} variant="contained" fullWidth>
+                            <CustomButton
+                            onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_go/tree/main/mill")} 
+                            variant="contained" 
+                            fullWidth>
                                 FrontEnd
                             </CustomButton>
                         </Grid>
                         <Grid item xs={6}>
-                            <CustomButton onClick={handleButtonClick} variant="contained" fullWidth>
+                            <CustomButton
+                            onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_api")} 
+                            variant="contained" 
+                            fullWidth
+                            >
                                 Backend
                             </CustomButton>
                         </Grid>
@@ -118,7 +125,7 @@ const LandingPage = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.paragraph>
-                            Discover complete information about sourced trees, from felling date to responsible individuals and precise locations. Experience unparalleled transparency and traceability for a truly distinctive offering.
+                           Discover complete information about sourced trees, from felling date to responsible individuals and precise locations. Experience unparalleled transparency and traceability for a truly distinctive offering.
                         </CustomTypography.paragraph>
                     </Grid>
                     <Grid item xs={6}>
