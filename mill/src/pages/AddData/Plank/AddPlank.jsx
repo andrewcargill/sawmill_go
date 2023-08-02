@@ -155,29 +155,6 @@ const AddPlank = () => {
     const [image1Url, setImage1Url] = useState(null);
     const [image2Url, setImage2Url] = useState(null);
 
-    /* FROM TEMPLATE - NOT USED */
-    // useEffect(() => {
-    //     console.log('Image 1 URL:', image1Url);
-    //   }, [image1Url]);
-
-    //   useEffect(() => {
-    //     console.log('Image 2 URL:', image2Url);
-    //   }, [image2Url]);
-
-    // const handleFileUpload = (event, setImageUrl) => {
-    //     const file = event.target.files[0];
-    //     const reader = new FileReader();
-    //     console.log('yes');
-
-    //     reader.onloadend = () => {
-    //         console.log('Image data URL:', reader.result);
-    //         setImageUrl(reader.result);
-    //         console.log('Image URL set:', reader.result);
-    //     };
-
-    //     reader.readAsDataURL(file);
-    // };
-
     const handleImageOneUpload = (event) => {
         const file = event.target.files[0];
         const reader = new FileReader();
@@ -352,8 +329,6 @@ const AddPlank = () => {
                                 </Grid>
                             </Paper>
                         </Box>
-
-
 
                         <Box p={2} sx={{ width: '100%' }}>
                             <Paper elevation={3} sx={{ p: 2, mb: 4 }}>
