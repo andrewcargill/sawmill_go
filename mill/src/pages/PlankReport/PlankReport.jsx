@@ -148,140 +148,147 @@ const PlankReport = () => {
 
 
 
-  
-    < PageContentContainer >
-    {/* Header */}
-    <CustomBox variant="primary">
-      <Grid container spacing={1}>
-        <Grid item xs={12}>
-          <CustomTypography.heading>
-            Life Cycle of Wood Product {species}_{id}
-          </CustomTypography.heading>
-        </Grid>
-        <Grid item xs={12}>
-          <CustomTypography.subheading>
-            {/* Empower Your Artisanal Sawmill with Sawmill Go - The Ultimate Database Solution! */}
-            Let's begin the journey.... Below is an image, taken on the day of felling, of the actual tree from which your product was produced.
-          </CustomTypography.subheading>
-        </Grid>
-        
 
-      </Grid>
-    </CustomBox>
-    {/* IMAGE */}
-    <FullWidthImageContainer imageUrl={treeImage} />
-    {/* Transparent Forestry */}
-    <CustomBox variant="secondary">
-      <Grid container spacing={1}>
-        
-        <Grid item xs={12}>
+    < PageContentContainer >
+      {/* Header */}
+      <CustomBox variant="primary">
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <CustomTypography.heading>
+              Life Cycle of Wood Product {species}_{id}
+            </CustomTypography.heading>
+          </Grid>
+          <Grid item xs={12}>
           <CustomTypography.subheading>
             Transparent forestry involves understanding the origin of your 
         wood and the circumstances surrounding its extraction from the forest.
           </CustomTypography.subheading>
         </Grid>
         <Grid item xs={12}>
-          <CustomTypography.paragraph>
-           You own {species}_{id}. It is unque. In this document we will share what we know. The tree
-          stood in a selective-cut forest in Selet, Vännäs, Umeå for {treeData.age}.
-          </CustomTypography.paragraph>
-        </Grid>
-        <Grid item xs={12}>
-          <CustomTypography.paragraph>
-          The tree was removed on <span className="highlight-one"> {formatDate(treeData.date)}</span> by lumberjack{" "}
-          {treeData.lumberjack}.
-          </CustomTypography.paragraph>
-        </Grid>
-      </Grid>
-    </CustomBox>
+            <CustomTypography.paragraph>
+              You own {species}_{id}. It is unque. In this document we will share what we know. 
+            </CustomTypography.paragraph>
+          </Grid>
+          
 
-    {/* Reason for felling */}
-    <CustomBox variant="white">
-      <Grid container spacing={1}>
-      <Grid item xs={12}>
-          <CustomTypography.heading>
-          the reason for felling <span> {species}_{id}</span>
-          </CustomTypography.heading>
+
         </Grid>
-        <Grid item xs={12}>
-          <CustomTypography.subheading>
-          <FontAwesomeIcon icon={faQuoteLeft} />
-           <p>{treeData.reason_for_felling}</p>
-          <FontAwesomeIcon icon={faQuoteRight} />
-          </CustomTypography.subheading>
+      </CustomBox>
+      {/* IMAGE */}
+      <FullWidthImageContainer imageUrl={treeImage} />
+      {/* Transparent Forestry */}
+      <CustomBox variant="secondary">
+        <Grid container spacing={1}>
+
+
+          
+          <Grid item xs={12}>
+            <CustomTypography.subheading>
+              Let's begin the journey.... Above is an image, taken on the day of felling, of the actual tree from which your product was produced.
+            </CustomTypography.subheading>
+          </Grid>
+          <Grid item xs={12}>
+            <CustomTypography.paragraph>
+              The tree
+              stood in a selective-cut forest in Selet, Vännäs, Umeå for {treeData.age} years.
+            </CustomTypography.paragraph>
+          </Grid>
+          <Grid item xs={12}>
+            <CustomTypography.paragraph>
+              The tree was removed on <span className="highlight-one"> {formatDate(treeData.date)}</span> by lumberjack{" "}
+              {treeData.lumberjack}.
+            </CustomTypography.paragraph>
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <CustomTypography.paragraph>
-          We record the GPS location of the tree as further transparency. 
-        
-          </CustomTypography.paragraph>
+      </CustomBox>
+
+      {/* Reason for felling */}
+      <CustomBox variant="white">
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <CustomTypography.heading>
+              the reason for felling <span> {species}_{id}</span>
+            </CustomTypography.heading>
+          </Grid>
+          <Grid item xs={12}>
+            <CustomTypography.subheading>
+              <FontAwesomeIcon icon={faQuoteLeft} />
+              <p>{treeData.reason_for_felling}</p>
+              <FontAwesomeIcon icon={faQuoteRight} />
+            </CustomTypography.subheading>
+          </Grid>
+          <Grid item xs={12}>
+            <CustomTypography.paragraph>
+              We record the GPS location of the tree as further transparency.
+
+            </CustomTypography.paragraph>
+          </Grid>
         </Grid>
+      </CustomBox>
+      <MyMapComponent tree={treeData} />
+      {/* Milling */}
+      <CustomBox variant="primary">
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <CustomTypography.heading>
+              Milling of <span> {species}_{id}</span>
+            </CustomTypography.heading>
+          </Grid>
+          <Grid item xs={12}>
+            <CustomTypography.subheading>
+              {treeName} was milled from a log (REF:{plank.log.tree.id}_{plank.log.id}) on {formatDate(plank.date)} by {plank.operator} at Selet15 sawmills.
+            </CustomTypography.subheading>
+          </Grid>
         </Grid>
-    </CustomBox>
-    <MyMapComponent tree={treeData}/>
-    {/* Milling */}
-    <CustomBox variant="primary">
-      <Grid container spacing={1}>
-      <Grid item xs={12}>
-          <CustomTypography.heading>
-          Milling of <span> {species}_{id}</span>
-          </CustomTypography.heading>
+      </CustomBox>
+      {/* Milling Notes - ADD PAPER CONTAINER */}
+      <CustomBox variant="white">
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <CustomTypography.heading>
+              Notes from the sawmill
+            </CustomTypography.heading>
+          </Grid>
+          <Grid item xs={12}>
+            <CustomTypography.subheading>
+              The cut dimensions were: {formattedDepth} x {formattedWidth} x {formattedLength}cm.
+              Wood is graded, with 1 being the highest standard. {treeName} was graded: {plank.wood_grade}. The following notes were added on milling:
+            </CustomTypography.subheading>
+          </Grid>
+          <Grid item xs={12}>
+            <CustomTypography.subheading>
+              <FontAwesomeIcon icon={faQuoteLeft} />
+              <p>{plank.info}</p>
+              <FontAwesomeIcon icon={faQuoteRight} />
+            </CustomTypography.subheading>
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <CustomTypography.subheading>
-          {treeName} was milled from a log (REF:{plank.log.tree.id}_{plank.log.id}) on {formatDate(plank.date)} by {plank.operator} at Selet15 sawmills.
-          </CustomTypography.subheading>
+      </CustomBox>
+      {/* Thank You */}
+      <CustomBox variant="dark">
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <CustomTypography.heading>
+              Finally...thank you for caring!
+            </CustomTypography.heading>
+          </Grid>
+          <Grid item xs={12}>
+            <CustomTypography.subheading>
+              It is essential that new wood products that come from an
+              honest and sustainable source. Without honesty and transparency we cannot stop the world's climate problems.
+
+            </CustomTypography.subheading>
+          </Grid>
+          <Grid item xs={12}>
+            <CustomTypography.paragraph>
+              Below you can read more about our project. Please continue to support the sawmill and forest
+              owners that are actively striving to create a positive impact.
+
+            </CustomTypography.paragraph>
+          </Grid>
         </Grid>
-        </Grid>
-    </CustomBox>
-    {/* Milling Notes - ADD PAPER CONTAINER */}
-    <CustomBox variant="white">
-      <Grid container spacing={1}>
-      <Grid item xs={12}>
-          <CustomTypography.heading>
-          Notes from the sawmill
-          </CustomTypography.heading>
-        </Grid>
-        <Grid item xs={12}>
-          <CustomTypography.subheading>
-          The cut dimensions were: {formattedDepth} x {formattedWidth} x {formattedLength}cm. 
-          Wood is graded, with 1 being the highest standard. {treeName} was graded: {plank.wood_grade}. The following notes were added on milling: 
-          </CustomTypography.subheading>
-        </Grid>
-        <Grid item xs={12}>
-          <CustomTypography.subheading>
-          <FontAwesomeIcon icon={faQuoteLeft} />
-           <p>{plank.info}</p>
-          <FontAwesomeIcon icon={faQuoteRight} />
-          </CustomTypography.subheading>
-        </Grid>
-        </Grid>
-    </CustomBox>
-    {/* Thank You */}
-    <CustomBox variant="dark">
-      <Grid container spacing={1}>
-      <Grid item xs={12}>
-          <CustomTypography.heading>
-          Finally...thank you for caring!
-          </CustomTypography.heading>
-        </Grid>
-        <Grid item xs={12}>
-          <CustomTypography.subheading>
-          It is essential that new wood products that come from an 
-        honest and sustainable source. Without honesty and transparency we cannot stop the world's climate problems. 
-       
-          </CustomTypography.subheading>
-        </Grid>
-        <Grid item xs={12}>
-          <CustomTypography.paragraph>
-          Below you can read more about our project. Please continue to support the sawmill and forest
-          owners that are actively striving to create a positive impact. 
-        
-          </CustomTypography.paragraph>
-        </Grid>
-        </Grid>
-    </CustomBox>
-      </PageContentContainer >
+      </CustomBox>
+    </PageContentContainer >
 
   );
 };
