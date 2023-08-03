@@ -38,33 +38,11 @@ const LandingPage = () => {
                     <Grid item xs={12}>
                         <CustomTypography.subheading>
                             {/* Empower Your Artisanal Sawmill with Sawmill Go - The Ultimate Database Solution! */}
-                            My ongoing personal API and Frontend project for Artisan Sawmill Owners!
+                            An inventory management system for Artisan Sawmill Owners!
                         </CustomTypography.subheading>
                     </Grid>
-                    <Grid item xs={12}>
-                        <CustomTypography.paragraph>
-                            {/* Seamlessly manage your inventory operations with ease. From start to finish, experience smooth and hassle-free management, allowing artisans to effortlessly oversee their operations. */}
-                            I own a sawmill and forests in the North of Sweden and had the need for an inventory management system.
-                        </CustomTypography.paragraph>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomTypography.paragraph>
-                            {/* Seamlessly manage your inventory operations with ease. From start to finish, experience smooth and hassle-free management, allowing artisans to effortlessly oversee their operations. */}
-                            Forestry done well is great for the enviroment. For the last few years I have wanted to create a system that delivers a transparent process, from the tree in the forest, to 
-                            the customer. This is what is at the heart of Sawmill Go.
-                        </CustomTypography.paragraph>
-                    </Grid>
-                    <Grid container xs={12} pt={2} spacing={1}>
-                       
-                        <Grid item xs={6}>
-                            <CustomButton 
-                            onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_go/tree/main/mill")} 
-                            variant="contained" fullWidth>
-                            ReadMe.MD
-                            </CustomButton>
-                        </Grid>
-
-                    </Grid>
+                    
+            
                 </Grid>
             </CustomBox>
 
