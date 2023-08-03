@@ -1,70 +1,115 @@
-import React from "react";
-import css from "./styles/home.module.css";
-import treetops from "./media/images/treetops.png";
-import treeview from "./media/images/forest_mountain.png";
+// LandingPage.js
+import React from 'react';
+import { Grid, Button, Container } from '@mui/material';
+import CustomTypography from './components/Typography/CustomTypography';
+import CustomBox from './components/CustomBoxes/CustomBoxes';
+import forest from './media/images/treetops.png';
+import forestTwo from './media/images/forest_mountain.png';
+import cloud from './media/images/database_structure.png';
+import FullWidthImageContainer from './components/CustomBoxes/FullWidthImageContainer';
+import CustomButton from './components/Buttons/CustomButtons';
+import { useNavigate } from "react-router-dom";
+import PageContentContainer from './components/CustomBoxes/PageContentContainer';
+
 
 const About = () => {
-  return (
-    <div className="page-home">
-      <div className={css.Container}>
-        <div className={css.textContainer}>
-          <h1>Our systems</h1>
-        </div>
-        <div className={css.textContainerWhite}>
-          <h1>Sawmill Go</h1>
-        </div>
-        <div className={css.textContainerWhite}>
-          <p>
-            <strong>
-              Sawmill Go is our comprehensive database system designed
-              specifically for sawmills.
-            </strong>
-          </p>
-          <p>
-            It offers efficient management of logs and processed planks,
-            streamlining inventory control and optimizing operations. With its
-            user-friendly interface and essential features, Sawmill Go provides
-            a reliable solution for your sawmill's everyday needs.
-          </p>
 
-          <div className={css.buttonContainer}>
-            <button>Find out More</button>
-          </div>
-        </div>
-        <div className={css.headimage}>
-          <img className={css.images} src={treeview} alt="My Image" />
-        </div>
+    const navigate = useNavigate();
 
-        <div className={css.textContainerWhite}>
-          <h1>Eco pro</h1>
-        </div>
-          <div className={css.textContainerWhite}>
-          <p>
-            <strong>
-              Eco Pro is our advanced system that encompasses the
-              entire process, from tree to planks. It goes beyond the
-              functionality of Sawmill Go, capturing and organizing data at
-              every stage.
-            </strong>
-          </p>
-          <p>
-            This holistic solution allows you to trace the journey of each
-            material, empowering you to provide customers with a complete
-            picture of the sourcing, processing, and origins of their products.
-            Experience unrivaled transparency and customer engagement with
-            Eco Pro.
-          </p>
-          <div className={css.buttonContainer}>
-            <button>Find out More</button>
-          </div>
-          </div>
-          
-        </div>
+    const handleButtonClick = (route) => {
+        // Check if the route starts with "http://" or "https://" to determine if it's an external link
+        if (route.startsWith('http://') || route.startsWith('https://')) {
+          window.open(route, '_blank'); // Open the external link in a new tab
+        } else {
+          navigate(route); // Navigate within your application using the useNavigate hook
+        }
+      };
 
-       
-      </div>
-   
-  );
+    return (
+        <PageContentContainer>
+            
+
+            <FullWidthImageContainer imageUrl={forestTwo} />
+            <CustomBox variant="secondary">
+                <Grid container spacing={1}>
+                    <Grid item xs={12}>
+                        <CustomTypography.heading>
+                            Project background
+                        </CustomTypography.heading>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <CustomTypography.subheading>
+                            I am a sawmill owner and software engineer. This is an ongoing personal project that I started in July 2023. 
+                        </CustomTypography.subheading>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <CustomTypography.paragraph>
+                           My goals for the project are below and I welcome your feedback and enquires. 
+                        </CustomTypography.paragraph>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <CustomTypography.paragraph>
+                          
+                           - Andrew Cargill 
+                           
+                        </CustomTypography.paragraph>
+                    </Grid>
+                    <Grid container xs={12} pt={2} spacing={1}>
+                        <Grid item xs={6}>
+                            <CustomButton
+                            onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_go/tree/main/mill")} 
+                            variant="contained" 
+                            fullWidth>
+                                FrontEnd
+                            </CustomButton>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <CustomButton
+                            onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_api")} 
+                            variant="contained" 
+                            fullWidth
+                            >
+                                Backend
+                            </CustomButton>
+                        </Grid>
+
+                    </Grid>
+
+                </Grid>
+            </CustomBox>
+            <FullWidthImageContainer imageUrl={cloud} />
+            <CustomBox variant="dark">
+                <Grid container spacing={1}>
+                    <Grid item xs={12}>
+                        <CustomTypography.heading>
+                            100% TRANSPARENT FORESTRY
+                        </CustomTypography.heading>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <CustomTypography.subheading>
+
+                            Introducing "Transparent Forestry" - Revolutionizing the Industry!
+                        </CustomTypography.subheading>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <CustomTypography.paragraph>
+                           Discover complete information about sourced trees, from felling date to responsible individuals and precise locations. Experience unparalleled transparency and traceability for a truly distinctive offering.
+                        </CustomTypography.paragraph>
+                    </Grid>
+                    <Grid item xs={6}>
+                            <CustomButton 
+                            onClick={() => handleButtonClick("/newplank")} 
+                            variant="contained" 
+                            fullWidth
+                            >
+                                Demo
+                            </CustomButton>
+                        </Grid>
+                </Grid>
+            </CustomBox>
+        </PageContentContainer>
+
+    );
 };
 
 export default About;

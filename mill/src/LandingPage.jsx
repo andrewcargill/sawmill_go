@@ -38,7 +38,7 @@ const LandingPage = () => {
                     <Grid item xs={12}>
                         <CustomTypography.subheading>
                             {/* Empower Your Artisanal Sawmill with Sawmill Go - The Ultimate Database Solution! */}
-                            An inventory management system for Artisan Sawmill Owners!
+                            An inventory management system for Artisan Sawmill Owners
                         </CustomTypography.subheading>
                     </Grid>
                     

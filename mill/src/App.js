@@ -40,6 +40,7 @@ import LandingPage from "./LandingPage";
 import PlankListView from "./pages/ListViews/Plank/PlankListView";
 import AddPlank from "./pages/AddData/Plank/AddPlank";
 import PageContentContainer from "./components/CustomBoxes/PageContentContainer";
+import Footer from "./Footer";
 
 
 const App = () => {
@@ -104,9 +105,11 @@ const App = () => {
         <Route path="mill_add_moisture" element={<MillAddMoisture />} />
         <Route path="moisture_by_planks" element={<MoistureByPlank />} />
       </Routes>
+      <Footer />
       </Box>
       </PageContentContainer>
     </Router>
+   
   );
 };
 
