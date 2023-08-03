@@ -334,9 +334,13 @@ const PlankReport = () => {
 
                 <Paper >
                   <Container >
-                   <Grid container xs={12}>
-                    <Grid item xs={6}>IMAGE1</Grid>
-                    <Grid item xs={6}>IMAGE2</Grid>
+                   <Grid container xs={12} spacing={1} paddingBottom={2} >
+                    <Grid item xs={6}>
+                    <img src={plank.image1} alt="Image 1" style={{ width: '100%', maxWidth: '150px' }} />
+                    </Grid>
+                    <Grid item xs={6}>
+                    <img src={plank.image2} alt="Image 2" style={{ width: '100%', maxWidth: '150px' }} />
+                    </Grid>
                    </Grid>
                   </Container>
                 </Paper>
