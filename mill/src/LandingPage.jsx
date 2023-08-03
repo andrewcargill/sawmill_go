@@ -89,7 +89,7 @@ const LandingPage = () => {
             </CustomBox>
             <FullWidthImageContainer imageUrl={cloud} />
             <CustomBox variant="dark">
-                <Grid container spacing={1}>
+                <Grid container spacing={1} paddingBottom={4}>
                     <Grid item xs={12}>
                         <CustomTypography.heading>
                             100% TRANSPARENT FORESTRY
@@ -106,7 +106,7 @@ const LandingPage = () => {
                            Discover complete information about sourced trees, from felling date to responsible individuals and precise locations. Experience unparalleled transparency and traceability for a truly distinctive offering.
                         </CustomTypography.paragraph>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} >
                             <CustomButton 
                             onClick={() => handleButtonClick("/newplank")} 
                             variant="contained" 

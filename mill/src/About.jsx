@@ -44,7 +44,7 @@ const About = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.paragraph>
-                           My goals for the project are below and I welcome your feedback and enquires. 
+                           My goals for the project are detailed in the frontend README.MD and I welcome your feedback and enquires. 
                         </CustomTypography.paragraph>
                     </Grid>
                     <Grid item xs={12}>
@@ -55,7 +55,7 @@ const About = () => {
                         </CustomTypography.paragraph>
                     </Grid>
                     <Grid container xs={12} pt={2} spacing={1}>
-                        <Grid item xs={6}>
+                        <Grid item xs={4}>
                             <CustomButton
                             onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_go/tree/main/mill")} 
                             variant="contained" 
@@ -63,7 +63,7 @@ const About = () => {
                                 FrontEnd
                             </CustomButton>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={4}>
                             <CustomButton
                             onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_api")} 
                             variant="contained" 
@@ -72,41 +72,22 @@ const About = () => {
                                 Backend
                             </CustomButton>
                         </Grid>
-
-                    </Grid>
-
-                </Grid>
-            </CustomBox>
-            <FullWidthImageContainer imageUrl={cloud} />
-            <CustomBox variant="dark">
-                <Grid container spacing={1}>
-                    <Grid item xs={12}>
-                        <CustomTypography.heading>
-                            100% TRANSPARENT FORESTRY
-                        </CustomTypography.heading>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomTypography.subheading>
-
-                            Introducing "Transparent Forestry" - Revolutionizing the Industry!
-                        </CustomTypography.subheading>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomTypography.paragraph>
-                           Discover complete information about sourced trees, from felling date to responsible individuals and precise locations. Experience unparalleled transparency and traceability for a truly distinctive offering.
-                        </CustomTypography.paragraph>
-                    </Grid>
-                    <Grid item xs={6}>
-                            <CustomButton 
+                        <Grid item xs={4}>
+                            <CustomButton
                             onClick={() => handleButtonClick("/newplank")} 
                             variant="contained" 
                             fullWidth
                             >
-                                Demo
+                                demo
                             </CustomButton>
                         </Grid>
+
+                    </Grid>
+
                 </Grid>
             </CustomBox>
+        
+         
         </PageContentContainer>
 
     );
