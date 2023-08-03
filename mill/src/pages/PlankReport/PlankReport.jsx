@@ -313,19 +313,19 @@ const PlankReport = () => {
 
                 <Paper >
                   <Container >
-                   <Grid container xs={12}>
-                   <Grid item xs={12}>
-                    <CustomTypography.subheading paddingTop={2}>
-                      Notes from {plank.operator}:
-                    </CustomTypography.subheading>
-                    </Grid>
-                    <Grid item xs={12} paddingBottom={2}>
-                    <CustomTypography.paragraph >
-                      <FontAwesomeIcon icon={faQuoteLeft} />
-                      <p>{plank.info}</p>
-                      <FontAwesomeIcon icon={faQuoteRight} />
-                    </CustomTypography.paragraph>
-                    </Grid>
+                    <Grid container xs={12}>
+                      <Grid item xs={12} paddingBottom={1}>
+                        <CustomTypography.subheading paddingTop={2}>
+                          Notes from {plank.operator}:
+                        </CustomTypography.subheading>
+                      </Grid>
+                      <Grid item xs={12} paddingBottom={2}>
+                        <CustomTypography.paragraph >
+                          <FontAwesomeIcon icon={faQuoteLeft} />
+                          <p>{plank.info}</p>
+                          <FontAwesomeIcon icon={faQuoteRight} />
+                        </CustomTypography.paragraph>
+                      </Grid>
                     </Grid>
                   </Container>
                 </Paper>
@@ -334,14 +334,14 @@ const PlankReport = () => {
 
                 <Paper >
                   <Container >
-                   <Grid container xs={12} spacing={1} paddingBottom={2} >
-                    <Grid item xs={6}>
-                    <img src={plank.image1} alt="Image 1" style={{ width: '100%', maxWidth: '150px' }} />
+                    <Grid container xs={12} spacing={1} paddingBottom={2} >
+                      <Grid item xs={6}>
+                        <img src={plank.image1} alt="Image 1" style={{ width: '100%', maxWidth: '150px' }} />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <img src={plank.image2} alt="Image 2" style={{ width: '100%', maxWidth: '150px' }} />
+                      </Grid>
                     </Grid>
-                    <Grid item xs={6}>
-                    <img src={plank.image2} alt="Image 2" style={{ width: '100%', maxWidth: '150px' }} />
-                    </Grid>
-                   </Grid>
                   </Container>
                 </Paper>
               </Grid>
