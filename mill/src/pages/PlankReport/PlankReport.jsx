@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PageContentContainer from "../../components/CustomBoxes/PageContentContainer";
 import CustomBox from "../../components/CustomBoxes/CustomBoxes";
-import { Card, CardContent, CardMedia, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
+import { Card, CardContent, CardMedia, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import CustomTypography from "../../components/Typography/CustomTypography";
 import FullWidthImageContainer from '../../components/CustomBoxes/FullWidthImageContainer';
 import { Container } from "react-bootstrap";
@@ -220,11 +220,11 @@ const PlankReport = () => {
         </Grid>
       </CustomBox>
       <CustomBox>
-      <Paper>
-      <MyMapComponent tree={treeData} />
-      </Paper>
+        <Paper>
+          <MyMapComponent tree={treeData} />
+        </Paper>
       </CustomBox>
-      
+
       {/* Milling */}
       <CustomBox variant="primary">
         <Grid container spacing={1}>
@@ -243,53 +243,106 @@ const PlankReport = () => {
       {/* Milling Notes - ADD PAPER CONTAINER */}
 
       <CustomBox variant="white">
-        <Card>
-          <Container>
-            <Grid container spacing={1}>
+        <Grid item xs={12} paddingBottom={2} >
+          <CustomTypography.heading>
+            sawmill
+          </CustomTypography.heading>
+        </Grid>
+        <Card >
+          <Container >
+            <Grid container spacing={3} paddingTop={2} paddingBottom={2}>
+
               <Grid item xs={12}>
-                <CustomTypography.heading>
-                  Notes from the sawmill
-                </CustomTypography.heading>
+
+                <TableContainer component={Paper} >
+                  <Table size="small" aria-label="a dense table">
+                    {/* Title Row */}
+                    <TableHead >
+                      <TableRow>
+                        <TableCell >Mill Date</TableCell>
+                        <TableCell>Operator</TableCell>
+                        <TableCell>Log ID</TableCell>
+
+                      </TableRow>
+                    </TableHead>
+
+                    {/* Entry Row */}
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>{plank.date}</TableCell>
+                        <TableCell>{plank.operator}</TableCell>
+                        <TableCell>{plank.log.tree.id}P{plank.log.id}</TableCell>
+
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Grid>
+              <Grid item xs={12}>
+                <TableContainer component={Paper} >
+                  <Table size="small" aria-label="a dense table">
+                    {/* Title Row */}
+                    <TableHead >
+                      <TableRow>
+
+                        <TableCell>Width</TableCell>
+                        <TableCell>Depth</TableCell>
+                        <TableCell>Length</TableCell>
+                        <TableCell>Grade</TableCell>
+                      </TableRow>
+                    </TableHead>
+
+                    {/* Entry Row */}
+                    <TableBody>
+                      <TableRow>
+
+                        <TableCell>{formattedWidth}cm</TableCell>
+                        <TableCell>{formattedDepth}cm</TableCell>
+                        <TableCell>{formattedLength}cm</TableCell>
+                        <TableCell>{plank.wood_grade}</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+
+                </TableContainer>
+
+
+              </Grid>
+
+              <Grid item xs={12}>
+
+                <Paper >
+                  <Container >
+                   <Grid container xs={12}>
+                   <Grid item xs={12}>
+                    <CustomTypography.subheading paddingTop={2}>
+                      Notes from {plank.operator}:
+                    </CustomTypography.subheading>
+                    </Grid>
+                    <Grid item xs={12} paddingBottom={2}>
+                    <CustomTypography.paragraph >
+                      <FontAwesomeIcon icon={faQuoteLeft} />
+                      <p>{plank.info}</p>
+                      <FontAwesomeIcon icon={faQuoteRight} />
+                    </CustomTypography.paragraph>
+                    </Grid>
+                    </Grid>
+                  </Container>
+                </Paper>
               </Grid>
               <Grid item xs={12}>
 
-              <TableContainer component={Paper} >
-      <Table>
-        <TableBody>
-          {/* Title Row */}
-          <TableRow>
-            <TableCell>Parent Log</TableCell>
-            <TableCell>width</TableCell>
-            <TableCell>depth</TableCell>
-            <TableCell>length</TableCell>
-          </TableRow>
-
-          {/* Entry Row */}
-          <TableRow>
-            <TableCell>Entry 1</TableCell>
-            <TableCell>{plank.width}</TableCell>
-            <TableCell>{plank.depth}</TableCell>
-            <TableCell>{plank.log.length}</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
-
-                <CustomTypography.subheading>
-
-
-
-                  The cut dimensions were: {formattedDepth} x {formattedWidth} x {formattedLength}cm.
-                  Wood is graded, with 1 being the highest standard. {treeName} was graded: {plank.wood_grade}. The following notes were added on milling:
-                </CustomTypography.subheading>
+                <Paper >
+                  <Container >
+                   <Grid container xs={12}>
+                    <Grid item xs={6}>IMAGE1</Grid>
+                    <Grid item xs={6}>IMAGE2</Grid>
+                   </Grid>
+                  </Container>
+                </Paper>
               </Grid>
-              <Grid item xs={12}>
-                <CustomTypography.subheading>
-                  <FontAwesomeIcon icon={faQuoteLeft} />
-                  <p>{plank.info}</p>
-                  <FontAwesomeIcon icon={faQuoteRight} />
-                </CustomTypography.subheading>
-              </Grid>
+
+
             </Grid>
           </Container>
         </Card>
