@@ -21,7 +21,7 @@ const MyMapComponent = ({ tree }) => {
   );
 
   return (
-    <div style={{ height: "400px", width: "100%" }}>
+    <div style={{ height: "250px", width: "100%" }}>
       <GoogleMapReact
         bootstrapURLKeys={{
           key: "AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U",

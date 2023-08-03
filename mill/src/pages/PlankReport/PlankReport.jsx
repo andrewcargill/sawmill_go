@@ -1,19 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import css from "../../styles/testApiGps.module.css";
-import styles from "../../styles/PlankReport.module.css";
-import {
-  Container,
-  Row,
-  Col,
-  Table,
-  Button,
-  Nav,
-  Image,
-  Tab,
-} from "react-bootstrap";
-
 import MyMapComponent from "./MapReport";
 import {
   faQuoteLeft,
@@ -22,10 +9,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PageContentContainer from "../../components/CustomBoxes/PageContentContainer";
 import CustomBox from "../../components/CustomBoxes/CustomBoxes";
-import { Grid } from "@mui/material";
+import { Card, CardContent, CardMedia, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
 import CustomTypography from "../../components/Typography/CustomTypography";
-import CustomButton from "../../components/Buttons/CustomButtons";
 import FullWidthImageContainer from '../../components/CustomBoxes/FullWidthImageContainer';
+import { Container } from "react-bootstrap";
 
 const PlankReport = () => {
   const { id } = useParams();
@@ -159,17 +146,24 @@ const PlankReport = () => {
             </CustomTypography.heading>
           </Grid>
           <Grid item xs={12}>
-          <CustomTypography.subheading>
-            Transparent forestry involves understanding the origin of your 
-        wood and the circumstances surrounding its extraction from the forest.
-          </CustomTypography.subheading>
-        </Grid>
-        <Grid item xs={12}>
+            <CustomTypography.subheading>
+              Transparent forestry involves understanding the origin of your
+              wood and the circumstances surrounding its extraction from the forest.
+            </CustomTypography.subheading>
+          </Grid>
+          <Grid item xs={12}>
             <CustomTypography.paragraph>
-              You own {species}_{id}. It is unque. In this document we will share what we know. 
+              You own {species}_{id}. It is unque. In this document we will share what we know.
             </CustomTypography.paragraph>
           </Grid>
-          
+          {/* <Card>
+            <CardMedia component="img" height="200" image={treeImage} alt='tree_image' />
+            <CardContent>
+              <CustomTypography.paragraph>
+                Taken on {formatDate(treeData.date)}
+              </CustomTypography.paragraph>
+            </CardContent>
+          </Card> */}
 
 
         </Grid>
@@ -181,7 +175,7 @@ const PlankReport = () => {
         <Grid container spacing={1}>
 
 
-          
+
           <Grid item xs={12}>
             <CustomTypography.subheading>
               Let's begin the journey.... Above is an image, taken on the day of felling, of the actual tree from which your product was produced.
@@ -225,7 +219,12 @@ const PlankReport = () => {
           </Grid>
         </Grid>
       </CustomBox>
+      <CustomBox>
+      <Paper>
       <MyMapComponent tree={treeData} />
+      </Paper>
+      </CustomBox>
+      
       {/* Milling */}
       <CustomBox variant="primary">
         <Grid container spacing={1}>
@@ -242,28 +241,61 @@ const PlankReport = () => {
         </Grid>
       </CustomBox>
       {/* Milling Notes - ADD PAPER CONTAINER */}
+
       <CustomBox variant="white">
-        <Grid container spacing={1}>
-          <Grid item xs={12}>
-            <CustomTypography.heading>
-              Notes from the sawmill
-            </CustomTypography.heading>
-          </Grid>
-          <Grid item xs={12}>
-            <CustomTypography.subheading>
-              The cut dimensions were: {formattedDepth} x {formattedWidth} x {formattedLength}cm.
-              Wood is graded, with 1 being the highest standard. {treeName} was graded: {plank.wood_grade}. The following notes were added on milling:
-            </CustomTypography.subheading>
-          </Grid>
-          <Grid item xs={12}>
-            <CustomTypography.subheading>
-              <FontAwesomeIcon icon={faQuoteLeft} />
-              <p>{plank.info}</p>
-              <FontAwesomeIcon icon={faQuoteRight} />
-            </CustomTypography.subheading>
-          </Grid>
-        </Grid>
+        <Card>
+          <Container>
+            <Grid container spacing={1}>
+              <Grid item xs={12}>
+                <CustomTypography.heading>
+                  Notes from the sawmill
+                </CustomTypography.heading>
+              </Grid>
+              <Grid item xs={12}>
+
+              <TableContainer component={Paper} >
+      <Table>
+        <TableBody>
+          {/* Title Row */}
+          <TableRow>
+            <TableCell>Parent Log</TableCell>
+            <TableCell>width</TableCell>
+            <TableCell>depth</TableCell>
+            <TableCell>length</TableCell>
+          </TableRow>
+
+          {/* Entry Row */}
+          <TableRow>
+            <TableCell>Entry 1</TableCell>
+            <TableCell>{plank.width}</TableCell>
+            <TableCell>{plank.depth}</TableCell>
+            <TableCell>{plank.log.length}</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
+
+                <CustomTypography.subheading>
+
+
+
+                  The cut dimensions were: {formattedDepth} x {formattedWidth} x {formattedLength}cm.
+                  Wood is graded, with 1 being the highest standard. {treeName} was graded: {plank.wood_grade}. The following notes were added on milling:
+                </CustomTypography.subheading>
+              </Grid>
+              <Grid item xs={12}>
+                <CustomTypography.subheading>
+                  <FontAwesomeIcon icon={faQuoteLeft} />
+                  <p>{plank.info}</p>
+                  <FontAwesomeIcon icon={faQuoteRight} />
+                </CustomTypography.subheading>
+              </Grid>
+            </Grid>
+          </Container>
+        </Card>
+
       </CustomBox>
+
       {/* Thank You */}
       <CustomBox variant="dark">
         <Grid container spacing={1}>
