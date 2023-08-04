@@ -29,18 +29,18 @@ const ForestTabContent = (props) =>
                             {/* Title Row */}
                             <TableHead >
                                 <TableRow>
-                                    <TableCell >Mill Date</TableCell>
+                                    <TableCell >Date</TableCell>
                                     <TableCell>Operator</TableCell>
-                                    <TableCell>Log ID</TableCell>
+                                    <TableCell>ID</TableCell>
                                 </TableRow>
                             </TableHead>
 
                             {/* Entry Row */}
                             <TableBody>
                                 <TableRow>
-                                    <TableCell>{props.plank.date}</TableCell>
-                                    <TableCell>{props.plank.operator}</TableCell>
-                                    <TableCell>{props.plank.log.tree.id}P{props.plank.log.id}</TableCell>
+                                    <TableCell>{props.treeData.date}</TableCell>
+                                    <TableCell>{props.treeData.lumberjack}</TableCell>
+                                    <TableCell>{props.plank.log.tree.id}P</TableCell>
 
                                 </TableRow>
                             </TableBody>
@@ -55,26 +55,26 @@ const ForestTabContent = (props) =>
                             {/* Title Row */}
                             <TableHead >
                                 <TableRow>
-                                    <TableCell>Width</TableCell>
-                                    <TableCell>Depth</TableCell>
-                                    <TableCell>Length</TableCell>
-                                    <TableCell>Grade</TableCell>
+                                    <TableCell>Lat</TableCell>
+                                    <TableCell>Lon</TableCell>
+                               
                                 </TableRow>
                             </TableHead>
                             {/* Entry Row */}
                             <TableBody>
                                 <TableRow>
-                                    <TableCell>{props.formattedWidth}cm</TableCell>
-                                    <TableCell>{props.formattedDepth}cm</TableCell>
-                                    <TableCell>{props.formattedLength}cm</TableCell>
-                                    <TableCell>{props.plank.wood_grade}</TableCell>
+                                    <TableCell>{props.treeData.latitude}</TableCell>
+                                    <TableCell>{props.treeData.longitude}</TableCell>
+                                  
                                 </TableRow>
                             </TableBody>
                         </Table>
                     </TableContainer>
+                   
 
 
                 </Grid>
+               
             </Grid>
         </Container>
     </div>
