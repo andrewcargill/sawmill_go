@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, Typography, styled, Rating, Grid, Dialog, DialogContent, DialogTitle, Box, Paper, Avatar } from '@mui/material';
+import { Card, CardContent, CardHeader, Typography, styled, Rating, Grid, Dialog, DialogContent, DialogTitle, Box, Paper, Avatar, Tooltip } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import image1 from '../../../media/images/cloud.jpeg';
 import image2 from '../../../media/images/forest.jpeg';
@@ -80,8 +80,12 @@ const ExpandableCard = ({ data }) => {
                 }
                 action={
                     <div sx={{ display: 'flex', height: '50px', alignItems: 'center', bgcolor: 'black', padding: '5px' }}>
+                             <Tooltip title="Customer Report Preview" placement="bottom-end">
                         <ArticleIcon fontSize="small" sx={{ marginRight: 1 }} onClick={handleReportClick}/>
+                        </Tooltip>
+                        <Tooltip title="EDIT" placement="bottom-end">
                         <EditIcon fontSize="small" onClick={handleEditClick} />
+                        </Tooltip>
                     </div>
                 }
                 sx={{

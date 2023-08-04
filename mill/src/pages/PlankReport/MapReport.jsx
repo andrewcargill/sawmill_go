@@ -3,6 +3,8 @@ import GoogleMapReact from "google-map-react";
 import { faTree } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import css from "../../styles/mapReport.module.css";
+import { Container } from "@mui/material";
+import CustomBox from "../../components/CustomBoxes/CustomBoxes";
 
 const MyMapComponent = ({ tree }) => {
   const marker = {
@@ -15,8 +17,10 @@ const MyMapComponent = ({ tree }) => {
       <div id={css.iconContainer}>
         <FontAwesomeIcon icon={faTree} />
       </div>
+      <div id={css.gps}>
       <div>{marker.lat}</div>
       <div>{marker.lng}</div>
+      </div>
     </div>
   );
 

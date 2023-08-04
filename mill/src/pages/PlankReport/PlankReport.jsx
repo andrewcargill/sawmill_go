@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PageContentContainer from "../../components/CustomBoxes/PageContentContainer";
 import CustomBox from "../../components/CustomBoxes/CustomBoxes";
-import { Alert, Card, CardContent, CardMedia, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Alert, Box, Card, CardContent, CardMedia, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import CustomTypography from "../../components/Typography/CustomTypography";
 import FullWidthImageContainer from '../../components/CustomBoxes/FullWidthImageContainer';
 import { Container } from "react-bootstrap";
@@ -137,7 +137,7 @@ const PlankReport = () => {
 
 
     < PageContentContainer >
-    <Alert severity="info">Demo Page — The final wood product will display a QR code linking to this page.</Alert>
+      <Alert severity="info">Demo Page — The final wood product will display a QR code linking to this page.</Alert>
       {/* Header */}
       <CustomBox variant="primary">
         <Grid container spacing={1}>
@@ -169,8 +169,34 @@ const PlankReport = () => {
 
         </Grid>
       </CustomBox>
-      {/* IMAGE */}
-      <FullWidthImageContainer imageUrl={treeImage} />
+      {/*TREE IMAGE & GPS MAP */}
+      <Box p={1} sx={{ width: '100%',  display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    
+      <Grid xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: '1' }}>
+     
+        {/*Select*/}
+        <CustomTypography.heading>
+          your tree
+        </CustomTypography.heading>
+      </Grid>
+
+      <Grid Container style={{ maxWidth: '350px', flex: '1' }}>
+      <Card>
+        <Grid id='treeImage' item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          {/*Tree Image */}
+          <img src={treeImage} alt="Uploaded Image" height="500" style={{ }} />
+        </Grid>
+        </Card>
+      </Grid>
+     
+    </Box>
+
+
+    <MyMapComponent tree={treeData} />
+
+
+      {/*TREE  IMAGE */}
+    
       {/* Transparent Forestry */}
       <CustomBox variant="secondary">
         <Grid container spacing={1}>
@@ -217,6 +243,7 @@ const PlankReport = () => {
               We record the GPS location of the tree as further transparency.
 
             </CustomTypography.paragraph>
+            <MyMapComponent tree={treeData} />
           </Grid>
         </Grid>
       </CustomBox>
