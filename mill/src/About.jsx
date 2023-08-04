@@ -29,33 +29,29 @@ const About = () => {
         <PageContentContainer>
             
 
+         
+          
+
             <FullWidthImageContainer imageUrl={forestTwo} />
             <CustomBox variant="secondary">
                 <Grid container spacing={1}>
                     <Grid item xs={12}>
                         <CustomTypography.heading>
-                            Project background
+                            UNLEASHING CLOUD COMPUTING'S POWER
                         </CustomTypography.heading>
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.subheading>
-                            I am a sawmill owner and software engineer. This is an ongoing personal project that I started in July 2023. 
+                            Effortlessly search your inventory with custom-built filters for seamless organization.
                         </CustomTypography.subheading>
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.paragraph>
-                           My goals for the project are detailed in the frontend README.MD and I welcome your feedback and enquires. 
-                        </CustomTypography.paragraph>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomTypography.paragraph>
-                          
-                           - Andrew Cargill 
-                           
+                            The backend is built with MySQL Database with a Django (Python) API, hosted with Heroku. The Frontend is ReactJS using Matrial UI for styling, currently deployed via Github Pages.
                         </CustomTypography.paragraph>
                     </Grid>
                     <Grid container xs={12} pt={2} spacing={1}>
-                        <Grid item xs={4}>
+                        <Grid item xs={6}>
                             <CustomButton
                             onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_go/tree/main/mill")} 
                             variant="contained" 
@@ -63,7 +59,7 @@ const About = () => {
                                 FrontEnd
                             </CustomButton>
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={6}>
                             <CustomButton
                             onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_api")} 
                             variant="contained" 
@@ -72,22 +68,41 @@ const About = () => {
                                 Backend
                             </CustomButton>
                         </Grid>
-                        <Grid item xs={4}>
-                            <CustomButton
-                            onClick={() => handleButtonClick("/newplank")} 
-                            variant="contained" 
-                            fullWidth
-                            >
-                                demo
-                            </CustomButton>
-                        </Grid>
 
                     </Grid>
 
                 </Grid>
             </CustomBox>
-        
-         
+            <FullWidthImageContainer imageUrl={cloud} />
+            <CustomBox variant="dark">
+                <Grid container spacing={1} paddingBottom={4}>
+                    <Grid item xs={12}>
+                        <CustomTypography.heading>
+                            100% TRANSPARENT FORESTRY
+                        </CustomTypography.heading>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <CustomTypography.subheading>
+
+                            Introducing "Transparent Forestry" - Revolutionizing the Industry!
+                        </CustomTypography.subheading>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <CustomTypography.paragraph>
+                           Enable customers to acccess the complete information about sourced trees, from felling date to responsible individuals and precise locations. Experience unparalleled transparency and traceability for a truly distinctive offering.
+                        </CustomTypography.paragraph>
+                    </Grid>
+                    <Grid item xs={6} >
+                            <CustomButton 
+                            onClick={() => handleButtonClick("/newplank")} 
+                            variant="contained" 
+                            fullWidth
+                            >
+                                Demo
+                            </CustomButton>
+                        </Grid>
+                </Grid>
+            </CustomBox>
         </PageContentContainer>
 
     );

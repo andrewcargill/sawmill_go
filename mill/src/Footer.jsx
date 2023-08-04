@@ -58,7 +58,7 @@ const Footer = () => {
                         bottom: 0,
                         left: 0,
                         right: 0,
-                        height: expanded ? 'auto' : '25px',
+                        height: expanded ? 'auto' : '30px',
                         backgroundColor: '#286140',
                         color: '#ffffff',
                         display: 'flex',
@@ -87,7 +87,7 @@ const Footer = () => {
                             <div
                                 style={{
 
-                                    height: expanded ? 'auto' : '20px',
+                                    height: expanded ? 'auto' : '30px',
                                     backgroundColor: '#286140',
                                     color: '#ffffff',
                                     display: 'flex',

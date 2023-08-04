@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PageContentContainer from "../../components/CustomBoxes/PageContentContainer";
 import CustomBox from "../../components/CustomBoxes/CustomBoxes";
-import { Card, CardContent, CardMedia, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Alert, Card, CardContent, CardMedia, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import CustomTypography from "../../components/Typography/CustomTypography";
 import FullWidthImageContainer from '../../components/CustomBoxes/FullWidthImageContainer';
 import { Container } from "react-bootstrap";
@@ -137,6 +137,7 @@ const PlankReport = () => {
 
 
     < PageContentContainer >
+    <Alert severity="info">Demo Page — The final wood product will display a QR code linking to this page.</Alert>
       {/* Header */}
       <CustomBox variant="primary">
         <Grid container spacing={1}>

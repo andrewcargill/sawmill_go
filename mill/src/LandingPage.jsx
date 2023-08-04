@@ -10,6 +10,7 @@ import FullWidthImageContainer from './components/CustomBoxes/FullWidthImageCont
 import CustomButton from './components/Buttons/CustomButtons';
 import { useNavigate } from "react-router-dom";
 import PageContentContainer from './components/CustomBoxes/PageContentContainer';
+import Avatar from '@mui/material/Avatar';
 
 
 const LandingPage = () => {
@@ -28,44 +29,43 @@ const LandingPage = () => {
     return (
         <PageContentContainer>
             <FullWidthImageContainer imageUrl={forest} />
-            <CustomBox variant="primary">
-                <Grid container spacing={1}>
-                    <Grid item xs={12}>
-                        <CustomTypography.heading>
-                            Welcome to Sawmill go!
-                        </CustomTypography.heading>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomTypography.subheading>
-                            {/* Empower Your Artisanal Sawmill with Sawmill Go - The Ultimate Database Solution! */}
-                            An inventory management system for Artisan Sawmill Owners
-                        </CustomTypography.subheading>
-                    </Grid>
-                    
-            
-                </Grid>
-            </CustomBox>
-
-            <FullWidthImageContainer imageUrl={forestTwo} />
+            {/* New Hopme */}
             <CustomBox variant="secondary">
                 <Grid container spacing={1}>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} paddingBottom={2}>
                         <CustomTypography.heading>
-                            UNLEASHING CLOUD COMPUTING'S POWER
+                            Project background
                         </CustomTypography.heading>
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.subheading>
-                            Effortlessly search your inventory with custom-built filters for seamless organization.
+                            I am a sawmill owner and software engineer. This is an ongoing personal project that I started in July 2023. 
                         </CustomTypography.subheading>
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.paragraph>
-                            The backend is built with MySQL Database with a Django (Python) API, hosted with Heroku. The Frontend is ReactJS using Matrial UI for styling, currently deployed via Github Pages.
+                           My goals for the project are detailed in the frontend README.MD and I welcome your feedback and enquires. 
                         </CustomTypography.paragraph>
                     </Grid>
+                    <Grid item xs={12}>
+                    <Avatar alt="Cindy Baker" src={cloud} />
+                        <CustomTypography.paragraph>
+                          
+                           - Andrew Cargill 
+                           
+                        </CustomTypography.paragraph>
+
+                    </Grid>
                     <Grid container xs={12} pt={2} spacing={1}>
-                        <Grid item xs={6}>
+                        <Grid item xs={4} paddingBottom={4}>
+                            <CustomButton
+                            onClick={() => handleButtonClick("/about")} 
+                            variant="contained" 
+                            fullWidth>
+                                explore
+                            </CustomButton>
+                        </Grid>
+                        {/* <Grid item xs={4}>
                             <CustomButton
                             onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_go/tree/main/mill")} 
                             variant="contained" 
@@ -73,7 +73,7 @@ const LandingPage = () => {
                                 FrontEnd
                             </CustomButton>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={4}>
                             <CustomButton
                             onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_api")} 
                             variant="contained" 
@@ -82,41 +82,23 @@ const LandingPage = () => {
                                 Backend
                             </CustomButton>
                         </Grid>
-
-                    </Grid>
-
-                </Grid>
-            </CustomBox>
-            <FullWidthImageContainer imageUrl={cloud} />
-            <CustomBox variant="dark">
-                <Grid container spacing={1} paddingBottom={4}>
-                    <Grid item xs={12}>
-                        <CustomTypography.heading>
-                            100% TRANSPARENT FORESTRY
-                        </CustomTypography.heading>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomTypography.subheading>
-
-                            Introducing "Transparent Forestry" - Revolutionizing the Industry!
-                        </CustomTypography.subheading>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomTypography.paragraph>
-                           Discover complete information about sourced trees, from felling date to responsible individuals and precise locations. Experience unparalleled transparency and traceability for a truly distinctive offering.
-                        </CustomTypography.paragraph>
-                    </Grid>
-                    <Grid item xs={6} >
-                            <CustomButton 
+                        <Grid item xs={4}>
+                            <CustomButton
                             onClick={() => handleButtonClick("/newplank")} 
                             variant="contained" 
                             fullWidth
                             >
-                                Demo
+                                demo
                             </CustomButton>
-                        </Grid>
+                        </Grid> */}
+
+                    </Grid>
+
                 </Grid>
             </CustomBox>
+        
+         {/* end of home */}
+
         </PageContentContainer>
 
     );
