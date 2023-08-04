@@ -13,6 +13,9 @@ import { Alert, Box, Card, CardContent, CardMedia, Grid, Paper, Table, TableBody
 import CustomTypography from "../../components/Typography/CustomTypography";
 import FullWidthImageContainer from '../../components/CustomBoxes/FullWidthImageContainer';
 import { Container } from "react-bootstrap";
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import TabReport from "./TabReport";
 
 const PlankReport = () => {
   const { id } = useParams();
@@ -129,6 +132,7 @@ const PlankReport = () => {
   const formattedWidth = Number(plank.width).toString();
   const formattedLength = Number(log.length).toString();
 
+  
 
 
   return (
@@ -191,12 +195,23 @@ const PlankReport = () => {
      
     </Box>
 
+    <CustomBox>
+        <Paper>
+          <MyMapComponent tree={treeData} />
+        </Paper>
+      </CustomBox>
 
-    <MyMapComponent tree={treeData} />
-
-
-      {/*TREE  IMAGE */}
+      {/* Add Tabs */}
+      <TabReport
+      treeData ={treeData} 
+      plank={plank} 
+      formatDate = {formatDate}
+      formattedDepth = {formattedDepth}
+      formattedLength = {formattedLength}
+      formattedWidth = {formattedWidth}
+      />
     
+
       {/* Transparent Forestry */}
       <CustomBox variant="secondary">
         <Grid container spacing={1}>
@@ -247,11 +262,7 @@ const PlankReport = () => {
           </Grid>
         </Grid>
       </CustomBox>
-      <CustomBox>
-        <Paper>
-          <MyMapComponent tree={treeData} />
-        </Paper>
-      </CustomBox>
+   
 
       {/* Milling */}
       <CustomBox variant="primary">
