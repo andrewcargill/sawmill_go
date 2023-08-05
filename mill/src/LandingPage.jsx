@@ -4,13 +4,14 @@ import { Grid, Button, Container } from '@mui/material';
 import CustomTypography from './components/Typography/CustomTypography';
 import CustomBox from './components/CustomBoxes/CustomBoxes';
 import forest from './media/images/treetops.png';
-import forestTwo from './media/images/forest_mountain.png';
+import andy from './media/images/andy.png';
 import cloud from './media/images/database_structure.png';
 import FullWidthImageContainer from './components/CustomBoxes/FullWidthImageContainer';
 import CustomButton from './components/Buttons/CustomButtons';
 import { useNavigate } from "react-router-dom";
 import PageContentContainer from './components/CustomBoxes/PageContentContainer';
 import Avatar from '@mui/material/Avatar';
+import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 
 
 const LandingPage = () => {
@@ -20,11 +21,11 @@ const LandingPage = () => {
     const handleButtonClick = (route) => {
         // Check if the route starts with "http://" or "https://" to determine if it's an external link
         if (route.startsWith('http://') || route.startsWith('https://')) {
-          window.open(route, '_blank'); // Open the external link in a new tab
+            window.open(route, '_blank'); // Open the external link in a new tab
         } else {
-          navigate(route); // Navigate within your application using the useNavigate hook
+            navigate(route); // Navigate within your application using the useNavigate hook
         }
-      };
+    };
 
     return (
         <PageContentContainer>
@@ -39,29 +40,38 @@ const LandingPage = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.subheading>
-                            I am a sawmill owner and software engineer. This is an ongoing personal project that I started in July 2023. 
+                            I am a sawmill owner and software engineer. This is an ongoing personal project that I started in July 2023.
                         </CustomTypography.subheading>
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.paragraph>
-                           My goals for the project are detailed in the frontend README.MD and I welcome your feedback and enquires. 
+                           Sawmill Go is a sawmill inventory and transparent forestry management system for forest owners that practice selective cut forestry.
                         </CustomTypography.paragraph>
                     </Grid>
-                    <Grid item xs={12}>
-                    <Avatar alt="Cindy Baker" src={cloud} />
-                        <CustomTypography.paragraph>
-                          
-                           - Andrew Cargill 
-                           
-                        </CustomTypography.paragraph>
+                    <Grid container> 
+                        <Grid item >
+                        <Grid item xs={12} paddingTop={4} paddingBottom={1}>
+                            <Avatar
+                                alt="Andy Cargill"
+                                src={andy}
+                                sx={{ width: 90, height: 90 }}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <CustomTypography.paragraph>
+                                Andrew Cargill
+                            </CustomTypography.paragraph>
 
+                        </Grid>
+                        </Grid>
                     </Grid>
+
                     <Grid container xs={12} pt={2} spacing={1}>
                         <Grid item xs={4} paddingBottom={4}>
                             <CustomButton
-                            onClick={() => handleButtonClick("/about")} 
-                            variant="contained" 
-                            fullWidth>
+                                onClick={() => handleButtonClick("/about")}
+                                variant="contained"
+                                fullWidth>
                                 explore
                             </CustomButton>
                         </Grid>
@@ -96,8 +106,8 @@ const LandingPage = () => {
 
                 </Grid>
             </CustomBox>
-        
-         {/* end of home */}
+
+            {/* end of home */}
 
         </PageContentContainer>
 

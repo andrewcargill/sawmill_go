@@ -25,7 +25,7 @@ const testData = [
     // Add more test data entries here
 ];
 
-const PlankListView = () => {
+const Demo = () => {
 
     /* Pagination */
     const [plankData, setPlankData] = useState({
@@ -234,4 +234,4 @@ const PlankListView = () => {
     );
 };
 
-export default PlankListView;
+export default Demo;
