@@ -8,6 +8,8 @@ import {
     faQuoteRight
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ConstructionIcon from '@mui/icons-material/Construction';
+import CarpenterIcon from '@mui/icons-material/Carpenter';
 
 
 const ForestTabContent = (props) =>
@@ -57,24 +59,43 @@ const ForestTabContent = (props) =>
                                 <TableRow>
                                     <TableCell>Lat</TableCell>
                                     <TableCell>Lon</TableCell>
-                               
+
                                 </TableRow>
                             </TableHead>
                             {/* Entry Row */}
                             <TableBody>
                                 <TableRow>
-                                    <TableCell>{props.treeData.latitude}</TableCell>
-                                    <TableCell>{props.treeData.longitude}</TableCell>
-                                  
+                                    <TableCell>{Number(props.treeData.latitude).toFixed(5)}</TableCell>
+                                    <TableCell>{Number(props.treeData.longitude).toFixed(5)}</TableCell>
+
                                 </TableRow>
                             </TableBody>
                         </Table>
                     </TableContainer>
-                   
-
-
                 </Grid>
-               
+                <Grid item xs={12}>
+                    {/* Quote */}
+                    <Paper >
+                        <Container >
+                            <Grid container xs={12}>
+                                <Grid item xs={12} paddingBottom={1}>
+                                    <CustomTypography.subheading paddingTop={2}>
+                                        Notes from {props.plank.operator}:
+                                    </CustomTypography.subheading>
+                                </Grid>
+                                <Grid item xs={12} paddingBottom={2}>
+                                    <CustomTypography.paragraph >
+                                        <FontAwesomeIcon icon={faQuoteLeft} />
+                                        <p>
+                                            {props.treeData.reason_for_felling}
+                                        </p>
+                                        <FontAwesomeIcon icon={faQuoteRight} />
+                                    </CustomTypography.paragraph>
+                                </Grid>
+                            </Grid>
+                        </Container>
+                    </Paper>
+                </Grid>
             </Grid>
         </Container>
     </div>
@@ -85,6 +106,7 @@ const SawmillTabContent = (props) =>
     <div>
         <Grid container paddingTop={2}>
             <Grid item xs={12} paddingBottom={2} >
+
                 <CustomTypography.heading>
                     sawmill
                 </CustomTypography.heading>
@@ -192,11 +214,15 @@ const SawmillTabContent = (props) =>
     ;
 const WoodshopTabContent = () =>
     <div>
-        <Grid container paddingTop={2}>
+        <Grid container paddingTop={2} height={400}>
             <Grid item xs={12} paddingBottom={2} >
                 <CustomTypography.heading>
-                    Workshop
+                    Woodshop
                 </CustomTypography.heading>
+                <Grid container pt={2}>
+                    <Grid pr={1}>    <ConstructionIcon /> </Grid>
+                    <Grid> This module is under development</Grid>
+                </Grid>
             </Grid>
         </Grid>
     </div>

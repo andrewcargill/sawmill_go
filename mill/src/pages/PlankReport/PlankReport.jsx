@@ -132,7 +132,7 @@ const PlankReport = () => {
   const formattedWidth = Number(plank.width).toString();
   const formattedLength = Number(log.length).toString();
 
-  
+
 
 
   return (
@@ -174,50 +174,38 @@ const PlankReport = () => {
         </Grid>
       </CustomBox>
       {/*TREE IMAGE & GPS MAP */}
-      <Box p={1} sx={{ width: '100%',  display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    
-      <Grid xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: '1' }}>
-     
-        {/*Select*/}
-        <CustomTypography.heading>
-          your tree
-        </CustomTypography.heading>
-      </Grid>
+      <Box p={1} sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
-      <Grid Container style={{ maxWidth: '350px', flex: '1' }}>
-      <Card>
-        <Grid id='treeImage' item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          {/*Tree Image */}
-          <img src={treeImage} alt="Uploaded Image" height="500" style={{ }} />
+        <Grid xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: '1' }}>
+
+          {/*Select*/}
+          <CustomTypography.heading>
+            your tree
+          </CustomTypography.heading>
         </Grid>
-        </Card>
-      </Grid>
-     
-    </Box>
 
-    <CustomBox>
+        <Grid Container style={{ maxWidth: '400px', flex: '1' }}>
+          <Card>
+            <Grid id='treeImage' item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              {/*Tree Image */}
+              <img src={treeImage} alt="Uploaded Image" height="300" style={{}} />
+            </Grid>
+          </Card>
+        </Grid>
+
+      </Box>
+
+
+      <CustomBox>
         <Paper>
-          <MyMapComponent tree={treeData} />
+          <MyMapComponent tree={treeData} sx={{ maxWidth: '500px' }} />
         </Paper>
       </CustomBox>
 
-      {/* Add Tabs */}
-      <TabReport
-      treeData ={treeData} 
-      plank={plank} 
-      formatDate = {formatDate}
-      formattedDepth = {formattedDepth}
-      formattedLength = {formattedLength}
-      formattedWidth = {formattedWidth}
-      />
-    
 
       {/* Transparent Forestry */}
-      <CustomBox variant="secondary">
+      <CustomBox variant="secondary" marginBottom={2}>
         <Grid container spacing={1}>
-
-
-
           <Grid item xs={12}>
             <CustomTypography.subheading>
               Let's begin the journey.... Above is an image, taken on the day of felling, of the actual tree from which your product was produced.
@@ -238,162 +226,21 @@ const PlankReport = () => {
         </Grid>
       </CustomBox>
 
-      {/* Reason for felling */}
-      <CustomBox variant="white">
-        <Grid container spacing={1}>
-          <Grid item xs={12}>
-            <CustomTypography.heading>
-              the reason for felling <span> {species}_{id}</span>
-            </CustomTypography.heading>
-          </Grid>
-          <Grid item xs={12}>
-            <CustomTypography.subheading>
-              <FontAwesomeIcon icon={faQuoteLeft} />
-              <p>{treeData.reason_for_felling}</p>
-              <FontAwesomeIcon icon={faQuoteRight} />
-            </CustomTypography.subheading>
-          </Grid>
-          <Grid item xs={12}>
-            <CustomTypography.paragraph>
-              We record the GPS location of the tree as further transparency.
 
-            </CustomTypography.paragraph>
-            <MyMapComponent tree={treeData} />
-          </Grid>
-        </Grid>
-      </CustomBox>
-   
-
-      {/* Milling */}
-      <CustomBox variant="primary">
-        <Grid container spacing={1}>
-          <Grid item xs={12}>
-            <CustomTypography.heading>
-              Milling of <span> {species}_{id}</span>
-            </CustomTypography.heading>
-          </Grid>
-          <Grid item xs={12}>
-            <CustomTypography.subheading>
-              {treeName} was milled from a log (REF:{plank.log.tree.id}_{plank.log.id}) on {formatDate(plank.date)} by {plank.operator} at Selet15 sawmills.
-            </CustomTypography.subheading>
-          </Grid>
-        </Grid>
-      </CustomBox>
-      {/* Milling Notes - ADD PAPER CONTAINER */}
-
-      <CustomBox variant="white">
-        <Grid item xs={12} paddingBottom={2} >
-          <CustomTypography.heading>
-            sawmill
-          </CustomTypography.heading>
-        </Grid>
-        <Card >
-          <Container >
-            <Grid container spacing={3} paddingTop={2} paddingBottom={2}>
-
-              <Grid item xs={12}>
-
-                <TableContainer component={Paper} >
-                  <Table size="small" aria-label="a dense table">
-                    {/* Title Row */}
-                    <TableHead >
-                      <TableRow>
-                        <TableCell >Mill Date</TableCell>
-                        <TableCell>Operator</TableCell>
-                        <TableCell>Log ID</TableCell>
-
-                      </TableRow>
-                    </TableHead>
-
-                    {/* Entry Row */}
-                    <TableBody>
-                      <TableRow>
-                        <TableCell>{plank.date}</TableCell>
-                        <TableCell>{plank.operator}</TableCell>
-                        <TableCell>{plank.log.tree.id}P{plank.log.id}</TableCell>
-
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Grid>
-              <Grid item xs={12}>
-                <TableContainer component={Paper} >
-                  <Table size="small" aria-label="a dense table">
-                    {/* Title Row */}
-                    <TableHead >
-                      <TableRow>
-
-                        <TableCell>Width</TableCell>
-                        <TableCell>Depth</TableCell>
-                        <TableCell>Length</TableCell>
-                        <TableCell>Grade</TableCell>
-                      </TableRow>
-                    </TableHead>
-
-                    {/* Entry Row */}
-                    <TableBody>
-                      <TableRow>
-
-                        <TableCell>{formattedWidth}cm</TableCell>
-                        <TableCell>{formattedDepth}cm</TableCell>
-                        <TableCell>{formattedLength}cm</TableCell>
-                        <TableCell>{plank.wood_grade}</TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-
-                </TableContainer>
+      {/* Add Tabs */}
+      <TabReport
+        treeData={treeData}
+        plank={plank}
+        formatDate={formatDate}
+        formattedDepth={formattedDepth}
+        formattedLength={formattedLength}
+        formattedWidth={formattedWidth}
+      />
 
 
-              </Grid>
-
-              <Grid item xs={12}>
-
-                <Paper >
-                  <Container >
-                    <Grid container xs={12}>
-                      <Grid item xs={12} paddingBottom={1}>
-                        <CustomTypography.subheading paddingTop={2}>
-                          Notes from {plank.operator}:
-                        </CustomTypography.subheading>
-                      </Grid>
-                      <Grid item xs={12} paddingBottom={2}>
-                        <CustomTypography.paragraph >
-                          <FontAwesomeIcon icon={faQuoteLeft} />
-                          <p>{plank.info}</p>
-                          <FontAwesomeIcon icon={faQuoteRight} />
-                        </CustomTypography.paragraph>
-                      </Grid>
-                    </Grid>
-                  </Container>
-                </Paper>
-              </Grid>
-              <Grid item xs={12}>
-
-                <Paper >
-                  <Container >
-                    <Grid container xs={12} spacing={1} paddingBottom={2} >
-                      <Grid item xs={6}>
-                        <img src={plank.image1} alt="Image 1" style={{ width: '100%', maxWidth: '150px' }} />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <img src={plank.image2} alt="Image 2" style={{ width: '100%', maxWidth: '150px' }} />
-                      </Grid>
-                    </Grid>
-                  </Container>
-                </Paper>
-              </Grid>
-
-
-            </Grid>
-          </Container>
-        </Card>
-
-      </CustomBox>
 
       {/* Thank You */}
-      <CustomBox variant="dark">
+      <CustomBox variant="dark" mb={10}>
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <CustomTypography.heading>
