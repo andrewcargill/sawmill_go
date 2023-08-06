@@ -1,6 +1,6 @@
 // LandingPage.js
 import React from 'react';
-import { Grid, Button, Container } from '@mui/material';
+import { Grid, Button, Container, Card } from '@mui/material';
 import CustomTypography from './components/Typography/CustomTypography';
 import CustomBox from './components/CustomBoxes/CustomBoxes';
 import forest from './media/images/treetops.png';
@@ -45,24 +45,45 @@ const LandingPage = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.paragraph>
-                           Sawmill Go is a sawmill inventory and transparent forestry management system for forest owners that practice selective cut forestry.
+                            Sawmill Go is a sawmill inventory and transparent forestry management system for forest owners that practice selective cut forestry.
                         </CustomTypography.paragraph>
-                    </Grid>
-                    <Grid container> 
-                        <Grid item >
-                        <Grid item xs={12} paddingTop={4} paddingBottom={1}>
-                            <Avatar
-                                alt="Andy Cargill"
-                                src={andy}
-                                sx={{ width: 90, height: 90 }}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <CustomTypography.paragraph>
-                                Andrew Cargill
-                            </CustomTypography.paragraph>
 
-                        </Grid>
+                    </Grid>
+
+                    <Grid container xs={12} m={2}>
+                        <Card >
+
+                            <Grid item p={2}>
+                                <CustomTypography.paragraph>
+                                    The system will create an end report; which via a QR code on the end product, will provide your customer honest and clear information on why the tree was
+                                    removed from the forest, when it was milled and the persons involved in the process.
+                                </CustomTypography.paragraph>
+                            </Grid>
+                            <Grid item p={2}>
+
+                                <CustomTypography.paragraph>
+                                    The goal is to create an emotional connection the the wood products produced. A little similar to 'local grown' food products, but for wood.
+                                </CustomTypography.paragraph>
+                            </Grid>
+                        </Card>
+                    </Grid>
+
+
+                    <Grid container>
+                        <Grid item >
+                            <Grid item xs={12} paddingTop={4} paddingBottom={1}>
+                                <Avatar
+                                    alt="Andy Cargill"
+                                    src={andy}
+                                    sx={{ width: 90, height: 90 }}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <CustomTypography.paragraph>
+                                    Andrew Cargill
+                                </CustomTypography.paragraph>
+
+                            </Grid>
                         </Grid>
                     </Grid>
 
