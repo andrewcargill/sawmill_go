@@ -1,6 +1,6 @@
 // LandingPage.js
 import React from 'react';
-import { Grid, Button, Container } from '@mui/material';
+import { Grid, Button, Container, List, ListItem, ListItemAvatar, ListItemText, Avatar } from '@mui/material';
 import CustomTypography from './components/Typography/CustomTypography';
 import CustomBox from './components/CustomBoxes/CustomBoxes';
 import forest from './media/images/treetops.png';
@@ -10,6 +10,11 @@ import FullWidthImageContainer from './components/CustomBoxes/FullWidthImageCont
 import CustomButton from './components/Buttons/CustomButtons';
 import { useNavigate } from "react-router-dom";
 import PageContentContainer from './components/CustomBoxes/PageContentContainer';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ParkIcon from '@mui/icons-material/Park';
+import WorkspacesIcon from '@mui/icons-material/Workspaces';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
 
 
 const About = () => {
@@ -19,25 +24,25 @@ const About = () => {
     const handleButtonClick = (route) => {
         // Check if the route starts with "http://" or "https://" to determine if it's an external link
         if (route.startsWith('http://') || route.startsWith('https://')) {
-          window.open(route, '_blank'); // Open the external link in a new tab
+            window.open(route, '_blank'); // Open the external link in a new tab
         } else {
-          navigate(route); // Navigate within your application using the useNavigate hook
+            navigate(route); // Navigate within your application using the useNavigate hook
         }
-      };
+    };
 
     return (
         <PageContentContainer>
-            
 
-         
-          
+
+
+
 
             <FullWidthImageContainer imageUrl={forestTwo} />
             <CustomBox variant="secondary">
                 <Grid container spacing={1}>
                     <Grid item xs={12}>
                         <CustomTypography.heading>
-                            UNLEASHING CLOUD COMPUTING'S POWER
+                            Code stack
                         </CustomTypography.heading>
                     </Grid>
                     <Grid item xs={12}>
@@ -50,20 +55,25 @@ const About = () => {
                             The backend is built with MySQL Database with a Django (Python) API, hosted with Heroku. The Frontend is ReactJS using Matrial UI for styling, currently deployed via Github Pages.
                         </CustomTypography.paragraph>
                     </Grid>
+                    <Grid item xs={12}>
+                        <CustomTypography.paragraph>
+                            See the code and ReadMe files via the links below.
+                        </CustomTypography.paragraph>
+                    </Grid>
                     <Grid container xs={12} pt={2} spacing={1}>
                         <Grid item xs={6}>
                             <CustomButton
-                            onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_go/tree/main/mill")} 
-                            variant="contained" 
-                            fullWidth>
+                                onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_go/tree/main/mill")}
+                                variant="contained"
+                                fullWidth>
                                 FrontEnd
                             </CustomButton>
                         </Grid>
                         <Grid item xs={6}>
                             <CustomButton
-                            onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_api")} 
-                            variant="contained" 
-                            fullWidth
+                                onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_api")}
+                                variant="contained"
+                                fullWidth
                             >
                                 Backend
                             </CustomButton>
@@ -78,29 +88,72 @@ const About = () => {
                 <Grid container spacing={1} paddingBottom={4}>
                     <Grid item xs={12}>
                         <CustomTypography.heading>
-                            100% TRANSPARENT FORESTRY
+                            FEATURES
                         </CustomTypography.heading>
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.subheading>
 
-                            Introducing "Transparent Forestry" - Revolutionizing the Industry!
+                            The database structure consists of several main tables that form the foundation of the application's data management. Key tables include:
                         </CustomTypography.subheading>
                     </Grid>
                     <Grid item xs={12}>
-                        <CustomTypography.paragraph>
-                           Enable customers to acccess the complete information about sourced trees, from felling date to responsible individuals and precise locations. Experience unparalleled transparency and traceability for a truly distinctive offering.
-                        </CustomTypography.paragraph>
+                        <List>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <ParkIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary="Tree: Stores information about individual trees, such as date of felling, species, and location."
+
+                                />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <WorkspacesIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary="Log: Relates each tree to its corresponding log, including log length, diameter, and buck status."
+                                  
+                                />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <ClearAllIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary="Plank: Represents processed timber planks, containing details like width, depth, wood grade, images and usage type."
+
+                                />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <WaterDropIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary="MoistureCheck: Tracks moisture content checks for each plank to ensure quality control."
+
+                                />
+                            </ListItem>
+                        </List>
                     </Grid>
                     <Grid item xs={6} >
-                            <CustomButton 
-                            onClick={() => handleButtonClick("/newplank")} 
-                            variant="contained" 
+                        <CustomButton
+                            onClick={() => handleButtonClick("/newplank")}
+                            variant="contained"
                             fullWidth
-                            >
-                                Demo
-                            </CustomButton>
-                        </Grid>
+                        >
+                            Demo
+                        </CustomButton>
+                    </Grid>
                 </Grid>
             </CustomBox>
         </PageContentContainer>

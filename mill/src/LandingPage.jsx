@@ -13,6 +13,7 @@ import PageContentContainer from './components/CustomBoxes/PageContentContainer'
 import Avatar from '@mui/material/Avatar';
 import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 import ExploreIcon from '@mui/icons-material/Explore';
+import Alert from '@mui/material/Alert';
 
 
 const LandingPage = () => {
@@ -30,6 +31,9 @@ const LandingPage = () => {
 
     return (
         <PageContentContainer>
+            <CustomBox>
+              <Alert severity="success">Latest Update: Demo database is live - with report view</Alert>
+              </CustomBox>
             <FullWidthImageContainer imageUrl={forest} />
             {/* New Hopme */}
             <CustomBox variant="secondary">
@@ -41,7 +45,7 @@ const LandingPage = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.subheading>
-                            I am a sawmill owner and software engineer. This is an ongoing personal project that I started in July 2023.
+                            Welcome to SawmillGo! I am a sawmill owner and software engineer. This is an ongoing personal project that I started in July 2023.
                         </CustomTypography.subheading>
                     </Grid>
                     <Grid item xs={12}>
@@ -56,9 +60,9 @@ const LandingPage = () => {
 
                             <Grid item p={2}>
                                 <CustomTypography.paragraph>
-                                The system will create an end report that provides your customers with honest and clear information 
+                                The system will create an end report that provides customers with honest and clear information 
                                 about why the tree was removed from the forest, when it was milled, and the individuals involved in 
-                                the process. This information will be accessible to your customers via a QR code on the end product.
+                                the process. This information will be accessible to end customers via a QR code on the end product.
                                 </CustomTypography.paragraph>
                             </Grid>
                             <Grid item p={2}>
