@@ -12,6 +12,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useNavigate } from "react-router";
 import "../../../styles/plankList.css";
 import PageContentContainer from '../../../components/CustomBoxes/PageContentContainer';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const testData = [
     { id: 2, species: 'pine', grade: 2, dimensions: '30 x 2 x 400', date: '2023-06-22', logid: 2, treeid: 3, operator: 'andy cargill', info: 'perfect plank for making a table', live_edge: false, structural: true, furniture: false, general: true, image1: 'dave.jpg', image2: 'frank.jpg', water: 10 },
@@ -134,7 +135,6 @@ const PlankListView = () => {
 
     const fetchMorePlanks = () => {
         if (plankData.next) {
-            console.log('Step 3: Fetching more data...');
             fetchMoreData(plankData.next, setPlankData);
         }
     };
@@ -210,24 +210,29 @@ const PlankListView = () => {
                 </CustomBox>
             </div>
             <Container> {/* Add padding to create space */}
-                <InfiniteScroll
-                    dataLength={plankData.results.length}
-                    next={fetchMorePlanks}
-                    hasMore={!!plankData.next}
-                    loader={<h4>Loading...</h4>}
-                    endMessage={<p>No more planks to load.</p>}
-                    scrollThreshold={0.8}
-                    style={{ height: 'calc(100% - 55px)', overflowY: 'auto',  zIndex: 1 }}
-                >
-                    <Grid container spacing={2}>
-                        {plankData.results.map((data) => (
-                            <Grid item xs={12} key={data.id}>
-                                <ExpandableCard data={data} />
-                            </Grid>
-                        ))}
-                    </Grid>
-
-                </InfiniteScroll>
+                {/* Check if 'plankData.results' is defined before rendering the InfiniteScroll */}
+                {plankData.results && plankData.results.length > 0 ? (
+                    <InfiniteScroll
+                        dataLength={plankData.results.length}
+                        next={fetchMorePlanks}
+                        hasMore={!!plankData.next}
+                        loader={<CircularProgress />}
+                        endMessage={<p>No more planks to load.</p>}
+                        scrollThreshold={0.8}
+                        style={{ height: 'calc(100% - 55px)', overflowY: 'auto',  zIndex: 1 }}
+                    >
+                        <Grid container spacing={2}>
+                            {plankData.results.map((data) => (
+                                <Grid item xs={12} key={data.id}>
+                                    <ExpandableCard data={data} />
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </InfiniteScroll>
+                ) : (
+                    // Render a loading indicator or any other fallback content while waiting for the data
+                    <CircularProgress />
+                )}
             </Container>
 
         </PageContentContainer>

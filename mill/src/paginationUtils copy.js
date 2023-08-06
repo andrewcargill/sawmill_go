@@ -3,17 +3,12 @@ import axios from "axios";
 export const fetchMoreData = async (nextUrl, setPlankData) => {
   console.log("Hitting fetchMoreData:");
   try {
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    // Check if the access_token exists in localStorage before adding it to headers
-    const access_token = localStorage.getItem("access_token");
-    if (access_token) {
-      headers.Authorization = `Bearer ${access_token}`;
-    }
-
-    const { data } = await axios.get(nextUrl, { headers });
+    const { data } = await axios.get(nextUrl, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    });
 
     console.log("API Response:", data);
 

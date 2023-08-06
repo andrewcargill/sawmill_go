@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { Container, Grid, IconButton, TextField, Button, Box, CircularProgress } from '@mui/material';
+import { Container, Grid, IconButton, TextField, Button, Box } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import CustomTypography from '../../../components/Typography/CustomTypography';
@@ -12,7 +12,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useNavigate } from "react-router";
 import "../../../styles/plankList.css";
 import PageContentContainer from '../../../components/CustomBoxes/PageContentContainer';
-
+import CircularProgress from '@mui/material/CircularProgress';
 
 const testData = [
     { id: 2, species: 'pine', grade: 2, dimensions: '30 x 2 x 400', date: '2023-06-22', logid: 2, treeid: 3, operator: 'andy cargill', info: 'perfect plank for making a table', live_edge: false, structural: true, furniture: false, general: true, image1: 'dave.jpg', image2: 'frank.jpg', water: 10 },
@@ -26,7 +26,7 @@ const testData = [
     // Add more test data entries here
 ];
 
-const Demo = () => {
+const PlankListView = () => {
 
     /* Pagination */
     const [plankData, setPlankData] = useState({
@@ -135,7 +135,6 @@ const Demo = () => {
 
     const fetchMorePlanks = () => {
         if (plankData.next) {
-            console.log('Step 3: Fetching more data...');
             fetchMoreData(plankData.next, setPlankData);
         }
     };
@@ -211,11 +210,11 @@ const Demo = () => {
                 </CustomBox>
             </div>
             <Container> {/* Add padding to create space */}
-                {/* Check if 'plankData.results' is defined before rendering the InfiniteScroll */}
                 <InfiniteScroll
                     dataLength={plankData.results.length}
                     next={fetchMorePlanks}
                     hasMore={!!plankData.next}
+                    // loader={<h4>Loading...</h4>}
                     loader={<CircularProgress />}
                     endMessage={<p>No more planks to load.</p>}
                     scrollThreshold={0.8}
@@ -236,4 +235,4 @@ const Demo = () => {
     );
 };
 
-export default Demo;
+export default PlankListView;
