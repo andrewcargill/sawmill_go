@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import PageContentContainer from './components/CustomBoxes/PageContentContainer';
 import Avatar from '@mui/material/Avatar';
 import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
+import ExploreIcon from '@mui/icons-material/Explore';
 
 
 const LandingPage = () => {
@@ -45,86 +46,65 @@ const LandingPage = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.paragraph>
-                            Sawmill Go is a sawmill inventory and transparent forestry management system for forest owners that practice selective cut forestry.
+                            Sawmill Go is an inventory and transparent forestry management system, primarily for forest owners that practice selective-cut forestry.
                         </CustomTypography.paragraph>
 
                     </Grid>
 
-                    <Grid container xs={12} m={2}>
+                    <Grid container xs={12} m={2} pt={2}>
                         <Card >
 
                             <Grid item p={2}>
                                 <CustomTypography.paragraph>
-                                    The system will create an end report; which via a QR code on the end product, will provide your customer honest and clear information on why the tree was
-                                    removed from the forest, when it was milled and the persons involved in the process.
+                                The system will create an end report that provides your customers with honest and clear information 
+                                about why the tree was removed from the forest, when it was milled, and the individuals involved in 
+                                the process. This information will be accessible to your customers via a QR code on the end product.
                                 </CustomTypography.paragraph>
                             </Grid>
                             <Grid item p={2}>
 
                                 <CustomTypography.paragraph>
-                                    The goal is to create an emotional connection the the wood products produced. A little similar to 'local grown' food products, but for wood.
+                                The goal is to create an emotional connection to the wood products produced, similar to the way 'locally grown' 
+                                food products evoke a sense of connection and authenticity.
                                 </CustomTypography.paragraph>
                             </Grid>
                         </Card>
                     </Grid>
 
+                    <Container>
+                        <Grid container>
+                            <Grid item >
+                                <Grid item xs={12} paddingTop={4} paddingBottom={1}>
+                                    <Avatar
+                                        alt="Andy Cargill"
+                                        src={andy}
+                                        sx={{ width: 90, height: 90 }}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <CustomTypography.paragraph>
+                                        Andrew Cargill
+                                    </CustomTypography.paragraph>
 
-                    <Grid container>
-                        <Grid item >
-                            <Grid item xs={12} paddingTop={4} paddingBottom={1}>
-                                <Avatar
-                                    alt="Andy Cargill"
-                                    src={andy}
-                                    sx={{ width: 90, height: 90 }}
-                                />
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12}>
-                                <CustomTypography.paragraph>
-                                    Andrew Cargill
-                                </CustomTypography.paragraph>
+                        </Grid>
 
+                        <Grid container xs={12} pt={2} spacing={1}>
+                            <Grid item xs={4} paddingBottom={4}>
+                                <CustomButton
+                                    onClick={() => handleButtonClick("/about")}
+                                    variant="contained"
+
+                                    startIcon={<ExploreIcon />}
+                                    fullWidth>
+                                    explore
+                                </CustomButton>
                             </Grid>
-                        </Grid>
-                    </Grid>
 
-                    <Grid container xs={12} pt={2} spacing={1}>
-                        <Grid item xs={4} paddingBottom={4}>
-                            <CustomButton
-                                onClick={() => handleButtonClick("/about")}
-                                variant="contained"
-                                fullWidth>
-                                explore
-                            </CustomButton>
-                        </Grid>
-                        {/* <Grid item xs={4}>
-                            <CustomButton
-                            onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_go/tree/main/mill")} 
-                            variant="contained" 
-                            fullWidth>
-                                FrontEnd
-                            </CustomButton>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <CustomButton
-                            onClick={() => handleButtonClick("https://github.com/andrewcargill/sawmill_api")} 
-                            variant="contained" 
-                            fullWidth
-                            >
-                                Backend
-                            </CustomButton>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <CustomButton
-                            onClick={() => handleButtonClick("/newplank")} 
-                            variant="contained" 
-                            fullWidth
-                            >
-                                demo
-                            </CustomButton>
-                        </Grid> */}
 
-                    </Grid>
-
+                        </Grid>
+                    </Container>
                 </Grid>
             </CustomBox>
 
