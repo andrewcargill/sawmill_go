@@ -5,13 +5,11 @@ import CustomTypography from './components/Typography/CustomTypography';
 import CustomBox from './components/CustomBoxes/CustomBoxes';
 import forest from './media/images/treetops.png';
 import andy from './media/images/andy.png';
-import cloud from './media/images/database_structure.png';
 import FullWidthImageContainer from './components/CustomBoxes/FullWidthImageContainer';
 import CustomButton from './components/Buttons/CustomButtons';
 import { useNavigate } from "react-router-dom";
 import PageContentContainer from './components/CustomBoxes/PageContentContainer';
 import Avatar from '@mui/material/Avatar';
-import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 import ExploreIcon from '@mui/icons-material/Explore';
 import Alert from '@mui/material/Alert';
 
@@ -32,7 +30,7 @@ const LandingPage = () => {
     return (
         <PageContentContainer>
             <CustomBox>
-              <Alert severity="success">Latest Update: Demo database is live - with report view</Alert>
+              <Alert severity="success">Latest Update: Unstable Demo database is live - with report view</Alert>
               </CustomBox>
             <FullWidthImageContainer imageUrl={forest} />
             {/* New Hopme */}

@@ -3,14 +3,12 @@ import React from 'react';
 import { Grid, Button, Container, List, ListItem, ListItemAvatar, ListItemText, Avatar } from '@mui/material';
 import CustomTypography from './components/Typography/CustomTypography';
 import CustomBox from './components/CustomBoxes/CustomBoxes';
-import forest from './media/images/treetops.png';
 import forestTwo from './media/images/forest_mountain.png';
 import cloud from './media/images/database_structure.png';
 import FullWidthImageContainer from './components/CustomBoxes/FullWidthImageContainer';
 import CustomButton from './components/Buttons/CustomButtons';
 import { useNavigate } from "react-router-dom";
 import PageContentContainer from './components/CustomBoxes/PageContentContainer';
-import DeleteIcon from '@mui/icons-material/Delete';
 import ParkIcon from '@mui/icons-material/Park';
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
@@ -22,11 +20,11 @@ const About = () => {
     const navigate = useNavigate();
 
     const handleButtonClick = (route) => {
-        // Check if the route starts with "http://" or "https://" to determine if it's an external link
+        
         if (route.startsWith('http://') || route.startsWith('https://')) {
-            window.open(route, '_blank'); // Open the external link in a new tab
+            window.open(route, '_blank');
         } else {
-            navigate(route); // Navigate within your application using the useNavigate hook
+            navigate(route); 
         }
     };
 

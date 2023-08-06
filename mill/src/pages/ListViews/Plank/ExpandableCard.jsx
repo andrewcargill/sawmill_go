@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, Typography, styled, Rating, Grid, Dialog, DialogContent, DialogTitle, Box, Paper, Avatar, Tooltip } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
-import image1 from '../../../media/images/cloud.jpeg';
-import image2 from '../../../media/images/forest.jpeg';
 import ArticleIcon from '@mui/icons-material/Article';
 import EditIcon from '@mui/icons-material/Edit';
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useNavigate } from "react-router";
 
 
 const ExpandableCardContainer = styled(Card)(({ theme }) => ({
     marginBottom: theme.spacing(2),
     cursor: 'pointer',
-    backgroundColor: theme.palette.white.main, // Use primary color for the card header background
+    backgroundColor: theme.palette.white.main, 
 
     '@media (max-width: 600px)': {
-        marginBottom: theme.spacing(1), // Reduce bottom margin on mobile devices
+        marginBottom: theme.spacing(1),
     },
 }));
 
@@ -31,7 +28,7 @@ const CustomStarIcon = ({ value }) => {
 const ExpandableCardContent = styled(CardContent)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: theme.palette.white.main, // Use secondary color for the card content background
+    backgroundColor: theme.palette.white.main,
 }));
 
 const ExpandableCard = ({ data }) => {
@@ -54,8 +51,8 @@ const ExpandableCard = ({ data }) => {
         setOpenImageDialog(false);
     };
 
-    const wholeLength = Math.floor(data.log.length); // or use Math.round() if you want rounding
-    const wholeDepth = Math.floor(data.depth); // or use Math.round() if you want rounding
+    const wholeLength = Math.floor(data.log.length); 
+    const wholeDepth = Math.floor(data.depth); 
     const wholeWidth = Math.floor(data.width);
 
     /* Card Click */
@@ -110,10 +107,6 @@ const ExpandableCard = ({ data }) => {
                             {data.date}
                         </Typography>
 
-                        {/* <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center', textTransform: 'capitalize' }}>
-                            Op:  {data.operator}
-                        </Typography> */}
-
                     </Grid>
 
                     {/* Column 2 */}
@@ -122,22 +115,15 @@ const ExpandableCard = ({ data }) => {
 
                             Grade: {data.wood_grade}
                         </Typography>
-                        {/* 
-                        <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center', textTransform: 'capitalize' }}>
-                            Tree ID: {data.treeid}
-                        </Typography> */}
+                    
                     </Grid>
 
                     {/* Column 3 */}
                     <Grid item xs={4}>
                         <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center' }}>
 
-                            Water:  {data.water}%
+                            Water:  10%
                         </Typography>
-
-                        {/* <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center' }}>
-                            Log ID:  {data.logid}
-                        </Typography> */}
                     </Grid>
                 </Grid>
             </ExpandableCardContent>
