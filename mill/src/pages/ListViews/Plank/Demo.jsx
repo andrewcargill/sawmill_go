@@ -221,7 +221,7 @@ const Demo = () => {
                     scrollThreshold={0.8}
                     style={{ height: 'calc(100% - 55px)', overflowY: 'auto',  zIndex: 1 }}
                 >
-                    <Grid container spacing={2}>
+                    <Grid container spacing={2} minHeight={50}>
                         {plankData.results.map((data) => (
                             <Grid item xs={12} key={data.id}>
                                 <ExpandableCard data={data} />
