@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, Typography, styled, Rating, Grid, Dialog, DialogContent, DialogTitle, Box, Paper, Avatar, Tooltip } from '@mui/material';
+import { Card, CardContent, CardHeader, Typography, styled, Rating, Grid, CircularProgress, Dialog, DialogContent, DialogTitle, Box, Paper, Avatar, Tooltip } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import ArticleIcon from '@mui/icons-material/Article';
 import EditIcon from '@mui/icons-material/Edit';
@@ -10,7 +10,7 @@ import { faBlackboard } from '@fortawesome/free-solid-svg-icons';
 const ExpandableCardContainer = styled(Card)(({ theme }) => ({
     marginBottom: theme.spacing(2),
     cursor: 'pointer',
-    backgroundColor: theme.palette.white.main, 
+    backgroundColor: theme.palette.white.main,
     border: 'black 1px solid',
     borderRadius: '10px',
 
@@ -29,6 +29,8 @@ const ExpandableCard = ({ data }) => {
     const [expanded, setExpanded] = useState(false);
     const [openImageDialog, setOpenImageDialog] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
+    const [imageLoaded, setImageLoaded] = useState(false);
+    const [image2Loaded, setImage2Loaded] = useState(false);
 
     /* Handles card expanding */
     const handleCardClick = () => {
@@ -45,8 +47,8 @@ const ExpandableCard = ({ data }) => {
         setOpenImageDialog(false);
     };
 
-    const wholeLength = Math.floor(data.log.length); 
-    const wholeDepth = Math.floor(data.depth); 
+    const wholeLength = Math.floor(data.log.length);
+    const wholeDepth = Math.floor(data.depth);
     const wholeWidth = Math.floor(data.width);
 
     /* Card Click */
@@ -54,11 +56,22 @@ const ExpandableCard = ({ data }) => {
 
     const handleEditClick = () => {
         navigate(`/plank/${data.id}/edit`);
-      };
+    };
 
     const handleReportClick = () => {
         navigate(`/report/${data.id}`);
-      };
+    };
+
+    /* Image loading */
+    const handleImageLoad = () => {
+        setImageLoaded(true);
+    };
+
+    const handleImage2Load = () => {
+        setImage2Loaded(true);
+    };
+
+
 
     return (
         <ExpandableCardContainer elevation={5} onClick={handleCardClick}>
@@ -71,10 +84,10 @@ const ExpandableCard = ({ data }) => {
                 action={
                     <div sx={{ display: 'flex', height: '50px', alignItems: 'center', bgcolor: 'black', padding: '5px' }}>
                         <Tooltip title="Customer Report Preview" placement="bottom-end">
-                        <ArticleIcon fontSize="small" sx={{ marginRight: 1 }} onClick={handleReportClick}/>
+                            <ArticleIcon fontSize="small" sx={{ marginRight: 1 }} onClick={handleReportClick} />
                         </Tooltip>
                         <Tooltip title="EDIT" placement="bottom-end">
-                        <EditIcon fontSize="small" onClick={handleEditClick} />
+                            <EditIcon fontSize="small" onClick={handleEditClick} />
                         </Tooltip>
                     </div>
                 }
@@ -108,7 +121,7 @@ const ExpandableCard = ({ data }) => {
 
                             Grade: {data.wood_grade}
                         </Typography>
-                    
+
                     </Grid>
 
                     {/* Column 3 */}
@@ -124,8 +137,9 @@ const ExpandableCard = ({ data }) => {
             {expanded && (
                 <CardContent>
 
-                    <Paper elevation={3} style={{ padding: '10px', margin: '2px' }}>
-                        <Grid container spacing={2}>
+                    <Paper elevation={1} style={{ padding: '10px', margin: '2px' }}>
+                        {/* Operator / tree / Log */}
+                        <Grid container spacing={2} pb={2} pt={2}>
                             <Grid item xs={6}>
                                 <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center', textTransform: 'capitalize' }}>
                                     Op:  {data.operator}
@@ -143,19 +157,20 @@ const ExpandableCard = ({ data }) => {
 
                             </Grid>
                         </Grid>
-                    </Paper>
 
-                    <Paper elevation={3} style={{ padding: '10px', margin: '2px' }}>
-                        <Grid item xs={12}>
-                            <Typography variant="body2">Operator Notes:</Typography>
-                            <Typography variant="body2">{data.info}</Typography>
+                        <Grid container spacing={2} pb={2}>
+                            {/* Operator notes */}
+                            <Grid item xs={12}>
+                                <Typography variant="body2">Operator Notes:</Typography>
+                                <Typography variant="body2">{data.info}</Typography>
 
+                            </Grid>
                         </Grid>
 
-                    </Paper>
 
-                    <Paper elevation={3} style={{ padding: '10px', margin: '2px' }}>
-                        <Grid container spacing={2}>
+                        {/* Category */}
+
+                        <Grid container spacing={2} pb={2}>
                             <Grid item xs={6}>
                                 <Typography variant="body2">Live Edge: {data.live_edge ? 'Yes' : 'No'}</Typography>
                                 <Typography variant="body2">Structural: {data.structural ? 'Yes' : 'No'}</Typography>
@@ -168,15 +183,27 @@ const ExpandableCard = ({ data }) => {
                     </Paper>
 
 
-                    <Paper elevation={3} style={{ padding: '10px', margin: '2px' }}>
+                    <Paper elevation={1} style={{ padding: '10px', margin: '2px' }}>
                         <Grid container spacing={1} >
                             <Grid item xs={6}>
                                 {/* Thumbnail of Image1 */}
-                                <img
+                                {/* <img
                                     src={data.image1}
                                     alt="Image 1"
                                     width="100%"
                                     style={{ cursor: 'pointer' }}
+                                    onClick={() => handleImageClick(data.image1)}
+                                /> */}
+                                {/* Show loading indicator while the image is not loaded */}
+                                {!imageLoaded && <CircularProgress />}
+
+                                {/* Show the image when it's loaded */}
+                                <img
+                                    src={data.image1}
+                                    alt="Image 1"
+                                    width="100%"
+                                    style={{ cursor: 'pointer', display: imageLoaded ? 'block' : 'none' }}
+                                    onLoad={handleImageLoad} // Call handleImageLoad when the image loads
                                     onClick={() => handleImageClick(data.image1)}
                                 />
                             </Grid>
@@ -184,11 +211,15 @@ const ExpandableCard = ({ data }) => {
                             {/* Column 3 */}
                             <Grid item xs={6} >
                                 {/* Thumbnail of Image2 */}
+                                {!imageLoaded && <CircularProgress />}
+
+                                {/* Show the image when it's loaded */}
                                 <img
                                     src={data.image2}
                                     alt="Image 2"
                                     width="100%"
-                                    style={{ cursor: 'pointer' }}
+                                    style={{ cursor: 'pointer', display: imageLoaded ? 'block' : 'none' }}
+                                    onLoad={handleImage2Load} // Call handleImageLoad when the image loads
                                     onClick={() => handleImageClick(data.image2)}
                                 />
                             </Grid>
