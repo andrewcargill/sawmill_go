@@ -86,7 +86,7 @@ const ExpandableCard = ({ data }) => {
                         <Tooltip title="Customer Report Preview" placement="bottom-end">
                             <ArticleIcon fontSize="small" sx={{ marginRight: 1 }} onClick={handleReportClick} />
                         </Tooltip>
-                        <Tooltip title="EDIT" placement="bottom-end">
+                        <Tooltip title="Edit (requires login)" placement="bottom-end">
                             <EditIcon fontSize="small" onClick={handleEditClick} />
                         </Tooltip>
                     </div>

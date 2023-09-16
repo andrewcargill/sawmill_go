@@ -30,7 +30,8 @@ const LandingPage = () => {
     return (
         <PageContentContainer>
             <CustomBox>
-              <Alert severity="success">Latest Update: Unstable Demo database is live - with report view</Alert>
+              <Alert severity="success">Latest Update: Demo database is live. Loading spinners added to images. Basic report view is live.</Alert>
+              
               </CustomBox>
             <FullWidthImageContainer imageUrl={forest} />
             {/* New Hopme */}
@@ -43,12 +44,13 @@ const LandingPage = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.subheading>
-                            Welcome to SawmillGo! I am a sawmill owner and software engineer. This is an ongoing personal project that I started in July 2023.
+                            Welcome to SawmillGo! This is an ongoing personal project that I started in July 2023.
                         </CustomTypography.subheading>
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.paragraph>
-                            Sawmill Go is an inventory and transparent forestry management system, primarily for forest owners that practice selective-cut forestry.
+                            On this site I will share my progress... please do not expect an all singing and dancing end product just yet! If you are a programmer and interested in joining me on 
+                            this project please drop me an email.
                         </CustomTypography.paragraph>
 
                     </Grid>

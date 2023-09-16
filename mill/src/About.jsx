@@ -50,7 +50,7 @@ const About = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.paragraph>
-                            The backend is built with MySQL Database with a Django (Python) API, hosted with Heroku. The Frontend is ReactJS using Matrial UI for styling, currently deployed via Github Pages.
+                            The backend is built with MySQL Database with a Django (Python) API, currently hosted with Heroku. The Frontend is ReactJS using Matrial UI for styling, currently deployed via Github Pages.
                         </CustomTypography.paragraph>
                     </Grid>
                     <Grid item xs={12}>
@@ -86,7 +86,7 @@ const About = () => {
                 <Grid container spacing={1} paddingBottom={4}>
                     <Grid item xs={12}>
                         <CustomTypography.heading>
-                            FEATURES
+                            FEATURE GOALS
                         </CustomTypography.heading>
                     </Grid>
                     <Grid item xs={12}>
