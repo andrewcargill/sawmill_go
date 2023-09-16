@@ -70,68 +70,68 @@ const Demo = () => {
         setFurnitureFilter(Furniture);
         setStructuralFilter(Structural);
         handleDrawerClose();
-        fetchData();
+     
     };
 
     /* New UseEffect and Fetch Data */
     useEffect(() => {
-        fetchData();
-        console.log('main orderby', orderBy)
-    }, [searchQuery, orderBy]);
-
-    const fetchData = async () => {
+        fetchDataWithFilters();
+      }, [searchQuery, gradeFilter, logIdFilter, speciesFilter, minWidthFilter, maxWidthFilter, minDepthFilter, maxDepthFilter, generalFilter, live_edgeFilter, furnitureFilter, structuralFilter]);
+    
+      const fetchDataWithFilters = async () => {
         try {
-            const params = {
-                search: searchQuery,
-                ordering: orderBy,
-                wood_grade: gradeFilter,
-                width_min: minWidthFilter,
-                width_max: maxWidthFilter,
-                depth_min: minDepthFilter,
-                depth_max: maxDepthFilter,
-                log_id: logIdFilter,
-                species: speciesFilter,
-            };
-
-            if (generalFilter) {
-                params.general = true;
+          // Create your params object based on the filter parameters
+          const params = {
+            search: searchQuery,
+            ordering: orderBy,
+            wood_grade: gradeFilter,
+            width_min: minWidthFilter,
+            width_max: maxWidthFilter,
+            depth_min: minDepthFilter,
+            depth_max: maxDepthFilter,
+            log_id: logIdFilter,
+            species: speciesFilter,
+          };
+    
+          if (generalFilter) {
+            params.general = true;
+          }
+    
+          if (structuralFilter) {
+            params.structural = true;
+          }
+    
+          if (live_edgeFilter) {
+            params.live_edge = true;
+          }
+    
+          if (furnitureFilter) {
+            params.furniture = true;
+          }
+    
+          // Fetch data using the updated params
+          const response = await axios.get(
+            "https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/",
+            {
+              params,
+              headers: {
+                "Content-Type": "application/json",
+              },
             }
-
-            if (structuralFilter) {
-                params.structural = true;
-            }
-
-            if (live_edgeFilter) {
-                params.live_edge = true;
-            }
-
-            if (furnitureFilter) {
-                params.furniture = true;
-            }
-
-            const response = await axios.get(
-                "https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/",
-                {
-                    params,
-                    headers: {
-                        "Content-Type": "application/json",
-                        // Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-                    },
-                }
-            );
-
-            setPlankData({
-                results: response.data.results,
-                count: response.data.count,
-                next: response.data.next,
-            });
-
-            setResultCount(response.data.count);
-            console.log("UseEffect_pageload", response.data);
+          );
+    
+          setPlankData({
+            results: response.data.results,
+            count: response.data.count,
+            next: response.data.next,
+          });
+    
+          setResultCount(response.data.count);
+          console.log("UseEffect_pageload", response.data);
         } catch (error) {
-            console.error("Error fetching data:", error);
+          console.error("Error fetching data:", error);
         }
-    };
+      };
 
     const fetchMorePlanks = () => {
         if (plankData.next) {
@@ -163,7 +163,7 @@ const Demo = () => {
         setLive_edgeFilter("");
         setFurnitureFilter("");
         setStructuralFilter("");
-        fetchData();
+        
     };
     return (
 
@@ -209,7 +209,6 @@ const Demo = () => {
                             </Grid>
                         </Grid>
                     </Grid>
-
                 </CustomBox>
             </div>
             <Container> {/* Add padding to create space */}
