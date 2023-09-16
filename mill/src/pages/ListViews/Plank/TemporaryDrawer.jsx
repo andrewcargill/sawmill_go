@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SwipeableDrawer, List, ListItem, ListItemText, Grid, Button, TextField, Typography, IconButton, Paper, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
+import { SwipeableDrawer, List, ListItem, ListItemText, Grid, Button, TextField, Typography, IconButton, Paper, FormGroup, FormControlLabel, Checkbox, Container } from '@mui/material';
 import CustomDropdown from '../../../components/CustomForm/CustomDropDown';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
@@ -132,13 +132,20 @@ const TemporaryDrawer = ({ open, onClose, onSubmit, onResetFilters }) => {
       open={open}
       onClose={onClose}
       onOpen={() => { }}
+      id="container"
+      PaperProps={{
+        sx: {
+          width: '80vw', // Adjust the width as needed
+        },
+      }}
     >
       <div>
         <form ref={formRef}>
-          <Grid item xs={12}>
+         
+          <Grid className='contentContainer' item xs={12} sx={{ padding: '5px' }}>
             {/* Sort Filter */}
             {/* Title and Filter Icon */}
-            <Grid container alignItems="center" justifyContent="space-between">
+            <Grid className='headerContainer' container alignItems="center" justifyContent="space-between" >
               <Grid item>
                 <Typography variant="h6" gutterBottom>
                   Filters
@@ -316,6 +323,7 @@ const TemporaryDrawer = ({ open, onClose, onSubmit, onResetFilters }) => {
             </Grid>
 
           </Grid>
+
         </form>
       </div>
     </SwipeableDrawer>

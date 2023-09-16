@@ -8,7 +8,7 @@ const CustomBox = styled(MuiBox)(({ theme, variant }) => ({
   color: variant === 'primary' ? theme.palette.primary.contrastText : variant === 'secondary' ? theme.palette.secondary.contrastText : variant === 'dark' ? theme.palette.dark.contrastText : 'inherit',
 
   padding: theme.spacing(2),
-  // Add more styles for different variants as needed
+  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
 }));
 
 export default CustomBox;

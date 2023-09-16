@@ -19,15 +19,6 @@ const ExpandableCardContainer = styled(Card)(({ theme }) => ({
     },
 }));
 
-const CustomStarIcon = ({ value }) => {
-    return (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-            <StarIcon fontSize="small" sx={{ marginRight: 1 }} />
-            <Typography variant="body2">{value}</Typography>
-        </div>
-    );
-};
-
 const ExpandableCardContent = styled(CardContent)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
@@ -70,7 +61,7 @@ const ExpandableCard = ({ data }) => {
       };
 
     return (
-        <ExpandableCardContainer onClick={handleCardClick}>
+        <ExpandableCardContainer elevation={5} onClick={handleCardClick}>
             <CardHeader
                 title={
                     <Typography variant="body1" sx={{ marginRight: 1 }}>
@@ -101,9 +92,9 @@ const ExpandableCard = ({ data }) => {
             />
 
             <ExpandableCardContent>
-                <Grid container spacing={2}>
+                <Grid container spacing={1}>
                     {/* Column 1 */}
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
 
                         <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center' }}>
                             {data.date}
@@ -112,7 +103,7 @@ const ExpandableCard = ({ data }) => {
                     </Grid>
 
                     {/* Column 2 */}
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                         <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center' }}>
 
                             Grade: {data.wood_grade}
@@ -121,7 +112,7 @@ const ExpandableCard = ({ data }) => {
                     </Grid>
 
                     {/* Column 3 */}
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                         <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center' }}>
 
                             Water:  10%
