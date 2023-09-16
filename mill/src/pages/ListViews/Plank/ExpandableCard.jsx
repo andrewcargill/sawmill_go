@@ -4,12 +4,15 @@ import StarIcon from '@mui/icons-material/Star';
 import ArticleIcon from '@mui/icons-material/Article';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router";
+import { faBlackboard } from '@fortawesome/free-solid-svg-icons';
 
 
 const ExpandableCardContainer = styled(Card)(({ theme }) => ({
     marginBottom: theme.spacing(2),
     cursor: 'pointer',
     backgroundColor: theme.palette.white.main, 
+    border: 'black 1px solid',
+    borderRadius: '10px',
 
     '@media (max-width: 600px)': {
         marginBottom: theme.spacing(1),
@@ -69,15 +72,14 @@ const ExpandableCard = ({ data }) => {
     return (
         <ExpandableCardContainer onClick={handleCardClick}>
             <CardHeader
-
                 title={
                     <Typography variant="body1" sx={{ marginRight: 1 }}>
-                        ID: {data.id} | {data.log.tree.species.toUpperCase()} | {wholeLength} x {wholeDepth} x {wholeWidth}
+                        {data.log.tree.species}{data.id} {wholeLength}x{wholeDepth}x{wholeWidth}
                     </Typography>
                 }
                 action={
                     <div sx={{ display: 'flex', height: '50px', alignItems: 'center', bgcolor: 'black', padding: '5px' }}>
-                             <Tooltip title="Customer Report Preview" placement="bottom-end">
+                        <Tooltip title="Customer Report Preview" placement="bottom-end">
                         <ArticleIcon fontSize="small" sx={{ marginRight: 1 }} onClick={handleReportClick}/>
                         </Tooltip>
                         <Tooltip title="EDIT" placement="bottom-end">
@@ -87,7 +89,7 @@ const ExpandableCard = ({ data }) => {
                 }
                 sx={{
                     color: 'primary.contrastText',
-                    backgroundColor: 'dark.main',
+                    backgroundColor: 'primary.main',
                     fontWeight: 'bold',
                     paddingLeft: '10px',
                     paddingRight: '15px',

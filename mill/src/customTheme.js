@@ -21,9 +21,13 @@ const customTheme = createTheme({
         dark: {
             main: '#286140', // Dark Green
             contrastText: '#ffffff',
+        },
+
+        solid: {
+            main: '#286140', // Dark Green
+            contrastText: '#ffffff',
         }
 
-        // You can customize other colors here as well
     },
 
     typography: {

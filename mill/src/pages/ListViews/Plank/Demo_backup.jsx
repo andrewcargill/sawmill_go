@@ -170,7 +170,7 @@ const Demo = () => {
         <PageContentContainer id="page_container">
             
             <div classname="stuck" style={{position: 'sticky', top: '55px', left: 0, right: 0, bottom: 0, zIndex: 1 }}>
-                <CustomBox variant="white" sx={{ marginBottom: '32px' }}>
+                <CustomBox variant="primary" sx={{ marginBottom: '32px' }}>
                     <Grid container spacing={1}>
                         <Grid item xs={12}>
                             <CustomTypography.heading>
@@ -200,9 +200,7 @@ const Demo = () => {
 
                             </Grid>
                                 <Grid item xs={4}>
-                                <Button size="md" variant="contained" color="primary" onClick={handleDrawerOpen}
-                                
-                                >
+                                <Button size="md" variant="contained" color="primary" onClick={handleDrawerOpen}>
                                     filter <FilterAltIcon />
                                 </Button>
                                 <TemporaryDrawer open={drawerOpen} onClose={handleDrawerClose} onSubmit={handleFilterSubmit} onResetFilters={handleResetFilters} />
