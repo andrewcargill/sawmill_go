@@ -46,6 +46,10 @@ const customTheme = createTheme({
             },
         },
     },
+    iconSizes: {
+        small: '12px',
+        medium: '25px',
+    },
     
 });
 

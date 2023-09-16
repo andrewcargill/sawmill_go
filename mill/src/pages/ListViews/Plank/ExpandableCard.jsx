@@ -2,9 +2,15 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, Typography, styled, Rating, Grid, CircularProgress, Dialog, DialogContent, DialogTitle, Box, Paper, Avatar, Tooltip } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import ArticleIcon from '@mui/icons-material/Article';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import PersonIcon from '@mui/icons-material/Person';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import EditIcon from '@mui/icons-material/Edit';
+import WaterIcon from '@mui/icons-material/Water';
 import { useNavigate } from "react-router";
 import { faBlackboard } from '@fortawesome/free-solid-svg-icons';
+import customTheme from '../../../customTheme';
 
 
 const ExpandableCardContainer = styled(Card)(({ theme }) => ({
@@ -105,12 +111,12 @@ const ExpandableCard = ({ data }) => {
             />
 
             <ExpandableCardContent>
-                <Grid container spacing={1}>
+                <Grid container spacing={1} xs={12}>
                     {/* Column 1 */}
                     <Grid item xs={3}>
 
                         <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center' }}>
-                            {data.date}
+                           <CalendarMonthIcon fontSize={customTheme.iconSizes.small} /> {data.date}
                         </Typography>
 
                     </Grid>
@@ -119,7 +125,8 @@ const ExpandableCard = ({ data }) => {
                     <Grid item xs={2}>
                         <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center' }}>
 
-                            Grade: {data.wood_grade}
+                            <StarIcon
+                            fontSize={customTheme.iconSizes.small} /> {data.wood_grade}
                         </Typography>
 
                     </Grid>
@@ -128,10 +135,15 @@ const ExpandableCard = ({ data }) => {
                     <Grid item xs={3}>
                         <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center' }}>
 
-                            Water:  10%
+                            <WaterIcon fontSize={customTheme.iconSizes.small} /> 10%
                         </Typography>
                     </Grid>
+                    {/* Arrow up and down */}
+                    <Grid item   xs={4} sx={{ display: 'flex', justifyContent: 'right', alignItems: 'center' }}>
+                    {expanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                    </Grid>
                 </Grid>
+                
             </ExpandableCardContent>
 
             {expanded && (
@@ -142,15 +154,19 @@ const ExpandableCard = ({ data }) => {
                         <Grid container spacing={2} pb={2} pt={2}>
                             <Grid item xs={6}>
                                 <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center', textTransform: 'capitalize' }}>
-                                    Op:  {data.operator}
+                                    <PersonIcon fontSize={customTheme.iconSizes.medium} />   {data.operator}
                                 </Typography>
 
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={3}>
 
                                 <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center', textTransform: 'capitalize' }}>
                                     Tree ID: {data.log.tree.id}
                                 </Typography>
+                            
+                            </Grid>
+                            <Grid item xs={3}>
+
                                 <Typography variant="body1" fontSize="small" sx={{ color: 'white', display: 'flex', alignItems: 'center' }}>
                                     Log ID:  {data.log.id}
                                 </Typography>
@@ -186,14 +202,7 @@ const ExpandableCard = ({ data }) => {
                     <Paper elevation={1} style={{ padding: '10px', margin: '2px' }}>
                         <Grid container spacing={1} >
                             <Grid item xs={6}>
-                                {/* Thumbnail of Image1 */}
-                                {/* <img
-                                    src={data.image1}
-                                    alt="Image 1"
-                                    width="100%"
-                                    style={{ cursor: 'pointer' }}
-                                    onClick={() => handleImageClick(data.image1)}
-                                /> */}
+                                
                                 {/* Show loading indicator while the image is not loaded */}
                                 {!imageLoaded && <CircularProgress />}
 

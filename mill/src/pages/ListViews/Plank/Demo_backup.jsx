@@ -166,27 +166,27 @@ const Demo = () => {
         fetchData();
     };
     return (
-        
+
         <PageContentContainer id="page_container">
-            
-            <div classname="stuck" style={{position: 'sticky', top: '55px', left: 0, right: 0, bottom: 0, zIndex: 1 }}>
-                <CustomBox variant="primary" sx={{ marginBottom: '32px' }}>
+
+            <div classname="stuck" style={{ position: 'sticky', top: '55px', left: 0, right: 0, bottom: 0, zIndex: 1 }}>
+                <CustomBox variant="white" sx={{ marginBottom: '32px' }}>
                     <Grid container spacing={1}>
                         <Grid item xs={12}>
-                            <CustomTypography.heading>
+                            <CustomTypography.listHeading>
                                 Lumber Stock
-                            </CustomTypography.heading>
+                            </CustomTypography.listHeading>
                         </Grid>
                         <Grid container xs={12} spacing={1} alignItems="center" justifyContent="center" ml="0px">
-                        <Grid item xs={4}>
-                            Results: {resultCount}
-                                </Grid>
+                            <Grid item xs={4}>
+                                Results: {resultCount}
+                            </Grid>
                             <Grid item xs={4}>
                                 <TextField
                                     id="search-input"
                                     label="Search"
                                     type="search"
-                                    variant="standard"
+                                    variant="outlined"
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     size="small"
                                     InputProps={{
@@ -199,15 +199,16 @@ const Demo = () => {
                                 />
 
                             </Grid>
-                                <Grid item xs={4}>
-                                <Button size="md" variant="contained" color="primary" onClick={handleDrawerOpen}>
-                                    filter <FilterAltIcon />
+                            <Grid item xs={4}>
+                                <Button size="md" variant="outlined" color="primary" onClick={handleDrawerOpen}
+
+                                >
+                                    <FilterAltIcon /> Filter
                                 </Button>
                                 <TemporaryDrawer open={drawerOpen} onClose={handleDrawerClose} onSubmit={handleFilterSubmit} onResetFilters={handleResetFilters} />
                             </Grid>
                         </Grid>
                     </Grid>
-                   
                 </CustomBox>
             </div>
             <Container> {/* Add padding to create space */}
@@ -219,7 +220,7 @@ const Demo = () => {
                     loader={<CircularProgress />}
                     endMessage={<p>No more planks to load.</p>}
                     scrollThreshold={0.8}
-                    style={{ height: 'calc(100% - 55px)', overflowY: 'auto',  zIndex: 1 }}
+                    style={{ height: 'calc(100% - 55px)', overflowY: 'auto', zIndex: 1 }}
                 >
                     <Grid container spacing={2} minHeight={50}>
                         {plankData.results.map((data) => (
