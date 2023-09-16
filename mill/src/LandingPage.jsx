@@ -39,18 +39,19 @@ const LandingPage = () => {
                 <Grid container spacing={1}>
                     <Grid item xs={12} paddingBottom={2}>
                         <CustomTypography.heading>
-                            Project background
+                            Welcome to Sawmill Go!
                         </CustomTypography.heading>
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.subheading>
-                            Welcome to SawmillGo! This is an ongoing personal project that I started in July 2023.
+                            A cloud-based stock management system for artisan foresters and sawmill owners.
                         </CustomTypography.subheading>
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.paragraph>
-                            On this site I will share my progress... please do not expect an all singing and dancing end product just yet! If you are a programmer and interested in joining me on 
-                            this project please drop me an email.
+                          This system will not only manage your infentory. The system will create an end report that provides customers with honest and clear information 
+                                about why the tree was removed from the forest, when it was milled, and the individuals involved in 
+                                the process. This information will be accessible to end customers via a QR code on the end product.
                         </CustomTypography.paragraph>
 
                     </Grid>
@@ -59,17 +60,18 @@ const LandingPage = () => {
                         <Card >
 
                             <Grid item p={2}>
+                                <CustomTypography.subheading>
+                                    About the project
+                                </CustomTypography.subheading>
                                 <CustomTypography.paragraph>
-                                The system will create an end report that provides customers with honest and clear information 
-                                about why the tree was removed from the forest, when it was milled, and the individuals involved in 
-                                the process. This information will be accessible to end customers via a QR code on the end product.
+                               This is an ongoing project that we started in July 2023. I am a programmer and work alongside local sawmill owners, carpenters and forest owners in the developing of the system. 
+                               The current site is for testing, feedback and development.
                                 </CustomTypography.paragraph>
                             </Grid>
                             <Grid item p={2}>
 
                                 <CustomTypography.paragraph>
-                                The goal is to create an emotional connection to the wood products produced, similar to the way 'locally grown' 
-                                food products evoke a sense of connection and authenticity.
+                                If you would like to be involved please drop me a message.
                                 </CustomTypography.paragraph>
                             </Grid>
                         </Card>

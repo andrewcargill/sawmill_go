@@ -241,7 +241,7 @@ const ExpandableCard = ({ data }) => {
             {/* Dialog for displaying bigger image */}
             <Dialog open={openImageDialog} onClose={handleCloseImageDialog} maxWidth="md" BackdropProps={{ onClick: handleCloseImageDialog }}>
                 <DialogContent>
-                    <DialogTitle>Image Preview</DialogTitle>
+                    <DialogTitle></DialogTitle>
                     <Box display="flex" justifyContent="center">
                         <img src={selectedImage} alt="Preview" style={{ width: '100%', height: 'auto' }} onClick={handleCloseImageDialog} />
                     </Box>
