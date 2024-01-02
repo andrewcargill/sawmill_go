@@ -54,6 +54,7 @@ const Demo = () => {
     const [live_edgeFilter, setLive_edgeFilter] = useState("");
     const [furnitureFilter, setFurnitureFilter] = useState("");
     const [logIdFilter, setLogIdFilter] = useState("");
+    const [loading, setLoading] = useState(false);
 
     /* Updates states from temp drawer */
     const handleFilterSubmit = (sort, grade, logId, species, minWidth, maxWidth, minDepth, maxDepth, general, liveEdge, Furniture, Structural) => {
@@ -80,6 +81,7 @@ const Demo = () => {
     
       const fetchDataWithFilters = async () => {
         try {
+            setLoading(true);
           // Create your params object based on the filter parameters
           const params = {
             search: searchQuery,
@@ -130,8 +132,10 @@ const Demo = () => {
           console.log("UseEffect_pageload", response.data);
         } catch (error) {
           console.error("Error fetching data:", error);
+        } finally {
+            setLoading(false);
         }
-      };
+    };
 
     const fetchMorePlanks = () => {
         if (plankData.next) {
@@ -212,13 +216,19 @@ const Demo = () => {
                 </CustomBox>
             </div>
             <Container> {/* Add padding to create space */}
+            {loading && 
+            
+             <CircularProgress />
+       
+          
+            }
                 {/* Check if 'plankData.results' is defined before rendering the InfiniteScroll */}
                 <InfiniteScroll
                     dataLength={plankData.results.length}
                     next={fetchMorePlanks}
                     hasMore={!!plankData.next}
                     loader={<CircularProgress />}
-                    endMessage={<p>No more planks to load.</p>}
+                    endMessage={<p></p>}
                     scrollThreshold={0.8}
                     style={{ height: 'calc(100% - 55px)', overflowY: 'auto', zIndex: 1 }}
                 >
