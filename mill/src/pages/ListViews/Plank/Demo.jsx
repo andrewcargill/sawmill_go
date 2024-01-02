@@ -216,11 +216,9 @@ const Demo = () => {
                 </CustomBox>
             </div>
             <Container> {/* Add padding to create space */}
-            {loading && 
-            
+            {loading &&       
              <CircularProgress />
-       
-          
+
             }
                 {/* Check if 'plankData.results' is defined before rendering the InfiniteScroll */}
                 <InfiniteScroll
