@@ -34,7 +34,7 @@ const Navigation = () => {
     }
   }, [isAuth]);
 
-  const pages = ['About','Demo'];
+  const pages = ['About','Demo', 'demo_desktop'];
   const settings = ['Mill_Home', 'Tree_List', 'Log_list', 'Plank_List', 'add_plank', 'Logout'];
 
   return (
@@ -42,7 +42,6 @@ const Navigation = () => {
       <AppBar position="fixed" sx={{ backgroundColor: theme => theme.palette.white.main, boxShadow: 'none' }}>
        <Container maxWidth='lg'>
         <Toolbar disableGutters>
-
           <FingerprintIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: 'secondary.main' }} />
           <Typography
             variant="h6"

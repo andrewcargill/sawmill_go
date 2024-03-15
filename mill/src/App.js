@@ -42,6 +42,7 @@ import AddPlank from "./pages/AddData/Plank/AddPlank";
 import PageContentContainer from "./components/CustomBoxes/PageContentContainer";
 import Footer from "./Footer";
 import Demo from "./pages/ListViews/Plank/Demo";
+import DemoDesktop from "./pages/ListViews/Plank/DemoDesktop";
 
 
 const App = () => {
@@ -62,6 +63,7 @@ const App = () => {
         <Route path="product" element={<PerfectSolution />} />
         <Route path="transparent" element={<Transparent />} />
         <Route path="demo" element={<Demo />} />
+        <Route path="demo_desktop" element={<DemoDesktop />} />
 
         <Route path="home_secure" element={<SecureHome />} />
         <Route path="logout_success" element={<LoggedOut />} />

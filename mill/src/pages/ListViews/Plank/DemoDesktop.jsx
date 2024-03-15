@@ -1,25 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { Container, Grid, IconButton, TextField, Button, Box, CircularProgress } from '@mui/material';
+import { CircularProgress, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, IconButton, Button, Box } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import CustomTypography from '../../../components/Typography/CustomTypography';
 import TemporaryDrawer from './TemporaryDrawer';
-import CustomBox from '../../../components/CustomBoxes/CustomBoxes';
-import ExpandableCard from './ExpandableCard';
 import { fetchMoreData } from "../../../paginationUtils";
 import InfiniteScroll from "react-infinite-scroll-component";
 import "../../../styles/plankList.css";
 import PageContentContainer from '../../../components/CustomBoxes/PageContentContainer';
-import ExpandableCardLarge from './ExpandableCardLarge';
 
-
-
-
-
-const Demo = () => {
-
-    /* Pagination */
+const DemoDesktop = () => {
+    // Your state definitions and useEffect hooks remain unchanged
     const [plankData, setPlankData] = useState({
         results: [],
         count: 0,
@@ -160,81 +151,88 @@ const Demo = () => {
         setStructuralFilter("");
         
     };
+    const columnsTemplate = [
+        {
+            label: "ID",
+            dataKey: "id",
+        },
+        {
+            label: "Species",
+            dataKey: "log.tree.species", // Assuming nested access is required
+        },
+        {
+            label: "Width",
+            dataKey: "width",
+        },
+        {
+            label: "Depth",
+            dataKey: "depth",
+        },
+        {
+            label: "Grade",
+            dataKey: "wood_grade",
+        },
+        {
+            label: "Length",
+            dataKey: "log.length",
+        },
+        {
+            label: "Sawmill Info",
+            dataKey: "info",
+        },
+      
+    ];
+
+    // Function to dynamically access nested object properties
+    const getValueByPath = (object, path) => {
+        return path.split('.').reduce((acc, part) => acc && acc[part], object);
+    };
+
+    // Function to render table rows based on the columns template
+    const renderTableRows = (data) => {
+        return (
+            <TableRow key={data.id}>
+                {columnsTemplate.map(({ label, dataKey }) => (
+                    <TableCell key={label} align="right">
+                        {getValueByPath(data, dataKey)}
+                    </TableCell>
+                ))}
+            </TableRow>
+        );
+    };
+
     return (
-
         <PageContentContainer id="page_container">
-
-            <div classname="stuck" style={{ position: 'sticky', top: '55px', left: 0, right: 0, bottom: 0, zIndex: 1 }}>
-                <CustomBox variant="white" sx={{ marginBottom: '32px' }}>
-                    <Grid container spacing={1}>
-                        <Grid item xs={12}>
-                            <CustomTypography.listHeading>
-                                Lumber Stock
-                            </CustomTypography.listHeading>
-                        </Grid>
-                        <Grid container xs={12} spacing={1} alignItems="center" justifyContent="center" ml="0px">
-                            <Grid item xs={4}>
-                                Results: {resultCount}
-                            </Grid>
-                            <Grid item xs={4}>
-                                <TextField
-                                    id="search-input"
-                                    label="Search"
-                                    type="search"
-                                    variant="outlined"
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    size="small"
-                                    InputProps={{
-                                        endAdornment: (
-                                            <IconButton size="small" type="submit" aria-label="search">
-                                                <SearchIcon />
-                                            </IconButton>
-                                        ),
-                                    }}
-                                />
-
-                            </Grid>
-                            <Grid item xs={4}>
-                                <Button size="md" variant="outlined" color="primary" onClick={handleDrawerOpen}
-
-                                >
-                                    <FilterAltIcon /> Filter
-                                </Button>
-                                <TemporaryDrawer open={drawerOpen} onClose={handleDrawerClose} onSubmit={handleFilterSubmit} onResetFilters={handleResetFilters} />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </CustomBox>
-            </div>
-            <Container> {/* Add padding to create space */}
-            {loading &&       
-             <CircularProgress />
-
-            }
-                {/* Check if 'plankData.results' is defined before rendering the InfiniteScroll */}
+            {/* Filter UI and loading indicator here */}
+            <Container>
+                {loading && <CircularProgress />}
                 <InfiniteScroll
                     dataLength={plankData.results.length}
                     next={fetchMorePlanks}
                     hasMore={!!plankData.next}
                     loader={<CircularProgress />}
-                    endMessage={<p></p>}
-                    scrollThreshold={0.8}
-                    style={{ height: 'calc(100% - 55px)', overflowY: 'auto', zIndex: 1 }}
+                    endMessage={<p style={{ textAlign: 'center' }}><b>You have seen it all</b></p>}
+                    scrollableTarget="scrollableDiv"
                 >
-                    <Grid container spacing={2} minHeight={50}>
-                        {plankData.results.map((data) => (
-                            <Grid item xs={12} key={data.id}>
-                         
-                            <ExpandableCardLarge data={data} />
-                            </Grid>
-                        ))}
-                    </Grid>
-
+                    <TableContainer component={Paper} style={{ maxHeight: 440, overflowX: 'auto' }}>
+                        <Table stickyHeader aria-label="sticky table">
+                            <TableHead>
+                                <TableRow>
+                                    {/* Dynamically create table headers */}
+                                    {columnsTemplate.map(({ label }) => (
+                                        <TableCell key={label} align="right">{label}</TableCell>
+                                    ))}
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {plankData.results.map(renderTableRows)}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
                 </InfiniteScroll>
             </Container>
-
         </PageContentContainer>
     );
 };
 
-export default Demo;
+export default DemoDesktop;
