@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { Container, Grid, IconButton, TextField, Button, Box, CircularProgress } from '@mui/material';
+import { Container, Grid, IconButton, TextField, Button, Box, CircularProgress, useTheme, useMediaQuery } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import CustomTypography from '../../../components/Typography/CustomTypography';
@@ -25,6 +25,9 @@ const Demo = () => {
         count: 0,
         next: null,
     });
+
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up('md'));
 
 
     /* Open/close Temp. Drawer */
@@ -224,8 +227,9 @@ const Demo = () => {
                     <Grid container spacing={2} minHeight={50}>
                         {plankData.results.map((data) => (
                             <Grid item xs={12} key={data.id}>
-                         
-                            <ExpandableCardLarge data={data} />
+                            
+                            {!matches && <ExpandableCard data={data} />}
+                            {matches && <ExpandableCardLarge data={data} />}
                             </Grid>
                         ))}
                     </Grid>
