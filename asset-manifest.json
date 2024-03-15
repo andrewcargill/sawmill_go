@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/sawmill_go/static/css/main.4125f3a7.css",
+    "main.js": "/sawmill_go/static/js/main.e35c4169.js",
+    "static/js/787.90f69282.chunk.js": "/sawmill_go/static/js/787.90f69282.chunk.js",
+    "static/media/treetops.png": "/sawmill_go/static/media/treetops.b713e0264785b2ef72b1.png",
+    "static/media/forest_mountain.png": "/sawmill_go/static/media/forest_mountain.72d92a0a7cc1eb6dc0be.png",
+    "static/media/andy.png": "/sawmill_go/static/media/andy.a3742371fd8c2e5f2d78.png",
+    "static/media/database_structure.png": "/sawmill_go/static/media/database_structure.6d278d6242b58a806bc3.png",
+    "index.html": "/sawmill_go/index.html",
+    "main.4125f3a7.css.map": "/sawmill_go/static/css/main.4125f3a7.css.map",
+    "main.e35c4169.js.map": "/sawmill_go/static/js/main.e35c4169.js.map",
+    "787.90f69282.chunk.js.map": "/sawmill_go/static/js/787.90f69282.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4125f3a7.css",
+    "static/js/main.e35c4169.js"
+  ]
+}
