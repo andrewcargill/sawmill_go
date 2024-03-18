@@ -51,6 +51,18 @@
     z-index: 2 !important; /* Ensure it's above other content */
     border-right: 1px solid #e0e0e0; /* Optional, for visual separation */
   }
+
+  /* InfinateScroll */
+  .infinite-scroll-component__outerdiv {
+  
+    width: 100%;
+  }
+  
+  .infinite-scroll-component {
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+  }
   
   
   @keyframes App-logo-spin {

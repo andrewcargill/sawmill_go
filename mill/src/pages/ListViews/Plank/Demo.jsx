@@ -17,7 +17,7 @@ import CustomTypography from "../../../components/Typography/CustomTypography";
 import TemporaryDrawer from "./TemporaryDrawer";
 import CustomBox from "../../../components/CustomBoxes/CustomBoxes";
 import ExpandableCard from "./ExpandableCard";
-import { fetchMoreData } from "../../../paginationUtils";
+import { fetchMoreData } from "../../../paginationUtilsNoAuth";
 import InfiniteScroll from "react-infinite-scroll-component";
 import "../../../styles/plankList.css";
 import PageContentContainer from "../../../components/CustomBoxes/PageContentContainer";
@@ -261,30 +261,33 @@ const Demo = () => {
         </CustomBox>
       </div>
       
-      <Container>
+      <div style={{minHeight: 200, paddingBottom: '100px' }}>
         {" "}
         {/* Add padding to create space */}
         {loading && <CircularProgress />}
         {/* Check if 'plankData.results' is defined before rendering the InfiniteScroll */}
+     
         <InfiniteScroll
           dataLength={plankData.results.length}
           next={fetchMorePlanks}
           hasMore={!!plankData.next}
-          loader={<CircularProgress />}
-          endMessage={<p></p>}
-          scrollThreshold={0.8}
-          style={{ height: "calc(100% - 55px)", overflowY: "auto", zIndex: 1 }}
+          loader={'Loading...'}
+          endMessage={'End of results'}
+          // scrollThreshold={0.8}
+          // style={{ height: "calc(100% - 55px)", overflowY: "auto", zIndex: 1 }}
+         
         >
-          <Grid container spacing={2} minHeight={50}>
+         <Grid container spacing={2} paddingTop={2}>
             {plankData.results.map((data) => (
               <Grid item xs={12} key={data.id}>
                 {!matches && <ExpandableCard data={data} />}
                 {matches && <ExpandableCardLarge data={data} />}
               </Grid>
             ))}
-          </Grid>
+        </Grid>
         </InfiniteScroll>
-      </Container>
+   
+      </div>
     </PageContentContainer>
   );
 };
