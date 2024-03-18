@@ -54,6 +54,8 @@ const Demo = () => {
   const [logIdFilter, setLogIdFilter] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   /* Updates states from temp drawer */
   const handleFilterSubmit = (
     sort,
@@ -124,7 +126,7 @@ const Demo = () => {
       if (furnitureFilter) params.furniture = true;
 
       const response = await axios.get(
-        "https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/",
+        `${API_BASE_URL}/api/plank/`,
         {
           params,
           headers: { "Content-Type": "application/json" },

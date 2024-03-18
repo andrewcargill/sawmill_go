@@ -15,13 +15,6 @@ import {
   Button,
   Box,
   Typography,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Checkbox,
-  ListItemText,
-  OutlinedInput,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
@@ -30,67 +23,6 @@ import { fetchMoreData } from "../../../paginationUtils";
 import InfiniteScroll from "react-infinite-scroll-component";
 import "../../../styles/plankList.css";
 import PageContentContainer from "../../../components/CustomBoxes/PageContentContainer";
-import TableRowComponent from "./Components/TableRowComponent";
-import TableHeader from "./Components/TableHeader";
-
-const columnsTemplate = [
-  {
-    label: "ID",
-    dataKey: "id",
-  },
-  {
-    label: "Species",
-    dataKey: "log.tree.species", // Assuming nested access is required
-  },
-  {
-    label: "Width",
-    dataKey: "width",
-  },
-  {
-    label: "Depth",
-    dataKey: "depth",
-  },
-  {
-    label: "Grade",
-    dataKey: "wood_grade",
-  },
-  {
-    label: "Length",
-    dataKey: "log.length",
-  },
-  {
-    label: "Sawmill Info",
-    dataKey: "info",
-  },
-  {
-    label: "Date Milled",
-    dataKey: "date",
-  },
-  {
-    label: "Operator",
-    dataKey: "operator",
-  },
-  {
-    label: "Tree ID",
-    dataKey: "log.tree.id",
-  },
-  {
-    label: "Log ID",
-    dataKey: "log.id",
-  },
-  {
-    label: "Date Felled",
-    dataKey: "log.tree.date",
-  },
-  {
-    label: "reason Felled",
-    dataKey: "log.tree.reason_for_felling",
-  },
-  {
-    label: "Tree Age",
-    dataKey: "log.tree.age",
-  },
-];
 
 const DemoDesktop = () => {
   // Your state definitions and useEffect hooks remain unchanged
@@ -102,15 +34,6 @@ const DemoDesktop = () => {
 
   /* Open/close Temp. Drawer */
   const [drawerOpen, setDrawerOpen] = useState(false);
-
-  /* Show and hide columns */
-  const [visibleColumns, setVisibleColumns] = useState(
-    new Array(columnsTemplate.length).fill(true)
-  );
-
-  /* Manage Visibility of Columns */
-  const [selectedColumns, setSelectedColumns] = useState(columnsTemplate.map((_, index) => index)); 
-
 
   /* States to use */
   const [searchQuery, setSearchQuery] = useState("");
@@ -266,94 +189,103 @@ const DemoDesktop = () => {
     setFurnitureFilter("");
     setStructuralFilter("");
   };
-  
+  const columnsTemplate = [
+    {
+      label: "ID",
+      dataKey: "id",
+    },
+    {
+      label: "Species",
+      dataKey: "log.tree.species", // Assuming nested access is required
+    },
+    {
+      label: "Width",
+      dataKey: "width",
+    },
+    {
+      label: "Depth",
+      dataKey: "depth",
+    },
+    {
+      label: "Grade",
+      dataKey: "wood_grade",
+    },
+    {
+      label: "Length",
+      dataKey: "log.length",
+    },
+    {
+      label: "Sawmill Info",
+      dataKey: "info",
+    },
+    {
+      label: "Date Milled",
+      dataKey: "date",
+    },
+    {
+      label: "Operator",
+      dataKey: "operator",
+    },
+    {
+      label: "Tree ID",
+      dataKey: "log.tree.id",
+    },
+    {
+      label: "Log ID",
+      dataKey: "log.id",
+    },
+    {
+      label: "Date Felled",
+      dataKey: "log.tree.date",
+    },
+    {
+      label: "reason Felled",
+      dataKey: "log.tree.reason_for_felling",
+    },
+    {
+      label: "Tree Age",
+      dataKey: "log.tree.age",
+    },
+  ];
 
   // Function to dynamically access nested object properties
   const getValueByPath = (object, path) => {
     return path.split(".").reduce((acc, part) => acc && acc[part], object);
   };
 
-  // Function to show or hide columns
-  const toggleColumnVisibility = (index) => {
-    setVisibleColumns((currentVisibleColumns) =>
-      currentVisibleColumns.map((isVisible, columnIndex) =>
-        index === columnIndex ? !isVisible : isVisible
-      )
-    );
-  };
-
-  // Handle visaibility of columns
-  const handleColumnVisibilityChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setSelectedColumns(typeof value === 'string' ? value.split(',') : value);
-
-    // Update visibleColumns based on selection
-    setVisibleColumns(
-      columnsTemplate.map((_, index) => value.includes(index))
-    );
-  };
-
   // Function to render table rows based on the columns template
   const renderTableRows = (data) => {
     return (
       <TableRow key={data.id}>
-        {columnsTemplate.map(
-          ({ label, dataKey }, index) => (
-            console.log("TableIndex", index),
-            (
-              <TableCell
-                key={label}
-                align="left"
-                style={{
-                  whiteSpace: "nowrap",
-                  padding: "8px 16px",
-                }}
-                className={index === 0 ? "stickyColumn" : ""} // Apply stickyColumn class to the first cell
-              >
-                {getValueByPath(data, dataKey)}
-              </TableCell>
-            )
-          )
-        )}
-      </TableRow>
+      {columnsTemplate.map(({ label, dataKey }, index) => (
+        console.log("TableIndex", index),
+        
+        <TableCell 
+          key={label} 
+          align="left" 
+          style={{
+            whiteSpace: 'nowrap',
+            padding: '8px 16px',
+          }}
+         
+          className={index === 0 ? "stickyColumn" : ""} // Apply stickyColumn class to the first cell
+        >
+          {getValueByPath(data, dataKey)}
+        </TableCell>
+      
+      ))}
+    </TableRow>
     );
   };
 
-
   return (
     <PageContentContainer id="page_container">
-      <Box
-        display="flex"
-        p={"50px 0"}
-        justifyContent="space-between"
-        alignItems="center"
-      >
+      {/* Filter UI and loading indicator here */}
+      <Box display="flex" p={'50px 0'} justifyContent="space-between" alignItems="center">
         <Typography variant="h5" component="h1">
-          Header
+         Header
         </Typography>
-        {/* Select Columns */}
-        <FormControl sx={{ m: 1, width: 300 }}>
-          <InputLabel id="demo-multiple-checkbox-label">Columns</InputLabel>
-          <Select
-            labelId="demo-multiple-checkbox-label"
-            id="demo-multiple-checkbox"
-            multiple
-            value={selectedColumns}
-            onChange={handleColumnVisibilityChange}
-            input={<OutlinedInput label="Columns" />}
-            renderValue={(selected) => selected.map(index => columnsTemplate[index].label).join(', ')}
-          >
-            {columnsTemplate.map((column, index) => (
-              <MenuItem key={index} value={index}>
-                <Checkbox checked={selectedColumns.indexOf(index) > -1} />
-                <ListItemText primary={column.label} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
+        </Box>
       <Container>
         {loading && <CircularProgress />}
         <InfiniteScroll
@@ -366,34 +298,34 @@ const DemoDesktop = () => {
               <b>All data loaded</b>
             </p>
           }
-          scrollableTarget="scrollableDiv"
+          scrollableTarget="scrollableDiv" // Ensure this matches the ID of the TableContainer
         >
+          {loading && <CircularProgress />}
           <TableContainer
             component={Paper}
             style={{ height: "80vh", overflowY: "auto" }}
             id="scrollableDiv"
           >
-            <Table
-              stickyHeader
-              aria-label="sticky table"
-              style={{ minWidth: "1200px" }}
-            >
-              <TableHeader
-                columnsTemplate={columnsTemplate}
-                toggleColumnVisibility={toggleColumnVisibility}
-                visibleColumns={visibleColumns}
-              />
-              <TableBody>
-                {plankData.results.map((data) => (
-                  <TableRowComponent
-                    key={data.id}
-                    data={data}
-                    columnsTemplate={columnsTemplate}
-                    getValueByPath={getValueByPath}
-                    visibleColumns={visibleColumns}
-                  />
-                ))}
-              </TableBody>
+            <Table stickyHeader aria-label="sticky table" style={{ minWidth: '1200px' }}>
+              <TableHead>
+                <TableRow>
+                  {columnsTemplate.map(({ label }, index) => (
+                     console.log("TableHeader", index),
+                    <TableCell 
+                    key={label} 
+                    align="left" 
+                    style={{
+                     
+                      textOverflow: 'ellipsis',
+                    }}
+                    className={index === 0 ? "stickyColumnHeader" : "tableHeader"} // Apply stickyColumn class to the first cell
+                  >
+                    {label}
+                  </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>{plankData.results.map(renderTableRows)}</TableBody>
             </Table>
           </TableContainer>
         </InfiniteScroll>

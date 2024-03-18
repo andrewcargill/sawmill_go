@@ -36,7 +36,7 @@ const Footer = () => {
     };
 
     return (
-        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}>
+        <div style={{ zIndex: 99, position: 'fixed', bottom: 0, left: 0, right: 0 }}>
             <PageContentContainer
                 onClick={toggleFooter}
               

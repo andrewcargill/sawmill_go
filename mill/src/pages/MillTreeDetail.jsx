@@ -34,7 +34,7 @@ const TreeDetail = () => {
         console.error("Error fetching tree:", error);
       }
     };
-    
+
     fetchTree();
   }, [id]);
 
@@ -54,7 +54,7 @@ const TreeDetail = () => {
             <h2>Tree {id} Info</h2>
           </Col>
           <Col xs={3}>
-          <Button onClick={handleGoBack}>BACK</Button>
+            <Button onClick={handleGoBack}>BACK</Button>
           </Col>
           <Col xs={3}>
             <Link to={`/tree/${tree.id}/edit`}>

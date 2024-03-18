@@ -197,7 +197,9 @@ const ExpandableCardLarge = ({ data }) => {
               <Grid item container xs={4}>
               <Paper elevation={3} sx={{ width: "100%", padding: "10px" }}>
                 {/* Edit & Report Buttons */}
+                
                 <Grid container justifyContent="flex-end" spacing={1}>
+                  ADD SIBLINGS HERE
                   <Grid item>
                     <Tooltip title="Edit (requires login)">
                       <IconButton onClick={handleEditClick}>

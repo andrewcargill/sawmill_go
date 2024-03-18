@@ -27,6 +27,31 @@
   .App-link {
     color: #61dafb;
   }
+
+  /* DemoDesktop Table */
+  .stickyColumn {
+    position: sticky;
+    left: 0;
+    background-color:  #edf7ed !important;; /* Match your theme's background or set as needed */
+    z-index: 1; /* Ensure it's above other content */
+    border-right: 1px solid #e0e0e0; /* Optional, for visual separation */
+  }
+
+  .stickyColumnHeader {
+    position: sticky;
+    left: 0;
+    background-color: #79c002 !important; /* Match your theme's background or set as needed */
+    z-index: 5 !important;  /* Ensure it's above other content */
+    border-right: 1px solid #e0e0e0; /* Optional, for visual separation */
+  }
+
+  .tableHeader {
+    left: 0;
+    background-color: #79c002 !important; /* Match your theme's background or set as needed */
+    z-index: 2 !important; /* Ensure it's above other content */
+    border-right: 1px solid #e0e0e0; /* Optional, for visual separation */
+  }
+  
   
   @keyframes App-logo-spin {
     from {
