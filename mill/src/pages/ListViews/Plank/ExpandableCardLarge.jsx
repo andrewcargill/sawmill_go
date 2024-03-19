@@ -122,9 +122,9 @@ const ExpandableCardLarge = ({ data }) => {
   return (
     <ExpandableCardContainer elevation={5} onClick={handleCardClick}>
       {/* On Load GUI */}
-      <Grid container bgcolor={"#79c001"} p={1}>
+      <Grid container bgcolor={"dark.main"} p={1}>
         <Grid item xs={1.5} lg={1} justifyContent="space-between">
-          <Typography variant="body1" gutterBottom p={2}>
+          <Typography color={'white.main'} variant="body1" gutterBottom p={2}>
             {data.log.tree.species} {data.id}
           </Typography>
         </Grid>

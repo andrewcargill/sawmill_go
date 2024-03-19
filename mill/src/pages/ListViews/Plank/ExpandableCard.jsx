@@ -99,7 +99,7 @@ const ExpandableCard = ({ data }) => {
                 }
                 sx={{
                     color: 'primary.contrastText',
-                    backgroundColor: 'primary.main',
+                    backgroundColor: 'dark.main',
                     fontWeight: 'bold',
                     paddingLeft: '10px',
                     paddingRight: '15px',

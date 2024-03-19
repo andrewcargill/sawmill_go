@@ -22,6 +22,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import "../../../styles/plankList.css";
 import PageContentContainer from "../../../components/CustomBoxes/PageContentContainer";
 import ExpandableCardLarge from "./ExpandableCardLarge";
+import AllResultsText from "../../../components/ApiDataComponents/AllResultsText";
+import LoadingSpinner from "../../../components/ApiDataComponents/LoadingSpinner";
 
 const Demo = () => {
   /* Pagination */
@@ -264,15 +266,15 @@ const Demo = () => {
       <div style={{minHeight: 200, paddingBottom: '100px' }}>
         {" "}
         {/* Add padding to create space */}
-        {loading && <CircularProgress />}
+        {loading && <LoadingSpinner />}
         {/* Check if 'plankData.results' is defined before rendering the InfiniteScroll */}
      
         <InfiniteScroll
           dataLength={plankData.results.length}
           next={fetchMorePlanks}
           hasMore={!!plankData.next}
-          loader={'Loading...'}
-          endMessage={'End of results'}
+          loader={<LoadingSpinner />}
+          endMessage={<AllResultsText />}
           // scrollThreshold={0.8}
           // style={{ height: "calc(100% - 55px)", overflowY: "auto", zIndex: 1 }}
          
