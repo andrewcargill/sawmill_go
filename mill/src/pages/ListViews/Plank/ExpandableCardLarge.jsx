@@ -34,6 +34,7 @@ import { faBlackboard } from "@fortawesome/free-solid-svg-icons";
 import ImageGallery from "react-image-gallery";
 import customTheme from "../../../customTheme";
 import { FormControl } from "@mui/material";
+import PlankSiblings from "./Components/PlankSiblings";
 
 const ExpandableCardContainer = styled(Card)(({ theme }) => ({
   marginBottom: theme.spacing(-1),
@@ -196,10 +197,14 @@ const ExpandableCardLarge = ({ data }) => {
 
               <Grid item container xs={4}>
               <Paper elevation={3} sx={{ width: "100%", padding: "10px" }}>
+              <Typography variant="h6" component="h6">
+                    All lumber of parent Log {data.log.id}
+                  </Typography>
                 {/* Edit & Report Buttons */}
                 
-                <Grid container justifyContent="flex-end" spacing={1}>
-                  ADD SIBLINGS HERE
+                <Grid container justifyContent={'center'} spacing={1}>
+
+                  <PlankSiblings logId={data.log.id} currentPlank={data.id} />
                   <Grid item>
                     <Tooltip title="Edit (requires login)">
                       <IconButton onClick={handleEditClick}>

@@ -43,6 +43,8 @@ import PageContentContainer from "./components/CustomBoxes/PageContentContainer"
 import Footer from "./Footer";
 import Demo from "./pages/ListViews/Plank/Demo";
 import DemoDesktop from "./pages/ListViews/Plank/DemoDesktop";
+import PlanksByLog from "./components/PlanksByLog";
+import PlankSiblings from "./pages/ListViews/Plank/Components/PlankSiblings";
 
 
 const App = () => {
@@ -99,6 +101,7 @@ const App = () => {
         <Route path="newplank" element={<PlankListView />} />
         <Route path="/plank/:id" element={<PlankDetail />} />
         <Route path="/plank/:id/edit" element={<MillEditPlank />} />
+
 
         <Route path="/report/:id" element={<PlankReport />} />
 
