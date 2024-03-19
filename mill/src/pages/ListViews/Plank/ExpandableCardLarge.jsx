@@ -35,6 +35,7 @@ import ImageGallery from "react-image-gallery";
 import customTheme from "../../../customTheme";
 import { FormControl } from "@mui/material";
 import PlankSiblings from "./Components/PlankSiblings";
+import PlankMoisture from "./Components/PlankMoisture";
 
 const ExpandableCardContainer = styled(Card)(({ theme }) => ({
   marginBottom: theme.spacing(-1),
@@ -191,6 +192,8 @@ const ExpandableCardLarge = ({ data }) => {
                     >
                       {data.info}
                     </Typography>
+
+                    <PlankMoisture plankId={data.id} />
                   </Grid>
                 </Paper>
               </Grid>

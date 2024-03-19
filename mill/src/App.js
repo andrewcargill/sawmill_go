@@ -45,6 +45,7 @@ import Demo from "./pages/ListViews/Plank/Demo";
 import DemoDesktop from "./pages/ListViews/Plank/DemoDesktop";
 import PlanksByLog from "./components/PlanksByLog";
 import PlankSiblings from "./pages/ListViews/Plank/Components/PlankSiblings";
+import PlankMoisture from "./pages/ListViews/Plank/Components/PlankMoisture";
 
 
 const App = () => {
@@ -110,7 +111,8 @@ const App = () => {
         <Route path="mill_add_logs" element={<MillAddLogs />} />
         <Route path="mill_add_trees" element={<MillAddTrees />} />
         <Route path="mill_add_moisture" element={<MillAddMoisture />} />
-        <Route path="moisture_by_planks" element={<MoistureByPlank />} />
+        <Route path="moisture" element={<PlankMoisture />} />
+        
       </Routes>
       <Footer />
       </Box>
