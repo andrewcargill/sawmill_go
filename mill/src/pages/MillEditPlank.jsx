@@ -10,6 +10,7 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import css from "../styles/millAddPlank.module.css";
 import axios from "axios";
+import LoadingSpinner from "../components/ApiDataComponents/LoadingSpinner";
 
 const MillEditPlank = () => {
   const { id } = useParams();
@@ -33,6 +34,7 @@ const MillEditPlank = () => {
   const [image2, setImage2] = useState("");
   const [success, setSuccess] = useState(false);
   const [postId, setPostId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // Effect to fetch the plank data when the component mounts
   useEffect(() => {
@@ -75,6 +77,7 @@ const MillEditPlank = () => {
   // Function to handle form submission for updating the plank
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       
@@ -104,9 +107,11 @@ const MillEditPlank = () => {
         }
       );
 
-      setSuccess(true); // Set success status to true
+      setSuccess(true);
     } catch (error) {
       console.error("Error creating data:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -158,7 +163,7 @@ const MillEditPlank = () => {
   return (
     <div className={css.page}>
       <div>
-        <h1>Sawmill Go - Add Plank</h1>
+        <h1>Sawmill Go - Edit Plank</h1>
       </div>
       <div className={css.container}>
         <form onSubmit={handleSubmit}>
@@ -336,7 +341,14 @@ const MillEditPlank = () => {
           {success && (
             <Alert key="success" variant="success">
               <p>Success! Data Updated.</p>
-              <div className={css.plankId}>Plank ID: {id}</div>{" "}
+            
+            </Alert>
+          )}
+          {loading && (
+            <Alert key="loading" variant="info">
+              <p>Saving Chanes, Please wait.</p>
+              <LoadingSpinner />
+             
             </Alert>
           )}
           <Row>
@@ -344,7 +356,7 @@ const MillEditPlank = () => {
               <Button
                 id={css.button}
                 variant="success"
-                disabled={!logIdExists}
+                disabled={loading || logIdExists?.exists}
                 type="submit"
               >
                 save
