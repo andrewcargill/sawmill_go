@@ -22,6 +22,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import "../../../styles/plankList.css";
 import PageContentContainer from "../../../components/CustomBoxes/PageContentContainer";
 import ExpandableCardLarge from "./ExpandableCardLarge";
+import AllResultsText from "../../../components/ApiDataComponents/AllResultsText";
+import LoadingSpinner from "../../../components/ApiDataComponents/LoadingSpinner";
 
 const Demo = () => {
   /* Pagination */
@@ -135,7 +137,6 @@ const Demo = () => {
 
       // Check if response.data and response.data.results exist
       if (response.data && response.data.results) {
-        console.log("Step 2: Data received:", response.data.results);
         setPlankData({
           results: response.data.results,
           count: response.data.count,
@@ -160,7 +161,7 @@ const Demo = () => {
 
   const fetchMorePlanks = () => {
     if (plankData.next) {
-   
+      console.log("Step 3: Fetching more data...");
       fetchMoreData(plankData.next, setPlankData);
     }
   };
@@ -202,6 +203,7 @@ const Demo = () => {
           zIndex: 1,
         }}
       >
+        {/* Mobile Page Header */}
         <CustomBox variant="white" sx={{ marginBottom: "32px" }}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
@@ -260,32 +262,39 @@ const Demo = () => {
             </Grid>
           </Grid>
         </CustomBox>
+        <CustomBox variant="white" sx={{ marginBottom: "32px" }}>
+          Desktop Page Header
+        </CustomBox>
+
       </div>
       
-      <Container>
+      <div style={{minHeight: 200, paddingBottom: '100px' }}>
         {" "}
         {/* Add padding to create space */}
-        {loading && <CircularProgress />}
+        {loading && <LoadingSpinner />}
         {/* Check if 'plankData.results' is defined before rendering the InfiniteScroll */}
+     
         <InfiniteScroll
           dataLength={plankData.results.length}
           next={fetchMorePlanks}
           hasMore={!!plankData.next}
-          loader={<CircularProgress />}
-          endMessage={<p></p>}
-          scrollThreshold={0.8}
-          style={{ height: "calc(100% - 55px)", overflowY: "auto", zIndex: 1 }}
+          loader={<LoadingSpinner />}
+          endMessage={<AllResultsText />}
+          // scrollThreshold={0.8}
+          // style={{ height: "calc(100% - 55px)", overflowY: "auto", zIndex: 1 }}
+         
         >
-          <Grid container spacing={2} minHeight={50}>
+         <Grid container spacing={2} paddingTop={2}>
             {plankData.results.map((data) => (
               <Grid item xs={12} key={data.id}>
                 {!matches && <ExpandableCard data={data} />}
                 {matches && <ExpandableCardLarge data={data} />}
               </Grid>
             ))}
-          </Grid>
+        </Grid>
         </InfiniteScroll>
-      </Container>
+   
+      </div>
     </PageContentContainer>
   );
 };

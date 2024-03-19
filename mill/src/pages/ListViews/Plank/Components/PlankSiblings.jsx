@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Grid, Typography } from '@mui/material';
+import LoadingSpinner from '../../../../components/ApiDataComponents/LoadingSpinner';
 
 // p = 82 l = 59
 // p = 88 l = 61
@@ -78,7 +79,7 @@ const PlankSiblings = ({ logId, currentPlank }) => {
                  
         </div>
       ) : (
-        <p>Loading...</p>
+        <LoadingSpinner />
       )}
     </div>
   );

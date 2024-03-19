@@ -10,6 +10,10 @@ import {
   CircularProgress,
   useTheme,
   useMediaQuery,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+  Accordion,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
@@ -24,6 +28,8 @@ import PageContentContainer from "../../../components/CustomBoxes/PageContentCon
 import ExpandableCardLarge from "./ExpandableCardLarge";
 import AllResultsText from "../../../components/ApiDataComponents/AllResultsText";
 import LoadingSpinner from "../../../components/ApiDataComponents/LoadingSpinner";
+import PlankFiltersDesktop from "./PlankFiltersDesktop";
+import FilterList from "@mui/icons-material/FilterList";
 
 const Demo = () => {
   /* Pagination */
@@ -127,13 +133,10 @@ const Demo = () => {
       if (live_edgeFilter) params.live_edge = true;
       if (furnitureFilter) params.furniture = true;
 
-      const response = await axios.get(
-        `${API_BASE_URL}/api/plank/`,
-        {
-          params,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const response = await axios.get(`${API_BASE_URL}/api/plank/`, {
+        params,
+        headers: { "Content-Type": "application/json" },
+      });
 
       // Check if response.data and response.data.results exist
       if (response.data && response.data.results) {
@@ -190,6 +193,7 @@ const Demo = () => {
     setFurnitureFilter("");
     setStructuralFilter("");
   };
+
   return (
     <PageContentContainer id="page_container">
       <div
@@ -203,28 +207,90 @@ const Demo = () => {
           zIndex: 1,
         }}
       >
-        <CustomBox variant="white" sx={{ marginBottom: "32px" }}>
-          <Grid container spacing={1}>
-            <Grid item xs={12}>
-              <CustomTypography.listHeading>
-                Lumber Stock
-              </CustomTypography.listHeading>
-            </Grid>
-            <Grid
-              container
-              xs={12}
-              spacing={1}
-              alignItems="center"
-              justifyContent="center"
-              ml="0px"
-            >
-              <Grid item xs={4}>
-                Results: {resultCount}
+        {!matches ? (
+          <CustomBox variant="white" sx={{ marginBottom: "32px" }}>
+            <Grid container spacing={1}>
+              <Grid item xs={12}>
+                <CustomTypography.listHeading>
+                  Lumber Stock
+                </CustomTypography.listHeading>
               </Grid>
-              <Grid item xs={4}>
+              <Grid
+                container
+                xs={12}
+                spacing={1}
+                alignItems="center"
+                justifyContent="center"
+                ml="0px"
+              >
+                <Grid item xs={4}>
+                  Results: {resultCount}
+                </Grid>
+                <Grid item xs={4}>
+                  <TextField
+                    id="search-input"
+                    label="Search"
+                    type="search"
+                    variant="outlined"
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    size="small"
+                    InputProps={{
+                      endAdornment: (
+                        <IconButton
+                          size="small"
+                          type="submit"
+                          aria-label="search"
+                        >
+                          <SearchIcon />
+                        </IconButton>
+                      ),
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <Button
+                    size="md"
+                    variant="outlined"
+                    color="primary"
+                    onClick={handleDrawerOpen}
+                  >
+                    <FilterAltIcon /> Filter
+                  </Button>
+                  <TemporaryDrawer
+                    open={drawerOpen}
+                    onClose={handleDrawerClose}
+                    onSubmit={handleFilterSubmit}
+                    onResetFilters={handleResetFilters}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+          </CustomBox>
+        ) : (
+          <CustomBox variant="white" sx={{ marginBottom: "32px" }}>
+            <Grid container spacing={1}>
+            <Grid item xs={8}>
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<FilterList />}
+                    aria-controls="panel1-content"
+                    id="panel1-header"
+                  >
+                    <Typography>Filters</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <PlankFiltersDesktop
+                      onSubmit={handleFilterSubmit}
+                      onResetFilters={handleResetFilters}
+                    />
+                  </AccordionDetails>
+                </Accordion>
+              </Grid>
+            
+              <Grid item xs={2}>
                 <TextField
                   id="search-input"
-                  label="Search"
+                  label="Lumber Id"
                   type="search"
                   variant="outlined"
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -242,33 +308,20 @@ const Demo = () => {
                   }}
                 />
               </Grid>
-              <Grid item xs={4}>
-                <Button
-                  size="md"
-                  variant="outlined"
-                  color="primary"
-                  onClick={handleDrawerOpen}
-                >
-                  <FilterAltIcon /> Filter
-                </Button>
-                <TemporaryDrawer
-                  open={drawerOpen}
-                  onClose={handleDrawerClose}
-                  onSubmit={handleFilterSubmit}
-                  onResetFilters={handleResetFilters}
-                />
+              <Grid item xs={2}>
+                Results: {resultCount}
               </Grid>
+              
             </Grid>
-          </Grid>
-        </CustomBox>
+          </CustomBox>
+        )}
       </div>
-      
-      <div style={{minHeight: 200, paddingBottom: '100px' }}>
+
+      <div style={{ minHeight: 200, paddingBottom: "100px" }}>
         {" "}
         {/* Add padding to create space */}
         {loading && <LoadingSpinner />}
         {/* Check if 'plankData.results' is defined before rendering the InfiniteScroll */}
-     
         <InfiniteScroll
           dataLength={plankData.results.length}
           next={fetchMorePlanks}
@@ -277,18 +330,16 @@ const Demo = () => {
           endMessage={<AllResultsText />}
           // scrollThreshold={0.8}
           // style={{ height: "calc(100% - 55px)", overflowY: "auto", zIndex: 1 }}
-         
         >
-         <Grid container spacing={2} paddingTop={2}>
+          <Grid container spacing={2} paddingTop={2}>
             {plankData.results.map((data) => (
               <Grid item xs={12} key={data.id}>
                 {!matches && <ExpandableCard data={data} />}
                 {matches && <ExpandableCardLarge data={data} />}
               </Grid>
             ))}
-        </Grid>
+          </Grid>
         </InfiniteScroll>
-   
       </div>
     </PageContentContainer>
   );
