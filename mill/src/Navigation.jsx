@@ -35,7 +35,7 @@ const Navigation = () => {
   }, [isAuth]);
 
   const pages = ['About','Demo', 'demo_desktop'];
-  const settings = ['Mill_Home', 'Tree_List', 'Log_list', 'Plank_List', 'add_plank', 'Logout'];
+  const settings = ['Mill_Home', 'Tree_List', 'Log_list', 'Plank_List', 'add_plank', 'water_crud', 'Logout'];
 
   return (
     

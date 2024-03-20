@@ -133,7 +133,7 @@ const Demo = () => {
       if (live_edgeFilter) params.live_edge = true;
       if (furnitureFilter) params.furniture = true;
 
-      const response = await axios.get(`${API_BASE_URL}/api/plank/`, {
+      const response = await axios.get(`${API_BASE_URL}/plank/`, {
         params,
         headers: { "Content-Type": "application/json" },
       });

@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+import { Alert, Button, Container, Grid } from "@mui/material";
+import CustomDatePicker from "../components/CustomForm/CustomDatePicker";
+import CustomInput from "../components/CustomForm/CustomInput";
 
 const TreeMoisturePost = () => {
-  const [plank, setPlank] = useState('');
-  const [date, setDate] = useState('');
-  const [water_percentage, setWater_percentage] = useState('');
+  const [plank, setPlank] = useState("");
+  const [date, setDate] = useState("");
+  const [water_percentage, setWater_percentage] = useState("");
   const [success, setSuccess] = useState(false);
   const [plankIdExists, setPlankIdExists] = useState(null);
 
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await axios.post(
-        'https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/water/',
+        `${API_BASE_URL}/water/`,
         {
           date,
           plank,
@@ -21,24 +26,23 @@ const TreeMoisturePost = () => {
         },
         {
           headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
         }
       );
-      console.log('Data created:', response.data);
-  
+      console.log("Data created:", response.data);
+
       // Reset form fields after successful submission
-      setDate('');
-      setPlank('');
-      setWater_percentage('');
-  
+      setDate("");
+      setPlank("");
+      setWater_percentage("");
+
       setSuccess(true); // Set success status to true
     } catch (error) {
-      console.error('Error creating data:', error);
+      console.error("Error creating data:", error);
     }
   };
-  
 
   const handlePlankChange = (e) => {
     const plankId = e.target.value;
@@ -48,7 +52,7 @@ const TreeMoisturePost = () => {
   const handlePlankBlur = async () => {
     try {
       const response = await axios.get(
-        `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/validate/${plank}/`,
+        `${API_BASE_URL}/plank/validate/${plank}/`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -65,42 +69,65 @@ const TreeMoisturePost = () => {
     }
   };
 
+  /* Update date state */
+  const handleDateChange = (formattedDate) => {
+    setDate(formattedDate);
+  };
+
   return (
-    <div className='mainContainer'>
+    <div className="mainContainer">
       <h3>Add new check</h3>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Date:</label>
-          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
-        </div>
-        <div>
-          <label>Plank ID:</label>
-          <input 
-          type="text" 
-          placeholder='Enter ID'
-          value={plank} 
-          onChange={handlePlankChange}
-          onBlur={handlePlankBlur}
-          required 
-          inputMode="numeric"
-          />
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <CustomDatePicker
+              value={date}
+              onChange={handleDateChange}
+              required
+            />
+            {/* <label>Date:</label>
+          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required /> */}
+          </Grid>
+      
+
+        <Grid item xs={12}>
+            <CustomInput 
+            label="Plank ID"
+            type="number"
+            value={plank}
+            onChange={handlePlankChange}
+            onBlur={handlePlankBlur}
+            required
+            inputMode="numeric"
+            />
+      
           {plankIdExists !== null && !plankIdExists && (
-                <div>ID not in system</div>
-              )}
-        </div>
-        <div>
-          <label>Moisture Content %:</label>
-          <input type="text" value={water_percentage} onChange={(e) => setWater_percentage(e.target.value)} required />
-        </div>
-        <button 
-        type="submit"
-        disabled={!plankIdExists}
-        >
+            <div>ID not in system</div>
+          )}
+    
+        </Grid>
+        <Grid item xs={12}>
+          <CustomInput 
+          label="Moisture Content %"
+          type="number"
+          value={water_percentage}
+          onChange={(e) => setWater_percentage(e.target.value)}
+          required
+          />
+        
+        </Grid>
+        </Grid>
+
+        <Button type="submit" color="primary" variant="contained" fullWidth disabled={!plankIdExists}>
           Submit
-        </button>
+        </Button>
       </form>
 
-      {success && <p>Success! Data created.</p>} {/* Display success message if success is true */}
+      {success && 
+      <Alert severity="success">
+      <p>Success! Data saved.</p>
+      </Alert>
+      }
     </div>
   );
 };
