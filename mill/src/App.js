@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import About from "./About";
-import { Box, Container } from '@mui/material';
+import { Box, Container } from "@mui/material";
 import Layout from "./pages/Layout";
 import { Login, Logout } from "./pages/TestLogIn";
 import TestApiCrud from "./pages/TestApiCrud";
@@ -46,79 +46,77 @@ import DemoDesktop from "./pages/ListViews/Plank/DemoDesktop";
 import PlanksByLog from "./components/PlanksByLog";
 import PlankSiblings from "./pages/ListViews/Plank/Components/PlankSiblings";
 import PlankMoisture from "./pages/ListViews/Plank/Components/PlankMoisture";
-
+import TreeHome from "./pages/mainPages/TreeHome";
 
 const App = () => {
   return (
     <Router basename={`/${process.env.PUBLIC_URL}`}>
       {/* <Layout /> */}
-    
+
       <Navigation />
-   
 
       <PageContentContainer>
-      <Box id='rootbox' sx={{ padding: '55px 0 0', margin: '0' }}>
-      <Routes>
-        {/* <Route path="" element={<Home />} /> */}
-        <Route path="" element={<LandingPage />} />
-        <Route path="nav" element={<Navigation />} />
-        <Route path="about" element={<About />} />
-        <Route path="product" element={<PerfectSolution />} />
-        <Route path="transparent" element={<Transparent />} />
-        <Route path="demo" element={<Demo />} />
-        <Route path="demo_desktop" element={<DemoDesktop />} />
+        <Box id="rootbox" sx={{ padding: "55px 0 0", margin: "0" }}>
+          <Routes>
+            {/* <Route path="" element={<Home />} /> */}
+            <Route path="" element={<LandingPage />} />
+            <Route path="nav" element={<Navigation />} />
+            <Route path="about" element={<About />} />
+            <Route path="product" element={<PerfectSolution />} />
+            <Route path="transparent" element={<Transparent />} />
+            <Route path="demo" element={<Demo />} />
+            <Route path="demo_desktop" element={<DemoDesktop />} />
 
-        <Route path="home_secure" element={<SecureHome />} />
-        <Route path="logout_success" element={<LoggedOut />} />
+            <Route path="home_secure" element={<SecureHome />} />
+            <Route path="logout_success" element={<LoggedOut />} />
 
-        <Route path="test_crud" element={<TestApiCrud />} />
-        <Route path="test_gps" element={<TestApiGps />} />
-        <Route path="test_gps_two" element={<TestApiGpsTwo />} />
-        <Route path="test_gps_map" element={<TestApiGpsMap />} />
+            <Route path="test_crud" element={<TestApiCrud />} />
+            <Route path="test_gps" element={<TestApiGps />} />
+            <Route path="test_gps_two" element={<TestApiGpsTwo />} />
+            <Route path="test_gps_map" element={<TestApiGpsMap />} />
 
-        <Route path="login" element={<Login />} />
-        <Route path="logout" element={<Logout />} />
+            <Route path="login" element={<Login />} />
+            <Route path="logout" element={<Logout />} />
 
-        <Route path="tree_crud" element={<TreeCrud />} />
+            <Route path="tree_crud" element={<TreeCrud />} />
 
-        <Route path="log_crud" element={<TreeLogCrud />} />
+            <Route path="log_crud" element={<TreeLogCrud />} />
 
-        <Route path="plank_crud" element={<TreePlankCrud />} />
+            <Route path="plank_crud" element={<TreePlankCrud />} />
 
-        <Route path="water_crud" element={<TreeMoistureCrud />} />
-        <Route path="water_post" element={<TreeMoisturePost />} />
-        <Route path="mill_home" element={<MillHome />} />
+            <Route path="water_crud" element={<TreeMoistureCrud />} />
+            <Route path="water_post" element={<TreeMoisturePost />} />
+            <Route path="mill_home" element={<MillHome />} />
 
-        <Route path="tree_list" element={<TreeList />} />
-        <Route path="/tree/:id" element={<TreeDetail />} />
-        <Route path="/tree/:id/edit" element={<TreeEdit />} />
+            <Route path="tree_list" element={<TreeList />} />
+            <Route path="/tree/:id" element={<TreeDetail />} />
+            <Route path="/tree/:id/edit" element={<TreeEdit />} />
 
-        <Route path="log_list" element={<LogList />} />
-    
-        <Route path="/log/:id" element={<LogDetail />} />
-        <Route path="/log/:id/edit" element={<MillEditLog />} />
+            <Route path="log_list" element={<LogList />} />
 
-        <Route path="plank_list" element={<PlankList />} />
-        <Route path="newplank" element={<PlankListView />} />
-        <Route path="/plank/:id" element={<PlankDetail />} />
-        <Route path="/plank/:id/edit" element={<MillEditPlank />} />
+            <Route path="/log/:id" element={<LogDetail />} />
+            <Route path="/log/:id/edit" element={<MillEditLog />} />
 
+            <Route path="plank_list" element={<PlankList />} />
+            <Route path="newplank" element={<PlankListView />} />
+            <Route path="/plank/:id" element={<PlankDetail />} />
+            <Route path="/plank/:id/edit" element={<MillEditPlank />} />
 
-        <Route path="/report/:id" element={<PlankReport />} />
+            <Route path="/report/:id" element={<PlankReport />} />
 
-        <Route path="mill_add_planks" element={<MillAddPlanks />} />
-        <Route path="add_plank" element={<AddPlank/>} />
-        <Route path="mill_add_logs" element={<MillAddLogs />} />
-        <Route path="mill_add_trees" element={<MillAddTrees />} />
-        <Route path="mill_add_moisture" element={<MillAddMoisture />} />
-        <Route path="moisture" element={<PlankMoisture />} />
-        
-      </Routes>
-      <Footer />
-      </Box>
+            <Route path="mill_add_planks" element={<MillAddPlanks />} />
+            <Route path="add_plank" element={<AddPlank />} />
+            <Route path="mill_add_logs" element={<MillAddLogs />} />
+            <Route path="mill_add_trees" element={<MillAddTrees />} />
+            <Route path="mill_add_moisture" element={<MillAddMoisture />} />
+            <Route path="moisture" element={<PlankMoisture />} />
+
+            <Route path="tree" element={<TreeHome />} />
+          </Routes>
+          <Footer />
+        </Box>
       </PageContentContainer>
     </Router>
-   
   );
 };
 

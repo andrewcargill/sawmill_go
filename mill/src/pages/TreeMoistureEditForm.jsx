@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Button, Grid, Typography } from '@mui/material';
 
 const TreeMoistureEditForm = ({ id, initialData, onCancel, onSave }) => {
   const [data, setData] = useState(initialData);
@@ -29,8 +30,11 @@ const TreeMoistureEditForm = ({ id, initialData, onCancel, onSave }) => {
 
   return (
     <div>
-      <h2>Edit Entry for Plank ID:{data.id}</h2>
+   
       <form onSubmit={handleSubmit}>
+     
+
+
         <div>
           <label>
             Date:

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TreeMoisturePost from "./TreeMoisturePost";
 import TreeMoistureEditForm from "./TreeMoistureEditForm";
-import { Box, Container, Paper, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
 import CustomFormHeading from "../components/CustomForm/CustomFormHeading";
 import FormBoxMain from "../components/CustomForm/FormBoxMain";
+import CustomInput from "../components/CustomForm/CustomInput";
 
 const TreeMoistureCrud = () => {
   const [data, setData] = useState([]);
@@ -101,72 +102,100 @@ const TreeMoistureCrud = () => {
   return (
     <div>
       <CustomFormHeading title="Moisture Check Database" />
-      <FormBoxMain>
-        </FormBoxMain>
-    <div className="mainContainer">
-      <Container style={{ paddingTop: "3%" }}>
-        {/* Add new moisture check */}
-    
-          <TreeMoisturePost />
-     
-        <Paper style={{ marginBottom: "3%" }}>
-          <Typography variant="h5" style={{ padding: "1%" }}>
-            Search for Moisture Check
-          </Typography>
-        
-         
-          <div>
-            <input
-              type="text"
-              placeholder="Search"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <button onClick={handleSearch}>Search</button>
-            <input
-              type="number"
-              value={idSearchQuery}
-              onChange={(e) => setIdSearchQuery(e.target.value)}
-            />
-            <button onClick={handleIdSearch}>Search by ID</button>
-          </div>
-       </Paper>
-       <Paper style={{ marginTop: "0" }}>
-        <h2>List of Moisture Checks</h2>
-        {data.map((item) => (
-          <div key={item.id}>
-            {selectedItemId === item.id ? (
-              <TreeMoistureEditForm
-                id={item.id}
-                initialData={item}
-                onCancel={handleCancelEdit}
-                onSave={handleSaveEdit}
-              />
-            ) : (
-              <>
-                <h3>ID: {item.id}</h3>
-                <p>Date: {item.date}</p>
-                <p>Water %: {item.water_percentage}</p>
-                <p>Plank ID: {item.plank}</p>
+      <FormBoxMain></FormBoxMain>
+      <div className="mainContainer">
+        <Container style={{ paddingTop: "3%" }}>
+          {/* Add new moisture check */}
 
-                <button onClick={() => handleEdit(item.id)}>Edit</button>
-                {confirmDelete && deleteItemId === item.id ? (
-                  <>
-                    <p>Are you sure you want to delete this item?</p>
-                    <button onClick={handleConfirmDelete}>Yes</button>
-                    <button onClick={handleCancelDelete}>No</button>
-                  </>
-                ) : (
-                  <button onClick={() => handleDelete(item.id)}>Delete</button>
-                )}
-              </>
-            )}
-          </div>
+          <TreeMoisturePost />
+
+          <Paper style={{ marginBottom: "3%", marginTop: "3%" }}>
+            <Typography variant="h5" style={{ padding: "1%" }}>
+              Search for Moisture Check
+            </Typography>
           
-        ))}
-        </Paper>
-      </Container>
-    </div>
+            <div>
+              
+              <Box p={3}>
+                <Grid container spacing={3}>
+              
+              <Grid item xs={6}>
+              <CustomInput
+                type="number"
+                value={idSearchQuery}
+                onChange={(e) => setIdSearchQuery(e.target.value)}
+              />
+              </Grid>
+              <Grid item xs={6}>
+              <Button variant="contained" color="info" onClick={handleIdSearch}>Search by ID</Button>
+              </Grid>
+              </Grid>
+              </Box>
+            
+            </div>
+
+            {data.map((item) => (
+              <Box border={'2px solid black'} borderRadius={'10px'} p={1} m={2}>
+
+              <div key={item.id}>
+                {selectedItemId === item.id ? (
+                  <TreeMoistureEditForm
+                    id={item.id}
+                    initialData={item}
+                    onCancel={handleCancelEdit}
+                    onSave={handleSaveEdit}
+                  />
+                ) : (
+                  <>
+                    <Grid container spacing={3}>
+                      <Grid item xs={2}>
+                        <Typography variant="h6">
+                          Plank ID: {item.plank}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={3}>
+                        <Typography>Id: {item.id}</Typography>
+                      </Grid>
+                      <Grid container item xs={3}>
+                        <Grid item xs={12}>
+                          <Typography>Date: {item.date}</Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Typography>
+                            Water: {item.water_percentage}%
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                      <Grid item xs={2}>
+                    
+
+                      <Button variant="contained" onClick={() => handleEdit(item.id)}>Edit</Button>
+                      </Grid>
+                    {confirmDelete && deleteItemId === item.id ? (
+                      <>
+                        <p>Are you sure you want to delete this item?</p>
+                        <button onClick={handleConfirmDelete}>Yes</button>
+                        <button onClick={handleCancelDelete}>No</button>
+                      </>
+                    ) : (
+                      <Grid item xs={2}>
+                      <Button variant="contained" color="warning" onClick={() => handleDelete(item.id)}>
+                        Delete
+                      </Button>
+                      </Grid>
+                    )}
+                        </Grid>
+                   
+
+                  
+                  </>
+                )}
+              </div>
+              </Box>
+            ))}
+          </Paper>
+        </Container>
+      </div>
     </div>
   );
 };

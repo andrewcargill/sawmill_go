@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Button, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Grid, Typography } from "@mui/material";
 
-const LogsByTree = ({ treeId }) => { // Accept treeId as a prop
+const LogsByTree = ({ treeId }) => {
+  // Accept treeId as a prop
 
   // Remove the useState for treeId and its corresponding onChange handler
 
   const [logs, setLogs] = useState([]);
+  const navigate = useNavigate();
 
   const fetchLogsByTree = async () => {
     try {
@@ -15,13 +17,14 @@ const LogsByTree = ({ treeId }) => { // Accept treeId as a prop
         `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/logs/by_tree/?tree_id=${treeId}`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
         }
       );
       setLogs(response.data);
+      console.log("logs by tree data: ", response.data);
     } catch (error) {
-      console.error('Error fetching logs:', error);
+      console.error("Error fetching logs:", error);
     }
   };
 
@@ -31,33 +34,45 @@ const LogsByTree = ({ treeId }) => { // Accept treeId as a prop
     }
   }, [treeId]); // Fetch logs when the treeId prop changes
 
-
-
+  const handleLogClick = (logId) => {
+    navigate(`/log/${logId}`);
+  };
 
   return (
-    <div>
-
-
-      {/* Remove the input field and button for searching */}
-
+    <Grid container spacing={2} m={1}>
       {logs && logs.length > 0 ? (
-        <div className='button-container'>
-          {logs.map((log) => (
-           <Link classname='button-link' key={log.id} to={`/log/${log.id}`}>
-            <Button id='detail-button'>
-              <h3>LOG ID: {log.id}</h3>
-              <p>Date Cut: {log.date}</p>
-              <p>Cut Length: {log.length}</p>
-       
-            </Button>
-            </Link>
-        
-          ))}
-        </div>
+        logs.map((log) => (
+          <Grid item xs={6} sm={3} lg={2} key={log.id}>
+            <div
+              style={{
+                backgroundColor: "lightgrey",
+                padding: "20px",
+                borderRadius: "5px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                cursor: "pointer",
+              }}
+              onClick={handleLogClick.bind(this, log.id)}
+            >
+              {" "}
+              {/* Added some styling for vertical alignment */}
+              <Typography variant="h6" align="center" gutterBottom>
+                LOG ID: {log.id}
+              </Typography>
+              <Typography variant="body1" align="center" gutterBottom>
+                Date Cut: {log.date.substring(2)}
+              </Typography>
+              <Typography variant="body1" align="center" gutterBottom>
+                Length: {log.length}
+              </Typography>
+            </div>
+          </Grid>
+        ))
       ) : (
-        <p>No logs found for Tree ID: {treeId}</p>
+        <Typography>No logs found for Tree ID: {treeId}</Typography>
       )}
-    </div>
+    </Grid>
   );
 };
 

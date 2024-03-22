@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 import css from "../styles/TreeList.module.css";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
+import { Container, Navbar } from "react-bootstrap";
+import { Box, Button, Grid, Input, Typography } from "@mui/material";
+import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
+import CustomInput from "../components/CustomForm/CustomInput";
+import CustomButton from "../components/Buttons/CustomButtons";
 
 const TreeList = () => {
   const [trees, setTrees] = useState([]);
@@ -13,6 +18,8 @@ const TreeList = () => {
   const [orderBy, setOrderBy] = useState("id");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
@@ -46,7 +53,7 @@ const TreeList = () => {
         }
       );
       setTrees(response.data.results);
-      console.log(trees);
+      console.log("tree data: ", trees);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -100,72 +107,123 @@ const TreeList = () => {
     setCurrentPage(1);
   };
 
+  const handleTreeClick = (treeId) => {
+    navigate(`/tree/${treeId}`);
+  };
+
   return (
-    <div className="page">
-      <Row className="pb-4">
+    <PageContentContainer>
+      <Grid container>
         <Col xs={12}>
-          <div>
-            <input
-              type="text"
-              placeholder="Search"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={handleSearchKeyPress}
-            />
-
-            <input
-              type="number"
-              value={idSearchQuery}
-              onChange={(e) => setIdSearchQuery(e.target.value)}
-              onKeyDown={handleIdSearchKeyPress}
-              placeholder="Search by ID"
-            />
-            <input
-              type="number"
-              value={pageSize}
-              onChange={handlePageSizeChange}
-              placeholder="Page Size"
-            />
-
-            <button onClick={handleReset}>Reset</button>
-          </div>
+          <Navbar>
+            <Grid container>
+              <Grid item container xs={4}>
+                <Grid
+                  item
+                  container
+                  xs={12}
+                  justifyContent={"flex-start"}
+                  alignContent={"center"}
+                >
+                  <Typography variant="h4">Trees</Typography>
+                </Grid>
+              </Grid>
+              <Grid
+                item
+                container
+                xs={8}
+                justifyContent={"flex-end"}
+                alignContent={"center"}
+              >
+                <Grid item xs={3} m={1}>
+                  <CustomInput
+                    size="small"
+                    type="text"
+                    placeholder="Search"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={handleSearchKeyPress}
+                  />
+                </Grid>
+                <Grid item xs={3} m={1}>
+                  <CustomInput
+                    size="small"
+                    type="number"
+                    value={idSearchQuery}
+                    onChange={(e) => setIdSearchQuery(e.target.value)}
+                    onKeyDown={handleIdSearchKeyPress}
+                    placeholder="Search by ID"
+                  />
+                </Grid>
+                <Grid item xs={1} m={1}>
+                  <CustomInput
+                    size="small"
+                    type="number"
+                    value={pageSize}
+                    onChange={handlePageSizeChange}
+                    placeholder="Page Size"
+                  />
+                </Grid>
+                <Grid
+                  item
+                  container
+                  xs={2}
+                  alignContent={"center"}
+                  justifyContent={"center"}
+                >
+                  <Button
+                    onClick={handleReset}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Reset
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Navbar>
         </Col>
-      </Row>
+      </Grid>
       <Row>
-        <div className={css.tableContainer}>
+      <Grid container justifyContent={"flex-start"} alignContent={"center"}>
           {trees && trees.length > 0 ? (
-            <Table striped bordered hover>
-              <thead className={css.tableHeader}>
-                <tr>
-                  <th onClick={() => handleSort("id")}>Ref</th>
-                  <th onClick={() => handleSort("date")}>Date</th>
-                  <th onClick={() => handleSort("species")}>Species</th>
-                  <th onClick={() => handleSort("age")}>Age</th>
-                  <th onClick={() => handleSort("lumberjack")}>Lumberjack</th>
-                  <th>Reason for Felling</th>
-                </tr>
-              </thead>
-              <tbody>
-                {trees.map((tree) => (
-                  <tr key={tree.id}>
-                    <td>
-                      <Link to={`/tree/${tree.id}`}>{tree.id}</Link>
-                    </td>
-                    <td>{tree.date}</td>
-                    <td>{tree.species}</td>
-                    <td>{tree.age}</td>
-                    <td>{tree.lumberjack}</td>
-                    <td>{tree.reason_for_felling}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
+            <>
+              {trees.map((tree) => (
+                <Grid
+                  item
+                  container
+                  xs={5}
+                  sm={2}
+                  lg={2}
+                  key={tree.id}
+                  m={1}
+                  style={{
+                    border: `2px solid ${tree.logged ? "orange" : "green"}`,
+                    borderRadius: "5px",
+                    padding: "12px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleTreeClick(tree.id)}
+                >
+                  <Grid item>
+                    <h3>{tree.id}</h3>
+                  </Grid>
+                  <Grid item>
+                    <p>{tree.species}</p>
+                  </Grid>
+                </Grid>
+              ))}
+            </>
           ) : (
             <p>No trees found.</p>
           )}
-        </div>
+        </Grid>
       </Row>
-    </div>
+    </PageContentContainer>
   );
 };
 

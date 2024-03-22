@@ -16,6 +16,7 @@ const LogsByTree = () => {
         }
       );
       setLogs(response.data);
+      console.log('logs by tree data: ', response.data);
     } catch (error) {
       console.error('Error fetching logs:', error);
     }

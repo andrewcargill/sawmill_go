@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import GoogleMapReact from "google-map-react";
+import { Loader } from "@googlemaps/js-api-loader";
 import css from "../styles/testApiGps.module.css";
-import { Container, Row, Col, Table, Button } from "react-bootstrap";
+import { Container, Row, Col, Table, Button, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import LogsByTree from "../components/LogsbyTree";
+import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
+import { Grid, Typography, Dialog, DialogContent } from "@mui/material";
 
 const TreeDetail = () => {
   const { id } = useParams();
   const [tree, setTree] = useState(null);
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
+  const mapRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -28,8 +31,7 @@ const TreeDetail = () => {
           }
         );
         setTree(response.data);
-        setLatitude(response.data.latitude);
-        setLongitude(response.data.longitude);
+        console.log("single tree data: ", response.data);
       } catch (error) {
         console.error("Error fetching tree:", error);
       }
@@ -38,32 +40,95 @@ const TreeDetail = () => {
     fetchTree();
   }, [id]);
 
+  useEffect(() => {
+    if (tree?.latitude && tree?.longitude && window.google) {
+      try {
+        const map = new window.google.maps.Map(mapRef.current, {
+          center: {
+            lat: parseFloat(tree.latitude),
+            lng: parseFloat(tree.longitude),
+          },
+          zoom: 18,
+          mapTypeId: "satellite",
+        });
+
+        new window.google.maps.Marker({
+          position: {
+            lat: parseFloat(tree.latitude),
+            lng: parseFloat(tree.longitude),
+          },
+          map: map,
+        });
+      } catch (error) {
+        console.error("Error creating Google Map:", error);
+      }
+    } else {
+      const loader = new Loader({
+        apiKey: "AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U", // Replace with your actual API key
+      });
+
+      loader
+        .load()
+        .then(() => {
+          if (tree?.latitude && tree?.longitude) {
+            const map = new window.google.maps.Map(mapRef.current, {
+              center: {
+                lat: parseFloat(tree.latitude),
+                lng: parseFloat(tree.longitude),
+              },
+              zoom: 18,
+              mapTypeId: "satellite",
+            });
+
+            new window.google.maps.Marker({
+              position: {
+                lat: parseFloat(tree.latitude),
+                lng: parseFloat(tree.longitude),
+              },
+              map: map,
+            });
+          }
+        })
+        .catch((e) => {
+          console.error("Error loading Google Maps", e);
+        });
+    }
+  }, [tree]);
+
   const handleGoBack = () => {
     navigate(-1);
   };
+
+  const handleEditClick = () => {
+    navigate(`/tree/${id}/edit`);
+  };
+
+  const handleOpenDialog = () => setOpenDialog(true);
+  const handleCloseDialog = () => setOpenDialog(false);
 
   if (!tree) {
     return <p>Loading...</p>;
   }
 
   return (
-    <div className="page">
-      <Container className="pb-4">
-        <Row className="pb-4">
-          <Col xs={6}>
-            <h2>Tree {id} Info</h2>
-          </Col>
-          <Col xs={3}>
-            <Button onClick={handleGoBack}>BACK</Button>
-          </Col>
-          <Col xs={3}>
-            <Link to={`/tree/${tree.id}/edit`}>
-              <Button>Edit</Button>
-            </Link>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
+    <PageContentContainer>
+      <Grid container pt={2}>
+        <Grid item container>
+          <Grid item container>
+            <Grid item xs={6}>
+              <Typography variant="h4">Tree {id} Info</Typography>
+            </Grid>
+            <Grid item container xs={6} justifyContent="flex-end">
+              <Grid item xs={3}>
+                <Button onClick={handleGoBack}>BACK</Button>
+              </Grid>
+              <Grid item xs={3}>
+                <Button onClick={handleEditClick}>Edit</Button>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid item container xs={12}>
             <Table bordered>
               <tbody>
                 <tr>
@@ -102,54 +167,77 @@ const TreeDetail = () => {
                   <td colSpan={2}>
                     <strong>Logs:</strong>
 
-                    <div>
+                    <Grid item container xs={12}>
                       <LogsByTree treeId={id} />
-                    </div>
+                    </Grid>
                   </td>
                 </tr>
               </tbody>
             </Table>
-          </Col>
-        </Row>
-      </Container>
-      <Row>
-        <Col xs={6}>
-          {latitude && longitude ? (
-            <div style={{ height: "400px", width: "100%" }} className="pb-4">
-              <GoogleMapReact
-                bootstrapURLKeys={{
-                  key: "AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U",
-                }}
-                defaultCenter={{
-                  lat: parseFloat(latitude),
-                  lng: parseFloat(longitude),
-                }}
-                defaultZoom={18}
-                options={{ mapTypeId: "satellite" }}
+          </Grid>
+        </Grid>
+
+        <Grid item container>
+          <Grid item container xs={12} spacing={2} pb={10}>
+            <Grid item xs={6}>
+              <div
+                style={{ height: "400px", width: "100%" }}
+                ref={mapRef}
+                className="pb-4"
               >
-                <Marker
-                  lat={parseFloat(latitude)}
-                  lng={parseFloat(longitude)}
-                />
-              </GoogleMapReact>
-            </div>
-          ) : (
-            <p>NO GPS DATA.</p>
-          )}
-        </Col>
-        <Col xs={6}>
-          <div className="pb-4">
-            {tree.image && (
-              <img
-                src={tree.image}
-                alt="Tree Image"
-                style={{ maxWidth: "100%", height: "auto" }}
-              />
-            )}
-          </div>
-        </Col>
-      </Row>
-    </div>
+                {/* Map will be rendered here */}
+                {!tree.latitude || !tree.longitude ? <p>NO GPS DATA.</p> : null}
+              </div>
+            </Grid>
+            <Grid item container xs={6}>
+              <Grid
+                item
+                container
+                maxHeight={400}
+                alignContent={"center"}
+                justifyContent={"center"}
+                bgcolor={"lightgrey"}
+                onClick={tree.image ? handleOpenDialog : undefined} // Only set onClick handler if tree.image exists
+                style={{ cursor: tree.image ? "pointer" : "default" }} // Change cursor style based on tree.image existence
+              >
+                {tree.image ? (
+                  <img
+                    src={tree.image}
+                    alt="Tree Image"
+                    style={{ maxWidth: "100%", height: "auto", maxHeight: 400 }}
+                  />
+                ) : (
+                  <Typography variant="h6" style={{ textAlign: "center" }}>
+                    No tree image saved
+                  </Typography> // Display message when no image
+                )}
+              </Grid>
+
+              {/* Dialog for displaying the image */}
+              <Dialog
+                open={openDialog}
+                onClose={handleCloseDialog}
+                maxWidth="lg" // Adjust the maximum size of the dialog if needed
+                aria-labelledby="image-dialog-title"
+              >
+                <DialogContent
+                  onClick={handleCloseDialog}
+                  style={{ cursor: "pointer" }}
+                >
+                  {tree.image && (
+                    <img
+                      src={tree.image}
+                      alt="Tree Image"
+                      style={{ maxWidth: "80vh", height: "auto" }}
+                    />
+                  )}
+                </DialogContent>
+              </Dialog>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </PageContentContainer>
   );
 };
 
