@@ -3,8 +3,11 @@ import axios from "axios";
 import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
+import { Grid, Input, Tooltip, Typography } from "@mui/material";
+import CustomInput from "../components/CustomForm/CustomInput";
 
 const LogList = () => {
   const [logs, setLogs] = useState([]);
@@ -12,10 +15,11 @@ const LogList = () => {
   const [orderBy, setOrderBy] = useState("id");
   const [currentPage, setCurrentPage] = useState(1);
   const [isFetching, setIsFetching] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
-    observeScroll();
+    
   }, [currentPage, orderBy]);
 
   const fetchData = async () => {
@@ -48,26 +52,9 @@ const LogList = () => {
     }
   };
 
-  const observeScroll = () => {
-    const options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 1.0,
-    };
+  
 
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !isFetching) {
-        loadMoreData();
-      }
-    }, options);
-
-    observer.observe(document.getElementById("scrollObserver"));
-  };
-
-  const loadMoreData = () => {
-    setIsFetching(true);
-    setCurrentPage((prevPage) => prevPage + 1);
-  };
+ 
 
   const handleSort = (field) => {
     if (orderBy === field) {
@@ -86,67 +73,92 @@ const LogList = () => {
     });
   }, [isFetching]);
 
+  const handleLogClick = (id) => () => {
+    navigate(`/log/${id}`);
+  };
+
+  const displayTitle = (log) => {
+    return (
+      <>
+      <Typography fontSize={12} variant="body1" component="div">Length: {log.length}</Typography>
+      <Typography fontSize={12} variant="body1" component="div">Diameter: {log.diameter}</Typography>
+    </>
+    );
+  };
+
   return (
-    <div id="pagePage" className="page">
-      <div className="sticky-top">
-      <Row className="pb-4">
-        <Col xs={12}>
-          <div>
-            <input
+    <PageContentContainer>
+
+    <Grid container>
+      <Grid container item xs={12} justifyContent="center" pt={2}>
+            <Grid item xs={6}>
+            <Typography variant="h4" component="h1" gutterBottom>
+              Logs 
+            </Typography>
+              </Grid>
+              <Grid item xs={6}>
+            <CustomInput
               type="text"
               placeholder="Search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-          </div>
-        </Col>
-      </Row>
-   </div>
-      <Row>
-        <div className="tableContainer">
-          <InfiniteScroll
-            dataLength={logs.length}
-            next={loadMoreData}
-            hasMore={!!currentPage}
-            loader={<h4>Loading...</h4>}
-            endMessage={<p>No more logs to load.</p>}
-            className="scrollable"
-          >
+        
+          </Grid>
+    
+     
+      </Grid>
+ 
+      <Grid container justifyContent={"flex-start"} alignContent={"center"}>
+       
             {logs && logs.length > 0 ? (
-              <Table striped bordered hover>
-                <thead className="tableHeader">
-                  <tr>
-                    <th onClick={() => handleSort("id")}>
-                      Ref
-                    </th>
-                    <th onClick={() => handleSort("date")}>Date</th>
-                    <th onClick={() => handleSort("length")}>Length</th>
-                    <th onClick={() => handleSort("width")}>Width</th>
-                    <th onClick={() => handleSort("buck")}>Buck</th>
-                  </tr>
-                </thead>
-                <tbody>
+                <>
                   {logs.map((log) => (
-                    <tr key={log.id}>
-                      <td>
-                        <Link to={`/log/${log.id}`}>{log.id}</Link>
-                      </td>
-                      <td>{log.date}</td>
-                      <td>{log.length}</td>
-                      <td>{log.diameter}</td>
-                      <td>{log.buck ? "Yes" : "No"}</td>
-                    </tr>
+                    <Tooltip title={displayTitle(log)} placement="top" arrow>
+                     <Grid
+                     item
+                     container
+                     xs={5}
+                     sm={2}
+                     lg={2}
+                     key={log.id}
+                     m={1}
+
+                     style={{
+                      border: "2px solid green",
+                      borderRadius: "50%", // This ensures the shape is always a circle
+                      width: "100px",
+                      maxWidth: "100px",
+                      maxHeight: "100px",
+                      height: "100px",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      cursor: "pointer",
+                      boxSizing: "border-box", // Ensures padding is included in the width/height calculations
+                    }}
+                    onClick={handleLogClick(log.id)}
+                   >
+                   <Grid item>
+                      {log.id}
+                    </Grid>
+                    <Grid item>
+                      {log.tree.species}
+                  </Grid>
+                   
+                    </Grid>
+                    </Tooltip>
                   ))}
-                </tbody>
-              </Table>
+                </>
             ) : (
               <p>No logs found.</p>
             )}
-          </InfiniteScroll>
-        </div>
-        <div id="scrollObserver" style={{ height: "10px" }}></div>
-      </Row>
-    </div>
+      
+        
+      </Grid>
+    </Grid>
+    </PageContentContainer>
   );
 };
 
