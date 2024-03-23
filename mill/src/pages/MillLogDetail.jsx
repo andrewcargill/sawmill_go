@@ -4,8 +4,10 @@ import axios from "axios";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
 import css from "../styles/testApiGps.module.css";
 import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
-import { Chip, Grid } from "@mui/material";
+import { Chip, Grid, Typography } from "@mui/material";
 import CustomHeaderWithNavEdit from "../components/CustomFormHeaders/CustomHeaderWithNavEdit";
+import LogChildren from "./ListViews/Plank/Components/LogChildren";
+import CustomTypography from "../components/Typography/CustomTypography";
 
 const LogDetail = () => {
   const { id } = useParams();
@@ -60,7 +62,6 @@ const LogDetail = () => {
     navigate(`/tree/${log.tree.id}`);
   };
 
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -74,22 +75,9 @@ const LogDetail = () => {
             handleGoBack={handleGoBack}
             handleEditClick={handleEditClick}
           />
-          {/* <Col xs={6}>
-            <h2>Log {id} Info</h2>
-          </Col>
-          <Col xs={3}>
-            <Button onClick={handleGoBack}>BACK</Button>
-          </Col>
-          <Col xs={3}>
-            <Link to={`/log/${id}/edit`}>
-              <Button>EDIT</Button>
-            </Link>
-          </Col> */}
         </Grid>
         <Grid item container xs={12}>
           <Col>
-            
-
             <Table bordered>
               <tbody>
                 <tr>
@@ -112,14 +100,11 @@ const LogDetail = () => {
                   <th>Tree:</th>
                   <td>
                     <Chip
-                    label={log.tree.id}
-                    onClick={handleTreeIdClick}
-                    varient="outlined"
-                    color="dark"
+                      label={log.tree.id}
+                      onClick={handleTreeIdClick}
+                      varient="outlined"
+                      color="dark"
                     />
-
-                   
-
                   </td>
                 </tr>
                 <tr>
@@ -130,6 +115,10 @@ const LogDetail = () => {
             </Table>
           </Col>
         </Grid>
+      </Grid>
+      <Grid container sm={12} bgcolor={'dark.main'} p={2} >
+        <Typography color={'dark.contrastText'} variant="h6">Planks</Typography>  
+        <LogChildren logId={id} length={log.length} />
       </Grid>
     </PageContentContainer>
   );
