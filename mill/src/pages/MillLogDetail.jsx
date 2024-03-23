@@ -3,14 +3,15 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
 import css from "../styles/testApiGps.module.css";
+import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
+import { Chip, Grid } from "@mui/material";
+import CustomHeaderWithNavEdit from "../components/CustomFormHeaders/CustomHeaderWithNavEdit";
 
 const LogDetail = () => {
   const { id } = useParams();
   const [log, setLog] = useState(null);
   const [tree, setTree] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  
-
 
   const navigate = useNavigate();
 
@@ -27,27 +28,21 @@ const LogDetail = () => {
           }
         );
         setLog(response.data);
-        setTree(response.data.tree)
+        setTree(response.data.tree);
         setIsLoading(false);
-        console.log("rd", response.data)
-       
-    
+        console.log("rd", response.data);
       } catch (error) {
         console.error("Error fetching log:", error);
         setIsLoading(false);
       }
     };
 
-
-
     fetchLog();
   }, [id]);
 
-
   useEffect(() => {
-    console.log('log', log);
+    console.log("log", log);
   }, [log]);
-
 
   const getBuckStatus = (buck) => {
     return buck ? "Yes" : "No";
@@ -57,15 +52,29 @@ const LogDetail = () => {
     navigate(-1);
   };
 
+  const handleEditClick = () => {
+    navigate(`/log/${id}/edit`);
+  };
+
+  const handleTreeIdClick = () => {
+    navigate(`/tree/${log.tree.id}`);
+  };
+
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="page">
-      <Container className="pb-4">
-        <Row className="pb-4">
-          <Col xs={6}>
+    <PageContentContainer>
+      <Grid container>
+        <Grid item container xs={12}>
+          <CustomHeaderWithNavEdit
+            title={`Log ${id} Info`}
+            handleGoBack={handleGoBack}
+            handleEditClick={handleEditClick}
+          />
+          {/* <Col xs={6}>
             <h2>Log {id} Info</h2>
           </Col>
           <Col xs={3}>
@@ -75,15 +84,14 @@ const LogDetail = () => {
             <Link to={`/log/${id}/edit`}>
               <Button>EDIT</Button>
             </Link>
-          </Col>
-        </Row>
-        <Row>
+          </Col> */}
+        </Grid>
+        <Grid item container xs={12}>
           <Col>
-          {log && <p>{log.date}</p>}
+            
 
             <Table bordered>
               <tbody>
-
                 <tr>
                   <th>Date:</th>
                   <td>{log.date}</td>
@@ -103,7 +111,15 @@ const LogDetail = () => {
                 <tr>
                   <th>Tree:</th>
                   <td>
-                    <Link to={`/tree/${log.tree.id}/`}>{log.tree.id}</Link>
+                    <Chip
+                    label={log.tree.id}
+                    onClick={handleTreeIdClick}
+                    varient="outlined"
+                    color="dark"
+                    />
+
+                   
+
                   </td>
                 </tr>
                 <tr>
@@ -113,9 +129,9 @@ const LogDetail = () => {
               </tbody>
             </Table>
           </Col>
-        </Row>
-      </Container>
-    </div>
+        </Grid>
+      </Grid>
+    </PageContentContainer>
   );
 };
 

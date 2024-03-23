@@ -10,6 +10,10 @@ import { Box, Button, Grid, Input, Typography } from "@mui/material";
 import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
 import CustomInput from "../components/CustomForm/CustomInput";
 import CustomButton from "../components/Buttons/CustomButtons";
+import CustomFormHeading from "../components/CustomForm/CustomFormHeading";
+import CustomListHeadingTitle from "../components/CustomForm/CustomListHeadingTitle";
+import CustomHeaderWithNav from "../components/CustomFormHeaders/CustomHeaderWithNav";
+import CustomHeaderWithNavAdd from "../components/CustomFormHeaders/CustomHeaderWithNavAdd";
 
 const TreeList = () => {
   const [trees, setTrees] = useState([]);
@@ -111,81 +115,82 @@ const TreeList = () => {
     navigate(`/tree/${treeId}`);
   };
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
+  const handleAddClick = () => {
+    navigate("/mill_add_trees");
+  }
+
   return (
     <PageContentContainer>
       <Grid container>
-        <Col xs={12}>
-          <Navbar>
-            <Grid container>
-              <Grid item container xs={4}>
-                <Grid
-                  item
-                  container
-                  xs={12}
-                  justifyContent={"flex-start"}
-                  alignContent={"center"}
-                >
-                  <Typography variant="h4">Trees</Typography>
-                </Grid>
-              </Grid>
-              <Grid
-                item
-                container
-                xs={8}
-                justifyContent={"flex-end"}
-                alignContent={"center"}
-              >
-                <Grid item xs={3} m={1}>
-                  <CustomInput
-                    size="small"
-                    type="text"
-                    placeholder="Search"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    onKeyDown={handleSearchKeyPress}
-                  />
-                </Grid>
-                <Grid item xs={3} m={1}>
-                  <CustomInput
-                    size="small"
-                    type="number"
-                    value={idSearchQuery}
-                    onChange={(e) => setIdSearchQuery(e.target.value)}
-                    onKeyDown={handleIdSearchKeyPress}
-                    placeholder="Search by ID"
-                  />
-                </Grid>
-                <Grid item xs={1} m={1}>
-                  <CustomInput
-                    size="small"
-                    type="number"
-                    value={pageSize}
-                    onChange={handlePageSizeChange}
-                    placeholder="Page Size"
-                  />
-                </Grid>
-                <Grid
-                  item
-                  container
-                  xs={2}
-                  alignContent={"center"}
-                  justifyContent={"center"}
-                >
-                  <Button
-                    onClick={handleReset}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Reset
-                  </Button>
-                </Grid>
-              </Grid>
+        <Grid container item>
+          {/* <CustomHeaderWithNav
+            title="Trees"
+            handleGoBack={handleGoBack} // Pass the function to handle "BACK" click
+            handleEditClick={handleEditClick} // Pass the function to handle "Edit" click
+          /> */}
+          <CustomHeaderWithNavAdd
+            title="Trees"
+            addButtonText="Tree"
+            handleGoBack={handleGoBack} 
+            handleAddClick={handleAddClick} 
+          />
+
+          <Grid
+            item
+            container
+            xs={12}
+            justifyContent={"flex-end"}
+            alignContent={"center"}
+          >
+            <Grid item xs={3} m={1}>
+              <CustomInput
+                size="small"
+                type="text"
+                placeholder="Search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleSearchKeyPress}
+              />
             </Grid>
-          </Navbar>
-        </Col>
+            <Grid item xs={3} m={1}>
+              <CustomInput
+                size="small"
+                type="number"
+                value={idSearchQuery}
+                onChange={(e) => setIdSearchQuery(e.target.value)}
+                onKeyDown={handleIdSearchKeyPress}
+                placeholder="Search by ID"
+              />
+            </Grid>
+            <Grid item xs={1} m={1}>
+              <CustomInput
+                size="small"
+                type="number"
+                value={pageSize}
+                onChange={handlePageSizeChange}
+                placeholder="Page Size"
+              />
+            </Grid>
+            <Grid
+              item
+              container
+              xs={2}
+              alignContent={"center"}
+              justifyContent={"center"}
+            >
+              <Button onClick={handleReset} variant="contained" color="primary">
+                Reset
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
       <Row>
-      <Grid container justifyContent={"flex-start"} alignContent={"center"}>
+        <Grid container justifyContent={"flex-start"} alignContent={"center"}>
           {trees && trees.length > 0 ? (
             <>
               {trees.map((tree) => (

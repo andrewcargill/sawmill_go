@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Grid, Typography } from "@mui/material";
+import CustomTypography from "./Typography/CustomTypography";
 
 const LogsByTree = ({ treeId }) => {
   // Accept treeId as a prop
@@ -46,26 +47,31 @@ const LogsByTree = ({ treeId }) => {
             <div
               style={{
                 backgroundColor: "lightgrey",
-                padding: "20px",
+                padding: "2%",
                 borderRadius: "5px",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 cursor: "pointer",
+                maxWidth: "200px",
+                maxHeight: "100px",
+                minWidth: "150px",
               }}
               onClick={handleLogClick.bind(this, log.id)}
             >
               {" "}
               {/* Added some styling for vertical alignment */}
-              <Typography variant="h6" align="center" gutterBottom>
-                LOG ID: {log.id}
-              </Typography>
-              <Typography variant="body1" align="center" gutterBottom>
+              <CustomTypography.subReportHeading>
+                Log ID: {log.id}
+              </CustomTypography.subReportHeading>
+            
+            
+              <CustomTypography.subReportContent>
                 Date Cut: {log.date.substring(2)}
-              </Typography>
-              <Typography variant="body1" align="center" gutterBottom>
-                Length: {log.length}
-              </Typography>
+              </CustomTypography.subReportContent>
+              <CustomTypography.subReportContent>
+                              Length: {log.length}
+              </CustomTypography.subReportContent>
             </div>
           </Grid>
         ))

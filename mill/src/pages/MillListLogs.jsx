@@ -8,6 +8,9 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
 import { Grid, Input, Tooltip, Typography } from "@mui/material";
 import CustomInput from "../components/CustomForm/CustomInput";
+import CustomListHeadingTitle from "../components/CustomForm/CustomListHeadingTitle";
+import CustomHeaderWithNav from "../components/CustomFormHeaders/CustomHeaderWithNav";
+import CustomHeaderWithNavAdd from "../components/CustomFormHeaders/CustomHeaderWithNavAdd";
 
 const LogList = () => {
   const [logs, setLogs] = useState([]);
@@ -77,6 +80,15 @@ const LogList = () => {
     navigate(`/log/${id}`);
   };
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
+  const handleAddClick = () => {
+    navigate("/mill_add_logs");
+  };
+
+
   const displayTitle = (log) => {
     return (
       <>
@@ -90,20 +102,14 @@ const LogList = () => {
     <PageContentContainer>
 
     <Grid container>
-      <Grid container item xs={12} justifyContent="center" pt={2}>
-            <Grid item xs={6}>
-            <Typography variant="h4" component="h1" gutterBottom>
-              Logs 
-            </Typography>
-              </Grid>
-              <Grid item xs={6}>
-            <CustomInput
-              type="text"
-              placeholder="Search"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-        
+      <Grid container item xs={12} justifyContent="center">
+     
+         <CustomHeaderWithNavAdd
+          title="Logs"
+          addButtonText="Log"
+          handleGoBack={handleGoBack}
+          handleAddClick={handleAddClick}
+          />
           </Grid>
     
      
@@ -157,7 +163,7 @@ const LogList = () => {
       
         
       </Grid>
-    </Grid>
+    
     </PageContentContainer>
   );
 };

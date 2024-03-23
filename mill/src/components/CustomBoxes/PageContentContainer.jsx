@@ -5,6 +5,8 @@ import { styled } from '@mui/material/styles';
 const PageContentContainer = styled(Container)(({ theme }) => ({
   
   padding: 0,
+  paddingTop: theme.spacing(1),
+
   [theme.breakpoints.up('sm')]: {
     paddingLeft: theme.spacing(0),
     paddingRight: theme.spacing(0),

@@ -47,6 +47,7 @@ import PlanksByLog from "./components/PlanksByLog";
 import PlankSiblings from "./pages/ListViews/Plank/Components/PlankSiblings";
 import PlankMoisture from "./pages/ListViews/Plank/Components/PlankMoisture";
 import TreeHome from "./pages/mainPages/TreeHome";
+import DemoPlankList from "./pages/ListViews/Plank/DemoPlankList";
 
 const App = () => {
   return (
@@ -66,6 +67,7 @@ const App = () => {
             <Route path="transparent" element={<Transparent />} />
             <Route path="demo" element={<Demo />} />
             <Route path="demo_desktop" element={<DemoDesktop />} />
+            <Route path="demoplanklist" element={<DemoPlankList />} />
 
             <Route path="home_secure" element={<SecureHome />} />
             <Route path="logout_success" element={<LoggedOut />} />

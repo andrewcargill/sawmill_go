@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import LogsByTree from "../components/LogsbyTree";
 import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
 import { Grid, Typography, Dialog, DialogContent } from "@mui/material";
+import CustomHeaderWithNav from "../components/CustomFormHeaders/CustomHeaderWithNav";
+import CustomHeaderWithNavEdit from "../components/CustomFormHeaders/CustomHeaderWithNavEdit";
 
 const TreeDetail = () => {
   const { id } = useParams();
@@ -112,21 +114,13 @@ const TreeDetail = () => {
 
   return (
     <PageContentContainer>
-      <Grid container pt={2}>
+      <Grid container>
         <Grid item container>
-          <Grid item container>
-            <Grid item xs={6}>
-              <Typography variant="h4">Tree {id} Info</Typography>
-            </Grid>
-            <Grid item container xs={6} justifyContent="flex-end">
-              <Grid item xs={3}>
-                <Button onClick={handleGoBack}>BACK</Button>
-              </Grid>
-              <Grid item xs={3}>
-                <Button onClick={handleEditClick}>Edit</Button>
-              </Grid>
-            </Grid>
-          </Grid>
+          <CustomHeaderWithNavEdit
+            title={`Tree ${id} Info`}
+            handleGoBack={handleGoBack} // Pass the function to handle "BACK" click
+            handleEditClick={handleEditClick} // Pass the function to handle "Edit" click
+          />
 
           <Grid item container xs={12}>
             <Table bordered>
