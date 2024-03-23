@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { AppBar, Box, Toolbar, Typography, Button, IconButton, Avatar, Tooltip, Menu, MenuItem, Container } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import FingerprintIcon from '@mui/icons-material/Fingerprint';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 
 
 const Navigation = () => {
@@ -34,8 +33,8 @@ const Navigation = () => {
     }
   }, [isAuth]);
 
-  const pages = ['About','Demo', 'demo_desktop'];
-  const settings = ['Mill_Home', 'Tree_List', 'Log_list', 'demoplanklist', 'Plank_List', 'add_plank', 'water_crud', 'Logout', 'tree'];
+  const pages = ['About'];
+  const settings = ['Admin', 'Trees', 'Logs', 'Planks', 'water_crud', 'Logout'];
 
   return (
     

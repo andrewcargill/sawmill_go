@@ -90,7 +90,7 @@ const PlankSiblingsContent = ({ data, length }) => {
         onClick={handlePlankClick}
       >
         <CustomTypography.subReportHeading>
-     {wholeWidth} {wholeDepth} {wholeLength} {data.id}
+    {data.id}
         </CustomTypography.subReportHeading>
       </Grid>
     </Tooltip>

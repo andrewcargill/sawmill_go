@@ -82,78 +82,7 @@ const About = () => {
                 </Grid>
             </CustomBox>
             <FullWidthImageContainer imageUrl={cloud} />
-            <CustomBox variant="dark">
-                <Grid container spacing={1} paddingBottom={4}>
-                    <Grid item xs={12}>
-                        <CustomTypography.heading>
-                            FEATURE GOALS
-                        </CustomTypography.heading>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomTypography.subheading>
-
-                            The database structure consists of several main tables that form the foundation of the application's data management. Key tables include:
-                        </CustomTypography.subheading>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <List>
-                            <ListItem>
-                                <ListItemAvatar>
-                                    <Avatar>
-                                        <ParkIcon />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary="Tree: Stores information about individual trees, such as date of felling, species, and location."
-
-                                />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemAvatar>
-                                    <Avatar>
-                                        <WorkspacesIcon />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary="Log: Relates each tree to its corresponding log, including log length, diameter, and buck status."
-                                  
-                                />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemAvatar>
-                                    <Avatar>
-                                        <ClearAllIcon />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary="Plank: Represents processed timber planks, containing details like width, depth, wood grade, images and usage type."
-
-                                />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemAvatar>
-                                    <Avatar>
-                                        <WaterDropIcon />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary="MoistureCheck: Tracks moisture content checks for each plank to ensure quality control."
-
-                                />
-                            </ListItem>
-                        </List>
-                    </Grid>
-                    <Grid item xs={6} >
-                        <CustomButton
-                            onClick={() => handleButtonClick("/newplank")}
-                            variant="contained"
-                            fullWidth
-                        >
-                            Demo
-                        </CustomButton>
-                    </Grid>
-                </Grid>
-            </CustomBox>
+           
         </PageContentContainer>
 
     );

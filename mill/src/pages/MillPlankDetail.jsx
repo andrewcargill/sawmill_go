@@ -7,8 +7,9 @@ import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 
 import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
-import { Chip, Dialog, DialogContent, Grid } from "@mui/material";
+import { Chip, Dialog, DialogContent, Grid, Typography } from "@mui/material";
 import CustomHeaderWithNavEdit from "../components/CustomFormHeaders/CustomHeaderWithNavEdit";
+import PlankSiblings from "./ListViews/Plank/Components/PlankSiblings";
 
 const PlankDetail = () => {
   const { id } = useParams();
@@ -257,27 +258,11 @@ const PlankDetail = () => {
                     />
                   </td>
                 </tr>
-              </tbody>
-            </Table>
-          </Grid>
-
-          <Table bordered>
-            <tbody>
-              <tr>
-                <td colSpan={2}>
-                  <strong>Operator's notes:</strong>
-                  <p>{plank.info}</p>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-          <Table bordered>
-            <tbody>
-              <tr>
+                <tr>
                 <td colSpan={2}>
                   <strong>Categories:</strong>
 
-                  <Grid container xs={12} p={2}>
+                  <Grid container xs={12} p={1}>
                     <Grid item container lg={3} sm={3} xs={6}>
                       <p>Live-Edge: {getLiveEdgeStatus(plank?.live_edge)}</p>
                     </Grid>
@@ -295,6 +280,29 @@ const PlankDetail = () => {
                   </Grid>
                 </td>
               </tr>
+              </tbody>
+            </Table>
+          </Grid>
+
+          <Table bordered>
+            <tbody>
+              <tr>
+                <td colSpan={2}>
+                  <strong>Operator's notes:</strong>
+                  <p>{plank.info}</p>
+                </td>
+              </tr>
+              <tr>
+                <td colSpan={2}>
+                  <strong>Siblings:</strong>  <Typography color={'#79c001'}>*Book-Matched</Typography>
+                  <PlankSiblings currentPlank={plank.id} logId={plank.log.id} />
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+          <Table bordered>
+            <tbody>
+              
               <Grid item container xs={12}>
                 <Grid
                   item

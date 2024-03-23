@@ -1,6 +1,6 @@
 // LandingPage.js
 import React from 'react';
-import { Grid, Button, Container, Card } from '@mui/material';
+import { Grid, Button, Container, Card, Typography } from '@mui/material';
 import CustomTypography from './components/Typography/CustomTypography';
 import CustomBox from './components/CustomBoxes/CustomBoxes';
 import forest from './media/images/treetops.png';
@@ -12,6 +12,15 @@ import PageContentContainer from './components/CustomBoxes/PageContentContainer'
 import Avatar from '@mui/material/Avatar';
 import ExploreIcon from '@mui/icons-material/Explore';
 import Alert from '@mui/material/Alert';
+import ParkIcon from '@mui/icons-material/Park';
+import WorkspacesIcon from '@mui/icons-material/Workspaces';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemText from '@mui/material/ListItemText';
+
 
 
 const LandingPage = () => {
@@ -29,10 +38,7 @@ const LandingPage = () => {
 
     return (
         <PageContentContainer>
-            <CustomBox>
-              <Alert severity="success">Latest Update: Demo database is live. Loading spinners added to images. Basic report view is live.</Alert>
-              
-              </CustomBox>
+     
             <FullWidthImageContainer imageUrl={forest} />
             {/* New Hopme */}
             <CustomBox variant="secondary">
@@ -44,7 +50,7 @@ const LandingPage = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <CustomTypography.subheading>
-                            A cloud-based stock management system for artisan foresters and sawmill owners.
+                            The complete cloud-based stock management system for artisan foresters and sawmill owners.
                         </CustomTypography.subheading>
                     </Grid>
                     <Grid item xs={12}>
@@ -60,41 +66,84 @@ const LandingPage = () => {
                         <Card >
 
                             <Grid item p={2}>
-                                <CustomTypography.subheading>
-                                    About the project
-                                </CustomTypography.subheading>
-                                <CustomTypography.paragraph>
-                               This is an ongoing project that we started in July 2023. I am a programmer and work alongside local sawmill owners, carpenters and forest owners in the developing of the system. 
-                               The current site is for testing, feedback and development.
-                                </CustomTypography.paragraph>
+                                <Typography variant="h1" align="center">
+                                    TREE > LOG > PLANK > PRODUCT
+                                    </Typography>
                             </Grid>
                             <Grid item p={2}>
 
-                                <CustomTypography.paragraph>
-                                If you would like to be involved please drop me a message.
-                                </CustomTypography.paragraph>
                             </Grid>
                         </Card>
                     </Grid>
+                    
+
+                    <CustomBox variant="dark">
+                <Grid container spacing={1} paddingBottom={4}>
+                    <Grid item xs={12}>
+                        <CustomTypography.heading>
+                            FEATURE GOALS
+                        </CustomTypography.heading>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <CustomTypography.subheading>
+
+                            The database structure consists of several main tables that form the foundation of the application's data management. Key tables include:
+                        </CustomTypography.subheading>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <List>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <ParkIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary="Tree: Stores information about individual trees, such as date of felling, species, and location."
+
+                                />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <WorkspacesIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary="Log: Relates each tree to its corresponding log, including log length, diameter, and buck status."
+                                  
+                                />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <ClearAllIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary="Plank: Represents processed timber planks, containing details like width, depth, wood grade, images and usage type."
+
+                                />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <WaterDropIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary="MoistureCheck: Tracks moisture content checks for each plank to ensure quality control."
+
+                                />
+                            </ListItem>
+                        </List>
+                    </Grid>
+                   
+                </Grid>
+            </CustomBox>
 
                     <Container>
-                        <Grid container>
-                            <Grid item >
-                                <Grid item xs={12} paddingTop={4} paddingBottom={1}>
-                                    <Avatar
-                                        alt="Andy Cargill"
-                                        src={andy}
-                                        sx={{ width: 90, height: 90 }}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <CustomTypography.paragraph>
-                                        Andrew Cargill
-                                    </CustomTypography.paragraph>
-
-                                </Grid>
-                            </Grid>
-                        </Grid>
+                       
 
                         <Grid container xs={12} pt={2} spacing={1}>
                             <Grid item xs={4} paddingBottom={4}>

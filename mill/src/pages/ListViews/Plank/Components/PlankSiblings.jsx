@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Grid, Typography } from '@mui/material';
+import { Grid, Tooltip, Typography } from '@mui/material';
 import LoadingSpinner from '../../../../components/ApiDataComponents/LoadingSpinner';
+import { useNavigate } from 'react-router-dom';
 
 // p = 82 l = 59
 // p = 88 l = 61
@@ -9,8 +10,9 @@ import LoadingSpinner from '../../../../components/ApiDataComponents/LoadingSpin
 
 const PlankSiblings = ({ logId, currentPlank }) => {
   const [planks, setPlanks] = useState([]);
-  // const logId = 61;
-  // const currentPlank = 87;
+
+  const navigate = useNavigate();
+
 
   const fetchPlanksByLog = async () => {
     console.log('logID', logId);
@@ -36,6 +38,42 @@ const PlankSiblings = ({ logId, currentPlank }) => {
     fetchPlanksByLog();
   }, [logId]); // Depend on logId to refetch when it changes
 
+  const calculateWidthPercentage = (width) => {
+    const minWidth = 2;
+    const maxWidth = 25;
+    const minPercentage = 40;
+    const maxPercentage = 250;
+
+    if (width <= minWidth) return `${minPercentage}px`;
+    if (width >= maxWidth) return `${maxPercentage}px`;
+
+    const percentage =
+      minPercentage +
+      ((width - minWidth) / (maxWidth - minWidth)) *
+        (maxPercentage - minPercentage);
+    return `${percentage}px`;
+  };
+
+  const calculateHeight = (depth) => {
+    const minDepth = 2;
+    const maxDepth = 25;
+    const minHeight = 40;
+    const maxHeight = 250;
+
+    if (depth <= minDepth) return `${minHeight}px`;
+    if (depth >= maxDepth) return `${maxHeight}px`;
+
+    const height =
+      minHeight +
+      ((depth - minDepth) / (maxDepth - minDepth)) * (maxHeight - minHeight);
+    return `${height}px`;
+  };
+
+  const handlePlankClick = (id) => {
+    navigate(`/plank/${id}`);
+  };
+  
+
   return (
     <div>
       {planks.length > 0 ? (
@@ -48,33 +86,37 @@ const PlankSiblings = ({ logId, currentPlank }) => {
 
             return (
              
+              <Tooltip  title={ plank.id === currentPlank ? 'This Plank' : `W=${plank.width} | D=${plank.depth} | Grade=${plank.wood_grade}` }>
               <Grid item container
-                sm={12}
                 key={plank.id}
-                p={0.5}
-                m={0.2}
-                justifyContent={'center'}
+                m={1}
                 borderRadius={'5px'}
                 style={{
-                  border: '1px solid black',
-                  color: plank.id === currentPlank ? 'green' : isBookMatched ? 'blue' : 'inherit',
-                  fontSize: '1rem',
+                  border: '3px solid black',
+                  backgroundColor: plank.id === currentPlank ? 'lightgrey' : isBookMatched ? '#79c001' : 'orange',
+                  color: 'black',
+                  height: calculateHeight(plank?.depth),
+                  width: calculateWidthPercentage(plank?.width),
+                  cursor: 'pointer',
                 }}
+                onClick={() => handlePlankClick(plank.id)}
+
               >
                 <Grid item sm={2}>
                 <Typography variant="h6" pl={2}>{plank.id}</Typography>
                 </Grid>
-                <Grid item sm={10}>
+                {/* <Grid item sm={10}>
                 <Typography>W={plank.width} | D={plank.depth} | Grade={plank.wood_grade}</Typography>
                 </Grid>
-               
+                */}
 
              
               </Grid>
+              </Tooltip>
        
             );
           })}
-          <Typography color={'blue'}>*Book-Matched</Typography>
+         
                  </Grid>
                  
         </div>

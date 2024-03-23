@@ -1,10 +1,8 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./Home";
 import About from "./About";
 import { Box, Container } from "@mui/material";
-import Layout from "./pages/Layout";
 import { Login, Logout } from "./pages/TestLogIn";
 import TestApiCrud from "./pages/TestApiCrud";
 import TreeCrud from "./pages/TreeCrud";
@@ -12,7 +10,6 @@ import TreeLogCrud from "./pages/TreeLogCrud";
 import TreePlankCrud from "./pages/TreePlankCrud";
 import TreeMoistureCrud from "./pages/TreeMoistureCrud";
 import MillAddPlanks from "./pages/MillAddPlanks";
-import MoistureByPlank from "./components/MoistureByPlank";
 import TreeMoisturePost from "./pages/TreeMoisturePost";
 import MillAddLogs from "./pages/MillAddLogs";
 import MillHome from "./pages/MillHome";
@@ -43,8 +40,6 @@ import PageContentContainer from "./components/CustomBoxes/PageContentContainer"
 import Footer from "./Footer";
 import Demo from "./pages/ListViews/Plank/Demo";
 import DemoDesktop from "./pages/ListViews/Plank/DemoDesktop";
-import PlanksByLog from "./components/PlanksByLog";
-import PlankSiblings from "./pages/ListViews/Plank/Components/PlankSiblings";
 import PlankMoisture from "./pages/ListViews/Plank/Components/PlankMoisture";
 import TreeHome from "./pages/mainPages/TreeHome";
 import DemoPlankList from "./pages/ListViews/Plank/DemoPlankList";
@@ -67,7 +62,7 @@ const App = () => {
             <Route path="transparent" element={<Transparent />} />
             <Route path="demo" element={<Demo />} />
             <Route path="demo_desktop" element={<DemoDesktop />} />
-            <Route path="demoplanklist" element={<DemoPlankList />} />
+            <Route path="planks" element={<DemoPlankList />} />
 
             <Route path="home_secure" element={<SecureHome />} />
             <Route path="logout_success" element={<LoggedOut />} />
@@ -88,18 +83,18 @@ const App = () => {
 
             <Route path="water_crud" element={<TreeMoistureCrud />} />
             <Route path="water_post" element={<TreeMoisturePost />} />
-            <Route path="mill_home" element={<MillHome />} />
+            <Route path="admin" element={<MillHome />} />
 
-            <Route path="tree_list" element={<TreeList />} />
+            <Route path="trees" element={<TreeList />} />
             <Route path="/tree/:id" element={<TreeDetail />} />
             <Route path="/tree/:id/edit" element={<TreeEdit />} />
 
-            <Route path="log_list" element={<LogList />} />
+            <Route path="logs" element={<LogList />} />
 
             <Route path="/log/:id" element={<LogDetail />} />
             <Route path="/log/:id/edit" element={<MillEditLog />} />
 
-            <Route path="plank_list" element={<PlankList />} />
+            <Route path="plank" element={<PlankList />} />
             <Route path="newplank" element={<PlankListView />} />
             <Route path="/plank/:id" element={<PlankDetail />} />
             <Route path="/plank/:id/edit" element={<MillEditPlank />} />
