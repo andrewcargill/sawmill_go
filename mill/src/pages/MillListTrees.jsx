@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Table from "react-bootstrap/Table";
-import css from "../styles/TreeList.module.css";
 import Row from "react-bootstrap/esm/Row";
-import Col from "react-bootstrap/esm/Col";
-import { Container, Navbar } from "react-bootstrap";
-import { Box, Button, Grid, Input, Typography } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
 import CustomInput from "../components/CustomForm/CustomInput";
-import CustomButton from "../components/Buttons/CustomButtons";
-import CustomFormHeading from "../components/CustomForm/CustomFormHeading";
-import CustomListHeadingTitle from "../components/CustomForm/CustomListHeadingTitle";
-import CustomHeaderWithNav from "../components/CustomFormHeaders/CustomHeaderWithNav";
 import CustomHeaderWithNavAdd from "../components/CustomFormHeaders/CustomHeaderWithNavAdd";
 
 const TreeList = () => {
@@ -121,22 +113,17 @@ const TreeList = () => {
 
   const handleAddClick = () => {
     navigate("/mill_add_trees");
-  }
+  };
 
   return (
     <PageContentContainer>
       <Grid container>
         <Grid container item>
-          {/* <CustomHeaderWithNav
-            title="Trees"
-            handleGoBack={handleGoBack} // Pass the function to handle "BACK" click
-            handleEditClick={handleEditClick} // Pass the function to handle "Edit" click
-          /> */}
           <CustomHeaderWithNavAdd
             title="Trees"
             addButtonText="Tree"
-            handleGoBack={handleGoBack} 
-            handleAddClick={handleAddClick} 
+            handleGoBack={handleGoBack}
+            handleAddClick={handleAddClick}
           />
 
           <Grid
@@ -202,6 +189,7 @@ const TreeList = () => {
                   lg={2}
                   key={tree.id}
                   m={1}
+                  bgcolor={"secondary.main"}
                   style={{
                     border: `2px solid ${tree.logged ? "orange" : "green"}`,
                     borderRadius: "5px",

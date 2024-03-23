@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Container, Row, Col, Table, Button } from "react-bootstrap";
+import { Col, Table } from "react-bootstrap";
 import css from "../styles/testApiGps.module.css";
 import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
 import { Chip, Grid, Typography } from "@mui/material";
 import CustomHeaderWithNavEdit from "../components/CustomFormHeaders/CustomHeaderWithNavEdit";
 import LogChildren from "./ListViews/Plank/Components/LogChildren";
-import CustomTypography from "../components/Typography/CustomTypography";
 
 const LogDetail = () => {
   const { id } = useParams();
@@ -116,14 +115,15 @@ const LogDetail = () => {
           </Col>
         </Grid>
       </Grid>
-      <Grid container sm={12} bgcolor={'dark.main'} p={2} >
-        <Typography color={'dark.contrastText'} variant="h6">Planks</Typography>  
+      <Grid container sm={12} bgcolor={"dark.main"} p={2}>
+        <Typography color={"dark.contrastText"} variant="h6">
+          Planks
+        </Typography>
         <LogChildren logId={id} length={log.length} />
       </Grid>
     </PageContentContainer>
   );
 };
 
-const Marker = () => <div className={css.marker}></div>;
 
 export default LogDetail;

@@ -31,8 +31,8 @@ const PlankListResultsContent = ({ data }) => {
   const calculateWidthPercentage = (width) => {
     const minWidth = 2;
     const maxWidth = 25;
-    const minPercentage = 30;
-    const maxPercentage = 180; 
+    const minPercentage = 40;
+    const maxPercentage = 190; 
 
     if (width <= minWidth) return `${minPercentage}px`;
     if (width >= maxWidth) return `${maxPercentage}px`;
@@ -47,8 +47,8 @@ const PlankListResultsContent = ({ data }) => {
   const calculateHeight = (depth) => {
     const minDepth = 2;
     const maxDepth = 25;
-    const minHeight = 30; 
-    const maxHeight = 180; 
+    const minHeight = 40; 
+    const maxHeight = 190; 
 
     if (depth <= minDepth) return `${minHeight}px`;
     if (depth >= maxDepth) return `${maxHeight}px`;
@@ -78,9 +78,14 @@ const PlankListResultsContent = ({ data }) => {
         item
         container
         bgcolor={"secondary.main"}
-       
-        p={1}
+        m={3}
+        p={0}
         borderRadius={"5px"}
+        pt={0}
+        pl={0}
+        justifyContent={"center"}
+        alignContent={"center"}
+        
        
         sx={{
           width: calculateWidthPercentage(data.width),

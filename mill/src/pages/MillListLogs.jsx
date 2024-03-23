@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Table from "react-bootstrap/Table";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { Link, useNavigate } from "react-router-dom";
-import InfiniteScroll from 'react-infinite-scroll-component';
+import { useNavigate } from "react-router-dom";
 import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
-import { Grid, Input, Tooltip, Typography } from "@mui/material";
-import CustomInput from "../components/CustomForm/CustomInput";
-import CustomListHeadingTitle from "../components/CustomForm/CustomListHeadingTitle";
-import CustomHeaderWithNav from "../components/CustomFormHeaders/CustomHeaderWithNav";
+import { Grid, Tooltip, Typography } from "@mui/material";
 import CustomHeaderWithNavAdd from "../components/CustomFormHeaders/CustomHeaderWithNavAdd";
 
 const LogList = () => {
@@ -22,7 +15,6 @@ const LogList = () => {
 
   useEffect(() => {
     fetchData();
-    
   }, [currentPage, orderBy]);
 
   const fetchData = async () => {
@@ -55,10 +47,6 @@ const LogList = () => {
     }
   };
 
-  
-
- 
-
   const handleSort = (field) => {
     if (orderBy === field) {
       setOrderBy(`-${field}`);
@@ -88,82 +76,73 @@ const LogList = () => {
     navigate("/mill_add_logs");
   };
 
-
   const displayTitle = (log) => {
     return (
       <>
-      <Typography fontSize={12} variant="body1" component="div">Length: {log.length}</Typography>
-      <Typography fontSize={12} variant="body1" component="div">Diameter: {log.diameter}</Typography>
-    </>
+        <Typography fontSize={12} variant="body1" component="div">
+          Length: {log.length}
+        </Typography>
+        <Typography fontSize={12} variant="body1" component="div">
+          Diameter: {log.diameter}
+        </Typography>
+      </>
     );
   };
 
   return (
     <PageContentContainer>
-
-    <Grid container>
-      <Grid container item xs={12} justifyContent="center">
-     
-         <CustomHeaderWithNavAdd
-          title="Logs"
-          addButtonText="Log"
-          handleGoBack={handleGoBack}
-          handleAddClick={handleAddClick}
+      <Grid container>
+        <Grid container item xs={12} justifyContent="center">
+          <CustomHeaderWithNavAdd
+            title="Logs"
+            addButtonText="Log"
+            handleGoBack={handleGoBack}
+            handleAddClick={handleAddClick}
           />
-          </Grid>
-    
-     
+        </Grid>
       </Grid>
- 
-      <Grid container justifyContent={"flex-start"} alignContent={"center"}>
-       
-            {logs && logs.length > 0 ? (
-                <>
-                  {logs.map((log) => (
-                    <Tooltip title={displayTitle(log)} placement="top" arrow>
-                     <Grid
-                     item
-                     container
-                     xs={5}
-                     sm={2}
-                     lg={2}
-                     key={log.id}
-                     m={1}
 
-                     style={{
-                      border: "2px solid green",
-                      borderRadius: "50%", // This ensures the shape is always a circle
-                      width: "100px",
-                      maxWidth: "100px",
-                      maxHeight: "100px",
-                      height: "100px",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      cursor: "pointer",
-                      boxSizing: "border-box", // Ensures padding is included in the width/height calculations
-                    }}
-                    onClick={handleLogClick(log.id)}
-                   >
-                   <Grid item>
-                      {log.id}
-                    </Grid>
-                    <Grid item>
-                      {log.tree.species}
-                  </Grid>
-                   
-                    </Grid>
-                    </Tooltip>
-                  ))}
-                </>
-            ) : (
-              <p>No logs found.</p>
-            )}
-      
-        
+      <Grid container justifyContent={"flex-start"} alignContent={"center"}>
+        {logs && logs.length > 0 ? (
+          <>
+            {logs.map((log) => (
+              <Tooltip title={displayTitle(log)} placement="top" arrow>
+                <Grid
+                  item
+                  container
+                  xs={5}
+                  sm={2}
+                  lg={2}
+                  key={log.id}
+                  m={1}
+                  bgcolor="secondary.main"
+                  style={{
+                    border: "2px solid green",
+
+                    borderRadius: "50%",
+                    width: "100px",
+                    maxWidth: "100px",
+                    maxHeight: "100px",
+                    height: "100px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    cursor: "pointer",
+                    boxSizing: "border-box",
+                  }}
+                  onClick={handleLogClick(log.id)}
+                >
+                  <Grid item>{log.id}</Grid>
+                  <Grid item>{log.tree.species}</Grid>
+                </Grid>
+              </Tooltip>
+            ))}
+          </>
+        ) : (
+          <p>No logs found.</p>
+        )}
       </Grid>
-    
     </PageContentContainer>
   );
 };

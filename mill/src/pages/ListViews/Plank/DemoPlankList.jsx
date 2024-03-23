@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
-  Container,
   Grid,
   IconButton,
   TextField,
   Button,
-  Box,
-  CircularProgress,
   useTheme,
   useMediaQuery,
   AccordionSummary,
@@ -20,12 +17,10 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import CustomTypography from "../../../components/Typography/CustomTypography";
 import TemporaryDrawer from "./TemporaryDrawer";
 import CustomBox from "../../../components/CustomBoxes/CustomBoxes";
-import ExpandableCard from "./ExpandableCard";
 import { fetchMoreData } from "../../../paginationUtilsNoAuth";
 import InfiniteScroll from "react-infinite-scroll-component";
 import "../../../styles/plankList.css";
 import PageContentContainer from "../../../components/CustomBoxes/PageContentContainer";
-import ExpandableCardLarge from "./ExpandableCardLarge";
 import AllResultsText from "../../../components/ApiDataComponents/AllResultsText";
 import LoadingSpinner from "../../../components/ApiDataComponents/LoadingSpinner";
 import PlankFiltersDesktop from "./PlankFiltersDesktop";
@@ -130,7 +125,6 @@ const DemoPlankList = () => {
         depth_max: maxDepthFilter,
         log_id: logIdFilter,
         species: speciesFilter,
-        // Include other filters as necessary
       };
 
       if (generalFilter) params.general = true;
@@ -207,7 +201,6 @@ const DemoPlankList = () => {
   const handleGoBack = () => {
     navigate(-1);
   };
-
 
   return (
     <PageContentContainer id="page_container">
@@ -290,7 +283,7 @@ const DemoPlankList = () => {
         ) : (
           <CustomBox variant="white" sx={{ marginBottom: "32px" }}>
             <Grid container spacing={1}>
-            <Grid item xs={8}>
+              <Grid item xs={8}>
                 <Accordion>
                   <AccordionSummary
                     expandIcon={<FilterList />}
@@ -307,7 +300,7 @@ const DemoPlankList = () => {
                   </AccordionDetails>
                 </Accordion>
               </Grid>
-            
+
               <Grid item xs={2}>
                 <TextField
                   id="search-input"
@@ -332,7 +325,6 @@ const DemoPlankList = () => {
               <Grid item xs={2}>
                 Results: {resultCount}
               </Grid>
-              
             </Grid>
           </CustomBox>
         )}
@@ -342,22 +334,28 @@ const DemoPlankList = () => {
         {" "}
         {/* Add padding to create space */}
         {loading && <LoadingSpinner />}
-        {/* Check if 'plankData.results' is defined before rendering the InfiniteScroll */}
         <InfiniteScroll
           dataLength={plankData.results.length}
           next={fetchMorePlanks}
           hasMore={!!plankData.next}
           loader={<LoadingSpinner />}
           endMessage={<AllResultsText />}
-          // scrollThreshold={0.8}
-          // style={{ height: "calc(100% - 55px)", overflowY: "auto", zIndex: 1 }}
         >
-          <Grid container spacing={2} paddingTop={2}>
+          <Grid
+            container
+            spacing={0}
+            paddingTop={2}
+            bgcolor={"dark.main"}
+            justifyContent={"center"}
+            alignContent={"center"}
+            p={2}
+            height={"100%"}
+          >
             {plankData.results.map((data) => (
-              <Grid container item xs={6} sm={3} md={3} lg={2} key={data.id}>
+              <>
                 {!matches && <PlankListResultsContent data={data} />}
                 {matches && <PlankListResultsContent data={data} />}
-              </Grid>
+              </>
             ))}
           </Grid>
         </InfiniteScroll>

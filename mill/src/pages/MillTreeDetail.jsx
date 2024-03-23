@@ -1,15 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import GoogleMapReact from "google-map-react";
 import { Loader } from "@googlemaps/js-api-loader";
-import css from "../styles/testApiGps.module.css";
-import { Container, Row, Col, Table, Button, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Table } from "react-bootstrap";
 import LogsByTree from "../components/LogsbyTree";
 import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
 import { Grid, Typography, Dialog, DialogContent } from "@mui/material";
-import CustomHeaderWithNav from "../components/CustomFormHeaders/CustomHeaderWithNav";
 import CustomHeaderWithNavEdit from "../components/CustomFormHeaders/CustomHeaderWithNavEdit";
 
 const TreeDetail = () => {
@@ -66,7 +62,7 @@ const TreeDetail = () => {
       }
     } else {
       const loader = new Loader({
-        apiKey: "AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U", // Replace with your actual API key
+        apiKey: "AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U",
       });
 
       loader
@@ -118,8 +114,8 @@ const TreeDetail = () => {
         <Grid item container>
           <CustomHeaderWithNavEdit
             title={`Tree ${id} Info`}
-            handleGoBack={handleGoBack} // Pass the function to handle "BACK" click
-            handleEditClick={handleEditClick} // Pass the function to handle "Edit" click
+            handleGoBack={handleGoBack}
+            handleEditClick={handleEditClick}
           />
 
           <Grid item container xs={12}>
@@ -191,8 +187,8 @@ const TreeDetail = () => {
                 alignContent={"center"}
                 justifyContent={"center"}
                 bgcolor={"lightgrey"}
-                onClick={tree.image ? handleOpenDialog : undefined} // Only set onClick handler if tree.image exists
-                style={{ cursor: tree.image ? "pointer" : "default" }} // Change cursor style based on tree.image existence
+                onClick={tree.image ? handleOpenDialog : undefined}
+                style={{ cursor: tree.image ? "pointer" : "default" }}
               >
                 {tree.image ? (
                   <img
@@ -203,7 +199,7 @@ const TreeDetail = () => {
                 ) : (
                   <Typography variant="h6" style={{ textAlign: "center" }}>
                     No tree image saved
-                  </Typography> // Display message when no image
+                  </Typography> 
                 )}
               </Grid>
 
@@ -211,7 +207,7 @@ const TreeDetail = () => {
               <Dialog
                 open={openDialog}
                 onClose={handleCloseDialog}
-                maxWidth="lg" // Adjust the maximum size of the dialog if needed
+                maxWidth="lg"
                 aria-labelledby="image-dialog-title"
               >
                 <DialogContent
@@ -235,6 +231,5 @@ const TreeDetail = () => {
   );
 };
 
-const Marker = () => <div className={css.marker}></div>;
 
 export default TreeDetail;
