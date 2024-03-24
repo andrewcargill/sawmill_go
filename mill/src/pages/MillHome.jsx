@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import css from "../styles/millHome.module.css";
+import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
 
 const MillHome = () => {
   const navigate = useNavigate();
@@ -13,11 +14,11 @@ const MillHome = () => {
   };
 
   return (
-    <div className="mainContainer">
+   <PageContentContainer>
       
       <div className={css.container}>
         <Row>
-          <Col xs={6}>
+          <Col xs={6} className={css.columns}  >
             <div className={css.buttonContainer}>
               <Button
                 className={css.selectButton}
@@ -28,7 +29,7 @@ const MillHome = () => {
               </Button>
             </div>
           </Col>
-          <Col xs={6}>
+          <Col xs={6} className={css.columns} >
             <div className={css.buttonContainer}>
               <Button
                 className={css.selectButton}
@@ -41,7 +42,7 @@ const MillHome = () => {
           </Col>
         </Row>
         <Row>
-          <Col xs={6}>
+          <Col xs={6} className={css.columns} >
             <div className={css.buttonContainer}>
               <Button
                 className={css.selectButton}
@@ -52,7 +53,7 @@ const MillHome = () => {
               </Button>
             </div>
           </Col>
-          <Col xs={6}>
+          <Col xs={6} className={css.columns} >
             <div className={css.buttonContainer}>
               <Button
                 className={css.selectButton}
@@ -77,7 +78,7 @@ const MillHome = () => {
           </Col>
         </Row>
       </div>
-    </div>
+    </PageContentContainer>
   );
 };
 

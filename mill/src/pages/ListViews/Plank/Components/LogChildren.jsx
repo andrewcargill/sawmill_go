@@ -10,8 +10,8 @@ import PlankSiblingsContent from '../PlankSiblingsContent';
 
 const LogChildren = ({ logId, length, currentPlank }) => {
   const [planks, setPlanks] = useState([]);
-  // const logId = 61;
-  // const currentPlank = 87;
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 
   const fetchPlanksByLog = async () => {
     console.log('logID', logId);
@@ -19,7 +19,7 @@ const LogChildren = ({ logId, length, currentPlank }) => {
 
     try {
       const response = await axios.get(
-        `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/planks/by_log/?log_id=${logId}`,
+        `${API_BASE_URL}/planks/by_log/?log_id=${logId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('access_token')}`,

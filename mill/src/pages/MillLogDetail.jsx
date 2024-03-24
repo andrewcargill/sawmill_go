@@ -14,13 +14,14 @@ const LogDetail = () => {
   const [tree, setTree] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLog = async () => {
       try {
         const response = await axios.get(
-          `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/log/${id}/`,
+          `${API_BASE_URL}/log/${id}/`,
           {
             headers: {
               "Content-Type": "application/json",

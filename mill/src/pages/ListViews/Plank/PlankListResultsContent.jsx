@@ -1,27 +1,9 @@
 import React, { useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Typography,
-  styled,
-  Rating,
-  Grid,
-  CircularProgress,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Box,
-  Paper,
-  Avatar,
-  Tooltip,
-} from "@mui/material";
+import { Typography, Grid, Tooltip } from "@mui/material";
 import { useNavigate } from "react-router";
 import CustomTypography from "../../../components/Typography/CustomTypography";
 
-
 const PlankListResultsContent = ({ data }) => {
-
   const navigate = useNavigate();
 
   const wholeLength = Math.floor(data.log.length);
@@ -32,7 +14,7 @@ const PlankListResultsContent = ({ data }) => {
     const minWidth = 2;
     const maxWidth = 25;
     const minPercentage = 40;
-    const maxPercentage = 190; 
+    const maxPercentage = 190;
 
     if (width <= minWidth) return `${minPercentage}px`;
     if (width >= maxWidth) return `${maxPercentage}px`;
@@ -47,8 +29,8 @@ const PlankListResultsContent = ({ data }) => {
   const calculateHeight = (depth) => {
     const minDepth = 2;
     const maxDepth = 25;
-    const minHeight = 40; 
-    const maxHeight = 190; 
+    const minHeight = 40;
+    const maxHeight = 190;
 
     if (depth <= minDepth) return `${minHeight}px`;
     if (depth >= maxDepth) return `${maxHeight}px`;
@@ -67,10 +49,9 @@ const PlankListResultsContent = ({ data }) => {
     </>
   );
 
-    const handlePlankClick = () => {
+  const handlePlankClick = () => {
     navigate(`/plank/${data.id}`);
-    };
-
+  };
 
   return (
     <Tooltip title={toolTipContent} arrow>
@@ -85,8 +66,6 @@ const PlankListResultsContent = ({ data }) => {
         pl={0}
         justifyContent={"center"}
         alignContent={"center"}
-        
-       
         sx={{
           width: calculateWidthPercentage(data.width),
           height: calculateHeight(data.depth),

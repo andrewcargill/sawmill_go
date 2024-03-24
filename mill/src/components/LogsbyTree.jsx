@@ -6,12 +6,14 @@ import CustomTypography from "./Typography/CustomTypography";
 
 const LogsByTree = ({ treeId }) => {
   const [logs, setLogs] = useState([]);
+
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const navigate = useNavigate();
 
   const fetchLogsByTree = async () => {
     try {
       const response = await axios.get(
-        `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/logs/by_tree/?tree_id=${treeId}`,
+        `${API_BASE_URL}/logs/by_tree/?tree_id=${treeId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,

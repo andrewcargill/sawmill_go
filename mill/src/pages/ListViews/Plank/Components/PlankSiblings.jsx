@@ -1,42 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Grid, Tooltip, Typography } from '@mui/material';
-import LoadingSpinner from '../../../../components/ApiDataComponents/LoadingSpinner';
-import { useNavigate } from 'react-router-dom';
-
-// p = 82 l = 59
-// p = 88 l = 61
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Grid, Tooltip, Typography } from "@mui/material";
+import LoadingSpinner from "../../../../components/ApiDataComponents/LoadingSpinner";
+import { useNavigate } from "react-router-dom";
 
 const PlankSiblings = ({ logId, currentPlank }) => {
   const [planks, setPlanks] = useState([]);
 
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const navigate = useNavigate();
 
-
   const fetchPlanksByLog = async () => {
-    console.log('logID', logId);
-    if (!logId) return 'no id'; // Guard clause to ensure logId is present
+    console.log("logID", logId);
+    if (!logId) return "no id";
 
     try {
       const response = await axios.get(
-        `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/planks/by_log/?log_id=${logId}`,
+        `${API_BASE_URL}/planks/by_log/?log_id=${logId}`,
+
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
         }
       );
-      setPlanks(response.data || []); 
-      console.log('data: ', response.data)// Ensure to default to an empty array
+      setPlanks(response.data || []);
+      console.log("data: ", response.data);
     } catch (error) {
-      console.error('Error fetching logs:', error);
+      console.error("Error fetching logs:", error);
     }
   };
 
   useEffect(() => {
     fetchPlanksByLog();
-  }, [logId]); // Depend on logId to refetch when it changes
+  }, [logId]);
 
   const calculateWidthPercentage = (width) => {
     const minWidth = 2;
@@ -72,53 +69,64 @@ const PlankSiblings = ({ logId, currentPlank }) => {
   const handlePlankClick = (id) => {
     navigate(`/plank/${id}`);
   };
-  
 
   return (
     <div>
       {planks.length > 0 ? (
         <div>
-         
-          <Grid container sm={12} alignItems={'center'} justifyContent={'center'} padding={'5% 5%'}>
-          {planks.map((plank, index) => {
-            const currentIndex = planks.findIndex(p => p.id === currentPlank);
-            const isBookMatched = index === currentIndex - 1 || index === currentIndex + 1;
+          <Grid
+            container
+            sm={12}
+            alignItems={"center"}
+            justifyContent={"center"}
+            padding={"5% 5%"}
+          >
+            {planks.map((plank, index) => {
+              const currentIndex = planks.findIndex(
+                (p) => p.id === currentPlank
+              );
+              const isBookMatched =
+                index === currentIndex - 1 || index === currentIndex + 1;
 
-            return (
-             
-              <Tooltip  title={ plank.id === currentPlank ? 'This Plank' : `W=${plank.width} | D=${plank.depth} | Grade=${plank.wood_grade}` }>
-              <Grid item container
-                key={plank.id}
-                m={1}
-                borderRadius={'5px'}
-                style={{
-                  border: '3px solid black',
-                  backgroundColor: plank.id === currentPlank ? 'lightgrey' : isBookMatched ? '#79c001' : 'orange',
-                  color: 'black',
-                  height: calculateHeight(plank?.depth),
-                  width: calculateWidthPercentage(plank?.width),
-                  cursor: 'pointer',
-                }}
-                onClick={() => handlePlankClick(plank.id)}
-
-              >
-                <Grid item sm={2}>
-                <Typography variant="h6" pl={2}>{plank.id}</Typography>
-                </Grid>
-                {/* <Grid item sm={10}>
-                <Typography>W={plank.width} | D={plank.depth} | Grade={plank.wood_grade}</Typography>
-                </Grid>
-                */}
-
-             
-              </Grid>
-              </Tooltip>
-       
-            );
-          })}
-         
-                 </Grid>
-                 
+              return (
+                <Tooltip
+                  title={
+                    plank.id === currentPlank
+                      ? "This Plank"
+                      : `W=${plank.width} | D=${plank.depth} | Grade=${plank.wood_grade}`
+                  }
+                >
+                  <Grid
+                    item
+                    container
+                    key={plank.id}
+                    m={1}
+                    borderRadius={"5px"}
+                    style={{
+                      border: "3px solid black",
+                      backgroundColor:
+                        plank.id === currentPlank
+                          ? "lightgrey"
+                          : isBookMatched
+                          ? "#79c001"
+                          : "orange",
+                      color: "black",
+                      height: calculateHeight(plank?.depth),
+                      width: calculateWidthPercentage(plank?.width),
+                      cursor: "pointer",
+                    }}
+                    onClick={() => handlePlankClick(plank.id)}
+                  >
+                    <Grid item sm={2}>
+                      <Typography variant="h6" pl={2}>
+                        {plank.id}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Tooltip>
+              );
+            })}
+          </Grid>
         </div>
       ) : (
         <LoadingSpinner />
@@ -128,4 +136,3 @@ const PlankSiblings = ({ logId, currentPlank }) => {
 };
 
 export default PlankSiblings;
-

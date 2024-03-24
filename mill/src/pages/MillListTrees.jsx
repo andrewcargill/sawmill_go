@@ -15,6 +15,7 @@ const TreeList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,7 +40,7 @@ const TreeList = () => {
       }
 
       const response = await axios.get(
-        "https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/",
+        `${API_BASE_URL}/tree/`,
         {
           params,
           headers: {

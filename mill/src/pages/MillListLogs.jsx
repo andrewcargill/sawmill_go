@@ -11,6 +11,8 @@ const LogList = () => {
   const [orderBy, setOrderBy] = useState("id");
   const [currentPage, setCurrentPage] = useState(1);
   const [isFetching, setIsFetching] = useState(false);
+
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const LogList = () => {
       }
 
       const response = await axios.get(
-        "https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/log/",
+        `${API_BASE_URL}/log/`,
         {
           params,
           headers: {

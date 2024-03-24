@@ -83,7 +83,7 @@ const App = () => {
 
             <Route path="water_crud" element={<TreeMoistureCrud />} />
             <Route path="water_post" element={<TreeMoisturePost />} />
-            <Route path="admin" element={<MillHome />} />
+            <Route path="quick_add" element={<MillHome />} />
 
             <Route path="trees" element={<TreeList />} />
             <Route path="/tree/:id" element={<TreeDetail />} />

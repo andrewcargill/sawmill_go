@@ -19,13 +19,14 @@ const PlankDetail = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [openImage2, setOpenImage2] = useState(false);
 
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPlank = async () => {
       try {
         const response = await axios.get(
-          `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/plank/${id}/`,
+          `${API_BASE_URL}/plank/${id}/`,
           {
             headers: {
               "Content-Type": "application/json",

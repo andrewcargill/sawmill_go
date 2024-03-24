@@ -14,13 +14,14 @@ const TreeDetail = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const mapRef = useRef(null);
 
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTree = async () => {
       try {
         const response = await axios.get(
-          `https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/api/tree/${id}/`,
+          `${API_BASE_URL}/tree/${id}/`,
           {
             headers: {
               "Content-Type": "application/json",
