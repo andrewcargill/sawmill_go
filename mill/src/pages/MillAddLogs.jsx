@@ -3,9 +3,14 @@ import { useNavigate } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Alert from "react-bootstrap/Alert";
-import Button from "react-bootstrap/Button";
+
 import css from "../styles/millAddLog.module.css";
 import axios from "axios";
+import CustomFormHeading from "../components/CustomForm/CustomFormHeading";
+import { Box, Button, Grid } from "@mui/material";
+import CustomDatePicker from "../components/CustomForm/CustomDatePicker";
+import FormBoxMain from "../components/CustomForm/FormBoxMain";
+import CustomInput from "../components/CustomForm/CustomInput";
 
 const MillAddLogs = () => {
   const [tree, setTree] = useState("");
@@ -77,6 +82,11 @@ const MillAddLogs = () => {
     }
   };
 
+  /* Update date state */
+  const handleDateChange = (formattedDate) => {
+    setDate(formattedDate);
+  };
+
   // Navigation to Mill Home
   const navigate = useNavigate();
 
@@ -89,103 +99,104 @@ const MillAddLogs = () => {
   };
 
   return (
-    <div className={css.page}>
-      <div>
-        <h1>Sawmill Go - Add Log</h1>
-      </div>
-
-      <div>
+    <div style={{ paddingTop: "1%" }}>
+      <CustomFormHeading title="+ log" />
+      <FormBoxMain>
         <form onSubmit={handleSubmit}>
-          <Row>
-            <Col xs={4}>
-              <label>Date:</label>
-              <input
-                type="date"
-                className="form-control form-control-lg"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                required
-              />
-            </Col>
-            <Col xs={4}>
-              <label>Tree ID:</label>
-              <input
-                type="text"
-                className="form-control form-control-lg"
-                placeholder="Enter ID"
+          {/* Custom Date Field */}
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <CustomDatePicker value={date} onChange={handleDateChange} />
+            </Grid>
+
+            {/* Custom Tree ID Field */}
+            <Grid item xs={12}>
+              <CustomInput
+                label="Tree ID"
+                type="number"
                 value={tree}
                 onChange={handleTreeChange}
                 onBlur={handleTreeBlur}
                 required
                 inputMode="numeric"
               />
-              {treeIdExists !== null && !treeIdExists && (
-                <div className={css.validationMessage}>ID not in system</div>
-              )}
-            </Col>
-            <Col xs={4}>
-              <Button
-                id={css.button}
-                variant={buck ? "success" : "light"}
-                onClick={handleBuckClick}
-              >
-                {buck ? "BUCK LOG" : "BUCK"}
-              </Button>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={6}>
-              <label>Length (cm):</label>
-              <input
+            </Grid>
+            {treeIdExists !== null && !treeIdExists && (
+              <Grid item xs={12}>
+                <Box>ID not in system</Box>
+              </Grid>
+            )}
+
+            {/* Length */}
+            <Grid item xs={12}>
+              <CustomInput
+                label="Length (cm)"
                 type="number"
-                className="form-control form-control-lg"
                 value={length}
                 onChange={(e) => setLength(e.target.value)}
-                inputMode="numeric"
                 required
+                inputMode="numeric"
               />
-            </Col>
-            <Col xs={6}>
-              <label>Diameter (cm):</label>
-              <input
+            </Grid>
+            {/* Diameter */}
+            <Grid item xs={12}>
+              <CustomInput
+                label="Diameter (cm)"
                 type="number"
-                className="form-control form-control-lg"
                 value={diameter}
                 onChange={(e) => setDiameter(e.target.value)}
-                inputMode="numeric"
                 required
+                inputMode="numeric"
               />
-            </Col>
-          </Row>
-
-          <Row>
-            <Col xs={12}>
+            </Grid>
+            {/* Buck */}
+            <Grid item xs={12} marginTop={1}>
               <Button
-                id={css.button}
-                variant="dark"
-                type="submit"
-                disabled={!treeIdExists}
+                fullWidth
+                variant="contained"
+                color={buck ? "primary" : "secondary"}
+                onClick={handleBuckClick}
               >
-                Save
+                {buck ? "BUCk log!" : "BUCK log?"}
               </Button>
-            </Col>
-          </Row>
-        </form>
-      </div>
-
-      {success && (
-        <Alert variant="success" className={css.alert}>
-          Log added successfully with ID: {postId}
-        </Alert>
+            </Grid>
+            {success && (
+        <Grid item xs={12}>
+          <Alert variant="success" className={css.alert}>
+            Log added successfully with ID: {postId}
+          </Alert>
+        </Grid>
       )}
 
-      <Button
-        id={css.button}
-        variant="outline-dark"
-        onClick={() => handleButtonClick("/mill_home")}
-      >
-        Back to Mill Home
-      </Button>
+          <Grid item xs={12} sx={{ mt: 2 }}>
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              type="submit"
+              disabled={!treeIdExists}
+            >
+              Save
+            </Button>
+          </Grid>
+          <Grid item xs={12} sx={{ mt: 2 }}>
+        <Button
+          fullWidth
+          variant="contained"
+          color="dark"
+          onClick={() => handleButtonClick("/mill_home")}
+        >
+          Back to Mill Home
+        </Button>
+      </Grid>
+          </Grid>
+        </form>
+      </FormBoxMain>
+
+    
+
+    
+      
     </div>
   );
 };

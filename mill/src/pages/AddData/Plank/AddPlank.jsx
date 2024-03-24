@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  TextField,
-  FormControl,
   Paper,
   Button,
-  InputLabel,
-  Select,
-  MenuItem,
   Typography,
-  styled,
   Alert,
 } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -19,7 +13,6 @@ import CustomDatePicker from "../../../components/CustomForm/CustomDatePicker";
 import CustomInput from "../../../components/CustomForm/CustomInput";
 import CustomDropdown from "../../../components/CustomForm/CustomDropDown";
 import CustomTextArea from "../../../components/CustomForm/CustomTextArea";
-import CustomImageUploadContainer from "../../../components/CustomForm/CustomImageUploadContainer";
 import FormBoxMain from "../../../components/CustomForm/FormBoxMain";
 import axios from "axios";
 import dayjs from "dayjs";
@@ -205,7 +198,7 @@ const AddPlank = () => {
   };
 
   return (
-    <div>
+    <div style={{ paddingTop: '1%'}}>
       {/* Custom header */}
       <CustomFormHeading title="+ plank" />
       <FormBoxMain>
@@ -437,7 +430,7 @@ const AddPlank = () => {
                 fullWidth
                 type="submit"
               >
-                Submit
+                Save
               </Button>
             </Grid>
           </Grid>
