@@ -1,44 +1,78 @@
-import React from "react";
-import GoogleMapReact from "google-map-react";
-import { faTree } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import css from "../../styles/mapReport.module.css";
-import { Container } from "@mui/material";
-import CustomBox from "../../components/CustomBoxes/CustomBoxes";
+import React, { useEffect, useRef } from "react";
+import { Loader } from "@googlemaps/js-api-loader";
+import { Container, Grid } from "@mui/material";
+
 
 const MyMapComponent = ({ tree }) => {
-  const marker = {
-    lat: parseFloat(tree.latitude),
-    lng: parseFloat(tree.longitude),
-  };
 
-  const Marker = () => (
-    <div className={css.pin}>
-      <div id={css.iconContainer}>
-        <FontAwesomeIcon icon={faTree} />
-      </div>
-      <div id={css.gps}>
-      <div>{marker.lat}</div>
-      <div>{marker.lng}</div>
-      </div>
-    </div>
-  );
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    if (tree?.latitude && tree?.longitude && window.google) {
+      try {
+        const map = new window.google.maps.Map(mapRef.current, {
+          center: {
+            lat: parseFloat(tree.latitude),
+            lng: parseFloat(tree.longitude),
+          },
+          zoom: 18,
+          mapTypeId: "satellite",
+        });
+
+        new window.google.maps.Marker({
+          position: {
+            lat: parseFloat(tree.latitude),
+            lng: parseFloat(tree.longitude),
+          },
+          map: map,
+        });
+      } catch (error) {
+        console.error("Error creating Google Map:", error);
+      }
+    } else {
+      const loader = new Loader({
+        apiKey: "AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U",
+      });
+
+      loader
+        .load()
+        .then(() => {
+          if (tree?.latitude && tree?.longitude) {
+            const map = new window.google.maps.Map(mapRef.current, {
+              center: {
+                lat: parseFloat(tree.latitude),
+                lng: parseFloat(tree.longitude),
+              },
+              zoom: 18,
+              mapTypeId: "satellite",
+            });
+
+            new window.google.maps.Marker({
+              position: {
+                lat: parseFloat(tree.latitude),
+                lng: parseFloat(tree.longitude),
+              },
+              map: map,
+            });
+          }
+        })
+        .catch((e) => {
+          console.error("Error loading Google Maps", e);
+        });
+    }
+  }, [tree]);
 
   return (
-    <div style={{ height: "250px", width: "100%" }}>
-      <GoogleMapReact
-        bootstrapURLKeys={{
-          key: "AIzaSyBTF9lCKZ8YoQS9GngDlBuGkrwmL9glt5U",
-        }}
-        center={marker}
-        defaultZoom={17}
-        options={{
-          gestureHandling: "greedy",
-        }}
-      >
-        <Marker />
-      </GoogleMapReact>
+    <Grid item xs={6}>
+    <div
+      style={{ height: "400px", width: "100%" }}
+      ref={mapRef}
+      className="pb-4"
+    >
+      {/* Map will be rendered here */}
+      {!tree.latitude || !tree.longitude ? <p>NO GPS DATA.</p> : null}
     </div>
+  </Grid>
   );
 };
 

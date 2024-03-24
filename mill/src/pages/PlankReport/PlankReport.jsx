@@ -23,7 +23,6 @@ const PlankReport = () => {
   const [species, setSpecies] = useState(null);
   const [log, setLog] = useState([]);
   const [treeData, setTreeData] = useState([]);
-  const [activeTab, setActiveTab] = useState("about");
 
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const navigate = useNavigate();
