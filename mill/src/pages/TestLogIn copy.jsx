@@ -3,16 +3,13 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import CustomFormHeading from '../components/CustomForm/CustomFormHeading';
 import FormBoxMain from '../components/CustomForm/FormBoxMain';
-import { Button, CircularProgress, Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import CustomInput from '../components/CustomForm/CustomInput';
-
 
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [loginError, setLoginError] = useState('');
 
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   // Create the submit method.
@@ -20,39 +17,30 @@ const Login = () => {
 
   const submit = async e => {
     e.preventDefault();
-    setLoading(true);
-    setLoginError('');
-    try {
-      const user = {
-        username: username,
-        password: password
-      };
-      const { data } = await axios.post('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/token/',
-        user,
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          withCredentials: true
-        }
-      );
-      console.log('Data received:', data); 
-  
-      // Initialize the access & refresh token in localstorage.      
-      localStorage.clear();
-      localStorage.setItem('access_token', data.access);
-      localStorage.setItem('refresh_token', data.refresh);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
-      setLoading(false);
-      window.location.href = 'home_secure';
-    } catch (error) {
-      setLoading(false);
-      setLoginError('Login failed. Please check your credentials.');
-      console.log('Login error:', error);
-    }
-  };
+    const user = {
+      username: username,
+      password: password
+    };
+    // Create the POST requuest
+    const { data } = await axios.post('https://sawmill-live-api-ecf54c3f35e6.herokuapp.com/token/',
+      user,
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
+      }
+    );
+    console.log('Data received:', data); // Log the data received from the API
 
+    // Initialize the access & refresh token in localstorage.      
+    localStorage.clear();
+    localStorage.setItem('access_token', data.access);
+    localStorage.setItem('refresh_token', data.refresh);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
 
+    window.location.href = 'home_secure';
+  }
   return (
 
 
@@ -81,9 +69,8 @@ const Login = () => {
           </Grid>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <Button variant="contained" color="primary" fullWidth type="submit">
-            {loading ? <CircularProgress size={24} /> : 'Submit'} {/* Display spinner when loading */}
+              Submit
             </Button>
-            {loginError && <div style={{ color: 'red' }}>{loginError}</div>} {/* Display login errors if any */}
           </Grid>
         </form>
       </FormBoxMain>
