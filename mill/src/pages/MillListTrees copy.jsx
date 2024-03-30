@@ -2,59 +2,54 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Row from "react-bootstrap/esm/Row";
-import {
-  Box,
-  Button,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
 import CustomInput from "../components/CustomForm/CustomInput";
 import CustomHeaderWithNavAdd from "../components/CustomFormHeaders/CustomHeaderWithNavAdd";
-import LoadingSpinner from "../components/ApiDataComponents/LoadingSpinner";
 
 const TreeList = () => {
   const [trees, setTrees] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [idSearchQuery, setIdSearchQuery] = useState("");
   const [orderBy, setOrderBy] = useState("id");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const [loading, setLoading] = useState(false);
 
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
-  }, [orderBy, pageSize, idSearchQuery]);
+  }, [currentPage, pageSize, orderBy]);
 
   const fetchData = async () => {
     try {
-      setLoading(true);
-     const params = new URLSearchParams({
+      const params = {
+        page: currentPage,
         page_size: pageSize,
-        ordering: orderBy,
+      };
+
+      if (searchQuery) {
+        params.search = searchQuery;
+      }
+      if (idSearchQuery) {
+        params.id = idSearchQuery;
+      }
+      if (orderBy) {
+        params.ordering = orderBy;
+      }
+
+      const response = await axios.get(`${API_BASE_URL}/tree/`, {
+        params,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
       });
-
-      if (idSearchQuery) params.set("id", idSearchQuery);
-
-      const response = await axios.get(
-        `${API_BASE_URL}/tree/?${params.toString()}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        }
-      );
       setTrees(response.data.results);
+      console.log("tree data: ", trees);
     } catch (error) {
       console.error("Error fetching data:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -80,6 +75,7 @@ const TreeList = () => {
   };
 
   const handleReset = () => {
+    setSearchQuery("");
     setIdSearchQuery("");
     setOrderBy("id");
     setCurrentPage(1);
@@ -103,10 +99,6 @@ const TreeList = () => {
     const size = parseInt(e.target.value);
     setPageSize(size);
     setCurrentPage(1);
-  };
-
-  const handleSortChange = (event) => {
-    setOrderBy(event.target.value);
   };
 
   const handleTreeClick = (treeId) => {
@@ -136,72 +128,54 @@ const TreeList = () => {
             item
             container
             xs={12}
-            style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-around' }}
-
-         
-    
+            justifyContent={"flex-end"}
+            alignContent={"center"}
           >
-            <Grid item  container xs={4} >
-        <FormControl size="small" fullWidth >
-          <InputLabel id="sort-by-label">Sort By</InputLabel>
-          <Select
-            autoWidth
-            labelId="sort-by-label"
-            label="Sort By"
-            id="sort-by"
-            value={orderBy}
-            onChange={handleSortChange}
-          >
-            <MenuItem value="id">ID (Lastest)</MenuItem>
-            <MenuItem value="-id">ID (Oldest)</MenuItem>
-            <MenuItem value="date">Date (Newest)</MenuItem>
-            <MenuItem value="-date">Date (Oldest)</MenuItem>
-            <MenuItem value="age">Age (Oldest)</MenuItem>
-            <MenuItem value="-age">Age (Youngest)</MenuItem>
-            <MenuItem value="species">Species (A-Z)</MenuItem>
-            <MenuItem value="-species">Species (Z-A)</MenuItem>
-          </Select>
-        </FormControl>
-      </Grid>
-
-      <Grid item xs={4}  container alignItems="center" justifyContent="flex-start">
-      
-        <CustomInput
-          label="Search by ID"
-          size="small"
-          type="number"
-          fullWidth
-          value={idSearchQuery}
-          onChange={(e) => setIdSearchQuery(e.target.value)}
-          onKeyDown={handleIdSearchKeyPress}
-          placeholder="Search by ID"
-        />
-       
-      </Grid>
-
-      <Grid item container xs={1}>
-        <CustomInput
-          label="Page Size"
-          size="small"
-          type="number"
-          fullWidth
-          value={pageSize}
-          onChange={handlePageSizeChange}
-          placeholder="Page Size"
-        />
-      </Grid>
-
-      <Grid item  container xs={1}>
-        <Button onClick={handleReset} variant="contained" color="primary">
-          Reset
-        </Button>
-      </Grid>
+            <Grid item xs={3} m={1}>
+              <CustomInput
+                size="small"
+                type="text"
+                placeholder="Search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleSearchKeyPress}
+              />
+            </Grid>
+            <Grid item xs={3} m={1}>
+              <CustomInput
+                size="small"
+                type="number"
+                value={idSearchQuery}
+                onChange={(e) => setIdSearchQuery(e.target.value)}
+                onKeyDown={handleIdSearchKeyPress}
+                placeholder="Search by ID"
+              />
+            </Grid>
+            <Grid item xs={1} m={1}>
+              <CustomInput
+                size="small"
+                type="number"
+                value={pageSize}
+                onChange={handlePageSizeChange}
+                placeholder="Page Size"
+              />
+            </Grid>
+            <Grid
+              item
+              container
+              xs={2}
+              alignContent={"center"}
+              justifyContent={"center"}
+            >
+              <Button onClick={handleReset} variant="contained" color="primary">
+                Reset
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
       <Row>
         <Grid container justifyContent={"flex-start"} alignContent={"center"}>
-          { loading && <LoadingSpinner />}
           {trees && trees.length > 0 ? (
             <>
               {trees.map((tree) => (

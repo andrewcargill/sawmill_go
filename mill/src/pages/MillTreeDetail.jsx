@@ -5,13 +5,26 @@ import { Loader } from "@googlemaps/js-api-loader";
 import { Table } from "react-bootstrap";
 import LogsByTree from "../components/LogsbyTree";
 import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
-import { Grid, Typography, Dialog, DialogContent } from "@mui/material";
+import {
+  Grid,
+  Typography,
+  Dialog,
+  DialogContent,
+  IconButton,
+  Button,
+  DialogTitle,
+  DialogActions,
+} from "@mui/material";
 import CustomHeaderWithNavEdit from "../components/CustomFormHeaders/CustomHeaderWithNavEdit";
+import EditIcon from "@mui/icons-material/Edit";
 
 const TreeDetail = () => {
   const { id } = useParams();
   const [tree, setTree] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
+  const [openImageModal, setOpenImageModal] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
   const mapRef = useRef(null);
 
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
@@ -91,16 +104,63 @@ const TreeDetail = () => {
     }
   }, [tree]);
 
+  const handleSaveClick = async () => {
+    const payload = { ...tree };
+
+    delete payload.image;
+
+    try {
+      // PUT request to update the tree. Adjust the URL and data as needed.
+      const response = await axios.put(`${API_BASE_URL}/tree/${id}/`, payload, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      });
+      console.log("Update response: ", response.data);
+      // Successfully saved changes
+      setIsEditing(false); // Exit editing mode
+      // Optionally, you might want to fetch the tree data again to ensure the UI is updated with the saved data
+    } catch (error) {
+      console.error("Error saving tree:", error);
+      // Handle errors (e.g., show an error message)
+    } finally {
+      setIsEditing(false);
+    }
+  };
+
   const handleGoBack = () => {
     navigate(-1);
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setTree((prevTree) => ({
+      ...prevTree,
+      [name]: value, // Dynamically updates the right property based on the input name
+    }));
+  };
+
   const handleEditClick = () => {
-    navigate(`/tree/${id}/edit`);
+    // navigate(`/tree/${id}/edit`);
+    setIsEditing(true);
+  };
+
+  const handleCancelClick = () => {
+    setIsEditing(false);
   };
 
   const handleOpenDialog = () => setOpenDialog(true);
   const handleCloseDialog = () => setOpenDialog(false);
+
+  const handleOpenImageModal = () => setOpenImageModal(true);
+  const handleCloseImageModal = () => setOpenImageModal(false);
+
+  const handleImageSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target); 
+    handleCloseImageModal();
+  };
 
   if (!tree) {
     return <p>Loading...</p>;
@@ -121,42 +181,146 @@ const TreeDetail = () => {
             <tbody>
               <tr>
                 <th>Date:</th>
-                <td>{tree.date}</td>
+                <td>
+                  {isEditing ? (
+                    <input
+                      name="date"
+                      type="date"
+                      value={tree.date}
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    tree.date
+                  )}
+                </td>
               </tr>
               <tr>
                 <th>Species:</th>
-                <td>{tree.species}</td>
+                <td>
+                  {isEditing ? (
+                    <input
+                      name="species"
+                      type="text"
+                      value={tree.species}
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    tree.species
+                  )}
+                </td>
               </tr>
               <tr>
                 <th>Age:</th>
-                <td>{tree.age}</td>
+                <td>
+                  {" "}
+                  {isEditing ? (
+                    <input
+                      name="age"
+                      type="text"
+                      value={tree.age}
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    tree.age
+                  )}
+                </td>
               </tr>
               <tr>
                 <th>Lumberjack:</th>
-                <td>{tree.lumberjack}</td>
+                <td>
+                  {isEditing ? (
+                    <input
+                      name="lumberjack"
+                      type="text"
+                      value={tree.lumberjack}
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    tree.lumberjack
+                  )}
+                </td>
               </tr>
               <tr>
                 <th>Latitude:</th>
-                <td>{tree.latitude}</td>
+                <td>
+                  {isEditing ? (
+                    <input
+                      name="latitude"
+                      type="text"
+                      value={tree.latitude}
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    tree.latitude
+                  )}
+                </td>
               </tr>
               <tr>
                 <th>Longitude:</th>
-                <td>{tree.longitude}</td>
+                <td>
+                  {isEditing ? (
+                    <input
+                      name="longitude"
+                      type="text"
+                      value={tree.longitude}
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    tree.longitude
+                  )}
+                </td>
               </tr>
             </tbody>
             <tbody>
               <tr>
                 <td colSpan={2}>
                   <strong>Reason For Felling:</strong>
-                  <p>{tree.reason_for_felling}</p>
+                  <p>
+                    {isEditing ? (
+                      <textarea
+                        name="reason_for_felling"
+                        rows={2}
+                        cols={50}
+                        value={tree.reason_for_felling}
+                        onChange={handleInputChange}
+                      ></textarea>
+                    ) : (
+                      tree.reason_for_felling
+                    )}
+                  </p>
                 </td>
               </tr>
-              
             </tbody>
           </Table>
+
+          {isEditing && (
+            <Grid container xs={12} p={2}>
+              <Grid
+                item
+                container
+                alignItems={"center"}
+                justifyContent={"flex-end"}
+              >
+                <Button
+                  variant="contained"
+                  style={{ margin: "5px" }}
+                  onClick={handleSaveClick}
+                >
+                  save
+                </Button>
+                <Button
+                  variant="contained"
+                  color="dark"
+                  onClick={handleCancelClick}
+                >
+                  cancel
+                </Button>
+              </Grid>
+            </Grid>
+          )}
         </Grid>
 
-        <Grid item container xs={12} sm={6} pt={1} >
+        <Grid item container xs={12} sm={6} pt={1}>
           <strong>Logs:</strong>
 
           <Grid item container xs={12}>
@@ -180,24 +344,48 @@ const TreeDetail = () => {
               <Grid
                 item
                 container
-                maxHeight={400}
-                alignContent={"center"}
-                justifyContent={"center"}
-                bgcolor={"lightgrey"}
+                xs={12}
+                sm={6}
+                style={{
+                  position: "relative",
+                  maxHeight: "400px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "lightgrey",
+                }}
                 onClick={tree.image ? handleOpenDialog : undefined}
-                style={{ cursor: tree.image ? "pointer" : "default" }}
               >
                 {tree.image ? (
                   <img
                     src={tree.image}
                     alt="Tree Image"
-                    style={{ maxWidth: "100%", height: "auto", maxHeight: 400 }}
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "400px",
+                      display: "block",
+                    }}
                   />
                 ) : (
                   <Typography variant="h6" style={{ textAlign: "center" }}>
                     No tree image saved
                   </Typography>
                 )}
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation(); 
+                    handleOpenImageModal();
+                  }}
+                  style={{
+                    position: "absolute",
+                    bottom: 10,
+                    right: 10,
+                    backgroundColor: "white",
+                    opacity: 0.9,
+                  }}
+                  aria-label="edit image"
+                >
+                  <EditIcon />
+                </IconButton>
               </Grid>
 
               {/* Dialog for displaying the image */}
@@ -219,6 +407,26 @@ const TreeDetail = () => {
                     />
                   )}
                 </DialogContent>
+              </Dialog>
+
+              {/* Dialog for image edit */}
+              <Dialog
+                open={openImageModal}
+                onClose={handleCloseImageModal}
+                aria-labelledby="form-dialog-title"
+              >
+                <DialogTitle id="form-dialog-title">
+                  Upload New Image
+                </DialogTitle>
+                <form onSubmit={handleImageSubmit}>
+                  <DialogContent>
+                    <input type="file" name="image" accept="image/*" required />
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleCloseImageModal}>Cancel</Button>
+                    <Button type="submit">Upload</Button>
+                  </DialogActions>
+                </form>
               </Dialog>
             </Grid>
           </Grid>
