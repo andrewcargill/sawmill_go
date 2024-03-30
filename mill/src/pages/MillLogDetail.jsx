@@ -76,7 +76,7 @@ const LogDetail = () => {
             handleEditClick={handleEditClick}
           />
         </Grid>
-        <Grid item container xs={12}>
+        <Grid item container xs={12} pt={1}>
           <Col>
             <Table bordered>
               <tbody>

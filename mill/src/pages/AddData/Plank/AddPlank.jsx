@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import CustomFormHeading from "../../../components/CustomForm/CustomFormHeading";
 import CustomDatePicker from "../../../components/CustomForm/CustomDatePicker";
 import CustomInput from "../../../components/CustomForm/CustomInput";
 import CustomDropdown from "../../../components/CustomForm/CustomDropDown";
@@ -16,6 +15,7 @@ import CustomTextArea from "../../../components/CustomForm/CustomTextArea";
 import FormBoxMain from "../../../components/CustomForm/FormBoxMain";
 import axios from "axios";
 import dayjs from "dayjs";
+import CustomHeaderWithNav from "../../../components/CustomFormHeaders/CustomHeaderWithNav";
 
 const AddPlank = () => {
   /* FROM OLD FORM */
@@ -200,11 +200,11 @@ const AddPlank = () => {
   return (
     <div style={{ paddingTop: '1%'}}>
       {/* Custom header */}
-      <CustomFormHeading title="+ plank" />
+      <CustomHeaderWithNav title="+ plank" />
       <FormBoxMain>
         <form onSubmit={handleSubmit}>
           {/* Custom Date Field */}
-          <Grid container spacing={1}>
+          <Grid container spacing={1} pt={1}>
             <Grid item xs={12}>
               <CustomDatePicker value={date} onChange={handleDateChange} />
             </Grid>

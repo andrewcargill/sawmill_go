@@ -5,34 +5,32 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import AddIcon from "@mui/icons-material/Add";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
-const CustomHeaderWithNavAdd = ({ title, addButtonText, handleGoBack, handleAddClick }) => {
+const CustomHeaderWithNavAdd = ({
+  title,
+  addButtonText,
+  handleGoBack,
+  handleAddClick,
+}) => {
   return (
     <Grid container item p={2} pt={2} bgcolor={"primary.main"}>
       <Grid item xs={6}>
-        {/* <Typography variant="h4">Tree {id} Info</Typography> */}
         <CustomTypography.navHeading color="white">
           {title}
         </CustomTypography.navHeading>
       </Grid>
 
       <Grid item container xs={6} justifyContent="flex-end">
-        <Grid item xs={3}>
-          <Button variant="contained" color="dark" startIcon={<AddIcon/>} onClick={handleAddClick}>
-            {addButtonText}
-          </Button>
-    
+        <Grid item pr={2}>
+          <IconButton color="white" size="small" onClick={handleAddClick}>
+            <AddIcon />
+          </IconButton>
         </Grid>
-        <Grid item xs={3}>
-          <Button
-            variant="contained"
-            color="dark"
-            onClick={handleGoBack}
-            startIcon={<ArrowBackIosIcon/>}
-          >
-            Back
-          </Button>
+        <Grid item>
+          <IconButton color="white" size="small" onClick={handleGoBack}>
+            <ArrowBackIosIcon />
+          </IconButton>
         </Grid>
       </Grid>
     </Grid>

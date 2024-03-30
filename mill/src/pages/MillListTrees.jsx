@@ -39,16 +39,13 @@ const TreeList = () => {
         params.ordering = orderBy;
       }
 
-      const response = await axios.get(
-        `${API_BASE_URL}/tree/`,
-        {
-          params,
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        }
-      );
+      const response = await axios.get(`${API_BASE_URL}/tree/`, {
+        params,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      });
       setTrees(response.data.results);
       console.log("tree data: ", trees);
     } catch (error) {
@@ -183,6 +180,7 @@ const TreeList = () => {
             <>
               {trees.map((tree) => (
                 <Grid
+                  className="item-select"
                   item
                   container
                   xs={5}

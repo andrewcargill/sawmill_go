@@ -19,9 +19,7 @@ import {
 import { useNavigate } from "react-router";
 import CustomTypography from "../../../components/Typography/CustomTypography";
 
-
 const PlankSiblingsContent = ({ data, length }) => {
-
   const navigate = useNavigate();
 
   const wholeLength = Math.floor(length);
@@ -32,7 +30,7 @@ const PlankSiblingsContent = ({ data, length }) => {
     const minWidth = 2;
     const maxWidth = 25;
     const minPercentage = 30;
-    const maxPercentage = 180; 
+    const maxPercentage = 180;
 
     if (width <= minWidth) return `${minPercentage}px`;
     if (width >= maxWidth) return `${maxPercentage}px`;
@@ -47,8 +45,8 @@ const PlankSiblingsContent = ({ data, length }) => {
   const calculateHeight = (depth) => {
     const minDepth = 2;
     const maxDepth = 25;
-    const minHeight = 30; 
-    const maxHeight = 180; 
+    const minHeight = 30;
+    const maxHeight = 180;
 
     if (depth <= minDepth) return `${minHeight}px`;
     if (depth >= maxDepth) return `${maxHeight}px`;
@@ -67,21 +65,19 @@ const PlankSiblingsContent = ({ data, length }) => {
     </>
   );
 
-    const handlePlankClick = () => {
+  const handlePlankClick = () => {
     navigate(`/plank/${data.id}`);
-    };
-
+  };
 
   return (
     <Tooltip title={toolTipContent} arrow>
       <Grid
+        className="item-select"
         item
         container
         bgcolor={"secondary.main"}
-       
         p={1}
         borderRadius={"5px"}
-       
         sx={{
           width: calculateWidthPercentage(data.width),
           height: calculateHeight(data.depth),
@@ -90,7 +86,7 @@ const PlankSiblingsContent = ({ data, length }) => {
         onClick={handlePlankClick}
       >
         <CustomTypography.subReportHeading>
-    {data.id}
+          {data.id}
         </CustomTypography.subReportHeading>
       </Grid>
     </Tooltip>

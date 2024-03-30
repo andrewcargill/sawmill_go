@@ -56,6 +56,7 @@ const PlankListResultsContent = ({ data }) => {
   return (
     <Tooltip title={toolTipContent} arrow>
       <Grid
+        className="item-select"
         item
         container
         bgcolor={"secondary.main"}

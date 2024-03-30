@@ -110,6 +110,7 @@ const LogList = () => {
             {logs.map((log) => (
               <Tooltip title={displayTitle(log)} placement="top" arrow>
                 <Grid
+                className="item-select"
                   item
                   container
                   xs={5}

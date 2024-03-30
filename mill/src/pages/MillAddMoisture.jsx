@@ -6,6 +6,8 @@ import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import css from "../styles/millAddPlank.module.css";
 import { useNavigate } from "react-router-dom";
+import CustomHeaderWithNav from '../components/CustomFormHeaders/CustomHeaderWithNav';
+
 
 const MillAddMoisture = () => {
   const [plank, setPlank] = useState('');
@@ -82,10 +84,8 @@ const MillAddMoisture = () => {
     };
 
   return (
-    <div className={css.page}>
-      <div>
-        <h1>Sawmill Go - Add Moisture Reading</h1>
-      </div>
+    <div style={{ paddingTop: "1%"}}>
+      <CustomHeaderWithNav title="+ moisture" />
       <div className={css.container}>
         <form onSubmit={handleSubmit}>
           <Row>

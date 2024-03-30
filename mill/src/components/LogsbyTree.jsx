@@ -38,7 +38,16 @@ const LogsByTree = ({ treeId }) => {
   };
 
   return (
-    <Grid container spacing={2} m={1}>
+    <Grid
+      container
+      spacing={2}
+      m={1}
+      sx={{
+        flexDirection: {
+          sm: "column", 
+        },
+      }}
+    >
       {logs && logs.length > 0 ? (
         logs.map((log) => (
           <Tooltip
@@ -52,6 +61,7 @@ const LogsByTree = ({ treeId }) => {
             <Grid item xs={6} sm={3} lg={2} key={log.id}>
               <Grid
                 item
+                className="item-select"
                 bgcolor={"secondary.main"}
                 style={{
                   border: "2px solid green",

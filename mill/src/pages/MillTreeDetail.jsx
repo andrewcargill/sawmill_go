@@ -20,15 +20,12 @@ const TreeDetail = () => {
   useEffect(() => {
     const fetchTree = async () => {
       try {
-        const response = await axios.get(
-          `${API_BASE_URL}/tree/${id}/`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-            },
-          }
-        );
+        const response = await axios.get(`${API_BASE_URL}/tree/${id}/`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        });
         setTree(response.data);
         console.log("single tree data: ", response.data);
       } catch (error) {
@@ -118,53 +115,52 @@ const TreeDetail = () => {
             handleGoBack={handleGoBack}
             handleEditClick={handleEditClick}
           />
+        </Grid>
+        <Grid item container xs={12} sm={6} pt={1}>
+          <Table bordered>
+            <tbody>
+              <tr>
+                <th>Date:</th>
+                <td>{tree.date}</td>
+              </tr>
+              <tr>
+                <th>Species:</th>
+                <td>{tree.species}</td>
+              </tr>
+              <tr>
+                <th>Age:</th>
+                <td>{tree.age}</td>
+              </tr>
+              <tr>
+                <th>Lumberjack:</th>
+                <td>{tree.lumberjack}</td>
+              </tr>
+              <tr>
+                <th>Latitude:</th>
+                <td>{tree.latitude}</td>
+              </tr>
+              <tr>
+                <th>Longitude:</th>
+                <td>{tree.longitude}</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td colSpan={2}>
+                  <strong>Reason For Felling:</strong>
+                  <p>{tree.reason_for_felling}</p>
+                </td>
+              </tr>
+              
+            </tbody>
+          </Table>
+        </Grid>
+
+        <Grid item container xs={12} sm={6} pt={1} >
+          <strong>Logs:</strong>
 
           <Grid item container xs={12}>
-            <Table bordered>
-              <tbody>
-                <tr>
-                  <th>Date:</th>
-                  <td>{tree.date}</td>
-                </tr>
-                <tr>
-                  <th>Species:</th>
-                  <td>{tree.species}</td>
-                </tr>
-                <tr>
-                  <th>Age:</th>
-                  <td>{tree.age}</td>
-                </tr>
-                <tr>
-                  <th>Lumberjack:</th>
-                  <td>{tree.lumberjack}</td>
-                </tr>
-                <tr>
-                  <th>Latitude:</th>
-                  <td>{tree.latitude}</td>
-                </tr>
-                <tr>
-                  <th>Longitude:</th>
-                  <td>{tree.longitude}</td>
-                </tr>
-              </tbody>
-              <tbody>
-                <tr>
-                  <td colSpan={2}>
-                    <strong>Reason For Felling:</strong>
-                    <p>{tree.reason_for_felling}</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td colSpan={2}>
-                    <strong>Logs:</strong>
-
-                    <Grid item container xs={12}>
-                      <LogsByTree treeId={id} />
-                    </Grid>
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
+            <LogsByTree treeId={id} />
           </Grid>
         </Grid>
 
@@ -200,7 +196,7 @@ const TreeDetail = () => {
                 ) : (
                   <Typography variant="h6" style={{ textAlign: "center" }}>
                     No tree image saved
-                  </Typography> 
+                  </Typography>
                 )}
               </Grid>
 
@@ -231,6 +227,5 @@ const TreeDetail = () => {
     </PageContentContainer>
   );
 };
-
 
 export default TreeDetail;

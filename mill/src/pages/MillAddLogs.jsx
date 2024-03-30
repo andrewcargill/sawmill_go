@@ -11,6 +11,7 @@ import { Box, Button, Grid } from "@mui/material";
 import CustomDatePicker from "../components/CustomForm/CustomDatePicker";
 import FormBoxMain from "../components/CustomForm/FormBoxMain";
 import CustomInput from "../components/CustomForm/CustomInput";
+import CustomHeaderWithNav from "../components/CustomFormHeaders/CustomHeaderWithNav";
 
 const MillAddLogs = () => {
   const [tree, setTree] = useState("");
@@ -100,11 +101,11 @@ const MillAddLogs = () => {
 
   return (
     <div style={{ paddingTop: "1%" }}>
-      <CustomFormHeading title="+ log" />
+      <CustomHeaderWithNav title="+ log" />
       <FormBoxMain>
         <form onSubmit={handleSubmit}>
           {/* Custom Date Field */}
-          <Grid container spacing={1}>
+          <Grid container spacing={1} pt={1}>
             <Grid item xs={12}>
               <CustomDatePicker value={date} onChange={handleDateChange} />
             </Grid>

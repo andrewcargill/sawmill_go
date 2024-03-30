@@ -8,13 +8,15 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import css from "../styles/millAddPlank.module.css";
 import axios from "axios";
+import CustomHeaderWithNav from "../components/CustomFormHeaders/CustomHeaderWithNav";
+
 
 const MillAddTrees = () => {
-  const [date, setDate] = useState("");
-  const [species, setSpecies] = useState("");
+ 
+  const [species, setSpecies] = useState("Pine");
   const [reason_for_felling, setReason_for_felling] = useState("");
-  const [age, setAge] = useState("");
-  const [lumberjack, setLumberjack] = useState("");
+  const [age, setAge] = useState("40-60");
+  const [lumberjack, setLumberjack] = useState("Andrew Cargill");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [image, setImage] = useState("");
@@ -86,6 +88,23 @@ const MillAddTrees = () => {
     }
   };
 
+  //Date Format
+  const formatDate = (date) => {
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+  };
+
+  const [date, setDate] = useState(formatDate(new Date()));
+
   /// Navigation to Mill Home
 
   const navigate = useNavigate();
@@ -95,10 +114,8 @@ const MillAddTrees = () => {
   };
 
   return (
-    <div className={css.page}>
-      <div>
-        <h1>Sawmill Go - Add Tree</h1>
-      </div>
+    <div style={{ paddingTop: '1%'}}>
+      <CustomHeaderWithNav title='+ tree' />
       <div className={css.container}>
         <form onSubmit={handleSubmit}>
           <Row>
@@ -213,6 +230,17 @@ const MillAddTrees = () => {
 
           <Row className="mb-4">
             <Col xs={12}>
+              <label>Upload Image</label>
+              <input
+                type="file"
+                accept="image/*"
+                className="form-control form-control-lg"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </Col>
+          </Row>
+          <Row className="mb-4">
+            <Col xs={12}>
               <label>Reason For Felling</label>
               <textarea
                 className="form-control form-control-lg"
@@ -223,17 +251,7 @@ const MillAddTrees = () => {
               ></textarea>
             </Col>
           </Row>
-          <Row className="mb-4">
-            <Col xs={12}>
-              <label>Image Upload</label>
-              <input
-                type="file"
-                accept="image/*"
-                className="form-control form-control-lg"
-                onChange={(e) => setImage(e.target.files[0])}
-              />
-            </Col>
-          </Row>
+        
           {success && (
             <Alert key="success" variant="success">
               <p>Success! Data Stored.</p>

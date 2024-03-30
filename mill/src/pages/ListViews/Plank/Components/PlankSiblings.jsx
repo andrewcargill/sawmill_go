@@ -97,6 +97,7 @@ const PlankSiblings = ({ logId, currentPlank }) => {
                   }
                 >
                   <Grid
+                    className={plank.id === currentPlank ? "" : "item-select"}
                     item
                     container
                     key={plank.id}
