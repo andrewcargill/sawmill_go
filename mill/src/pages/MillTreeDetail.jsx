@@ -330,7 +330,7 @@ const TreeDetail = () => {
 
         <Grid item container>
           <Grid item container xs={12} spacing={2} pb={10}>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <div
                 style={{ height: "400px", width: "100%" }}
                 ref={mapRef}
@@ -340,7 +340,7 @@ const TreeDetail = () => {
                 {!tree.latitude || !tree.longitude ? <p>NO GPS DATA.</p> : null}
               </div>
             </Grid>
-            <Grid item container xs={6}>
+            <Grid item container xs={12} sm={6}>
               <Grid
                 item
                 container
