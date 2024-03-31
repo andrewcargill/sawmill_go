@@ -24,6 +24,7 @@ const TreeDetail = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [openImageModal, setOpenImageModal] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const mapRef = useRef(null);
 
@@ -129,6 +130,50 @@ const TreeDetail = () => {
     }
   };
 
+  const handleImageSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    // Append all current tree fields to formData
+    Object.keys(tree).forEach((key) => {
+      if (key !== "image") {
+        formData.append(key, tree[key]);
+        
+      }
+    });
+
+    // Append the new image file under the 'image' key only if it's selected
+    if (selectedImage) {
+      console.log("Selected image:", selectedImage);
+      formData.append("image", selectedImage);
+    }
+
+    try {
+      const response = await axios.put(
+        `${API_BASE_URL}/tree/${id}/`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            // 'Content-Type': 'multipart/form-data' is set automatically by the browser
+          },
+        }
+      );
+      console.log("Tree updated successfully:", response.data);
+      // After a successful update, you might want to update the tree state
+      // This could include setting the image to the new image URL returned by the server, if applicable
+      setTree((prev) => ({
+        ...prev,
+        image: response.data.image || prev.image,
+      }));
+      setSelectedImage(null); // Clear the selected image
+      handleCloseImageModal(); // Close the modal
+    } catch (error) {
+      console.error("Error updating the tree with new image:", error);
+    }
+  };
+
   const handleGoBack = () => {
     navigate(-1);
   };
@@ -155,12 +200,6 @@ const TreeDetail = () => {
 
   const handleOpenImageModal = () => setOpenImageModal(true);
   const handleCloseImageModal = () => setOpenImageModal(false);
-
-  const handleImageSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target); 
-    handleCloseImageModal();
-  };
 
   if (!tree) {
     return <p>Loading...</p>;
@@ -352,6 +391,7 @@ const TreeDetail = () => {
                   justifyContent: "center",
                   alignItems: "center",
                   backgroundColor: "lightgrey",
+                  cursor: tree.image ? "pointer" : "default",
                 }}
                 onClick={tree.image ? handleOpenDialog : undefined}
               >
@@ -372,7 +412,7 @@ const TreeDetail = () => {
                 )}
                 <IconButton
                   onClick={(e) => {
-                    e.stopPropagation(); 
+                    e.stopPropagation();
                     handleOpenImageModal();
                   }}
                   style={{
@@ -420,7 +460,17 @@ const TreeDetail = () => {
                 </DialogTitle>
                 <form onSubmit={handleImageSubmit}>
                   <DialogContent>
-                    <input type="file" name="image" accept="image/*" required />
+                    <input
+                      type="file"
+                      name="image"
+                      accept="image/*"
+                      required
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                          setSelectedImage(e.target.files[0]);
+                        }
+                      }}
+                    />
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleCloseImageModal}>Cancel</Button>
