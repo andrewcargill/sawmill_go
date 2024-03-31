@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Loader } from "@googlemaps/js-api-loader";
-import { Table } from "react-bootstrap";
+import { Spinner, Table } from "react-bootstrap";
 import LogsByTree from "../components/LogsbyTree";
 import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
 import {
@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import CustomHeaderWithNavEdit from "../components/CustomFormHeaders/CustomHeaderWithNavEdit";
 import EditIcon from "@mui/icons-material/Edit";
+import LoadingSpinner from "../components/ApiDataComponents/LoadingSpinner";
 
 const TreeDetail = () => {
   const { id } = useParams();
@@ -187,7 +188,6 @@ const TreeDetail = () => {
   };
 
   const handleEditClick = () => {
-    // navigate(`/tree/${id}/edit`);
     setIsEditing(true);
   };
 
@@ -202,7 +202,12 @@ const TreeDetail = () => {
   const handleCloseImageModal = () => setOpenImageModal(false);
 
   if (!tree) {
-    return <p>Loading...</p>;
+    return 
+    (
+      <Grid xs={12} container alignContent={'center'} justifyContent={'center'}>
+      <LoadingSpinner />
+      </Grid>
+    )
   }
 
   return (
@@ -210,12 +215,12 @@ const TreeDetail = () => {
       <Grid container>
         <Grid item container>
           <CustomHeaderWithNavEdit
-            title={`Tree ${id} Info`}
+            title={`Tree ${id}`}
             handleGoBack={handleGoBack}
             handleEditClick={handleEditClick}
           />
         </Grid>
-        <Grid item container xs={12} sm={6} pt={1}>
+        <Grid item container xs={12} md={6} pt={1}>
           <Table bordered>
             <tbody>
               <tr>
@@ -359,8 +364,9 @@ const TreeDetail = () => {
           )}
         </Grid>
 
-        <Grid item container xs={12} sm={6} pt={1}>
-          <strong>Logs:</strong>
+        <Grid item container xs={12} md={6} pl={2} pb={2} pt={1}>
+          <Typography variant="h6">Logs:</Typography>
+      
 
           <Grid item container xs={12}>
             <LogsByTree treeId={id} />
@@ -379,7 +385,7 @@ const TreeDetail = () => {
                 {!tree.latitude || !tree.longitude ? <p>NO GPS DATA.</p> : null}
               </div>
             </Grid>
-            <Grid item container xs={12} sm={6}>
+            <Grid item container xs={12} sm={6} width={'100%'} maxWidth={'100%'}>
               <Grid
                 item
                 container
@@ -387,11 +393,14 @@ const TreeDetail = () => {
                 sm={6}
                 style={{
                   position: "relative",
+                  width: "100%",
                   maxHeight: "400px",
                   justifyContent: "center",
                   alignItems: "center",
                   backgroundColor: "lightgrey",
                   cursor: tree.image ? "pointer" : "default",
+                  maxWidth: "100%",
+                  flexBasis: '100%'
                 }}
                 onClick={tree.image ? handleOpenDialog : undefined}
               >
@@ -400,8 +409,11 @@ const TreeDetail = () => {
                     src={tree.image}
                     alt="Tree Image"
                     style={{
-                      maxWidth: "100%",
+                      width: "100%",
+                      height: "100%",
                       maxHeight: "400px",
+                      maxWidth: "100%",
+                      objectFit: "cover",
                       display: "block",
                     }}
                   />

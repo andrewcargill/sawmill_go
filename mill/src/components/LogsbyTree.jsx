@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Grid, Tooltip, Typography } from "@mui/material";
 import CustomTypography from "./Typography/CustomTypography";
 
+
 const LogsByTree = ({ treeId }) => {
   const [logs, setLogs] = useState([]);
 
@@ -37,6 +38,8 @@ const LogsByTree = ({ treeId }) => {
     navigate(`/log/${logId}`);
   };
 
+
+
   return (
     <Grid
       container
@@ -44,7 +47,8 @@ const LogsByTree = ({ treeId }) => {
       m={1}
       sx={{
         flexDirection: {
-          sm: "column", 
+          xs: "row", 
+          md: "row",
         },
       }}
     >
@@ -58,7 +62,7 @@ const LogsByTree = ({ treeId }) => {
          `}
             key={log.id}
           >
-            <Grid item xs={6} sm={3} lg={2} key={log.id}>
+            <Grid item xs={6} sm={3} md={3} key={log.id}>
               <Grid
                 item
                 className="item-select"
@@ -94,7 +98,9 @@ const LogsByTree = ({ treeId }) => {
           </Tooltip>
         ))
       ) : (
+        <Grid container justifyContent={"center"} alignContent={"center"}>
         <Typography>No logs found for Tree ID: {treeId}</Typography>
+        </Grid>
       )}
     </Grid>
   );

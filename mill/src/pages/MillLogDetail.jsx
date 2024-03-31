@@ -71,7 +71,7 @@ const LogDetail = () => {
       <Grid container>
         <Grid item container xs={12}>
           <CustomHeaderWithNavEdit
-            title={`Log ${id} Info`}
+            title={`Log ${id}`}
             handleGoBack={handleGoBack}
             handleEditClick={handleEditClick}
           />

@@ -126,7 +126,7 @@ const PlankDetail = () => {
     <PageContentContainer>
       <Grid Container>
         <CustomHeaderWithNavEdit
-          title={`Plank ${id} Info`}
+          title={`Plank ${id}`}
           handleGoBack={handleGoBack}
           handleEditClick={handleEditClick}
         />
