@@ -38,7 +38,7 @@ const DemoPlankList = () => {
   });
 
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("md"));
+  const matches = useMediaQuery(theme.breakpoints.up("xl"));
 
   /* Open/close Temp. Drawer */
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -221,14 +221,10 @@ const DemoPlankList = () => {
           handleGoBack={handleGoBack}
           handleAddClick={handleAddClick}
         />
-        {!matches ? (
-          <CustomBox variant="white" sx={{ marginBottom: "32px" }}>
+       
+          <CustomBox variant="white" sx={{ marginBottom: "32px", opacity: 0.9 }}>
             <Grid container spacing={1}>
-              <Grid item xs={12}>
-                <CustomTypography.listHeading>
-                  Lumber Stock
-                </CustomTypography.listHeading>
-              </Grid>
+            
               <Grid
                 container
                 xs={12}
@@ -280,54 +276,7 @@ const DemoPlankList = () => {
               </Grid>
             </Grid>
           </CustomBox>
-        ) : (
-          <CustomBox variant="white" sx={{ marginBottom: "32px" }}>
-            <Grid container spacing={1}>
-              <Grid item xs={8}>
-                <Accordion>
-                  <AccordionSummary
-                    expandIcon={<FilterList />}
-                    aria-controls="panel1-content"
-                    id="panel1-header"
-                  >
-                    <Typography>Filters</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <PlankFiltersDesktop
-                      onSubmit={handleFilterSubmit}
-                      onResetFilters={handleResetFilters}
-                    />
-                  </AccordionDetails>
-                </Accordion>
-              </Grid>
-
-              <Grid item xs={2}>
-                <TextField
-                  id="search-input"
-                  label="Lumber Id"
-                  type="search"
-                  variant="outlined"
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  size="small"
-                  InputProps={{
-                    endAdornment: (
-                      <IconButton
-                        size="small"
-                        type="submit"
-                        aria-label="search"
-                      >
-                        <SearchIcon />
-                      </IconButton>
-                    ),
-                  }}
-                />
-              </Grid>
-              <Grid item xs={2}>
-                Results: {resultCount}
-              </Grid>
-            </Grid>
-          </CustomBox>
-        )}
+       
       </div>
 
       <div style={{ minHeight: 200, paddingBottom: "100px" }}>

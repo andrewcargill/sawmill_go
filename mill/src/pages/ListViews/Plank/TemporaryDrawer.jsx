@@ -135,8 +135,12 @@ const TemporaryDrawer = ({ open, onClose, onSubmit, onResetFilters }) => {
       id="container"
       PaperProps={{
         sx: {
-          width: '80vw', // Adjust the width as needed
+          width: { xs: '80vw', sm: '50vw', md: '30vw', lg: '20vw'},
+          height: '100%',
+          padding: '0px',
+          marginTop: { xs: '0', sm: '10px', md: '20px', lg: '50px'},
         },
+        
       }}
     >
       <div>
@@ -152,7 +156,7 @@ const TemporaryDrawer = ({ open, onClose, onSubmit, onResetFilters }) => {
                 </Typography>
               </Grid>
               <Grid item>
-                <IconButton onClick={handleReset}>
+                <IconButton onClick={onClose}>
                   <FilterListIcon />
                 </IconButton>
               </Grid>

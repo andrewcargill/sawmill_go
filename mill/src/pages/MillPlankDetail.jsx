@@ -10,6 +10,7 @@ import PageContentContainer from "../components/CustomBoxes/PageContentContainer
 import { Chip, Dialog, DialogContent, Grid, Typography } from "@mui/material";
 import CustomHeaderWithNavEdit from "../components/CustomFormHeaders/CustomHeaderWithNavEdit";
 import PlankSiblings from "./ListViews/Plank/Components/PlankSiblings";
+import LoadingSpinner from "../components/ApiDataComponents/LoadingSpinner";
 
 const PlankDetail = () => {
   const { id } = useParams();
@@ -45,9 +46,9 @@ const PlankDetail = () => {
     fetchPlank();
   }, [id]);
 
-  if (!plank) {
-    return <p>Loading...</p>;
-  }
+  // if (!plank) {
+  //   return <p>Loading...</p>;
+  // }
 
   const getLiveEdgeStatus = (live_edge) => {
     return live_edge ? <DoneIcon /> : <CloseIcon />;
@@ -131,12 +132,10 @@ const PlankDetail = () => {
           handleEditClick={handleEditClick}
         />
 
+        {plank ? (
+        
         <Grid item container xs={12} pt={2}>
-          <Grid
-            item
-            container
-            lg={6}
-            md={12}
+          <Grid item container md={6} xs={12}
             p={10}
             justifyContent={"center"}
             alignContent={"space-between"}
@@ -206,7 +205,7 @@ const PlankDetail = () => {
               ></Grid>
             </Grid>
           </Grid>
-          <Grid item container lg={6} md={12}>
+          <Grid item container md={6} xs={12}>
             <Table bordered>
               <tbody>
                 <tr>
@@ -293,6 +292,10 @@ const PlankDetail = () => {
                   <p>{plank.info}</p>
                 </td>
               </tr>
+            </tbody>
+          </Table>
+          <Table bordered>
+              <tbody>
               <tr>
                 <td colSpan={2}>
                   <strong>Siblings:</strong>  <Typography color={'#79c001'}>*Book-Matched</Typography>
@@ -393,6 +396,11 @@ const PlankDetail = () => {
             </DialogContent>
           </Dialog>
         </Grid>
+        ) : (
+          <Grid item container xs={12} p={2}>
+            <LoadingSpinner />
+          </Grid>
+        )}
       </Grid>
     </PageContentContainer>
   );

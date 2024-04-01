@@ -79,7 +79,8 @@ const PlankSiblings = ({ logId, currentPlank }) => {
             sm={12}
             alignItems={"center"}
             justifyContent={"center"}
-            padding={"5% 5%"}
+            padding={"1% 5%"}
+            bgcolor={"dark.main"}
           >
             {planks.map((plank, index) => {
               const currentIndex = planks.findIndex(
@@ -114,7 +115,8 @@ const PlankSiblings = ({ logId, currentPlank }) => {
                       color: "black",
                       height: calculateHeight(plank?.depth),
                       width: calculateWidthPercentage(plank?.width),
-                      cursor: "pointer",
+                      cursor: plank.id === currentPlank
+                                ? "default" : "pointer",
                     }}
                     onClick={() => handlePlankClick(plank.id)}
                   >
