@@ -18,14 +18,14 @@ const MillHome = () => {
       
       <div className={css.container}>
         <Row>
-          <Col xs={6} className={css.columns}  >
+        <Col xs={6} className={css.columns} >
             <div className={css.buttonContainer}>
               <Button
                 className={css.selectButton}
-              
-                onClick={() => handleButtonClick("/add_plank")}
+                variant="success"
+                onClick={() => handleButtonClick("/mill_add_trees")}
               >
-                + Plank
+                + Tree
               </Button>
             </div>
           </Col>
@@ -42,14 +42,15 @@ const MillHome = () => {
           </Col>
         </Row>
         <Row>
-          <Col xs={6} className={css.columns} >
+        
+          <Col xs={6} className={css.columns}  >
             <div className={css.buttonContainer}>
               <Button
                 className={css.selectButton}
-                variant="success"
-                onClick={() => handleButtonClick("/mill_add_trees")}
+              
+                onClick={() => handleButtonClick("/add_plank")}
               >
-                + Tree
+                + Plank
               </Button>
             </div>
           </Col>
