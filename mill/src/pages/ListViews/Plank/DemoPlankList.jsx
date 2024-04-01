@@ -7,14 +7,9 @@ import {
   Button,
   useTheme,
   useMediaQuery,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-  Accordion,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import CustomTypography from "../../../components/Typography/CustomTypography";
 import TemporaryDrawer from "./TemporaryDrawer";
 import CustomBox from "../../../components/CustomBoxes/CustomBoxes";
 import { fetchMoreData } from "../../../paginationUtilsNoAuth";
@@ -23,8 +18,6 @@ import "../../../styles/plankList.css";
 import PageContentContainer from "../../../components/CustomBoxes/PageContentContainer";
 import AllResultsText from "../../../components/ApiDataComponents/AllResultsText";
 import LoadingSpinner from "../../../components/ApiDataComponents/LoadingSpinner";
-import PlankFiltersDesktop from "./PlankFiltersDesktop";
-import FilterList from "@mui/icons-material/FilterList";
 import PlankListResultsContent from "./PlankListResultsContent";
 import { useNavigate } from "react-router-dom";
 import CustomHeaderWithNavAdd from "../../../components/CustomFormHeaders/CustomHeaderWithNavAdd";
@@ -59,6 +52,7 @@ const DemoPlankList = () => {
   const [furnitureFilter, setFurnitureFilter] = useState("");
   const [logIdFilter, setLogIdFilter] = useState("");
   const [loading, setLoading] = useState(false);
+  const containerRef = React.useRef(null);
 
   const navigate = useNavigate();
 
@@ -161,12 +155,50 @@ const DemoPlankList = () => {
     }
   };
 
+  // const fetchMorePlanks = () => {
+  //   if (plankData.next) {
+  //     console.log("Step 3: Fetching more data...");
+  //     fetchMoreData(plankData.next, setPlankData);
+  //   }
+  // };
+
   const fetchMorePlanks = () => {
-    if (plankData.next) {
-      console.log("Step 3: Fetching more data...");
-      fetchMoreData(plankData.next, setPlankData);
+    if (plankData.next && !loading) {
+      setLoading(true);
+      console.log("Fetching more data...");
+      fetchMoreData(plankData.next, setPlankData).then(() => setLoading(false));
     }
   };
+
+  const checkIfContainerIsFilled = () => {
+    // Placeholder check, implement your own logic based on your UI
+    if (containerRef.current) {
+      return (
+        containerRef.current.scrollHeight > containerRef.current.clientHeight
+      );
+    }
+    return false;
+  };
+
+  useEffect(() => {
+    const checkAndFetchMore = () => {
+      if (!checkIfContainerIsFilled() && !loading) {
+        fetchMorePlanks();
+      }
+    };
+
+    // Initial check
+    checkAndFetchMore();
+    // Set up event listeners for window resize or orientation change
+    window.addEventListener("resize", checkAndFetchMore);
+    window.addEventListener("orientationchange", checkAndFetchMore);
+
+    // Clean up event listeners when component unmounts or rerenders
+    return () => {
+      window.removeEventListener("resize", checkAndFetchMore);
+      window.removeEventListener("orientationchange", checkAndFetchMore);
+    };
+  }, [plankData.results, loading]); // Make sure to list all dependencies here
 
   /* Drawer open and close state */
   const handleDrawerOpen = () => {
@@ -221,65 +253,66 @@ const DemoPlankList = () => {
           handleGoBack={handleGoBack}
           handleAddClick={handleAddClick}
         />
-       
-          <CustomBox variant="white" sx={{ marginBottom: "32px", opacity: 0.9 }}>
-            <Grid container spacing={1}>
-            
-              <Grid
-                container
-                xs={12}
-                spacing={1}
-                alignItems="center"
-                justifyContent="center"
-                ml="0px"
-              >
-                <Grid item xs={4}>
-                  Results: {resultCount}
-                </Grid>
-                <Grid item xs={4}>
-                  <TextField
-                    id="search-input"
-                    label="Search"
-                    type="search"
-                    variant="outlined"
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    size="small"
-                    InputProps={{
-                      endAdornment: (
-                        <IconButton
-                          size="small"
-                          type="submit"
-                          aria-label="search"
-                        >
-                          <SearchIcon />
-                        </IconButton>
-                      ),
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={4}>
-                  <Button
-                    size="md"
-                    variant="outlined"
-                    color="primary"
-                    onClick={handleDrawerOpen}
-                  >
-                    <FilterAltIcon /> Filter
-                  </Button>
-                  <TemporaryDrawer
-                    open={drawerOpen}
-                    onClose={handleDrawerClose}
-                    onSubmit={handleFilterSubmit}
-                    onResetFilters={handleResetFilters}
-                  />
-                </Grid>
+
+        <CustomBox variant="white" sx={{ marginBottom: "32px", opacity: 0.9 }}>
+          <Grid container spacing={1}>
+            <Grid
+              container
+              xs={12}
+              spacing={1}
+              alignItems="center"
+              justifyContent="center"
+              ml="0px"
+            >
+              <Grid item xs={4}>
+                Results: {resultCount}
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  id="search-input"
+                  label="Search"
+                  type="search"
+                  variant="outlined"
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  size="small"
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton
+                        size="small"
+                        type="submit"
+                        aria-label="search"
+                      >
+                        <SearchIcon />
+                      </IconButton>
+                    ),
+                  }}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <Button
+                  size="md"
+                  variant="outlined"
+                  color="primary"
+                  onClick={handleDrawerOpen}
+                >
+                  <FilterAltIcon /> Filter
+                </Button>
+                <TemporaryDrawer
+                  open={drawerOpen}
+                  onClose={handleDrawerClose}
+                  onSubmit={handleFilterSubmit}
+                  onResetFilters={handleResetFilters}
+                />
               </Grid>
             </Grid>
-          </CustomBox>
-       
+          </Grid>
+        </CustomBox>
       </div>
 
-      <div style={{ minHeight: 200, paddingBottom: "100px" }}>
+      <div
+        ref={containerRef}
+        style={{ minHeight: 200, paddingBottom: "100px" }}
+      >
         {" "}
         {/* Add padding to create space */}
         {loading && <LoadingSpinner />}

@@ -205,6 +205,7 @@ const PlankDetail = () => {
               ></Grid>
             </Grid>
           </Grid>
+
           <Grid item container md={6} xs={12}>
             <Table bordered>
               <tbody>
@@ -316,7 +317,7 @@ const PlankDetail = () => {
                   style={{ cursor: plank.image1 ? "pointer" : "default" }}
                 >
                   <td colSpan={2}>
-                    Image 1
+            
                     {plank.image1 && (
                       <img
                         src={plank.image1}
@@ -334,7 +335,7 @@ const PlankDetail = () => {
                   style={{ cursor: plank.image2 ? "pointer" : "default" }}
                 >
                   <td colSpan={2}>
-                    Image 2
+                    
                     {plank.image2 && (
                       <img
                         src={plank.image2}
