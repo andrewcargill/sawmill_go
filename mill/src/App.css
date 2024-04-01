@@ -73,7 +73,14 @@
     filter: brightness(95%);
   }
 
-
+  /* Report */
+.report-image {
+  position: absolute;
+  top: 600px; /* Align the top of the image with the bottom of the container */
+  left: 45%; /* Adjust for desired offset */
+  transform: translateY(-50%); /* Adjust this value to overlap the container by the desired amount */
+  z-index: 1; /* Ensure it overlaps any content below */
+}
   
   
   @keyframes App-logo-spin {

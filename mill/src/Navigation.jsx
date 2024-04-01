@@ -34,7 +34,7 @@ const Navigation = () => {
   }, [isAuth]);
 
   const pages = ['About'];
-  const settings = ['Quick_Add', 'Trees', 'Logs', 'Planks', 'water_crud', 'Logout'];
+  const settings = ['home_secure', 'Quick_Add', 'Trees', 'Logs', 'Planks', 'water_crud', 'Logout'];
 
   return (
     

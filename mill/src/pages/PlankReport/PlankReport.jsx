@@ -100,34 +100,118 @@ const PlankReport = () => {
 
   return (
     <PageContentContainer>
-      <Alert severity="info">
-        Demo Page — The final wood product will display a QR code linking to
-        this page.
-      </Alert>
       {/* Header */}
-      <CustomBox variant="primary">
-        <Grid container spacing={1}>
+      {/* START MARKER */}
+      <Grid container pt={2} justifyContent={"flex-end"}>
+        <Grid
+          container
+          xs={6}
+          item
+          spacing={1}
+          p={5}
+          style={{
+            borderRadius: "30px 0 0 30px",
+            backgroundColor: "black",
+            color: "white",
+          }}
+        >
           <Grid item xs={12}>
-            <CustomTypography.heading>
-              Life Cycle of Wood Product {species}_{id}
-            </CustomTypography.heading>
-          </Grid>
-          <Grid item xs={12}>
-            <CustomTypography.subheading>
-              Transparent forestry involves understanding the origin of your
-              wood and the circumstances surrounding its extraction from the
-              forest.
-            </CustomTypography.subheading>
-          </Grid>
-          <Grid item xs={12}>
-            <CustomTypography.paragraph>
-              You own {species}_{id}. It is unque. In this document we will
-              share what we know.
-            </CustomTypography.paragraph>
+            <CustomTypography.heading>INTRODUCTION</CustomTypography.heading>
           </Grid>
         </Grid>
-      </CustomBox>
+      </Grid>
+
+      {/* SPACER */}
+      <Grid container height={"5vh"} spacing={1} xs={6}></Grid>
+
+      {/* PRIDE OF OWNERSHIP */}
+      <Grid container spacing={1} xs={7}>
+        <CustomBox variant="primary">
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <CustomTypography.heading>
+                Pride of Ownership
+              </CustomTypography.heading>
+            </Grid>
+            <Grid item xs={12}>
+              <CustomTypography.subheading>
+                Transparent forestry involves understanding the origin of your
+                wood and the circumstances surrounding its extraction from the
+                forest. You own {species}_{id}. It is unque. In this document we
+                will the journey.
+              </CustomTypography.subheading>
+            </Grid>
+
+            <Grid item xs={12}>
+              <CustomTypography.paragraph>
+                Trees are the lungs of the earth. They are the source of life
+                and the source of wood. Sustainable and transparent forestry is
+                the only way to ensure that we can continue to enjoy the
+                benefits of wood products. We believe in small scale, local
+                forestry. We believe in the power of the individual to make a
+                difference. We believe in the power of the individual to make a
+                difference. Selective cutting is the only way to ensure that the
+                forest remains healthy and that the trees can continue to grow.
+              </CustomTypography.paragraph>
+            </Grid>
+          </Grid>
+        </CustomBox>
+      </Grid>
+
+      {/* SPACER */}
+      <Grid container height={"5vh"} spacing={1} xs={6}></Grid>
+
+      {/* ORIGIN MARKER */}
+      <Grid container pt={2} justifyContent={"flex-end"}>
+        <Grid
+          container
+          xs={6}
+          item
+          spacing={1}
+          p={5}
+          style={{
+            borderRadius: "30px 0 0 30px",
+            backgroundColor: "black",
+            color: "white",
+          }}
+        >
+          <Grid item xs={12}>
+            <CustomTypography.heading>
+              THE ORIGIN: THE TREE
+            </CustomTypography.heading>
+          </Grid>
+        </Grid>
+      </Grid>
+
+      {/* SPACER */}
+      <Grid container height={"5vh"} spacing={1} xs={6}></Grid>
+
+      <Grid container spacing={1} xs={8} justifySelf={"flex-end"}>
+        <CustomBox variant="secondary">
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <CustomTypography.heading>
+                {formatDate(treeData.date)}
+              </CustomTypography.heading>
+            </Grid>
+            <Grid item xs={12}>
+              <CustomTypography.subheading>
+                Transparent forestry involves understanding the origin of your
+                wood and the circumstances surrounding its extraction from the
+                forest.
+              </CustomTypography.subheading>
+            </Grid>
+            <Grid item xs={12}>
+              <CustomTypography.paragraph>
+                You own {species}_{id}. It is unque. In this document we will
+                share what we know.
+              </CustomTypography.paragraph>
+            </Grid>
+          </Grid>
+        </CustomBox>
+      </Grid>
       {/*TREE IMAGE & GPS MAP */}
+
       <Box
         p={1}
         sx={{
@@ -174,11 +258,191 @@ const PlankReport = () => {
         </Grid>
       </Box>
 
-      <CustomBox>
+      <CustomBox width={"50%"}>
         <Paper>
           <MyMapComponent tree={treeData} sx={{ maxWidth: "500px" }} />
         </Paper>
       </CustomBox>
+
+      {/* SPACER */}
+      <Grid container height={"5vh"} spacing={1} xs={6}></Grid>
+
+      {/* LOGGING MARKER */}
+      <Grid container pt={2} justifyContent={"flex-end"}>
+        <Grid
+          container
+          xs={7}
+          item
+          spacing={1}
+          p={5}
+          style={{
+            borderRadius: "30px 0 0 30px",
+            backgroundColor: "black",
+            color: "white",
+          }}
+        >
+          <Grid item xs={12}>
+            <CustomTypography.heading>
+              THE JOURNEY: LOGGING
+            </CustomTypography.heading>
+          </Grid>
+        </Grid>
+      </Grid>
+
+      {/* SPACER */}
+      <Grid container height={"5vh"} spacing={1} xs={6}></Grid>
+      
+      {/* LOGGING FACTS */}
+      <Grid container spacing={1} xs={7}>
+        <CustomBox variant="primary">
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <CustomTypography.heading>
+                LOGGING
+              </CustomTypography.heading>
+            </Grid>
+            <Grid item xs={12}>
+              <CustomTypography.subheading>
+                Transparent forestry involves understanding the origin of your
+                wood and the circumstances surrounding its extraction from the
+                forest. You own {species}_{id}. It is unque. In this document we
+                will the journey.
+              </CustomTypography.subheading>
+            </Grid>
+
+            <Grid item xs={12}>
+              <CustomTypography.paragraph>
+                Trees are the lungs of the earth. They are the source of life
+                and the source of wood. Sustainable and transparent forestry is
+                the only way to ensure that we can continue to enjoy the
+                benefits of wood products. We believe in small scale, local
+                forestry. We believe in the power of the individual to make a
+                difference. We believe in the power of the individual to make a
+                difference. Selective cutting is the only way to ensure that the
+                forest remains healthy and that the trees can continue to grow.
+              </CustomTypography.paragraph>
+            </Grid>
+          </Grid>
+        </CustomBox>
+      </Grid>
+
+      {/* SPACER */}
+      <Grid container height={"5vh"} spacing={1} xs={6}></Grid>
+
+      {/* MILLING MARKER */}
+      <Grid container pt={2} justifyContent={"flex-end"}>
+        <Grid
+          container
+          xs={9}
+          item
+          spacing={1}
+          p={5}
+          style={{
+            borderRadius: "30px 0 0 30px",
+            backgroundColor: "black",
+            color: "white",
+          }}
+        >
+          <Grid item xs={12}>
+            <CustomTypography.heading>
+              TRANSFORMATION: MILLING
+            </CustomTypography.heading>
+          </Grid>
+        </Grid>
+      </Grid>
+
+      {/* SPACER */}
+      <Grid container height={"5vh"} spacing={1} xs={6}></Grid>
+
+      <Grid container spacing={1} xs={8} justifySelf={"flex-end"}>
+        <CustomBox variant="dark">
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <CustomTypography.heading>
+                {formatDate(treeData.date)}
+              </CustomTypography.heading>
+            </Grid>
+            <Grid item xs={12}>
+              <CustomTypography.subheading>
+                Transparent forestry involves understanding the origin of your
+                wood and the circumstances surrounding its extraction from the
+                forest.
+              </CustomTypography.subheading>
+            </Grid>
+            <Grid item xs={12}>
+              <CustomTypography.paragraph>
+                You own {species}_{id}. It is unque. In this document we will
+                share what we know.
+              </CustomTypography.paragraph>
+            </Grid>
+          </Grid>
+        </CustomBox>
+      </Grid>
+
+       {/* SPACER */}
+       <Grid container height={"5vh"} spacing={1} xs={6}></Grid>
+
+       {/* END PRODUCT MARKER */}
+      <Grid container pt={2} justifyContent={"flex-end"}>
+        <Grid
+          container
+          xs={5}
+          item
+          spacing={1}
+          p={5}
+          style={{
+            borderRadius: "30px 0 0 30px",
+            backgroundColor: "black",
+            color: "white",
+          }}
+        >
+          <Grid item xs={12}>
+            <CustomTypography.heading>
+              THE END PRODUCT
+            </CustomTypography.heading>
+          </Grid>
+        </Grid>
+      </Grid>
+
+           {/* SPACER */}
+       <Grid container height={"5vh"} spacing={1} xs={6}></Grid>
+
+       {/* LOGGING FACTS */}
+       <Grid container spacing={1} xs={7}>
+        <CustomBox variant="primary">
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <CustomTypography.heading>
+                END PRODUCT
+              </CustomTypography.heading>
+            </Grid>
+            <Grid item xs={12}>
+              <CustomTypography.subheading>
+                Transparent forestry involves understanding the origin of your
+                wood and the circumstances surrounding its extraction from the
+                forest. You own {species}_{id}. It is unque. In this document we
+                will the journey.
+              </CustomTypography.subheading>
+            </Grid>
+
+            <Grid item xs={12}>
+              <CustomTypography.paragraph>
+                Trees are the lungs of the earth. They are the source of life
+                and the source of wood. Sustainable and transparent forestry is
+                the only way to ensure that we can continue to enjoy the
+                benefits of wood products. We believe in small scale, local
+                forestry. We believe in the power of the individual to make a
+                difference. We believe in the power of the individual to make a
+                difference. Selective cutting is the only way to ensure that the
+                forest remains healthy and that the trees can continue to grow.
+              </CustomTypography.paragraph>
+            </Grid>
+          </Grid>
+        </CustomBox>
+      </Grid>
+
+       {/* SPACER */}
+       <Grid container height={"5vh"} spacing={1} xs={6}></Grid>
 
       {/* Transparent Forestry */}
       <CustomBox variant="secondary" marginBottom={2}>
