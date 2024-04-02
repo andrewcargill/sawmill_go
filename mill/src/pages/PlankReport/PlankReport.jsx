@@ -4,7 +4,7 @@ import axios from "axios";
 import MyMapComponent from "./MapReport";
 import PageContentContainer from "../../components/CustomBoxes/PageContentContainer";
 import CustomBox from "../../components/CustomBoxes/CustomBoxes";
-import { Alert, Box, Card, Grid, Paper } from "@mui/material";
+import { Alert, Box, Card, Grid, Paper, Typography } from "@mui/material";
 import CustomTypography from "../../components/Typography/CustomTypography";
 import TabReport from "./TabReport";
 import board1 from "../../media/images/board1.png";
@@ -115,14 +115,15 @@ const PlankReport = () => {
             item
             spacing={1}
             p={5}
+            bgcolor={"dark.main"}
             style={{
-              borderRadius: "30px 0 0 30px",
+            
               backgroundColor: "black",
               color: "white",
             }}
           >
             <Grid item xs={12}>
-              <CustomTypography.heading>INTRODUCTION</CustomTypography.heading>
+              <CustomTypography.heading >INTRODUCTION</CustomTypography.heading>
             </Grid>
           </Grid>
         </Grid>
@@ -136,29 +137,21 @@ const PlankReport = () => {
             <Grid container spacing={1}>
               <Grid item xs={12} pb={4}>
                 <CustomTypography.heading>
-                  Pride of Ownership
+                  Transparent Forestry
                 </CustomTypography.heading>
               </Grid>
               <Grid item xs={12} pb={4}>
                 <CustomTypography.subheading>
                   Transparent forestry involves understanding the origin of your
-                  wood and the circumstances surrounding its extraction from the
-                  forest. You own {species}_{id}. It is unque. In this document
-                  we will the journey.
+                  wood product and sharing evidence about its journey from the forest to your home. Your item was made from  '{species}_{id}'. It is unque.
                 </CustomTypography.subheading>
               </Grid>
+              
 
               <Grid item xs={12} pb={4}>
                 <CustomTypography.paragraph>
-                  Trees are the lungs of the earth. They are the source of life
-                  and the source of wood. Sustainable and transparent forestry
-                  is the only way to ensure that we can continue to enjoy the
-                  benefits of wood products. We believe in small scale, local
-                  forestry. We believe in the power of the individual to make a
-                  difference. We believe in the power of the individual to make
-                  a difference. Selective cutting is the only way to ensure that
-                  the forest remains healthy and that the trees can continue to
-                  grow.
+                Sawmill Go is a custom sawmill database that is used to provide transparency and traceability for wood products.  This is your 
+                  personal sawmill report.
                 </CustomTypography.paragraph>
               </Grid>
               <Grid item container xs={12} pb={4}>
@@ -278,17 +271,25 @@ const PlankReport = () => {
               </Grid>
               <Grid item xs={12} pb={4}>
                 <CustomTypography.subheading>
-                  Transparent forestry involves understanding the origin of your
-                  wood and the circumstances surrounding its extraction from the
-                  forest.
+                  Northern Sweden is home to some of the world's most beautiful and sustainable forests. This is where your tree was felled.
                 </CustomTypography.subheading>
               </Grid>
               <Grid item xs={12} pb={4}>
                 <CustomTypography.paragraph>
-                  You own {species}_{id}. It is unque. In this document we will
-                  share what we know.
+                  The tree stood in a selective-cut forest in Selet, Vännäs, Umeå for {treeData.age} years. It was removed by lumberjack {treeData.lumberjack} and here are his notes:
+
+                  
                 </CustomTypography.paragraph>
+                
               </Grid>
+              <Grid item xs={12} pb={4}>
+              <Typography variant="subheading" color="textSecondary">
+                   "{treeData.reason_for_felling}"
+               </Typography>
+                
+              </Grid>
+
+
             </Grid>
           </CustomBox>
         </Grid>
