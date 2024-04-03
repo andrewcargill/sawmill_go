@@ -390,25 +390,11 @@ const PlankReport = () => {
             </Grid>
             <Grid item xs={12}>
               <CustomTypography.subheading>
-                Transparent forestry involves understanding the origin of your
-                wood and the circumstances surrounding its extraction from the
-                forest. You own {species}_{id}. It is unque. In this document we
-                will the journey.
+                Your tree was given the reference: {treeData.id}. On this date it was logged and 
+                the log id was {log.id}. From here the log was taken to the sawmill.
               </CustomTypography.subheading>
             </Grid>
 
-            <Grid item xs={12}>
-              <CustomTypography.paragraph>
-                Trees are the lungs of the earth. They are the source of life
-                and the source of wood. Sustainable and transparent forestry is
-                the only way to ensure that we can continue to enjoy the
-                benefits of wood products. We believe in small scale, local
-                forestry. We believe in the power of the individual to make a
-                difference. We believe in the power of the individual to make a
-                difference. Selective cutting is the only way to ensure that the
-                forest remains healthy and that the trees can continue to grow.
-              </CustomTypography.paragraph>
-            </Grid>
           </Grid>
         </CustomBox>
       </Grid>
@@ -449,22 +435,69 @@ const PlankReport = () => {
                 {formatDate(plank.date)}
               </CustomTypography.heading>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} pb={4}>
               <CustomTypography.subheading>
-                Transparent forestry involves understanding the origin of your
-                wood and the circumstances surrounding its extraction from the
-                forest.
+               On this date the log was milled by {plank.operator}. The plank was given the reference: {plank.id}
+               and the dimensions are {formattedLength} x {formattedWidth} x {formattedDepth} cm.
               </CustomTypography.subheading>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} pb={4} >
               <CustomTypography.paragraph>
-                You own {species}_{id}. It is unque. In this document we will
-                share what we know.
+                The wood was given a grade of {plank.wood_grade} (with 1 being high and 5 being low) and noted by the operator as "{plank.info}".
               </CustomTypography.paragraph>
             </Grid>
           </Grid>
         </CustomBox>
       </Grid>
+
+      {/* MILLING IMAGES */}
+      <Grid container m={-3} justifyContent={"flex-end"}>
+          <Grid item container xs={7} bgcolor={"primary.main"} p={3}>
+            <Grid container spacing={1}>
+              <Grid
+                item
+                xs={6}
+                style={{ width: "100%", height: "200px", position: "relative" }}
+              >
+                <div
+                  style={{ width: "100%", height: "100%", overflow: "hidden" }}
+                >
+                  <img
+                    src={plank.image1}
+                    alt="Uploaded Image"
+                    style={{
+                      height: "100%",
+                      width: "auto",
+                      objectFit: "cover",
+                      display: "block",
+                    }}
+                  />
+                </div>
+              </Grid>
+              <Grid
+                item
+                xs={6}
+                style={{ width: "100%", height: "200px", position: "relative" }}
+              >
+                <div
+                  style={{ width: "100%", height: "100%", overflow: "hidden" }}
+                >
+                  <img
+                    src={plank.image2}
+                    alt="Uploaded Image"
+                    style={{
+                      height: "100%",
+                      width: "auto",
+                      objectFit: "cover",
+                      display: "block",
+                    }}
+                  />
+                </div>
+              </Grid>
+             
+            </Grid>
+          </Grid>
+        </Grid>
 
       {/* SPACER */}
       <Grid container height={"5vh"} spacing={1} xs={6}></Grid>

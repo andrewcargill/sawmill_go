@@ -73,14 +73,14 @@ const PlankSiblings = ({ logId, currentPlank }) => {
   return (
     <div>
       {planks.length > 0 ? (
-        <div>
+         <div style={{ maxHeight: '250px', overflowY: 'auto' }}>
           <Grid
             container
             sm={12}
             alignItems={"center"}
             justifyContent={"center"}
             padding={"1% 5%"}
-            bgcolor={"dark.main"}
+            
           >
             {planks.map((plank, index) => {
               const currentIndex = planks.findIndex(
@@ -111,7 +111,7 @@ const PlankSiblings = ({ logId, currentPlank }) => {
                           ? "lightgrey"
                           : isBookMatched
                           ? "#79c001"
-                          : "orange",
+                          : "white",
                       color: "black",
                       height: calculateHeight(plank?.depth),
                       width: calculateWidthPercentage(plank?.width),
