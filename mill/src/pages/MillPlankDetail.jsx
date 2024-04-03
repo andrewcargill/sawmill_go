@@ -7,7 +7,14 @@ import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 
 import PageContentContainer from "../components/CustomBoxes/PageContentContainer";
-import { Chip, CircularProgress, Dialog, DialogContent, Grid, Typography } from "@mui/material";
+import {
+  Chip,
+  CircularProgress,
+  Dialog,
+  DialogContent,
+  Grid,
+  Typography,
+} from "@mui/material";
 import CustomHeaderWithNavEdit from "../components/CustomFormHeaders/CustomHeaderWithNavEdit";
 import PlankSiblings from "./ListViews/Plank/Components/PlankSiblings";
 import LoadingSpinner from "../components/ApiDataComponents/LoadingSpinner";
@@ -22,12 +29,9 @@ const PlankDetail = () => {
   const [isLoadingImage1, setLoadingImage1] = useState(false);
   const [isLoadingImage2, setLoadingImage2] = useState(false);
 
-
   // Handlers to set loading state false when image has loaded
   const handleImageLoadEnd1 = () => setLoadingImage1(false);
   const handleImageLoadEnd2 = () => setLoadingImage2(false);
-
-
 
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const navigate = useNavigate();
@@ -35,14 +39,14 @@ const PlankDetail = () => {
   useEffect(() => {
     let timeoutId1 = null;
     let timeoutId2 = null;
-  
+
     const ensureLoadingStateIsUpdated = (setLoadingState) => {
       return setTimeout(() => {
         console.log("Forcing loading state to false due to timeout.");
         setLoadingState(false);
       }, 5000); // Delay before forcing the update
     };
-  
+
     const fetchPlank = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/plank/${id}/`, {
@@ -62,14 +66,13 @@ const PlankDetail = () => {
         }
         setLength(response.data.log.length);
         setSpecies(response.data.log.tree.species);
-  
       } catch (error) {
         console.error("Error fetching plank:", error);
       }
     };
-  
+
     fetchPlank();
-  
+
     // Cleanup function to clear the timeouts if the component unmounts
     // or if the useEffect dependencies cause it to re-run.
     return () => {
@@ -77,9 +80,6 @@ const PlankDetail = () => {
       if (timeoutId2) clearTimeout(timeoutId2);
     };
   }, [id]); // Dependency array includes id to re-run fetchPlank when it changes.
-  
-
-
 
   const getLiveEdgeStatus = (live_edge) => {
     return live_edge ? <DoneIcon /> : <CloseIcon />;
@@ -322,75 +322,116 @@ const PlankDetail = () => {
                 </tbody>
               </Table>
             </Grid>
-            
-            <Grid container item sm={12} md={6} > 
-            {/* Operator's Notes */}
-            <Table bordered>
-              <tbody>
-                <tr>
-                  <td colSpan={2}>
-                    <strong>Operator's notes:</strong>
-                    <p>{plank.info}</p>
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
+
+            <Grid container item xs={12}>
+
+            <Grid container item sm={12} md={6}  border={"1px solid lightgrey"}>
+              {/* Operator's Notes */}
+              <Table>
+                <tbody>
+                  <tr>
+                    <td >
+                      <strong>Operator's notes:</strong>
+                      <p>{plank.info}</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </Table>
             </Grid>
 
-
-            <Grid item container sm={12} md={6} p={2} border={"1px solid lightgrey"}  >
+            <Grid
+              item
+              container
+              sm={12}
+              md={6}
+              p={2}
+              border={"1px solid lightgrey"}
+            >
               {/* Images */}
               <Table bordered>
-      <tbody>
-        <Grid item container xs={12} >
-          <Grid
-            item
-            container
-            xs={6}
-            alignContent={"center"}
-            justifyContent={"center"}
-            onClick={plank.image1 ? handleOpenDialog : undefined}
-            style={{ cursor: plank.image1 ? "pointer" : "default", position: 'relative' }}
-          >
-            <td colSpan={2}>
-              {isLoadingImage1 && <CircularProgress style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />}
-              {plank.image1 && (
-                <img
-                  src={plank.image1}
-                  alt="Tree Image"
-                  style={{ objectFit: "cover", maxWidth: "100%", height: "200px" }}
-                  onLoad={handleImageLoadEnd1}
-                  onError={handleImageLoadEnd1}
-                />
-              )}
-            </td>
-          </Grid>
-          <Grid
-            item
-            container
-            xs={6}
-            alignContent={"center"}
-            justifyContent={"center"}
-            onClick={plank.image2 ? handleOpenImage2 : undefined}
-            style={{ cursor: plank.image2 ? "pointer" : "default", position: 'relative' }}
-          >
-            <td colSpan={2}>
-              {isLoadingImage2 && <CircularProgress style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />}
-              {plank.image2 && (
-                <img
-                  src={plank.image2}
-                  alt="Tree Image"
-                  style={{ objectFit: 'cover', maxWidth: "100%", height: "200px" }}
-                  onLoad={handleImageLoadEnd2}
-                  onError={handleImageLoadEnd2}
-                />
-              )}
-            </td>
-          </Grid>
-        </Grid>
-      </tbody>
-    </Table>
+                <tbody>
+                  <Grid item container xs={12}>
+                    <Grid
+                      item
+                      container
+                      xs={6}
+                      alignContent={"center"}
+                      justifyContent={"center"}
+                      onClick={plank.image1 ? handleOpenDialog : undefined}
+                      style={{
+                        cursor: plank.image1 ? "pointer" : "default",
+                        position: "relative",
+                      }}
+                    >
+                      <td colSpan={2}>
+                        {isLoadingImage1 && (
+                          <CircularProgress
+                            style={{
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              transform: "translate(-50%, -50%)",
+                            }}
+                          />
+                        )}
+                        {plank.image1 && (
+                          <img
+                            src={plank.image1}
+                            alt="Tree Image"
+                            style={{
+                              objectFit: "cover",
+                              maxWidth: "100%",
+                              height: "200px",
+                            }}
+                            onLoad={handleImageLoadEnd1}
+                            onError={handleImageLoadEnd1}
+                          />
+                        )}
+                      </td>
+                    </Grid>
+                    <Grid
+                      item
+                      container
+                      xs={6}
+                      alignContent={"center"}
+                      justifyContent={"center"}
+                      onClick={plank.image2 ? handleOpenImage2 : undefined}
+                      style={{
+                        cursor: plank.image2 ? "pointer" : "default",
+                        position: "relative",
+                      }}
+                    >
+                      <td colSpan={2}>
+                        {isLoadingImage2 && (
+                          <CircularProgress
+                            style={{
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              transform: "translate(-50%, -50%)",
+                            }}
+                          />
+                        )}
+                        {plank.image2 && (
+                          <img
+                            src={plank.image2}
+                            alt="Tree Image"
+                            style={{
+                              objectFit: "cover",
+                              maxWidth: "100%",
+                              height: "200px",
+                            }}
+                            onLoad={handleImageLoadEnd2}
+                            onError={handleImageLoadEnd2}
+                          />
+                        )}
+                      </td>
+                    </Grid>
+                  </Grid>
+                </tbody>
+              </Table>
             </Grid>
+          </Grid>
 
             <Grid container>
               {/* Siblings Container */}
@@ -445,7 +486,6 @@ const PlankDetail = () => {
                 </div>
               </Grid>
             </Grid>
-
 
             <Dialog
               open={openDialog}
